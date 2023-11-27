@@ -17,67 +17,99 @@ function OutStandingDoctor(props) {
           <div className="section-body">
             <Slider {...props.settings}>
               <div className="section-customize">
-                <div className="bg-outer text-center">
-                  <div className="bg-image out-standing-doctor" />
-                  <div className="section-descrip">GS,TS.Nguyễn Tuấn Anh</div>
-                  <br></br>
-                  <div className="section-descrip">Gia liễu</div>
+                <div className="customize-border">
+                  <div className="bg-outer text-center">
+                    <div className="bg-image section-outstanding-doctor " />
+                    <div className="section-descrip">
+                      GS,TS.Nguyễn Tuấn Anh1
+                    </div>
+                    <br></br>
+                    <div className="section-descrip">Gia liễu</div>
+                  </div>
                 </div>
               </div>
               <div className="section-customize">
-                <div className="bg-outer text-center">
-                  <div className="bg-image out-standing-doctor" />
-                  <div className="section-descrip">GS,TS.Nguyễn Tuấn Anh</div>
-                  <br></br>
-                  <div className="section-descrip">Gia liễu</div>
+                <div className="customize-border">
+                  <div className="bg-outer text-center">
+                    <div className="bg-image section-outstanding-doctor " />
+                    <div className="section-descrip">
+                      GS,TS.Nguyễn Tuấn Anh2
+                    </div>
+                    <br></br>
+                    <div className="section-descrip">Gia liễu</div>
+                  </div>
                 </div>
               </div>
               <div className="section-customize">
-                <div className="bg-outer text-center">
-                  <div className="bg-image out-standing-doctor" />
-                  <div className="section-descrip">GS,TS.Nguyễn Tuấn Anh</div>
-                  <br></br>
-                  <div className="section-descrip">Gia liễu</div>
+                <div className="customize-border">
+                  <div className="bg-outer text-center">
+                    <div className="bg-image section-outstanding-doctor " />
+                    <div className="section-descrip">
+                      GS,TS.Nguyễn Tuấn Anh3
+                    </div>
+                    <br></br>
+                    <div className="section-descrip">Gia liễu</div>
+                  </div>
                 </div>
               </div>
               <div className="section-customize">
-                <div className="bg-outer text-center">
-                  <div className="bg-image out-standing-doctor" />
-                  <div className="section-descrip">GS,TS.Nguyễn Tuấn Anh</div>
-                  <br></br>
-                  <div className="section-descrip">Gia liễu</div>
+                <div className="customize-border">
+                  <div className="bg-outer text-center">
+                    <div className="bg-image section-outstanding-doctor " />
+                    <div className="section-descrip">
+                      GS,TS.Nguyễn Tuấn Anh4
+                    </div>
+                    <br></br>
+                    <div className="section-descrip">Gia liễu</div>
+                  </div>
                 </div>
               </div>
               <div className="section-customize">
-                <div className="bg-outer text-center">
-                  <div className="bg-image out-standing-doctor" />
-                  <div className="section-descrip">GS,TS.Nguyễn Tuấn Anh</div>
-                  <br></br>
-                  <div className="section-descrip">Gia liễu</div>
+                <div className="customize-border">
+                  <div className="bg-outer text-center">
+                    <div className="bg-image section-outstanding-doctor " />
+                    <div className="section-descrip">
+                      GS,TS.Nguyễn Tuấn Anh5
+                    </div>
+                    <br></br>
+                    <div className="section-descrip">Gia liễu</div>
+                  </div>
                 </div>
               </div>
               <div className="section-customize">
-                <div className="bg-outer">
-                  <div className="bg-image out-standing-doctor" />
-                  <div className="section-descrip">GS,TS.Nguyễn Tuấn Anh</div>
-                  <br></br>
-                  <div className="section-descrip">Gia liễu</div>
+                <div className="customize-border">
+                  <div className="bg-outer text-center">
+                    <div className="bg-image section-outstanding-doctor " />
+                    <div className="section-descrip">
+                      GS,TS.Nguyễn Tuấn Anh6
+                    </div>
+                    <br></br>
+                    <div className="section-descrip">Gia liễu</div>
+                  </div>
                 </div>
               </div>
               <div className="section-customize">
-                <div className="bg-outer text-center">
-                  <div className="bg-image out-standing-doctor" />
-                  <div className="section-descrip">GS,TS.Nguyễn Tuấn Anh</div>
-                  <br></br>
-                  <div className="section-descrip">Gia liễu</div>
+                <div className="customize-border">
+                  <div className="bg-outer text-center">
+                    <div className="bg-image section-outstanding-doctor " />
+                    <div className="section-descrip">
+                      GS,TS.Nguyễn Tuấn Anh7
+                    </div>
+                    <br></br>
+                    <div className="section-descrip">Gia liễu</div>
+                  </div>
                 </div>
               </div>
               <div className="section-customize">
-                <div className="bg-outer text-center">
-                  <div className="bg-image out-standing-doctor" />
-                  <div className="section-descrip">GS,TS.Nguyễn Tuấn Anh</div>
-                  <br></br>
-                  <div className="section-descrip">Gia liễu</div>
+                <div className="customize-border">
+                  <div className="bg-outer text-center">
+                    <div className="bg-image section-outstanding-doctor " />
+                    <div className="section-descrip">
+                      GS,TS.Nguyễn Tuấn Anh8
+                    </div>
+                    <br></br>
+                    <div className="section-descrip">Gia liễu</div>
+                  </div>
                 </div>
               </div>
             </Slider>

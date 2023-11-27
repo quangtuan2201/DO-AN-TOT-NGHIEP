@@ -5,12 +5,13 @@ import HomeHeader from "../HomePage/HomeHeader";
 import Specialty from "../HomePage/Section/Specialty";
 import MedicalFacility from "../HomePage/Section/MedicalFacility";
 import OutStandingDoctor from "../HomePage/Section/OutStandingDoctor";
+import Abount from "../HomePage/Section/Abount";
+import HomeFooter from "../HomePage/HomeFooter";
 import HandBook from "./Section/HandBook";
 import { changeLanguageApp } from "../../store/actions/appActions";
 import "./HomePage.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-// src/containers/HomePage/HomePage.js
 
 function HomePage({ isLoggedIn }) {
   const settings = {
@@ -32,12 +33,14 @@ function HomePage({ isLoggedIn }) {
   }, []);
   return (
     <React.Fragment>
-      <HomeHeader />
       <div>
+        <HomeHeader />
         <Specialty settings={settings} />
         <MedicalFacility settings={settings} />
         <OutStandingDoctor settings={settings} />
         <HandBook settings={settings} />
+        <Abount />
+        <HomeFooter />
       </div>
     </React.Fragment>
   );

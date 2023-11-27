@@ -1,12 +1,17 @@
-*{
-     padding: 0;
-     margin: 0;
-     box-sizing: border-box;
-}
+// *{
+//      padding: 0;
+//      margin: 0;
+//      box-sizing: border-box;
+// }
 .home-header-container {
      height: 60px;
      width: 100%;
-     padding: 0 20px;
+     padding: 0 40px;
+     position: fixed ;
+     top: 0 ;
+     background: white;
+     z-index: 10000000;
+
      .home-header-content {
           width: 100%;
           height: 100%;
