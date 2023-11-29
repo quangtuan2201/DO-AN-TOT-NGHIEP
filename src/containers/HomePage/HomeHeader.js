@@ -10,6 +10,7 @@ function HomeHeader() {
   const intl = useIntl();
   const dispatch = useDispatch();
   const language = useSelector((state) => {
+    console.log("isLogin:", state);
     return state.app.language;
   });
   const [activeLang, setActiveLang] = useState(language);
@@ -19,12 +20,12 @@ function HomeHeader() {
 
   const switchToEnglish = () => {
     dispatch(changeLanguageApp(LANGUAGES.EN));
-    localStorage.setItem("appLanguage", LANGUAGES.EN); // Thay đổi từ setLanguage sang changeLanguage
+    // localStorage.setItem("appLanguage", LANGUAGES.EN); // Thay đổi từ setLanguage sang changeLanguage
   };
 
   const switchToVietnamese = () => {
     dispatch(changeLanguageApp(LANGUAGES.VI));
-    localStorage.setItem("appLanguage", LANGUAGES.VI); // Thay đổi từ setLanguage sang changeLanguage
+    // localStorage.setItem("appLanguage", LANGUAGES.VI); // Thay đổi từ setLanguage sang changeLanguage
   };
   return (
     <React.Fragment>
@@ -179,3 +180,4 @@ function HomeHeader() {
   );
 }
 export default HomeHeader;
+// export ={ switchToEnglish, switchToVietnamese };

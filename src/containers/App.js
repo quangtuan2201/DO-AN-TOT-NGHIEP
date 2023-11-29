@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Fragment } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter as Router } from "connected-react-router";
 import { history } from "../redux";
@@ -19,9 +19,11 @@ import { CustomToastCloseButton } from "../components/CustomToast";
 import ConfirmModal from "../components/ConfirmModal";
 import HomePage from "./HomePage/HomePage.js";
 import CustomScrollbars from "../components/CustomScrollbars.js";
+import { changeLanguageApp } from ".././store/actions/appActions.js";
 
 const App = () => {
   const [bootstrapped, setBootstrapped] = useState(false);
+  const dispatch = useDispatch();
 
   const started = useSelector((state) => state.app.started);
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -34,6 +36,15 @@ const App = () => {
     // setBootstrapped(bootstrapped);
   };
 
+  // useEffect(() => {
+  //   const storedLanguage = localStorage.getItem("appLanguage");
+  //   console.log("storedLanguage", storedLanguage);
+  //   if (storedLanguage) {
+  //     // Nếu có trạng thái ngôn ngữ đã lưu trữ, đặt ngôn ngữ mặc định
+  //     dispatch(changeLanguageApp(storedLanguage));
+  //   }
+  // }, []);
+
   useEffect(() => {
     handlePersistorState();
   }, []);
@@ -43,8 +54,6 @@ const App = () => {
       <Router history={history}>
         <div className="main-container">
           <ConfirmModal />
-          {isLoggedIn && <Header />}
-
           <div className="content-container">
             <CustomScrollbars style={{ height: "100vh", width: "100%" }}>
               <Switch>

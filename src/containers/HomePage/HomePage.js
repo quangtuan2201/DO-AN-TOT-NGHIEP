@@ -22,15 +22,15 @@ function HomePage({ isLoggedIn }) {
     slidesToScroll: 2,
   };
   const dispatch = useDispatch();
-  useEffect(() => {
-    // Kiểm tra localStorage khi tải lại trang
+  // useEffect(() => {
+  //   // Kiểm tra localStorage khi tải lại trang
 
-    const storedLanguage = localStorage.getItem("appLanguage");
-    if (storedLanguage) {
-      // Nếu có trạng thái ngôn ngữ đã lưu trữ, đặt ngôn ngữ mặc định
-      dispatch(changeLanguageApp(storedLanguage));
-    }
-  }, []);
+  //   const storedLanguage = localStorage.getItem("appLanguage");
+  //   if (storedLanguage) {
+  //     // Nếu có trạng thái ngôn ngữ đã lưu trữ, đặt ngôn ngữ mặc định
+  //     dispatch(changeLanguageApp(storedLanguage));
+  //   }
+  // }, []);
   return (
     <React.Fragment>
       <div>

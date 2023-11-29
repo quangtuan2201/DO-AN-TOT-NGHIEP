@@ -8,8 +8,10 @@ function Abount() {
   return (
     <React.Fragment>
       <div className="section-share section-abount">
-        <div className="section-abount-header">
-          <span>Thông tin của tôi</span>
+        <div className=" section-abount-header">
+          <div className="abount-title">
+            <span>Thông tin của tôi</span>
+          </div>
           <div className="section-abount-content">
             <div className="content-left">
               <iframe

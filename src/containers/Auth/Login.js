@@ -32,7 +32,6 @@ function Login(props) {
     });
   };
   //[handele submit]
-  let notification = {};
   const handleSubmit = async (e) => {
     try {
       const data = await apiUserService.handleLogin(
@@ -85,7 +84,7 @@ function Login(props) {
               </span>
             </div>
           </div>
-          <div className={`col-12 ${notification.class}`}>{message}</div>
+          <div className={`col-12`}>{message}</div>
           <div className="col-12 form-group">
             <button className="col-12 btn-login" onClick={handleSubmit}>
               Login
