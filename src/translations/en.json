@@ -8,7 +8,8 @@
         "doctor":"Doctor",
         "fee":"Feer",
         "checkHealth":"Check Health",
-        "support":"Support"
+        "support":"Support",
+        "wellcome":"Wellcome, "
     },
 
     "banner":{
@@ -53,17 +54,20 @@
         "userpass-wrong": "Invalid username or password!"
     },
     "menu": {
-        "system": {
-            "header": "System",
-            "system-administrator": {
-                "header": "System Administrator",
-                "user-manage": "User manage",
-                "product-manage": "Package manage",
-                "register-package-group-or-account": "Register service package for group/account"
-            },
-            "system-parameter": {
-                "header": "System-parameter"
-            }
+        "admin":{
+            "manage-user":"User",
+            "manage-doctor":"Doctor management",
+            "manage-admin":"Admin management",
+            "crud":"CRUD User",
+            "crud-redux":"CRUD User , redux",
+            "manage-clinic":" Clinic management",
+            "clinic":"Clinic",
+            "specialty":"Specialty",
+            "manage-specialty":"Specialty management",
+            "post":"Post",
+            "manage-post":"Post management",
+            "handbook":"HandBook management",
+            "manage-handbook":"HandBook management"
         }
     },
     "system": {

@@ -21,6 +21,9 @@
         }
     }
     .languages {
+        .wellcome {
+            margin-right: 10px;
+        }
         .language_vn {
             cursor: pointer;
             &.active {

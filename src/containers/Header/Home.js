@@ -7,6 +7,7 @@ import { adminMenu } from "./menuApp";
 import "./Header.scss";
 import { LANGUAGES } from "../../utils/constant";
 import { changeLanguageApp } from "../../store/actions/appActions";
+import { FormattedMessage, useIntl } from "react-intl";
 
 // class Header extends Component {
 //   render() {
@@ -30,11 +31,14 @@ import { changeLanguageApp } from "../../store/actions/appActions";
 function Header({ processLogout }) {
   console.log("processLogout", processLogout);
   const dispatch = useDispatch();
-  const language = useSelector((state) => {
+  const { language, userInfo } = useSelector((state) => {
     console.log("language:", state);
     // console.log("isLoggin:"state.user)
 
-    return state.app.language;
+    return {
+      language: state.app.language,
+      userInfo: state.user.userInfo,
+    };
   });
 
   const switchToEnglish = () => {
@@ -55,6 +59,10 @@ function Header({ processLogout }) {
         <Navigator menus={adminMenu} />
       </div>
       <div className="languages">
+        <span className="wellcome">
+          <FormattedMessage id="homeHeader.wellcome" />
+          {userInfo?.firstName}
+        </span>
         <span
           className={`language_vn ${language === "vi" ? "active" : ""} `}
           onClick={switchToVietnamese}

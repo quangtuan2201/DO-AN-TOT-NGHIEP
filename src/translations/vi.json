@@ -8,9 +8,9 @@
         "doctor":"Bác sĩ",
         "fee":"Gói khám",
         "checkHealth":"Khám sức khỏe tổng quát",
-        "support":"Hỗ trợ"
+        "support":"Hỗ trợ",
+        "wellcome":"Xin chào, "
         
-
     },
     "banner": {
         "title1":"NỀN TẢNG Y TẾ ",
@@ -53,17 +53,20 @@
         "userpass-wrong": "Sai tên đăng nhập hoặc mật khẩu!"
     },
     "menu": {
-        "system": {
-            "header": "Hệ thống",
-            "system-administrator": {
-                "header": "Quản trị hệ thống",
-                "user-manage": "Quản lý người sử dụng",
-                "product-manage": "Quản lý gói",
-                "register-package-group-or-account": "Đăng ký gói dịch vụ cho nhóm/tài khoản"
-            },
-            "system-parameter": {
-                "header": "Tham số hệ thống"
-            }
+        "admin":{
+            "manage-user":"Người dùng",
+            "manage-doctor":"Quản lý bác sĩ",
+            "manage-admin":"Quản lý admin",
+            "crud":"CRUD Người dùng",
+            "crud-redux":"CRUD Người dùng , redux",
+            "manage-clinic":" Quản lý phòng khám",
+            "clinic":"Phòng khám",
+            "specialty":"Chuyên khoa",
+            "manage-specialty":"Quản lý chuyên khoa",
+            "post":"Bài đăng",
+            "manage-post":"Quản lý bài đăng",
+            "handbook":"Cẩm nang",
+            "manage-handbook":"Quản lý cẩm nang"
         }
     },
     "system": {
