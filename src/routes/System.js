@@ -3,8 +3,16 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import UserManage from "../containers/System/UserManage";
 import ProductManage from "../containers/System/ProductManage";
+import UserRedux from "../containers/System/Admin/UserRedux";
+import UserDoctor from "../containers/System/Admin/DoctorManage";
+import UserAdmin from "../containers/System/Admin/UserAdmin";
+import ClinicManage from "../containers/System/Admin/ClinicManage";
+import SpecialtyManage from "../containers/System/Admin/SpecialtyManage";
+import HandBookManage from "../containers/System/Admin/HandbookManage";
+import PostManage from "../containers/System/Admin/PostManage";
 import RegisterPackageGroupOrAcc from "../containers/System/RegisterPackageGroupOrAcc";
 import Header from "../containers/Header/Home";
+import DoctorManage from "../containers/System/Admin/DoctorManage";
 
 // class System extends Component {
 //     render() {
@@ -40,6 +48,17 @@ function System(systemMenuPath) {
               path="/system/register-package-group-or-account"
               component={RegisterPackageGroupOrAcc}
             />
+            <Route path="/system/user-redux" component={UserRedux} />
+            <Route path="/system/user-doctor" component={DoctorManage} />
+            <Route path="/system/user-admin" component={UserAdmin} />
+            <Route path="/system/clinic-manage" component={ClinicManage} />
+            <Route
+              path="/system/specialty-manage"
+              component={SpecialtyManage}
+            />
+            <Route path="/system/handbook-manage" component={HandBookManage} />
+            <Route path="/system/post-manage" component={PostManage} />
+
             <Route
               component={() => {
                 return <Redirect to={systemMenuPath} />;

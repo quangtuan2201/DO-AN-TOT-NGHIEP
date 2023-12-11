@@ -6,7 +6,7 @@ import { FormattedMessage, useIntl } from "react-intl";
 
 function HomeFooter() {
   return (
-    <React.Fragment>
+    <>
       <div className="home-footer">
         {/* <h1>HomeFooter</h1> */}
         <p>
@@ -16,7 +16,7 @@ function HomeFooter() {
           </a>
         </p>
       </div>
-    </React.Fragment>
+    </>
   );
 }
 export default HomeFooter;

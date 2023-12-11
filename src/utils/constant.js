@@ -25,3 +25,11 @@ export const YesNoObj = {
   YES: "Y",
   NO: "N",
 };
+export const KEYS = {
+  ROLE: "ROLE",
+  STATUS: "STATUS",
+  TIME: "TIME",
+  POSITION: "POSITION",
+  GENDER: "GENDER",
+};
+export const allKeys = ["ROLE", "STATUS", "TIME", "POSITION", "GENDER"];

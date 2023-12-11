@@ -1,5 +1,5 @@
-import React, { useEffect, useState, Fragment } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, Fragment } from "react";
+// import { useSelector, useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter as Router } from "connected-react-router";
 import { history } from "../redux";
@@ -13,20 +13,21 @@ import { path } from "../utils";
 
 import Home from "../routes/Home";
 import Login from "./Auth/Login";
-import Header from "./Header/Home.js";
+// import Header from "./Header/Home.js";
 import System from "../routes/System";
-import { CustomToastCloseButton } from "../components/CustomToast";
+// import { CustomToastCloseButton } from "../components/CustomToast";
 import ConfirmModal from "../components/ConfirmModal";
 import HomePage from "./HomePage/HomePage.js";
 import CustomScrollbars from "../components/CustomScrollbars.js";
-import { changeLanguageApp } from ".././store/actions/appActions.js";
+// import { changeLanguageApp } from ".././store/actions/appActions.js";
+// import * as actions from "./../store/actions";
 
 const App = () => {
-  const [bootstrapped, setBootstrapped] = useState(false);
-  const dispatch = useDispatch();
+  // const [bootstrapped, setBootstrapped] = useState(false);
+  // const dispatch = useDispatch();
 
-  const started = useSelector((state) => state.app.started);
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  // const started = useSelector((state) => state.app.started);
+  // const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   const handlePersistorState = () => {
     // You may need to adjust this part based on your specific use case
@@ -35,15 +36,6 @@ const App = () => {
     // Example: const { bootstrapped } = useSomeCustomHook();
     // setBootstrapped(bootstrapped);
   };
-
-  // useEffect(() => {
-  //   const storedLanguage = localStorage.getItem("appLanguage");
-  //   console.log("storedLanguage", storedLanguage);
-  //   if (storedLanguage) {
-  //     // Nếu có trạng thái ngôn ngữ đã lưu trữ, đặt ngôn ngữ mặc định
-  //     dispatch(changeLanguageApp(storedLanguage));
-  //   }
-  // }, []);
 
   useEffect(() => {
     handlePersistorState();
@@ -71,7 +63,7 @@ const App = () => {
             </CustomScrollbars>
           </div>
 
-          <ToastContainer
+          {/* <ToastContainer
             className="toast-container"
             toastClassName="toast-item"
             bodyClassName="toast-item-body"
@@ -82,6 +74,17 @@ const App = () => {
             closeOnClick={false}
             draggable={false}
             closeButton={<CustomToastCloseButton />}
+          /> */}
+          <ToastContainer
+            position="bottom-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
           />
         </div>
       </Router>

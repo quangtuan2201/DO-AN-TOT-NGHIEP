@@ -24,7 +24,7 @@ body {
                height: 217px;
                width: 332px;
                background-size: contain !important;
-               background-position: center center;
+               background-position: center center !important;
                background-repeat:no-repeat !important;
                &.section-specialty {
                background: url("../../assets/images/specialtyImg/co-xuong-khop.jpg")  ;
@@ -34,7 +34,7 @@ body {
 
                }
                &.section-outstanding-doctor  {
-               background: url("../../assets/images/doctor/bs-nguyenvanthong.jpg");
+               // background: url("../../assets/images/doctor/bs-nguyenvanthong.jpg");
                width:120px ;
                height: 120px;
                margin: 0 auto;
@@ -66,6 +66,15 @@ body {
                margin-right: 30px;
           
           }
+          .slick-disablesd {
+               display: none !important;
+          }
+          button.slick-arrow.slick-prev.slick-disabled {
+               display: none !important;
+           }
+           button.slick-arrow.slick-next.slick-disabled {
+               display: none !important;
+           }
           .slick-prev:before, .slick-next:before {
                font-family: 'Glyphicons Halflings' !important;
                font-size: 40px;

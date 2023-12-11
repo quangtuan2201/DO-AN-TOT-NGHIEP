@@ -44,7 +44,7 @@ export const adminMenu = [
     menus: [
       {
         name: "menu.admin.manage-clinic",
-        link: "/system/manage-clinic",
+        link: "/system/clinic-manage",
       },
     ],
   },
@@ -54,7 +54,7 @@ export const adminMenu = [
     menus: [
       {
         name: "menu.admin.manage-specialty",
-        link: "/system/manage-clinic",
+        link: "/system/specialty-manage",
       },
     ],
   },
@@ -64,7 +64,7 @@ export const adminMenu = [
     menus: [
       {
         name: "menu.admin.manage-handbook",
-        link: "/system/manage-handbook",
+        link: "/system/handbook-manage",
       },
     ],
   },
@@ -74,7 +74,7 @@ export const adminMenu = [
     menus: [
       {
         name: "menu.admin.manage-post",
-        link: "/system/manage-post",
+        link: "/system/post-manage",
       },
     ],
   },

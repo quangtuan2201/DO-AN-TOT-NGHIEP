@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
 import apiUserService from "../../services/userService";
@@ -23,7 +23,6 @@ function Login(props) {
     username: "",
     password: "",
   });
-  const [message, setMessage] = useState("");
   //[handele chang on form]
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -84,7 +83,6 @@ function Login(props) {
               </span>
             </div>
           </div>
-          <div className={`col-12`}>{message}</div>
           <div className="col-12 form-group">
             <button className="col-12 btn-login" onClick={handleSubmit}>
               Login

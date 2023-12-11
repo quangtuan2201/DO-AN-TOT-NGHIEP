@@ -28,13 +28,10 @@ import { FormattedMessage, useIntl } from "react-intl";
 //     );
 //   }
 // }
-function Header({ processLogout }) {
-  console.log("processLogout", processLogout);
+function Header() {
+  // console.log("processLogout", processLogout);
   const dispatch = useDispatch();
   const { language, userInfo } = useSelector((state) => {
-    console.log("language:", state);
-    // console.log("isLoggin:"state.user)
-
     return {
       language: state.app.language,
       userInfo: state.user.userInfo,
@@ -43,16 +40,12 @@ function Header({ processLogout }) {
 
   const switchToEnglish = () => {
     dispatch(changeLanguageApp(LANGUAGES.EN));
-    // localStorage.setItem("appLanguage", LANGUAGES.EN); // Thay đổi từ setLanguage sang changeLanguage
   };
   const switchToVietnamese = () => {
     dispatch(changeLanguageApp(LANGUAGES.VI));
-    // localStorage.setItem("appLanguage", LANGUAGES.VI); // Thay đổi từ setLanguage sang changeLanguage
   };
 
   return (
-    /**/
-
     <div className="header-container">
       {/* thanh navigator */}
       <div className="header-tabs-container">
@@ -75,26 +68,30 @@ function Header({ processLogout }) {
         >
           EN
         </span>
-        <div className="btn btn-logout" onClick={processLogout}>
+        {/* nút logout */}
+        <div
+          className="btn btn-logout"
+          onClick={() => {
+            dispatch(actions.processLogout());
+          }}
+        >
           <i className="fas fa-sign-out-alt"></i>
         </div>
       </div>
-
-      {/* nút logout */}
     </div>
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isLoggedIn: state.user.isLoggedIn,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     isLoggedIn: state.user.isLoggedIn,
+//   };
+// };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    processLogout: () => dispatch(actions.processLogout()),
-  };
-};
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     processLogout: () => dispatch(actions.processLogout()),
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

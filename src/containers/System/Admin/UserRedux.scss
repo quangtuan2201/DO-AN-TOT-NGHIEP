@@ -1,0 +1,43 @@
+
+.preview-image-container {
+     // display: flex;
+
+     .label-upload {
+          padding: 5px;
+          border-radius: 3px;
+          background: #ddd;
+          cursor: pointer;
+          &:hover {
+               opacity: 0.9;
+          }
+     }
+     .preview-image {
+          height: 50px;
+          width: 100%;
+          border:  1px solid rebeccapurple;
+          background: center center no-repeat;
+          background-size: contain;
+          cursor: pointer;
+     }
+     /* styles.css hoặc App.css hoặc tệp CSS tương tự */
+
+   
+
+}
+.is-invalid {
+     border-color: #dc3545 !important; /* Màu đỏ của Bootstrap, bạn có thể thay đổi theo ý muốn */
+   }
+   
+.invalid-feedback {
+     color: #dc3545; /* Màu đỏ của Bootstrap, bạn có thể thay đổi theo ý muốn */
+     font-size: 80%; /* Kích thước chữ nhỏ hơn */
+     margin-top: 0.25rem; /* Khoảng cách từ trên xuống */
+}
+.btn_save_user {
+     display: flex;
+     justify-content: space-between;
+        button.btn.btn-primary {
+          min-width: 78px;
+      }
+    
+}

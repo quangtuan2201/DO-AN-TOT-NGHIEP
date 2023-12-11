@@ -28,13 +28,13 @@ function UserManage(props) {
   }, [selectedUser]);
   // show modal edit & create
   const handleShowEditModal = (user) => {
-    console.log("show :", selectedUser);
+    // console.log("show :", selectedUser);
     setSelectedUser(user);
     setEditModalOpen(true);
   };
 
   const handleCloseEditModal = () => {
-    console.log("close:", selectedUser);
+    // console.log("close:", selectedUser);
     setEditModalOpen(false);
     setSelectedUser(null);
   };
@@ -47,7 +47,7 @@ function UserManage(props) {
         const userNew = users.filter((item) => item.id !== userId);
         setUsers(userNew);
       }
-      console.log("use sau khi click delete:", users);
+      // console.log("use sau khi click delete:", users);
     } catch (error) {
       throw error;
     }

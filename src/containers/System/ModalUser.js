@@ -32,7 +32,7 @@ const ModalUser = ({ isOpen, toggle, user }) => {
         setValue(key, user[key]);
       });
     } else {
-      console.log("usaEff create user");
+      // console.log("usaEff create user");
       resetForm();
     }
   }, [user, setValue]);
@@ -52,10 +52,11 @@ const ModalUser = ({ isOpen, toggle, user }) => {
     // alert(JSON.stringify(user?.id));
     try {
       if (user?.id) {
-        await userService.updateUser(data);
+        const updateUser = await userService.updateUser(data);
+        console.log("update User", updateUser);
       } else {
         const response = await userService.createUser(data);
-        console.log("create new:", response);
+        // console.log("create new:", response);
       }
       toggle();
     } catch (error) {

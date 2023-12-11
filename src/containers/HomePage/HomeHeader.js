@@ -10,14 +10,8 @@ function HomeHeader() {
   const intl = useIntl();
   const dispatch = useDispatch();
   const language = useSelector((state) => {
-    console.log("isLogin:", state);
     return state.app.language;
   });
-  const [activeLang, setActiveLang] = useState(language);
-  console.log("activeLang", activeLang);
-  // console.log("selectedLanguage", selectedLanguage);
-  console.log("language", language);
-
   const switchToEnglish = () => {
     dispatch(changeLanguageApp(LANGUAGES.EN));
     // localStorage.setItem("appLanguage", LANGUAGES.EN); // Thay đổi từ setLanguage sang changeLanguage

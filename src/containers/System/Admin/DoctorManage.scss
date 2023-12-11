@@ -1,0 +1,63 @@
+body {
+     height: 1000px;
+}
+.doctor-container {
+     margin-top: 50px;
+     .manage-doctor-title {
+          margin: 15px 0;
+          font-size: 20px;
+          text-transform: uppercase;
+          font-weight: 600;
+     }
+     .doctor-form {
+       display: flex;
+       margin-top: 30px;
+   
+       label {
+         width: 100%;
+       }
+       .doctor-select-left,
+       .doctor-input-right {
+         // width: 100%; // Move to the common parent to avoid repetition
+         label {
+           width: 100%;
+         }
+       }
+   
+       .doctor-select-left {
+         .css-2b097c-container {
+          margin-top: 6px;
+         }
+       }
+   
+       .doctor-textarea-right {
+         margin-left: 30px;
+         textarea {
+          margin-top: 5px;
+           // margin-left: 30px;
+           width: 96.5%;
+          //  height: 140px;
+          height: 140px;
+          padding: 10px; 
+          box-sizing: border-box;
+         }
+       }
+     }
+     .save-content-doctor {
+          margin-top: 20px;
+          margin-bottom: 30px;
+          border-radius: 3px;
+          outline: none;
+          border: none;
+          padding:5 px;
+          box-sizing: border-box;
+          &:hover {
+               opacity: 0.9;
+          }
+          button {
+               padding: 3px
+          };
+
+     }
+   }
+   

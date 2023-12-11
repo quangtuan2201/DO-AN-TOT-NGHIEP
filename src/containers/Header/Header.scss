@@ -21,6 +21,8 @@
         }
     }
     .languages {
+        display: flex;
+        align-items: center ;
         .wellcome {
             margin-right: 10px;
         }
