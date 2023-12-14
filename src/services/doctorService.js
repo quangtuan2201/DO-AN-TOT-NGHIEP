@@ -22,7 +22,7 @@ const handleSaveInfoDoctor = async (InfoDoctor) => {
     const response = await instance.post("/save-info-doctor", InfoDoctor);
     console.log("Call API save info doctor in doctorService:", response);
     if (response && response.data) {
-      return response;
+      return response.data;
     } else {
       return {
         error: "Invalid response format",
@@ -34,8 +34,25 @@ const handleSaveInfoDoctor = async (InfoDoctor) => {
     };
   }
 };
+const handleGetDetailDoctor = async (id) => {
+  try {
+    const response = await instance.get(`/detail-doctor-by-id?id=${id}`);
+    // console.log("response handleGetDetailDoctor: ", response);
+    if (response.data.data && response.data.errCode === 0) {
+      return response.data.data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error(
+      "Fail call API get detail info doctor in doctorService: ",
+      error.message
+    );
+  }
+};
 
 export default {
   handleGetAllDoctors,
   handleSaveInfoDoctor,
+  handleGetDetailDoctor,
 };

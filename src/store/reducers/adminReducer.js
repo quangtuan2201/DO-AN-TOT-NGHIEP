@@ -12,6 +12,7 @@ const initialState = {
   topDoctors: [],
   allDoctors: [],
   saveInfoDoctor: {},
+  detailDoctor: {},
 };
 const adminReducer = (state = initialState, action) => {
   // console.log("action:", action);
@@ -121,6 +122,15 @@ const adminReducer = (state = initialState, action) => {
         saveInfoDoctor: action.data,
       };
     case actionTypes.FETCH_SAVE_INFO_DOCTOR_FAIL:
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_GET_DETAIL_DOCTOR_SUCCESS:
+      return {
+        ...state,
+        detailDoctor: action.data,
+      };
+    case actionTypes.FETCH_GET_DETAIL_DOCTOR_FAIL:
       return {
         ...state,
       };

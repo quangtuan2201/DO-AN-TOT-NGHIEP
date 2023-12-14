@@ -7,6 +7,7 @@ import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../store/actions";
 import doctorService from "../../../services/doctorService";
+import UserAdmin from "./UserAdmin";
 // const options = [
 //   { value: 1, label: "Tuấn Anh", position: "P1" },
 //   { value: 2, label: "Ngọc Anh", position: "P2" },
@@ -25,6 +26,7 @@ function DoctorSelect({ options, onChange, value }) {
 }
 
 function DoctorManage() {
+  const defaultValue = { value: "", label: "Select..." };
   const dispatch = useDispatch();
   const [selectDoctor, setSelectOption] = useState({});
   const [options, setOptions] = useState(null);
@@ -46,7 +48,7 @@ function DoctorManage() {
       };
     });
   });
-  console.log("CHECK option", options);
+  // console.log("CHECK option", options);
   useEffect(() => {
     dispatch(actions.fetchGetAllDoctors());
   }, []);
@@ -63,11 +65,15 @@ function DoctorManage() {
 
   const mdParser = new MarkdownIt(/* Markdown-it options */);
   console.log("Content: ", content);
+  console.log("Select doctor: ", selectDoctor);
   const handleEditorChange = ({ html, text }) => {
     console.log("handleEditorChange:/n", html, ",", text);
-    setContent({
-      contentMarkdown: text,
-      contentHTML: html,
+    setContent((present) => {
+      return {
+        ...present,
+        contentMarkdown: text,
+        contentHTML: html,
+      };
     });
   };
   const handleIntroWrite = (e) => {
@@ -83,7 +89,21 @@ function DoctorManage() {
   const handleSaveInfo = () => {
     try {
       console.log("content in fuc handlSave: ", content);
-      dispatch(actions.fetchSaveInfoDoctor(content));
+      let keys = Object.keys(content).filter((key) => {
+        return content[key] !== selectDoctor[key];
+      });
+      keys.filter((item) => {
+        return;
+      });
+      // dispatch(actions.fetchSaveInfoDoctor(content));
+      alert("Save !");
+      setContent({
+        contentMarkdown: "",
+        contentHTML: "",
+        doctorId: 0,
+        description: "",
+      });
+      setSelectOption({});
     } catch (error) {
       console.error("Call API fail: ", error.message);
     }
@@ -92,11 +112,25 @@ function DoctorManage() {
   const handlSelectDoctor = (selectDoctor) => {
     console.log("selectDoctor: ", selectDoctor);
     setSelectOption(selectDoctor);
+
     setContent((present) => {
-      return {
-        ...present,
-        doctorId: selectDoctor.value,
-      };
+      console.log("present content: ", present);
+      console.log("selectDoctor.Markdown", selectDoctor.Markdown);
+      if (selectDoctor.Markdown) {
+        return {
+          ...present,
+          doctorId: selectDoctor.value,
+          contentMarkdown: selectDoctor.Markdown?.contentMarkdown,
+          description: selectDoctor?.Markdown?.description,
+        };
+      } else {
+        return {
+          ...present,
+          doctorId: selectDoctor.value,
+          contentMarkdown: "",
+          description: "",
+        };
+      }
     });
   };
 
@@ -125,6 +159,8 @@ function DoctorManage() {
               className="form-control"
               placeholder="Description..."
               onChange={handleIntroWrite}
+              // value={content?.description ? content?.description : ""}
+              value={content?.description}
             ></textarea>
           </div>
         </div>
@@ -135,20 +171,21 @@ function DoctorManage() {
             style={{ height: "500px" }}
             renderHTML={(text) => mdParser.render(text)}
             onChange={handleEditorChange}
+            value={content?.contentMarkdown}
+            // value={content?.contentMarkdown}
           />
         </div>
         <div className="save-content-doctor">
           <button
             type="button"
             class="btn btn-warning"
-            disabled={
-              !content?.doctorId ||
-              !content?.contentMarkdown ||
-              !content?.contentHTML
-            }
+            disabled={!content?.doctorId || !content?.contentMarkdown}
+            // {!content?.doctorId || !content?.contentMarkdown}
             onClick={handleSaveInfo}
           >
-            Lưu thông tin
+            {!content?.doctorId || !content?.contentMarkdown
+              ? "Create"
+              : "Update"}
           </button>
         </div>
       </div>

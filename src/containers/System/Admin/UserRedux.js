@@ -7,6 +7,7 @@ import { LANGUAGES, CommonUtils } from "../../../utils";
 import { FormattedMessage, useIntl } from "react-intl";
 import * as actions from "../../../store/actions";
 import TableManageUser from "./TableManageUser";
+import UserAdmin from "./UserAdmin";
 import "./UserRedux.scss";
 
 function UserRedux() {
@@ -400,6 +401,11 @@ function UserRedux() {
         handleDeleteUser={handleDeleteUser}
         handleUpdateUser={handleUpdateUser}
       />
+      {/* 
+      {console.log("allUser: ", Array.isArray(dataReducer.allUser))}
+      <div>
+        <UserAdmin items={dataReducer.allUser} page={4} />
+      </div> */}
     </React.Fragment>
   );
 }

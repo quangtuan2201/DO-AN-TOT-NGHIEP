@@ -19,6 +19,7 @@ import System from "../routes/System";
 import ConfirmModal from "../components/ConfirmModal";
 import HomePage from "./HomePage/HomePage.js";
 import CustomScrollbars from "../components/CustomScrollbars.js";
+import DetailDoctor from "./Patient/Doctor/DetailDoctor.js";
 // import { changeLanguageApp } from ".././store/actions/appActions.js";
 // import * as actions from "./../store/actions";
 
@@ -59,6 +60,7 @@ const App = () => {
                   component={userIsAuthenticated(System)}
                 />
                 <Route path={path.HOMEPAGE} component={HomePage} />
+                <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
               </Switch>
             </CustomScrollbars>
           </div>

@@ -2,17 +2,19 @@ import "./OutStandingDoctor.scss";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
-// Import css files
 import { FormattedMessage, useIntl } from "react-intl";
 import * as actions from "../../../store/actions";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { path } from "../../../utils";
 import { lang } from "moment";
-
+// Import css files
 function OutStandingDoctor(props) {
   const [thumbnail, setThumbnail] = useState("");
   const [seemore, setSeeMore] = useState(true);
   const dispatch = useDispatch();
+  const history = useHistory();
   useEffect(() => {
-    console.log("seemore last:", seemore);
+    // console.log("seemore last:", seemore);
     if (seemore === false) {
       dispatch(actions.fetchTopDoctor(15));
     } else {
@@ -25,7 +27,10 @@ function OutStandingDoctor(props) {
       topDoctors: state.admin.topDoctors,
     };
   });
-  // console.log("topDoctor: ", topDoctors);
+  const handleViewDetailDoctor = (doctor) => {
+    console.log("handle click view: ", doctor);
+    history.push(`/detail-doctors/${doctor.id}`);
+  };
   const getThumbnail = (imagebuffer) => {
     let imageBase64 = "";
     // console.log("imagebuffer: ", imagebuffer, typeof imagebuffer);
@@ -38,13 +43,13 @@ function OutStandingDoctor(props) {
   };
 
   const renderAllDoctor = (allDoctors) => {
-    console.log("All doctor: ", allDoctors);
     const containerStyle = {
       height: "700px", // Có thể là px, em, rem, %, etc.
       // backgroundColor: 'lightgray', // Các thuộc tính CSS khác nếu cần
       // padding: '10px',
       boxSizing: "border-box",
     };
+
     return (
       <div className="container">
         <table className="table table-striped">
@@ -101,6 +106,7 @@ function OutStandingDoctor(props) {
       </div>
     );
   };
+
   return (
     <React.Fragment>
       <div
@@ -120,7 +126,7 @@ function OutStandingDoctor(props) {
               className="btn-section"
               onClick={() => {
                 setSeeMore((present) => {
-                  console.log("present seemore: ", present);
+                  // console.log("present seemore: ", present);
                   return !present;
                 });
               }}
@@ -133,7 +139,13 @@ function OutStandingDoctor(props) {
               <Slider {...props.settings}>
                 {topDoctors &&
                   topDoctors.map((doctor, index) => (
-                    <div className="section-customize" key={index}>
+                    <div
+                      className="section-customize"
+                      key={index}
+                      onClick={() => {
+                        handleViewDetailDoctor(doctor);
+                      }}
+                    >
                       <div className="customize-border">
                         <div className="bg-outer text-center">
                           <div

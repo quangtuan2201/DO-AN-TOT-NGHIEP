@@ -24,7 +24,7 @@ function HomePage({ isLoggedIn }) {
   return (
     <React.Fragment>
       <div>
-        <HomeHeader />
+        <HomeHeader isShowHeader={true} />
         <Specialty settings={settings} />
         <MedicalFacility settings={settings} />
         <OutStandingDoctor settings={settings} />

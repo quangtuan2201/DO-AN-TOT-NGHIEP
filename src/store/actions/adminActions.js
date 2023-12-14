@@ -203,9 +203,8 @@ export const fetchSaveInfoDoctor = (newInfo) => {
       const response = await doctorService.handleSaveInfoDoctor(newInfo);
       console.log("response SAVE INFO in file adminAction:", response);
       if (response.data && response.errCode === 0) {
+        toast.success("Save info a doctor success !");
         dispatch(fetchSaveInfoDoctorSuccess(response.data));
-      } else {
-        dispatch(fetchSaveInfoDoctorFail());
       }
     } catch (error) {
       dispatch(fetchSaveInfoDoctorFail());
@@ -218,4 +217,29 @@ const fetchSaveInfoDoctorSuccess = (data) => ({
 });
 const fetchSaveInfoDoctorFail = () => ({
   type: actionTypes.FETCH_GET_ALL_DOCTOR_FAIL,
+});
+// ACTION GET DETAIL DOCTOR
+export const fetchGetDetailDoctor = (id) => {
+  return async (dispatch) => {
+    try {
+      const doctor = await doctorService.handleGetDetailDoctor(id);
+      console.log("Doctor: ", doctor);
+      if (doctor) {
+        toast.success("Get Detail Doctor Succsess !");
+        dispatch(fetchGetDetailDoctorSuccess(doctor));
+      }
+    } catch (error) {
+      toast.error("Get Detail Doctor Fail !");
+      dispatch(fetchGetDetailDoctorFail());
+      console.error("", error.message);
+    }
+  };
+};
+const fetchGetDetailDoctorSuccess = (data) => ({
+  type: actionTypes.FETCH_GET_DETAIL_DOCTOR_SUCCESS,
+  data,
+});
+
+const fetchGetDetailDoctorFail = () => ({
+  type: actionTypes.FETCH_GET_DETAIL_DOCTOR_FAIL,
 });

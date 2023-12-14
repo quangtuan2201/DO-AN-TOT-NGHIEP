@@ -1,0 +1,67 @@
+body {
+     height: 100vh; /* Đảm bảo chiều cao của body chiếm toàn bộ viewport */
+     overflow-y: scroll; /* Thêm thanh cuộn dọc khi cần thiết */
+     margin: 0; /* Loại bỏ margin mặc định của body */
+
+.doctor-detail-container {
+height: 700px;
+border: 1px solid black;
+.intro-doctor{
+     display: flex;
+     height: 100px;
+     margin: 0 50px;
+     .content-left{
+          width: 20%;
+          border: 1px solid salmon ;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+          height: 120px;
+          border-radius: 50%;
+          width: 120px;
+          margin: 10px 0;
+     }
+   
+     .content-right{
+          width: 80%;
+          border: 1px solid blue;
+          display: flex;
+          flex-direction: column;
+          padding-left: 10px;
+          padding-top: 10px;
+          height: 120px;
+          margin: 10px 20px;
+          .up {
+               font-size: 20px;
+               font-weight: 600;
+               padding-top: 15px;
+          }
+          .down {
+               padding-top: 10px;
+          }
+     }
+     
+
+}
+.detail-doctor {
+     border-top: 1px solid black;
+     margin-top: 50px;
+}
+}
+.container {
+     padding-left: 0 !important;
+     padding-right: 0 !important;
+}
+.bk-image {
+     display: flex;
+     justify-content: center;
+     align-items: center; 
+     margin-bottom: 100px;
+     img {
+          max-width: 100%;
+           height: auto;
+           width: 350px;
+           height: 350px;
+     }
+}
+}

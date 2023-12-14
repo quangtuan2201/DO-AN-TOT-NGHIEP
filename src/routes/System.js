@@ -31,11 +31,14 @@ import DoctorManage from "../containers/System/Admin/DoctorManage";
 //         );
 //     }
 // }
-function System(systemMenuPath) {
-  console.log("systemMenuPath", systemMenuPath);
-  const loggedIn = useSelector((state) => {
-    return state.user.isLoggedIn;
+function System() {
+  const { loggedIn, systemMenuPath } = useSelector((state) => {
+    return {
+      loggedIn: state.user.isLoggedIn,
+      systemMenuPath: state.app.systemMenuPath,
+    };
   });
+  console.log("systemMenuPath", systemMenuPath);
   return (
     <React.Fragment>
       {loggedIn && <Header />}
@@ -71,14 +74,14 @@ function System(systemMenuPath) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    systemMenuPath: state.app.systemMenuPath,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     systemMenuPath: state.app.systemMenuPath,
+//   };
+// };
 
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(System);
+// const mapDispatchToProps = (dispatch) => {
+//   return {};
+// };
+//connect(mapStateToProps, mapDispatchToProps)(System)
+export default System;
