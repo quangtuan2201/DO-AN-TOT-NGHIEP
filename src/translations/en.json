@@ -11,7 +11,6 @@
         "support":"Support",
         "wellcome":"Wellcome, "
     },
-
     "banner":{
         "title1":"MEDICAL FOUNDATION",
         "title2":"Comprehensive health care",
@@ -27,31 +26,15 @@
     "popularSpeciality":{
         "popularSpeciality":"Popular speciality"
     },
-    "common": {
-        "add": "Add",
-        "edit": "Edit",
-        "delete": "Delete",
-        "decentralize": "Decentralize",
-        "close": "Close",
-        "save": "Save",
-        "refresh": "Refresh",
-        "accept": "Accept",
-        "confirm": "Confirm",
-        "confirm-this-task": "Are you sure to process this task?",
-        "fail-to-load-data": "Fail to load data",
-        "unknown-error": "There was an error",
-        "internal-server-error": "Internal server error",
-        "bad-request": "Bad request",
-        "forbiden-request": "Invalid input data",
-        "fail-to-load-all-code": "Fail to load data from allcode",
-        "sum": "Sum",
-        "date-range-invalid": "Date range invalid"
-    },
     "login": {
         "login": "Login",
-        "username": "Username",
+        "email": "Email",
         "password": "Password",
-        "userpass-wrong": "Invalid username or password!"
+        "userpass-wrong": "Sai tên đăng nhập hoặc mật khẩu!",
+        "show":"Show Password",
+        "hide":"Hide Password",
+        "or-login-with":"Or Login with?",
+        "oblivion":"Forgot password?"
     },
     "menu": {
         "admin":{
@@ -68,6 +51,9 @@
             "manage-post":"Post management",
             "handbook":"HandBook management",
             "manage-handbook":"HandBook management"
+        },
+        "doctor":{
+            "manage-schedule":"Manage doctor's schedule"
         }
     },
     "user-manage":{
@@ -88,11 +74,28 @@
         "action":"Action",
         "selectGender":"Select Gender",
         "selectPosition":"Select Position",
-        "selectRole":"Select Role"
+        "selectRole":"Select Role",
+        "invalidEmail":"Invalid Email",
+        "enterEmail":"Enter Email",
+        "enterPassword":"Enter Password",
+        "login":"Login",
+        "passwordLength":"Password length"
     },
     "homePage":{
         "prominent-doctor":"Prominent dotor",
         "see-more":"See more"
+
+    },
+    "manage-schedule": {
+        "title":"Manage doctor's medical examination plans",
+        "save":"Save",
+        "select-date":"Select date",
+        "select-doctor":"Select doctor",
+        "appointment-schedule":"Appointment Schedule",
+        "warring-select-doctor":"Please select a date before submitting.",
+        "warring-select-date":"Please select a date before submitting.",
+        "warring-select-schedule-hours":"Vui lòng chọn khung giờ khám trước khi gửi."
+
 
     }
     

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { dateFilter } from "react-bootstrap-table2-filter";
 const instance = axios.create({
   baseURL: "http://localhost:3333/api",
 });
@@ -17,6 +18,7 @@ const handleGetAllDoctors = async () => {
     throw error;
   }
 };
+//[CREATE] || [UPDATE] /api/save-info-doctor
 const handleSaveInfoDoctor = async (InfoDoctor) => {
   try {
     const response = await instance.post("/save-info-doctor", InfoDoctor);
@@ -50,9 +52,38 @@ const handleGetDetailDoctor = async (id) => {
     );
   }
 };
+//[GET] /api/get-schedule-hours
+const handleAllCodeScheduleHours = async () => {
+  try {
+    const response = await instance.get("/allcode-schedule-hours");
+    if (response.data && response.data.errCode === 0) {
+      return response.data.data;
+    }
+  } catch (error) {
+    console.error("Fetch api get allcode schedule fail!");
+    return null;
+  }
+};
+//[POST] /api//api/bulk-create-schedule
+const handlBulkCreateSchedule = async (data) => {
+  try {
+    const response = await instance.post("/bulk-create-schedule", data);
+    if (response.errCode === 0 && response.data) {
+      return response.data;
+    } else {
+      console.log("response fetch Fail: ", response);
+      return null;
+    }
+  } catch (error) {
+    console.error("Fetch call api bulk create schedule Fail: ", error.message);
+    return null;
+  }
+};
 
 export default {
   handleGetAllDoctors,
   handleSaveInfoDoctor,
   handleGetDetailDoctor,
+  handleAllCodeScheduleHours,
+  handlBulkCreateSchedule,
 };

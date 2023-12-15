@@ -3,6 +3,7 @@ body {
 }
 .doctor-container {
      margin-top: 50px;
+     margin: 0 90px;
      .manage-doctor-title {
           margin: 15px 0;
           font-size: 20px;
@@ -57,6 +58,14 @@ body {
           button {
                padding: 3px
           };
+          .btn-e {
+            background-color: rgb(165, 0, 230) !important;
+            color: white;
+          }
+            .btn-c {
+            background-color: rgb(106, 200, 23) !important;
+            // color: white;
+          }
 
      }
    }

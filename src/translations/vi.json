@@ -30,7 +30,11 @@
         "login": "Đăng nhập",
         "username": "Tên đăng nhập",
         "password": "Mật khẩu",
-        "userpass-wrong": "Sai tên đăng nhập hoặc mật khẩu!"
+        "userpass-wrong": "Sai tên đăng nhập hoặc mật khẩu!",
+        "show":"Hiện Mật khẩu",
+        "hide":"Ẩn Mật khẩu",
+        "oblivion":"Quên Mật khẩu?",
+        "or-login-with":"Hoặc Đăng nhập bằng?"
     },
     "menu": {
         "admin":{
@@ -47,6 +51,10 @@
             "manage-post":"Quản lý bài đăng",
             "handbook":"Cẩm nang",
             "manage-handbook":"Quản lý cẩm nang"
+        },
+        "doctor":{
+            "manage-schedule":"Quản lý kế hoạch khám bệnh"
+        
         }
     },
     "user-manage":{
@@ -67,11 +75,28 @@
         "action":"Hành động",
         "selectGender":"Chọn Giới tính",
         "selectPosition":"Chon Chức danh",
-        "selectRole":"Chọn Vai trò"
+        "selectRole":"Chọn Vai trò",
+        "invalidEmail":"Email không hợp lệ !",
+        "enterEmail":"Nhập Email",
+        "enterPassword":"Nhập Mật khẩu",
+        "login":"Đăng nhập",
+        "passwordLength":"Độ dài mật khẩu"
+
     },
     "homePage":{
         "prominent-doctor":"Bác sĩ nổi bật",
         "see-more":"Xem thêm"
+
+    },
+    "manage-schedule": {
+        "title":"Quản lý kế hoạch khám bệnh của bác sĩ",
+        "save":"Lưu thông tin",
+        "select-date":"Chọn ngày",
+        "select-doctor":"Chọn bác sĩ",
+        "appointment-schedule":"Lịch Khám",
+        "warring-select-doctor":"Vui lòng chọn bác sĩ trước khi gửi.",
+        "warring-select-date":"Vui lòng chọn ngày trước khi gửi.",
+        "warring-select-schedule-hours":"Vui lòng chọn khung giờ khám trước khi gửi."
 
     }
     

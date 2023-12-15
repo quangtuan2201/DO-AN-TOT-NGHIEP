@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
 
 import * as actions from "../../store/actions";
 import Navigator from "../../components/Navigator";
-import { adminMenu } from "./menuApp";
+import { adminMenu, doctorMenu } from "./menuApp";
 import "./Header.scss";
-import { LANGUAGES } from "../../utils/constant";
+import { LANGUAGES, USER_ROLE } from "../../utils/constant";
 import { changeLanguageApp } from "../../store/actions/appActions";
 import { FormattedMessage, useIntl } from "react-intl";
 
@@ -31,11 +31,28 @@ import { FormattedMessage, useIntl } from "react-intl";
 function Header() {
   // console.log("processLogout", processLogout);
   const dispatch = useDispatch();
+  const [menuApp, setMenuApp] = useState([]);
   const { language, userInfo } = useSelector((state) => {
     return {
       language: state.app.language,
       userInfo: state.user.userInfo,
     };
+  });
+  useEffect(() => {
+    // let menu =[];
+    // console.log("UserInfo: ", userInfo);
+    if (userInfo && Object.keys(userInfo).length > 0) {
+      let role = userInfo.roleId;
+      if (role === USER_ROLE.ADMIN) {
+        // console.log("IS ADMIN");
+        setMenuApp(adminMenu);
+      } else if (role === USER_ROLE.DOCTOR) {
+        // console.log("IS DOCTOR");
+        setMenuApp(doctorMenu);
+      }
+    } else {
+      console.log("IS ...");
+    }
   });
 
   const switchToEnglish = () => {
@@ -49,7 +66,7 @@ function Header() {
     <div className="header-container">
       {/* thanh navigator */}
       <div className="header-tabs-container">
-        <Navigator menus={adminMenu} />
+        <Navigator menus={menuApp} />
       </div>
       <div className="languages">
         <span className="wellcome">

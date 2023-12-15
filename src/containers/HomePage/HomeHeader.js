@@ -3,12 +3,16 @@ import React, { useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useDispatch, useSelector } from "react-redux";
 import { changeLanguageApp } from "../../store/actions/appActions";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { path } from "../../utils/constant";
+
 //src/store/actions/appActions.js
 import { LANGUAGES } from "../../utils/constant";
 
 function HomeHeader({ isShowHeader }) {
   const intl = useIntl();
   const dispatch = useDispatch();
+  const history = useHistory();
   const language = useSelector((state) => {
     return state.app.language;
   });
@@ -21,6 +25,10 @@ function HomeHeader({ isShowHeader }) {
     dispatch(changeLanguageApp(LANGUAGES.VI));
     // localStorage.setItem("appLanguage", LANGUAGES.VI); // Thay đổi từ setLanguage sang changeLanguage
   };
+  const returnHome = () => {
+    // alert("Return Home !");
+    history.push(path.HOMEPAGE);
+  };
   return (
     <React.Fragment>
       (
@@ -29,7 +37,7 @@ function HomeHeader({ isShowHeader }) {
           <div className="home-header-content">
             <div className="left-content">
               <i className="fas fa-bars icon-menu"></i>
-              <div className="header-logo"></div>
+              <div className="header-logo" onClick={returnHome}></div>
             </div>
 
             <div className="center-content">

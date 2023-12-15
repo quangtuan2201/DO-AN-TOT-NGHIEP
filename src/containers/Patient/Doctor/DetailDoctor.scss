@@ -5,14 +5,19 @@ body {
 
 .doctor-detail-container {
 height: 700px;
-border: 1px solid black;
+// margin: 0px 90px;
+// padding: 15px 20px;
+// .detail-doctor,.achedule-doctor {
+//      opacity: 1!important;
+//      // background-color: rgb(200,200,200)!important;
+//      background-color: #dddd;
+// }
 .intro-doctor{
      display: flex;
      height: 100px;
-     margin: 0 50px;
+     margin: 40px 100px;
      .content-left{
           width: 20%;
-          border: 1px solid salmon ;
           background-repeat: no-repeat;
           background-position: center;
           background-size: cover;
@@ -24,7 +29,6 @@ border: 1px solid black;
    
      .content-right{
           width: 80%;
-          border: 1px solid blue;
           display: flex;
           flex-direction: column;
           padding-left: 10px;
@@ -37,15 +41,35 @@ border: 1px solid black;
                padding-top: 15px;
           }
           .down {
-               padding-top: 10px;
+               // padding-top: 10px;
           }
      }
      
 
 }
-.detail-doctor {
-     border-top: 1px solid black;
+.detail-info-doctor {
      margin-top: 50px;
+     padding: 20px 100px;
+     background-color: #ddd;
+     h2 {
+          font-size: 17px;
+          font-weight: 600;
+     }
+     .detail-info-doctor p{
+          display: flex;
+          justify-content: center; /* Căn giữa theo chiều ngang */
+          align-items: center; 
+     }
+     img {
+          transition: transform 0.3s ease-in-out;      /* Hiệu ứng chuyển động mượt mà */
+          height: 100%; /* Đặt chiều cao cố định */
+          width: auto;
+          
+        }
+        
+        img:hover {
+          transform: scale(1.1); /* Phóng to hình ảnh khi rê chuột qua */
+        }
 }
 }
 .container {
@@ -65,3 +89,4 @@ border: 1px solid black;
      }
 }
 }
+

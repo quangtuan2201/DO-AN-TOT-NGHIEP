@@ -3,12 +3,17 @@ const instance = axios.create({
   baseURL: "http://localhost:3333/api",
 });
 //Handle login
-const handleLogin = async (email, password) => {
+const handleLogin = async (user) => {
   try {
-    return await instance.post("/login", {
-      email,
-      password,
+    const response = await instance.post("/login", {
+      email: user.email,
+      password: user.password,
     });
+    if (response && response.data) {
+      return response.data;
+    } else {
+      return null;
+    }
   } catch (error) {
     throw error;
   }

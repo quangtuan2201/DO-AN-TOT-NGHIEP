@@ -10,6 +10,7 @@ import ClinicManage from "../containers/System/Admin/ClinicManage";
 import SpecialtyManage from "../containers/System/Admin/SpecialtyManage";
 import HandBookManage from "../containers/System/Admin/HandbookManage";
 import PostManage from "../containers/System/Admin/PostManage";
+import DoctorSchedule from "../containers/System/Admin/DoctorSchedule";
 import RegisterPackageGroupOrAcc from "../containers/System/RegisterPackageGroupOrAcc";
 import Header from "../containers/Header/Home";
 import DoctorManage from "../containers/System/Admin/DoctorManage";

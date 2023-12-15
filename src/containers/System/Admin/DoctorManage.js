@@ -6,28 +6,15 @@ import { useState, useEffect } from "react";
 import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../store/actions";
-import doctorService from "../../../services/doctorService";
-import UserAdmin from "./UserAdmin";
-// const options = [
-//   { value: 1, label: "Tuấn Anh", position: "P1" },
-//   { value: 2, label: "Ngọc Anh", position: "P2" },
-//   { value: 3, label: "Ngọc Tú", position: "P4" },
-//   { value: 4, label: "Tuấn Hà", position: "P3" },
-//   { value: 5, label: "Anh Thư", position: "P3" },
-//   { value: 6, label: "Vân Nguyễn", position: "P3" },
-//   { value: 7, label: "Tuấn Anh", position: "P3" },
-//   { value: 8, label: "Ngọc Anh", position: "P3" },
-//   { value: 9, label: "Ngọc Tú", position: "P3" },
-//   { value: 10, label: "Tuấn Anh", position: "P3" },
-// ];
+import { CRUD_ACTIONS } from "../../../utils/constant";
 
 function DoctorSelect({ options, onChange, value }) {
   return <Select options={options} onChange={onChange} value={value} />;
 }
 
 function DoctorManage() {
-  const defaultValue = { value: "", label: "Select..." };
   const dispatch = useDispatch();
+  const [isContentEdited, setIsContentEdited] = useState(false);
   const [selectDoctor, setSelectOption] = useState({});
   const [options, setOptions] = useState(null);
   const [content, setContent] = useState({
@@ -48,26 +35,20 @@ function DoctorManage() {
       };
     });
   });
-  // console.log("CHECK option", options);
+  const saveInfoDoctor = useSelector((state) => {
+    console.warn("SAVEINFO DOCTOR:", state.admin.saveInfoDoctor);
+    return state.admin.saveInfoDoctor;
+  });
   useEffect(() => {
-    dispatch(actions.fetchGetAllDoctors());
+    if (!Object.keys(allDoctors).length) dispatch(actions.fetchGetAllDoctors());
   }, []);
-  // useEffect(() => {
-  //     console.log("Check doctor: ", allDoctors);
-  //     const doctors = allDoctors?.map((doctor) => ({
-  //       ...doctor,
-  //       value: doctor.id,
-  //       label: `${doctor.lastName} ${doctor.firstName} `,
-  //     }));
-  //     console.log("DOCTORS... : ", doctors);
-  //     setOptions(doctors);
-  // }, []);
 
   const mdParser = new MarkdownIt(/* Markdown-it options */);
   console.log("Content: ", content);
-  console.log("Select doctor: ", selectDoctor);
+  // console.log("Select doctor: ", selectDoctor);
   const handleEditorChange = ({ html, text }) => {
     console.log("handleEditorChange:/n", html, ",", text);
+    console.log("handleEditchange: ", content);
     setContent((present) => {
       return {
         ...present,
@@ -88,15 +69,7 @@ function DoctorManage() {
   };
   const handleSaveInfo = () => {
     try {
-      console.log("content in fuc handlSave: ", content);
-      let keys = Object.keys(content).filter((key) => {
-        return content[key] !== selectDoctor[key];
-      });
-      keys.filter((item) => {
-        return;
-      });
-      // dispatch(actions.fetchSaveInfoDoctor(content));
-      alert("Save !");
+      dispatch(actions.fetchSaveInfoDoctor(content));
       setContent({
         contentMarkdown: "",
         contentHTML: "",
@@ -114,14 +87,27 @@ function DoctorManage() {
     setSelectOption(selectDoctor);
 
     setContent((present) => {
-      console.log("present content: ", present);
-      console.log("selectDoctor.Markdown", selectDoctor.Markdown);
       if (selectDoctor.Markdown) {
+        if (
+          Object.keys(saveInfoDoctor).length !== 0 &&
+          saveInfoDoctor.doctorId === selectDoctor.doctorId
+        ) {
+          console.log("TRUE!");
+          return {
+            ...present,
+            doctorId: saveInfoDoctor.doctorId,
+            contentMarkdown: saveInfoDoctor?.contentMarkdown,
+            // contentMarkdown: saveInfoDoctor?.contentMarkdown,
+            description: saveInfoDoctor?.description,
+            action: CRUD_ACTIONS.EDIT,
+          };
+        }
         return {
           ...present,
           doctorId: selectDoctor.value,
           contentMarkdown: selectDoctor.Markdown?.contentMarkdown,
           description: selectDoctor?.Markdown?.description,
+          action: CRUD_ACTIONS.EDIT,
         };
       } else {
         return {
@@ -129,6 +115,7 @@ function DoctorManage() {
           doctorId: selectDoctor.value,
           contentMarkdown: "",
           description: "",
+          action: CRUD_ACTIONS.CREATE,
         };
       }
     });
@@ -136,7 +123,7 @@ function DoctorManage() {
 
   return (
     <>
-      <div className="container doctor-container">
+      <div className="doctor-container">
         <div className="manage-doctor-title text-center">
           Tạo thêm thông tin Doctors
         </div>
@@ -178,14 +165,17 @@ function DoctorManage() {
         <div className="save-content-doctor">
           <button
             type="button"
-            class="btn btn-warning"
+            className={`btn btn-warning ${
+              content && content?.action === "CREATE" ? "btn-c" : "btn-e"
+            } `}
             disabled={!content?.doctorId || !content?.contentMarkdown}
             // {!content?.doctorId || !content?.contentMarkdown}
             onClick={handleSaveInfo}
           >
-            {!content?.doctorId || !content?.contentMarkdown
+            {/* {!content?.doctorId || !content?.contentMarkdown
               ? "Create"
-              : "Update"}
+              : "Update"} */}
+            {content && content?.action === "CREATE" ? "CREATE" : "EDIT"}
           </button>
         </div>
       </div>

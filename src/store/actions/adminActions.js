@@ -146,12 +146,12 @@ const fetchUpdateSuccess = (data) => ({
 const fetchUpdateFail = () => ({
   type: actionTypes.FETCH_UPDATE_USER_FAIL,
 });
-
+//ACTION UPDATE
 export const fetchTopDoctor = (limit) => {
-  console.log("limit1:", limit);
+  // console.log("limit1:", limit);
   return async (dispatch, getState) => {
     try {
-      console.log("limit 2: ", limit);
+      // console.log("limit 2: ", limit);
       const response = await userService.fetchGetDoctor(limit, "R2");
       // console.log("response: ", response);
       if (response.data && response.errCode === 0) {
@@ -177,13 +177,16 @@ export const fetchGetAllDoctors = () => {
   return async (dispatch) => {
     try {
       const response = await doctorService.handleGetAllDoctors();
-      console.log("response ALL DOCTOR in file adminAction:", response);
+      // console.log("response ALL DOCTOR in file adminAction:", response);
       if (response.data && response.errCode === 0) {
+        toast.success("Get all a doctor success !");
         dispatch(fetchAllDoctorSuccess(response.data));
       } else {
+        toast.error("Get all a doctor fail !");
         dispatch(fetchAllDoctoFail());
       }
     } catch (error) {
+      toast.error("Get all a doctor fail !");
       dispatch(fetchAllDoctoFail());
     }
   };
@@ -197,14 +200,18 @@ const fetchAllDoctoFail = () => ({
 });
 //ACTION SAVE INFO DOCTOR
 export const fetchSaveInfoDoctor = (newInfo) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     try {
-      console.log("newInfoDoctor in adminAction: ", newInfo);
+      // console.log("newInfoDoctor in adminAction: ", newInfo);
+      // console.log("Get State save info; ", getState());
       const response = await doctorService.handleSaveInfoDoctor(newInfo);
-      console.log("response SAVE INFO in file adminAction:", response);
+      // console.log("response SAVE INFO in file adminAction:", response);
       if (response.data && response.errCode === 0) {
         toast.success("Save info a doctor success !");
         dispatch(fetchSaveInfoDoctorSuccess(response.data));
+      } else {
+        toast.error("Save info doctor fail !");
+        dispatch(fetchSaveInfoDoctorFail());
       }
     } catch (error) {
       dispatch(fetchSaveInfoDoctorFail());
@@ -223,10 +230,13 @@ export const fetchGetDetailDoctor = (id) => {
   return async (dispatch) => {
     try {
       const doctor = await doctorService.handleGetDetailDoctor(id);
-      console.log("Doctor: ", doctor);
+      // console.log("Doctor: ", doctor);
       if (doctor) {
         toast.success("Get Detail Doctor Succsess !");
         dispatch(fetchGetDetailDoctorSuccess(doctor));
+      } else {
+        toast.error("Get Detail Doctor Fail !");
+        dispatch(fetchGetDetailDoctorFail());
       }
     } catch (error) {
       toast.error("Get Detail Doctor Fail !");
@@ -243,3 +253,25 @@ const fetchGetDetailDoctorSuccess = (data) => ({
 const fetchGetDetailDoctorFail = () => ({
   type: actionTypes.FETCH_GET_DETAIL_DOCTOR_FAIL,
 });
+//ACTION LOGIN
+// export const fetchUserLogin = (user) => {
+//   console.log("User: ", user);
+//   return async (dispatch) => {
+//     const response = await userService.handleLogin(user);
+//     console.log("response login :",response);
+//     if (response) {
+//       toast.success("User Login Success !");
+//       dispatch(fetchUserLoginSuccess(response));
+//     } else {
+//       toast.error("User Login Fail");
+//       dispatch(fetchUserLoginFail());
+//     }
+//   };
+// };
+// const fetchUserLoginSuccess = (data) => ({
+//   type: actionTypes.FETCH_USER_LOGIN_SUCCESS,
+//   data,
+// });
+// const fetchUserLoginFail = () => ({
+//   type: actionTypes.FETCH_USER_LOGIN_FAIL,
+// });

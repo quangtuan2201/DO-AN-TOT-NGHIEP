@@ -5,8 +5,14 @@ export const path = {
   LOG_OUT: "/logout",
   SYSTEM: "/system",
   DETAIL_DOCTOR: "/detail-doctors/:id",
+  DOCTOR_MANAGE: "/doctor",
 };
-
+export const CRUD_ACTIONS = {
+  CREATE: "CREATE",
+  EDIT: "EDIT",
+  DELETE: "DELETE",
+  READ: "READ",
+};
 export const LANGUAGES = {
   VI: "vi",
   EN: "en",
@@ -34,3 +40,8 @@ export const KEYS = {
   GENDER: "GENDER",
 };
 export const allKeys = ["ROLE", "STATUS", "TIME", "POSITION", "GENDER"];
+export const USER_ROLE = {
+  ADMIN: "R1",
+  DOCTOR: "R2",
+  PATIENT: "R3",
+};

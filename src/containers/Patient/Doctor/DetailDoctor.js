@@ -1,5 +1,5 @@
-import React, { Component, useState, useEffect } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import HomeHeader from "../../HomePage/HomeHeader";
 import * as actions from "../../../store/actions";
@@ -29,7 +29,7 @@ function DetailDoctor() {
   return (
     <React.Fragment>
       <HomeHeader isShowHeader={false} />
-      <div className="container doctor-detail-container  mt-4">
+      <div className=" doctor-detail-container  mt-4">
         <div className="intro-doctor">
           <div
             className="content-left"
@@ -37,7 +37,7 @@ function DetailDoctor() {
           ></div>
           <div className="content-right">
             <div className="up">
-              {`${doctor?.positionData?.valueVn}.${doctor?.lastName} ${doctor?.firstName} `}
+              <h1>{`${doctor?.positionData?.valueVn}.${doctor?.lastName} ${doctor?.firstName} `}</h1>
             </div>
             <div className="down">
               {" "}
@@ -48,14 +48,10 @@ function DetailDoctor() {
         <div className="schedule-doctor"></div>
 
         <div
-          className="detail-doctor"
+          className="detail-info-doctor"
           dangerouslySetInnerHTML={{ __html: doctor?.Markdown?.contentHTML }}
         ></div>
-
-        <div className="comment-doctor"></div>
-      </div>
-      <div className="bk-image">
-        <img src="https://github.com/quangtuan2201/sharing-host-free/blob/main/IMG/allissa_Shin.jpg?raw=true"></img>
+        <div className="comment-doctor" style={{ height: "200px" }}></div>
       </div>
     </React.Fragment>
   );

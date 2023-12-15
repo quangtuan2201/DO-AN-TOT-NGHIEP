@@ -1,99 +1,210 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
 import apiUserService from "../../services/userService";
-
-// import * as actions from "../../store/actions";
 import * as actions from "../../store/actions";
-// src/store/actions/userActions.js
-
-// import { KeyCodeUtils, LanguageUtils } from "../utils";
-
-// import userIcon from '../../src/assets/images/user.svg';
-// import passIcon from '../../src/assets/images/pass.svg';
+import { useForm, Controller } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import "./Login.scss";
-// import { FormattedMessage } from "react-intl";
-
-// import adminService from "../services/adminService";
-// import adminService from "../../services/adminService";
 import { useState } from "react";
+import { useIntl, FormattedMessage } from "react-intl";
+import { LANGUAGES } from "../../utils/constant";
 
 function Login(props) {
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
+  console.log("PROPS: ", props);
+  const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    reset,
+  } = useForm();
+  const intl = useIntl();
+  const { language, userInfo, navigate } = useSelector((state) => {
+    console.log("STATE REDUCER: ", state);
+    // navigate: (path) => {
+    //   console.log("PATH: ", path);
+    //   return dispatch(push(path));
+    // },
+
+    return {
+      language: state.app.language,
+      userInfo: state.user.userInfo,
+    };
   });
-  //[handele chang on form]
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => {
-      return { ...prevFormData, [name]: value };
-    });
-  };
+
   //[handele submit]
-  const handleSubmit = async (e) => {
-    try {
-      const data = await apiUserService.handleLogin(
-        formData.username,
-        formData.password
-      );
-      console.log("result", data, "data:", data.data.user);
-      props.userLoginSuccess(data.data.user);
-    } catch (error) {
-      console.error(`Khong goi đuoc /api/login , xay ra loi :${error}`);
+  const handleLogin = (data) => {
+    console.log("data login: ", data);
+    // dispatch(actions.fetchUserLogin(data));
+    // props.userLoginSuccess();
+    dispatch(actions.fetchUserLogin(data));
+    // props.dispatch(actions.fetchUserLogin(data));
+    setValue("email", "");
+    setValue("password", "");
+  };
+  //[handele togglePass]
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+    // reset();
+  };
+  //handle Enter pass
+  const handleEnterKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleLogin(handleLogin)();
     }
   };
-  // console.log("notification", notification);
-  // Sử dụng Axios để gọi API
-
-  const [showPass, setShowPass] = useState(false);
-  const handleOnChangePassword = (e) => {
-    setShowPass(!showPass);
+  //on chang language
+  const onChangeLanguage = () => {
+    // setLanguage(!language);
+    if (language === LANGUAGES.VI) {
+      // alert("Change EN");
+      dispatch(actions.changeLanguageApp(LANGUAGES.EN));
+    } else {
+      dispatch(actions.changeLanguageApp(LANGUAGES.VI));
+      // alert("Chang VI");
+    }
   };
+  //action dispatch
+  // useEffect(() => {
+  //   (path) => {
+  //     console.log("PATH: ", path);
+  //     return dispatch(push(path));
+  //   };
+  // }, []);
 
   return (
     <div className="login-background">
       <div className="login-container">
         <div className="login-content row">
-          <div className="col-12 login-text">Login</div>
-          <div className="col-12 form-group login-input">
-            <label>Username:</label>
-            <input
-              type="text"
-              className="form-control"
-              name="username"
-              required="required"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="col-12 form-group login-input">
-            <label>Password:</label>
-            <div className="col-12 custom-input-password">
-              <input
-                type={showPass ? "text" : "password"}
-                className="form-control"
-                name="password"
-                required="required"
-                onChange={handleChange}
-              />
-              <span onClick={handleOnChangePassword}>
-                <i
-                  className={showPass ? "fas fa-eye eye" : "fas fa-eye-slash"}
-                ></i>
-              </span>
+          <div className="col-12 login-text">
+            <FormattedMessage id="login.login" />
+            <div className="active_language">
+              <div className="language" onClick={onChangeLanguage}>
+                {language === LANGUAGES.VI ? "VI" : "EN"}
+              </div>
             </div>
           </div>
-          <div className="col-12 form-group">
-            <button className="col-12 btn-login" onClick={handleSubmit}>
-              Login
-            </button>
-          </div>
+
+          <form onSubmit={handleSubmit(handleLogin)}>
+            <div className="">
+              <label className="form-label">
+                <FormattedMessage id="user-manage.email" />
+              </label>
+              <Controller
+                name="email"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: intl.formatMessage({
+                    id: "user-manage.enterEmail",
+                  }),
+                  pattern: {
+                    value: /^\S+@\S+$/i,
+                    message: intl.formatMessage({
+                      id: "user-manage.invalidEmail",
+                    }),
+                  },
+                }}
+                render={({ field, fieldState }) => (
+                  <>
+                    <input
+                      type="email"
+                      className={`form-control`}
+                      placeholder={`${intl.formatMessage({
+                        id: "user-manage.enter",
+                      })} ${intl.formatMessage({ id: "user-manage.email" })}`}
+                      {...field}
+                    />
+                    {fieldState.invalid && (
+                      <div className="invalid-feedback">
+                        {fieldState?.error?.message || "Invalid input"}
+                      </div>
+                    )}
+                  </>
+                )}
+              />
+            </div>
+
+            <div className="">
+              <label className="form-label" style={{ marginTop: "20px" }}>
+                <FormattedMessage id="user-manage.password" />
+              </label>
+              <Controller
+                type={showPassword ? "text" : "password"}
+                name="password"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: intl.formatMessage({
+                    id: "user-manage.enterPassword",
+                  }),
+                  minLength: {
+                    value: 6,
+                    message: intl.formatMessage({
+                      id: "user-manage.passwordLength",
+                    }),
+                  },
+                }}
+                render={({ field, fieldState }) => (
+                  <>
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      className={`form-control ${
+                        fieldState.invalid ? "is-invalid" : ""
+                      }`}
+                      placeholder={`${intl.formatMessage({
+                        id: "user-manage.enter",
+                      })} ${intl.formatMessage({
+                        id: "user-manage.password",
+                      })}`}
+                      {...field}
+                      readOnly={false}
+                    />
+                    <button
+                      type="button"
+                      className="border-0 mt-3"
+                      onClick={handleTogglePassword}
+                      style={{ float: "right", fontSize: "13px" }}
+                    >
+                      {showPassword ? (
+                        <FormattedMessage id="login.show" />
+                      ) : (
+                        <FormattedMessage id="login.hide" />
+                      )}
+                    </button>
+                    {fieldState.invalid && (
+                      <div className="invalid-feedback">
+                        {fieldState?.error?.message || "Invalid input"}
+                      </div>
+                    )}
+                  </>
+                )}
+              />
+            </div>
+            <div className="col-12 form-group">
+              <button
+                type="submit"
+                className="col-12 btn-login"
+                onKeyDown={handleEnterKeyPress}
+              >
+                {intl.formatMessage({ id: "user-manage.login" })}
+              </button>
+            </div>
+          </form>
 
           <div className="col-12">
-            <span className="forgot-password">Forgot your password?</span>
+            <span className="forgot-password">
+              <FormattedMessage id="login.oblivion" />
+            </span>
           </div>
           <div className="col-12 text-center">
-            <span className="">Or Login with</span>
+            <span className="">
+              {" "}
+              <FormattedMessage id="login.or-login-with" />
+            </span>
           </div>
           <div className="col-12 social-login text-center">
             <i className="fab fa-google google"></i>
@@ -113,9 +224,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    navigate: (path) => dispatch(push(path)),
-    userLoginSuccess: (userInfo) =>
-      dispatch(actions.userLoginSuccess(userInfo)),
+    navigate: (path) => {
+      console.log("PATH: ", path);
+      return dispatch(push(path));
+    },
+
+    userLoginSuccess: (userInfo) => {},
+    // dispatch(actions.userLoginSuccess(userInfo)),
     // userLoginFail: () => dispatch(actions.adminLoginFail()),
   };
 };

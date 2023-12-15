@@ -20,16 +20,11 @@ import ConfirmModal from "../components/ConfirmModal";
 import HomePage from "./HomePage/HomePage.js";
 import CustomScrollbars from "../components/CustomScrollbars.js";
 import DetailDoctor from "./Patient/Doctor/DetailDoctor.js";
+import Doctor from "../routes/Doctor.js";
 // import { changeLanguageApp } from ".././store/actions/appActions.js";
 // import * as actions from "./../store/actions";
 
 const App = () => {
-  // const [bootstrapped, setBootstrapped] = useState(false);
-  // const dispatch = useDispatch();
-
-  // const started = useSelector((state) => state.app.started);
-  // const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-
   const handlePersistorState = () => {
     // You may need to adjust this part based on your specific use case
     // The logic appears to depend on the persistor, which might not be necessary with hooks
@@ -61,6 +56,11 @@ const App = () => {
                 />
                 <Route path={path.HOMEPAGE} component={HomePage} />
                 <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
+                <Route
+                  path={path.DOCTOR_MANAGE}
+                  component={userIsAuthenticated(Doctor)}
+                  // component={userIsNotAuthenticated(Doctor)}
+                />
               </Switch>
             </CustomScrollbars>
           </div>
