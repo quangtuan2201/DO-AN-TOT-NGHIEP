@@ -94,7 +94,9 @@
         "appointment-schedule":"Appointment Schedule",
         "warring-select-doctor":"Please select a date before submitting.",
         "warring-select-date":"Please select a date before submitting.",
-        "warring-select-schedule-hours":"Vui lòng chọn khung giờ khám trước khi gửi."
+        "warring-select-schedule-hours":"Please select an appointment time frame before submitting.",
+        "success-book-schedule":"Added new appointment successfully.",
+        "error-book-schedule" :"Adding a new appointment failed"
 
 
     }

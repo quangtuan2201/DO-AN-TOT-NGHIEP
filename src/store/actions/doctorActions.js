@@ -2,20 +2,21 @@ import actionTypes from "./actionTypes";
 import userService from "../../services/userService";
 import doctorService from "../../services/doctorService";
 import { toast } from "react-toastify";
+import { FormattedMessage } from "react-intl";
 
 export const fetchAllCodeScheduleHours = () => {
   return async (dispatch) => {
     try {
       const reseponse = await doctorService.handleAllCodeScheduleHours();
       if (reseponse) {
-        toast.success("Get allcode schedule hours success !");
+        <FormattedMessage id="user-manage.success-get-allcode-schedule" />;
         dispatch(fetchAllCodeScheduleHoursSuccess(reseponse));
       } else {
-        toast.error("Get allcode schedule hours fail!");
+        <FormattedMessage id="user-manage.error-get-allcode-schedule" />;
         dispatch(fetchAllCodeScheduleHoursFail());
       }
     } catch (error) {
-      toast.error("Get allcode schedule hours fail!");
+      <FormattedMessage id="user-manage.error-get-allcode-schedule" />;
       dispatch(fetchAllCodeScheduleHoursFail());
     }
   };

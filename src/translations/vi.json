@@ -34,7 +34,9 @@
         "show":"Hiện Mật khẩu",
         "hide":"Ẩn Mật khẩu",
         "oblivion":"Quên Mật khẩu?",
-        "or-login-with":"Hoặc Đăng nhập bằng?"
+        "or-login-with":"Hoặc Đăng nhập bằng?",
+        "success-login":"Đăng nhập thành công",
+        "error-login":"Đăng nhập thất bại"
     },
     "menu": {
         "admin":{
@@ -80,7 +82,23 @@
         "enterEmail":"Nhập Email",
         "enterPassword":"Nhập Mật khẩu",
         "login":"Đăng nhập",
-        "passwordLength":"Độ dài mật khẩu"
+        "passwordLength":"Độ dài mật khẩu",
+        "success-create-user":"Tạo dùng người mới thành công.",
+         "error-create-user":"Tạo người dùng thất bại.",
+         "sucess-update-user":"Cập nhật người dùng thành công",
+         "error-update-user":"Cập nhật người dùng thất bại",
+         "sucess-delete-user":"Xóa người dùng thành công.",
+         "error-delete-user":"Xóa người dùng thất bại.",
+         "sucess-get-all-user":"Lấy danh sách người dùng thành công",
+         "error-get-all-user":"Lấy danh sách người dùng thất bại",
+         "sucess-save-info-user":"Lưu thông tin người dùng thành công.",
+         "error-save-info-user":"lưu thông tin người dùng thất bại",
+         "sucess-get-detail-user":"Lấy thông chi tiết người dùng thành công.",
+         "error-get-detail-user":"Lấy thông tin chi tiết người dùng thất bại",
+         "sucess-get-allcode-schedule":"Lấy thông tin đặt lịch thành công",
+         "error-get-allcode-schedule":"Lấy thông tin đặt lịch thất bại"
+
+
 
     },
     "homePage":{
@@ -96,7 +114,9 @@
         "appointment-schedule":"Lịch Khám",
         "warring-select-doctor":"Vui lòng chọn bác sĩ trước khi gửi.",
         "warring-select-date":"Vui lòng chọn ngày trước khi gửi.",
-        "warring-select-schedule-hours":"Vui lòng chọn khung giờ khám trước khi gửi."
+        "warring-select-schedule-hours":"Vui lòng chọn khung giờ khám trước khi gửi.",
+        "success-book-schedule":"Thêm mới lịch hẹn thành công.",
+        "error-book-schedule" :"Thêm mới lịch hẹn không thành công."
 
     }
     

@@ -39,7 +39,6 @@ function System() {
       systemMenuPath: state.app.systemMenuPath,
     };
   });
-  console.log("systemMenuPath", systemMenuPath);
   return (
     <React.Fragment>
       {loggedIn && <Header />}

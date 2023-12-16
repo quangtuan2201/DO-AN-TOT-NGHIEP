@@ -17,6 +17,7 @@ function DoctorManage() {
   const [isContentEdited, setIsContentEdited] = useState(false);
   const [selectDoctor, setSelectOption] = useState({});
   const [options, setOptions] = useState(null);
+  const mdParser = new MarkdownIt(/* Markdown-it options */);
   const [content, setContent] = useState({
     contentHTML: "",
     contentMarkdown: "",
@@ -24,7 +25,7 @@ function DoctorManage() {
     doctorId: 0,
   });
   const allDoctors = useSelector((state) => {
-    console.log("state in DoctorMange: ", state);
+    // console.log("state in DoctorMange: ", state);
     // let data = state.admin.allDoctors;
     // console.log(data);
     return state.admin.allDoctors.map((doctor) => {
@@ -36,19 +37,28 @@ function DoctorManage() {
     });
   });
   const saveInfoDoctor = useSelector((state) => {
-    console.warn("SAVEINFO DOCTOR:", state.admin.saveInfoDoctor);
+    // console.log("Get all data adminReducer: ", state.admin);
+    // console.log(
+    //   "--Get state in admineducer => info doctor:",
+    //   state.admin.saveInfoDoctor
+    // );
+    // setContent({
+    //   contentHTML: state.admin.contentHTML,
+    //   contentMarkdown: state.admin.contentMarkdown,
+    //   description: state.admin.description,
+    //   doctorId: state.admin.doctorId,
+    // });
     return state.admin.saveInfoDoctor;
   });
+
   useEffect(() => {
     if (!Object.keys(allDoctors).length) dispatch(actions.fetchGetAllDoctors());
   }, []);
 
-  const mdParser = new MarkdownIt(/* Markdown-it options */);
-  console.log("Content: ", content);
+  // console.log("Content: ", content);
   // console.log("Select doctor: ", selectDoctor);
   const handleEditorChange = ({ html, text }) => {
-    console.log("handleEditorChange:/n", html, ",", text);
-    console.log("handleEditchange: ", content);
+    // console.log("--Content change:", html, ",", text);
     setContent((present) => {
       return {
         ...present,
@@ -58,7 +68,7 @@ function DoctorManage() {
     });
   };
   const handleIntroWrite = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     let description = e.target.value;
     setContent((present) => {
       return {
@@ -69,6 +79,7 @@ function DoctorManage() {
   };
   const handleSaveInfo = () => {
     try {
+      // console.log("---Action save infor : ", content);
       dispatch(actions.fetchSaveInfoDoctor(content));
       setContent({
         contentMarkdown: "",
@@ -83,29 +94,36 @@ function DoctorManage() {
   };
 
   const handlSelectDoctor = (selectDoctor) => {
-    console.log("selectDoctor: ", selectDoctor);
+    // console.log("Current Select Doctor: ", selectDoctor);
     setSelectOption(selectDoctor);
 
     setContent((present) => {
       if (selectDoctor.Markdown) {
+        console.log(
+          "Check dieu kien: ,data !== ) && idNew === idCurent",
+          Object.keys(saveInfoDoctor).length !== 0 &&
+            saveInfoDoctor.doctorId === selectDoctor.id
+        );
         if (
           Object.keys(saveInfoDoctor).length !== 0 &&
-          saveInfoDoctor.doctorId === selectDoctor.doctorId
+          saveInfoDoctor.doctorId === selectDoctor.id
         ) {
-          console.log("TRUE!");
+          alert("Update");
           return {
             ...present,
             doctorId: saveInfoDoctor.doctorId,
             contentMarkdown: saveInfoDoctor?.contentMarkdown,
-            // contentMarkdown: saveInfoDoctor?.contentMarkdown,
+            contentHTML: saveInfoDoctor.contentHTML,
             description: saveInfoDoctor?.description,
             action: CRUD_ACTIONS.EDIT,
           };
         }
+
         return {
           ...present,
           doctorId: selectDoctor.value,
           contentMarkdown: selectDoctor.Markdown?.contentMarkdown,
+          contentHTML: selectDoctor?.Markdown?.contentHTML,
           description: selectDoctor?.Markdown?.description,
           action: CRUD_ACTIONS.EDIT,
         };
@@ -159,7 +177,6 @@ function DoctorManage() {
             renderHTML={(text) => mdParser.render(text)}
             onChange={handleEditorChange}
             value={content?.contentMarkdown}
-            // value={content?.contentMarkdown}
           />
         </div>
         <div className="save-content-doctor">
@@ -169,12 +186,8 @@ function DoctorManage() {
               content && content?.action === "CREATE" ? "btn-c" : "btn-e"
             } `}
             disabled={!content?.doctorId || !content?.contentMarkdown}
-            // {!content?.doctorId || !content?.contentMarkdown}
             onClick={handleSaveInfo}
           >
-            {/* {!content?.doctorId || !content?.contentMarkdown
-              ? "Create"
-              : "Update"} */}
             {content && content?.action === "CREATE" ? "CREATE" : "EDIT"}
           </button>
         </div>

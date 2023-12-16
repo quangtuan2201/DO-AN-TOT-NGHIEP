@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import HomeHeader from "../../HomePage/HomeHeader";
 import * as actions from "../../../store/actions";
+import DoctorSchedule from "../Clinic/DoctorSchedule";
 import "./DetailDoctor.scss";
 function DetailDoctor() {
   const { id } = useParams();
@@ -40,12 +41,16 @@ function DetailDoctor() {
               <h1>{`${doctor?.positionData?.valueVn}.${doctor?.lastName} ${doctor?.firstName} `}</h1>
             </div>
             <div className="down">
-              {" "}
               <span>{doctor?.Markdown?.description}</span>
             </div>
           </div>
         </div>
-        <div className="schedule-doctor"></div>
+        <div className="schedule-doctor">
+          <div className="content-left">
+            <DoctorSchedule />
+          </div>
+          <div className="content-right"></div>
+        </div>
 
         <div
           className="detail-info-doctor"

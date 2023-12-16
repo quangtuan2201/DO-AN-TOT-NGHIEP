@@ -3,6 +3,7 @@ import actionTypes from "./actionTypes";
 import userService from "../../services/userService";
 import doctorService from "../../services/doctorService";
 import { toast } from "react-toastify";
+import { FormattedMessage } from "react-intl";
 
 export const addUserSuccess = () => ({
   type: actionTypes.ADD_USER_SUCCESS,
@@ -26,14 +27,14 @@ export const fetchUserLogin = (user) => {
       const response = await userService.handleLogin(user);
       console.log("response login :", response);
       if (response.data && response.errCode === 0) {
-        toast.success("User Login Success !");
+        <FormattedMessage id="login.success-login" />;
         dispatch(userLoginSuccess(response.data));
       } else {
-        toast.error("User Login Fail");
+        <FormattedMessage id="login.error-login" />;
         dispatch(userLoginFail());
       }
     } catch (error) {
-      toast.error("User Login Fail");
+      <FormattedMessage id="login.error-login" />;
       dispatch(userLoginFail());
     }
   };

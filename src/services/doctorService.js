@@ -68,14 +68,34 @@ const handleAllCodeScheduleHours = async () => {
 const handlBulkCreateSchedule = async (data) => {
   try {
     const response = await instance.post("/bulk-create-schedule", data);
-    if (response.errCode === 0 && response.data) {
-      return response.data;
+    if (response.data.errCode === 0 && response.data.data) {
+      return response.data.data;
     } else {
       console.log("response fetch Fail: ", response);
       return null;
     }
+    // return response;
   } catch (error) {
     console.error("Fetch call api bulk create schedule Fail: ", error.message);
+    return null;
+  }
+};
+const handlefindScheduleByDate = async (doctorId, date) => {
+  try {
+    const response = await instance.get("/get-schedule-doctor-by-date", {
+      params: {
+        doctorId,
+        date,
+      },
+    });
+    console.log("---respon findScheduleByDate: ", response);
+    if (response && response.data) {
+      return response.data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error("Fetch get schedule doctor fail");
     return null;
   }
 };
@@ -86,4 +106,5 @@ export default {
   handleGetDetailDoctor,
   handleAllCodeScheduleHours,
   handlBulkCreateSchedule,
+  handlefindScheduleByDate,
 };

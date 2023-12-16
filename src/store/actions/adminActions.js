@@ -2,6 +2,8 @@ import actionTypes from "./actionTypes";
 import userService from "../../services/userService";
 import doctorService from "../../services/doctorService";
 import { toast } from "react-toastify";
+import { FormattedMessage } from "react-intl";
+
 export const allKeys = ["ROLE", "STATUS", "TIME", "POSITION", "GENDER"];
 export const fetchKeysStart = (keysArray) => {
   return async (dispatch) => {
@@ -37,18 +39,21 @@ export const fetchCreateUserStart = (data) => {
       const response = await userService.createUser(data);
       // console.log("RESPONSE IN FILE AdminAction :", response);
       if (response.data && response?.data?.errCode === 0) {
-        toast.success("Create a user success!");
+        toast.success(
+          <FormattedMessage id="user-manage.success-create-user" />
+        );
         dispatch(fetchCreateUserSuccess(response.data.user));
         // console.log(
         //   "Reponse data[response.data.user] in adminAction.js :",
         //   response.data.user.image
         // );
       } else {
-        toast.error("Create a user fail!");
+        toast.error(<FormattedMessage id="user-manage.error-create-user" />);
         dispatch(fetchCreateUserFail());
       }
     } catch (error) {
       console.log("Error create user in admin.Action.js: ", error);
+      toast.error(<FormattedMessage id="user-manage.error-create-user" />);
       dispatch(fetchCreateUserFail());
     }
   };
@@ -100,13 +105,13 @@ export const fetchDeleteUser = (user) => {
     try {
       const response = await userService.deleteUser(user.id);
       if (response.data && response.data.errCode === 0) {
-        toast.success("Delete user success!");
         dispatch(fetchDeleteUserSuccess(response.data.userId));
       } else {
-        toast.error("Delete a user fail!");
+        toast.success(<FormattedMessage id="user-manage.error-delete-user" />);
         dispatch(fetchDeleteUserFail(response.data));
       }
     } catch (error) {
+      toast.success(<FormattedMessage id="user-manage.error-delete-user" />);
       console.log("Delete User Error ", error.message);
       dispatch(fetchDeleteUserFail());
     }
@@ -126,13 +131,14 @@ export const fetchUpdateUser = (user) => {
     try {
       const response = await userService.updateUser(user);
       if (response.data && response.data.errCode === 0) {
-        toast.success("Update a user success !");
+        toast.success(<FormattedMessage id="user-manage.sucess-update-user" />);
         dispatch(fetchUpdateSuccess(response.data.user));
       } else {
-        toast.error("Delete a user fail !");
+        toast.success(<FormattedMessage id="user-manage.error-update-user" />);
         dispatch(fetchUpdateFail());
       }
     } catch (error) {
+      toast.success(<FormattedMessage id="user-manage.error-update-user" />);
       console.log("Update user error in fetchUpdateUser:", error.message);
       dispatch(fetchUpdateFail());
     }
@@ -179,14 +185,16 @@ export const fetchGetAllDoctors = () => {
       const response = await doctorService.handleGetAllDoctors();
       // console.log("response ALL DOCTOR in file adminAction:", response);
       if (response.data && response.errCode === 0) {
-        toast.success("Get all a doctor success !");
+        toast.success(
+          <FormattedMessage id="user-manage.sucess-get-all-user" />
+        );
         dispatch(fetchAllDoctorSuccess(response.data));
       } else {
-        toast.error("Get all a doctor fail !");
+        toast.success(<FormattedMessage id="user-manage.error-get-all-user" />);
         dispatch(fetchAllDoctoFail());
       }
     } catch (error) {
-      toast.error("Get all a doctor fail !");
+      toast.success(<FormattedMessage id="user-manage.error-get-all-user" />);
       dispatch(fetchAllDoctoFail());
     }
   };
@@ -207,13 +215,18 @@ export const fetchSaveInfoDoctor = (newInfo) => {
       const response = await doctorService.handleSaveInfoDoctor(newInfo);
       // console.log("response SAVE INFO in file adminAction:", response);
       if (response.data && response.errCode === 0) {
-        toast.success("Save info a doctor success !");
+        toast.success(
+          <FormattedMessage id="user-manage.sucess-save-info-user" />
+        );
         dispatch(fetchSaveInfoDoctorSuccess(response.data));
       } else {
-        toast.error("Save info doctor fail !");
+        toast.success(
+          <FormattedMessage id="user-manage.error-save-info-user" />
+        );
         dispatch(fetchSaveInfoDoctorFail());
       }
     } catch (error) {
+      toast.success(<FormattedMessage id="user-manage.error-save-info-user" />);
       dispatch(fetchSaveInfoDoctorFail());
     }
   };
@@ -232,14 +245,20 @@ export const fetchGetDetailDoctor = (id) => {
       const doctor = await doctorService.handleGetDetailDoctor(id);
       // console.log("Doctor: ", doctor);
       if (doctor) {
-        toast.success("Get Detail Doctor Succsess !");
+        toast.success(
+          <FormattedMessage id="user-manage.sucess-get-detail-user" />
+        );
         dispatch(fetchGetDetailDoctorSuccess(doctor));
       } else {
-        toast.error("Get Detail Doctor Fail !");
+        toast.success(
+          <FormattedMessage id="user-manage.sucess-get-detail-user" />
+        );
         dispatch(fetchGetDetailDoctorFail());
       }
     } catch (error) {
-      toast.error("Get Detail Doctor Fail !");
+      toast.success(
+        <FormattedMessage id="user-manage.error-get-detail-user" />
+      );
       dispatch(fetchGetDetailDoctorFail());
       console.error("", error.message);
     }

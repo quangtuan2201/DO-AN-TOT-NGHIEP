@@ -14,8 +14,8 @@ height: 700px;
 // }
 .intro-doctor{
      display: flex;
-     height: 100px;
-     margin: 40px 100px;
+     height: 165px;
+     margin: 40px 200px;
      .content-left{
           width: 20%;
           background-repeat: no-repeat;
@@ -42,13 +42,28 @@ height: 700px;
           }
           .down {
                // padding-top: 10px;
+               display: inline-block;
+               max-width: 50%;
           }
      }
      
 
 }
+.schedule-doctor {
+     margin: 0 100px;
+     display: flex;
+     height: 200px;
+     border: 1px solid red;
+     .content-left {
+          width: 50%;
+     }
+     .content-right {
+          width: 50%;
+     }
+
+}
 .detail-info-doctor {
-     margin-top: 50px;
+     margin-top: 35px;
      padding: 20px 100px;
      background-color: #ddd;
      h2 {

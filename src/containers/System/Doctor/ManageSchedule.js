@@ -10,6 +10,7 @@ import DatePicker from "../../../components/Input/DatePicker";
 import { LANGUAGES, dateFormat } from "../../../utils/constant";
 import { toast } from "react-toastify";
 import doctorService from "../../../services/doctorService";
+import { set } from "lodash";
 function DoctorSelect({ options, onChange, value }) {
   return <Select options={options} onChange={onChange} value={value} />;
 }
@@ -21,6 +22,7 @@ function Doctor() {
   const [options, setOptions] = useState([]);
   const [infoSchedule, setInfoSchedule] = useState({});
   const [selectedDate, setSelectedDate] = useState(new Date());
+  let yesterDay = new Date(new Date().setDate(new Date().getDate() - 1));
   const {
     loggedIn,
     language,
@@ -62,7 +64,7 @@ function Doctor() {
       return {
         ...pres,
         chosenDoctor: {
-          id: selectDoctor.value,
+          doctorId: selectDoctor.value,
           fullName: selectDoctor.label,
         },
       };
@@ -108,40 +110,77 @@ function Doctor() {
     });
     console.log("Schedule hours; ", selectedAppointment);
   };
+  console.log("Select doctor sau khi submit: ", selectDoctor);
   const handleInfoSchedule = async () => {
-    let result = [];
-    if (!infoSchedule?.chosenDoctor?.hasOwnProperty("id")) {
-      toast.warn(
-        <FormattedMessage id="manage-schedule.warring-select-doctor" />
+    try {
+      let result = [];
+      console.log("------INFO SCHEDULE: ", infoSchedule);
+      console.log(
+        '---InfoSchedule?.chosenDoctor?.doctorId === ""',
+        infoSchedule?.chosenDoctor?.doctorId === null,
+        infoSchedule?.chosenDoctor?.doctorId,
+        "type",
+        typeof infoSchedule?.chosenDoctor?.doctorId
       );
-      return;
-    }
-    if (!infoSchedule?.hasOwnProperty("selectedDate")) {
-      toast.warn(<FormattedMessage id="manage-schedule.warring-select-date" />);
-      return;
-    }
-    if (!infoSchedule?.hasOwnProperty("scheduleHoursList")) {
-      toast.warn(
-        <FormattedMessage id="manage-schedule.warring-select-schedule-hours" />
-      );
-    }
-    console.log("DATA INFO SCHEDULE: ", infoSchedule);
-    // const dataArray = Object.values(infoSchedule);
-    if (infoSchedule?.hasOwnProperty("scheduleHoursList")) {
-      infoSchedule.scheduleHoursList.map((element) => {
-        const obj = {};
-        obj.doctorId = infoSchedule.chosenDoctor.id;
-        obj.date = infoSchedule.selectedDate;
-        obj.timeType = element;
-        result.push(obj);
+      if (
+        !infoSchedule?.chosenDoctor?.hasOwnProperty("doctorId") ||
+        infoSchedule?.chosenDoctor?.doctorId === null
+      ) {
+        toast.warn(
+          <FormattedMessage id="manage-schedule.warring-select-doctor" />
+        );
+        return;
+      }
+      if (!infoSchedule?.hasOwnProperty("selectedDate")) {
+        toast.warn(
+          <FormattedMessage id="manage-schedule.warring-select-date" />
+        );
+        return;
+      }
+      if (!infoSchedule?.hasOwnProperty("scheduleHoursList")) {
+        toast.warn(
+          <FormattedMessage id="manage-schedule.warring-select-schedule-hours" />
+        );
+      }
+      console.log("DATA INFO SCHEDULE: ", infoSchedule);
+      // const dataArray = Object.values(infoSchedule);
+      if (infoSchedule?.hasOwnProperty("scheduleHoursList")) {
+        infoSchedule.scheduleHoursList.map((element) => {
+          const obj = {};
+          obj.doctorId = infoSchedule.chosenDoctor.doctorId;
+          obj.date = infoSchedule.selectedDate;
+          obj.timeType = element;
+          result.push(obj);
+        });
+        console.log("Result: ", result);
+      }
+      console.log("quang tuan dev: ", infoSchedule);
+      const options = {
+        doctorCode: infoSchedule.chosenDoctor.doctorId,
+        bookingDate: infoSchedule.selectedDate,
+        bookingInfoList: result,
+      };
+
+      setSelectOption({
+        value: null,
+        label: "Chose doctor",
       });
-      console.log("Result: ", result);
-    }
-    const response = await doctorService.handlBulkCreateSchedule(result);
-    if (response) {
-      console.log("Quang tuan dev: ", response);
-    } else {
-      console.log("quang tuan dev");
+      setSelectedDate(new Date());
+      setInfoSchedule(null);
+      const response = await doctorService.handlBulkCreateSchedule(options);
+      console.log("---quang tuan dev - action tạo mới : ", response);
+      if (response) {
+        toast.success(
+          <FormattedMessage id="manage-schedule.success-book-schedule" />
+        );
+      } else {
+        toast.success(
+          // <FormattedMessage id="manage-schedule.error-book-schedule" />
+          toast.error("Thêm mới lịch hẹn không thànhc công.")
+        );
+      }
+    } catch (error) {
+      toast.error("Xảy ra ngoại lệ ", error.message);
     }
   };
 
@@ -170,7 +209,7 @@ function Doctor() {
 
               <DatePicker
                 className="form-control"
-                minDate={new Date()}
+                minDate={yesterDay}
                 onChange={handleDateChange}
                 value={selectedDate}
               />
