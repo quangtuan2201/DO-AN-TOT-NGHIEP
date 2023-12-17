@@ -58,6 +58,7 @@
 
                     }
                }
+              
           }
           .login-input {
                margin: 7px 0;
@@ -74,7 +75,7 @@
           .btn-login {
                background: rgb(34,193,195);
                background: linear-gradient(135deg, rgba(34,193,195,1) 0%,     rgba(253,187,45,1) 100%);
-               margin: 10px 0;
+               margin: 35px 0 10px 0;
                height: 30px;
                border-radius: 15px;
                outline: none;
@@ -119,4 +120,23 @@
     
 
     }
+    form {
+     .form-login-password  {
+          position: relative;
+          // display: inline-block;
+          .showPassword {
+               position: absolute !important;
+               right: 10px;
+               top: 60px;
+               // transform: translateY(50%);     
+               cursor: pointer;
+             }
+     }
+     .is-invalid {
+          background-image: none !important;
+
+     }
+        
+      
+}
 }

@@ -71,7 +71,7 @@ const handlBulkCreateSchedule = async (data) => {
     if (response.data.errCode === 0 && response.data.data) {
       return response.data.data;
     } else {
-      console.log("response fetch Fail: ", response);
+      console.error("Fetch call api bulk create schedule Fail: ", response);
       return null;
     }
     // return response;
@@ -88,7 +88,7 @@ const handlefindScheduleByDate = async (doctorId, date) => {
         date,
       },
     });
-    console.log("---respon findScheduleByDate: ", response);
+    // console.log("---respon findScheduleByDate: ", response);
     if (response && response.data) {
       return response.data;
     } else {
@@ -99,6 +99,22 @@ const handlefindScheduleByDate = async (doctorId, date) => {
     return null;
   }
 };
+// const handlGetAllCodeService = async (key) => {
+//   try {
+//     if (!key) {
+//       return;
+//     }
+//     const reseponse = await instance.get("/get-all-doctor-info?", {
+//       params: key,
+//     });
+//     console.log("---Respnsse thông tin bác sĩ : ", reseponse``);
+//     if (reseponse) {
+//       return reseponse;
+//     }
+//   } catch (error) {
+//     console.error("Fetch get all doctor info: ", error.message);
+//   }
+// };
 
 export default {
   handleGetAllDoctors,

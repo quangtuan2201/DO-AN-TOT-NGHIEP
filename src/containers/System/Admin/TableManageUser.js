@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import UserAdmin from "./UserAdmin";
 
-function TableManageUser({ allUser, handleDeleteUser, handleUpdateUser }) {
+function TableManageUser({ allUser, onDeleteUser, onUpdateUser, onIncrease }) {
+  console.log("re-render");
   return (
     <>
       <div className="user-container container">
         <div className="users-table mt-3 mx-1">
+          <button className="btn btn-primary" onClick={onIncrease}>
+            Click me
+          </button>
           <table id="customers">
             <tr>
               <th>
@@ -59,18 +63,18 @@ function TableManageUser({ allUser, handleDeleteUser, handleUpdateUser }) {
                   <button
                     className="btn-edit"
                     onClick={() => {
-                      handleUpdateUser(user);
+                      onUpdateUser(user);
                     }}
                   >
-                    <i class="fas fa-pencil-alt"></i>
+                    <i className="fas fa-pencil-alt"></i>
                   </button>
                   <button
                     className="btn-delete"
                     onClick={() => {
-                      handleDeleteUser(user);
+                      onDeleteUser(user);
                     }}
                   >
-                    <i class="fas fa-trash"></i>
+                    <i className="fas fa-trash"></i>
                   </button>
                 </td>
               </tr>
@@ -84,4 +88,4 @@ function TableManageUser({ allUser, handleDeleteUser, handleUpdateUser }) {
     </>
   );
 }
-export default TableManageUser;
+export default memo(TableManageUser);

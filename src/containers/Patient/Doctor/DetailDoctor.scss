@@ -4,14 +4,8 @@ body {
      margin: 0; /* Loại bỏ margin mặc định của body */
 
 .doctor-detail-container {
-height: 700px;
-// margin: 0px 90px;
-// padding: 15px 20px;
-// .detail-doctor,.achedule-doctor {
-//      opacity: 1!important;
-//      // background-color: rgb(200,200,200)!important;
-//      background-color: #dddd;
-// }
+     height: 700px;
+
 .intro-doctor{
      display: flex;
      height: 165px;
@@ -53,12 +47,14 @@ height: 700px;
      margin: 0 100px;
      display: flex;
      height: 200px;
-     border: 1px solid red;
      .content-left {
           width: 50%;
+
      }
      .content-right {
           width: 50%;
+          padding: 10px 20px;
+          border-left: 1px solid black;
      }
 
 }

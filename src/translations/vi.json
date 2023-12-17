@@ -116,7 +116,12 @@
         "warring-select-date":"Vui lòng chọn ngày trước khi gửi.",
         "warring-select-schedule-hours":"Vui lòng chọn khung giờ khám trước khi gửi.",
         "success-book-schedule":"Thêm mới lịch hẹn thành công.",
-        "error-book-schedule" :"Thêm mới lịch hẹn không thành công."
+        "error-book-schedule" :"Thêm mới lịch hẹn không thành công.",
+        "no-appointment-scheduled":"Không có lịch hẹn trong thời gian này, vui lòng chọn thời gian khác.",
+        "appointment":"Lịch khám",
+        "chosse":"Chọn ",
+        "and-book":" và đặt (miễn phí)"
+
 
     }
     

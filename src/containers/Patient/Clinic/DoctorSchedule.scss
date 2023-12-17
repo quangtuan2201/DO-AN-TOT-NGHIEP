@@ -1,21 +1,30 @@
 
 .doctor-schedule-container{
-     border: 1px solid red;
+     // border: 1px solid red;
+     height: 100%;
      .all-schedule{
           select {
              width: 100%;
-             padding: 10px;
+          //    padding: 10px;
              font-size: 12px;
              border: none; /* Bỏ viền */
-             border-radius: 5px;
+          //    border-radius: 5px;
              appearance: none;
              max-width: 100px;
              max-width: 16%;
              font-weight: bold;
              color:rgb(197, 163, 8);
-             border-bottom:  2px solid rgb(236, 181, 0);
-             
+             border-bottom:  3px solid rgb(236, 181, 0);
+             text-align: center;   
+             height: 22px;
+             background-color:#ffffff00;
+            
           }
+          select:focus {
+               outline: none;
+               border: 1px solid transparent; /* Đặt border thành màu trong suốt để ẩn viền */
+               box-shadow: none; /* Ẩn shadow khi focus */
+             }
 
      }
      .all-available-time {
@@ -35,6 +44,7 @@
                display: flex;
                gap: 25px;
                flex-wrap: wrap;
+               min-height: 117px;
                button {
                     background-color: #f2b500;
                     border-width: 0;
@@ -59,5 +69,8 @@
                     
                }
           }
+     }
+     .warning-schedule-hours{
+          padding: 15px 10px 10px 0;
      }
 }

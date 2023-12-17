@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import HomeHeader from "../../HomePage/HomeHeader";
@@ -10,7 +10,7 @@ function DetailDoctor() {
   const dispatch = useDispatch();
   //   const [doctor, setDoctor] = useState(null);
   const { language, doctor } = useSelector((state) => {
-    console.log("State redux: ", state);
+    // console.log("State redux: ", state);
     return {
       language: state.app.language,
       doctor: state.admin.detailDoctor,
@@ -38,7 +38,7 @@ function DetailDoctor() {
           ></div>
           <div className="content-right">
             <div className="up">
-              <h1>{`${doctor?.positionData?.valueVn}.${doctor?.lastName} ${doctor?.firstName} `}</h1>
+              <h1>{`${doctor?.positionData?.valueVn},${doctor?.lastName} ${doctor?.firstName} `}</h1>
             </div>
             <div className="down">
               <span>{doctor?.Markdown?.description}</span>
@@ -49,7 +49,15 @@ function DetailDoctor() {
           <div className="content-left">
             <DoctorSchedule />
           </div>
-          <div className="content-right"></div>
+          <div className="content-right">
+            <div>
+              ĐỊA CHỈ KHÁM
+              <br /> Phòng khám Chuyên khoa Da Liễu
+              <br /> 207 Phố Huế - Hai Bà Trưng - Hà Nội
+            </div>
+            <div>GIÁ KHÁM: 300.000đ - 400.000đ LOẠI BẢO HIỂM ÁP DỤNG.</div>
+            <div>LOẠI BẢO HIỂM ÁP DỤNG.</div>
+          </div>
         </div>
 
         <div

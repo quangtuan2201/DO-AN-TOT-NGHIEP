@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { FormattedMessage } from "react-intl";
 
 export const allKeys = ["ROLE", "STATUS", "TIME", "POSITION", "GENDER"];
+//GET allcode
 export const fetchKeysStart = (keysArray) => {
   return async (dispatch) => {
     try {
@@ -250,15 +251,13 @@ export const fetchGetDetailDoctor = (id) => {
         );
         dispatch(fetchGetDetailDoctorSuccess(doctor));
       } else {
-        toast.success(
-          <FormattedMessage id="user-manage.sucess-get-detail-user" />
+        toast.error(
+          <FormattedMessage id="user-manage.error-get-detail-user" />
         );
         dispatch(fetchGetDetailDoctorFail());
       }
     } catch (error) {
-      toast.success(
-        <FormattedMessage id="user-manage.error-get-detail-user" />
-      );
+      toast.error(<FormattedMessage id="user-manage.error-get-detail-user" />);
       dispatch(fetchGetDetailDoctorFail());
       console.error("", error.message);
     }

@@ -41,3 +41,22 @@
       }
     
 }
+.info-form-container {
+     .password-container {
+          position: relative;
+          display: inline-block;
+        }
+        
+        #passwordInput {
+          padding-right: 30px; /* Để tạo khoảng trống bên phải cho biểu tượng con mắt */
+        }
+        
+        .showPassword {
+          position: absolute;
+          right: 18px; /* Điều chỉnh vị trí của biểu tượng con mắt */
+          top: 50%;
+          transform: translateY(50%);
+          cursor: pointer;
+        }
+     
+}

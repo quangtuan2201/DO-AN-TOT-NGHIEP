@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import ReactPaginate from "react-paginate";
 import "./UserAdmin.scss";
@@ -36,8 +36,8 @@ function Items({ currentItems }) {
   return (
     <>
       {currentItems &&
-        currentItems.map((item) => (
-          <div>
+        currentItems.map((item, index) => (
+          <div key={index}>
             <h3>Item #{item.firstName}</h3>
           </div>
         ))}
@@ -54,16 +54,16 @@ function PaginatedItems({ items, itemsPerPage }) {
   // (This could be items from props; or items loaded in a local state
   // from an API endpoint with useEffect and useState)
   const endOffset = itemOffset + itemsPerPage;
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+  // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
   const currentItems = items.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(items.length / itemsPerPage);
 
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % items.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
+    // console.log(
+    //   `User requested page number ${event.selected}, which is offset ${newOffset}`
+    // );
     setItemOffset(newOffset);
   };
 
@@ -97,9 +97,9 @@ function PaginatedItems({ items, itemsPerPage }) {
 // Add a <div id="container"> to your HTML to see the component rendered.
 function UserAdmin({ items = items2, itemsPage }) {
   //{ items = items2, itemsPage }
-  console.log("items: ", items);
-  console.log("itemsPerPage: ", itemsPage);
+  // console.log("items: ", items);
+  // console.log("itemsPerPage: ", itemsPage);
   return <PaginatedItems items={items} itemsPerPage={4} />;
 }
 
-export default UserAdmin;
+export default memo(UserAdmin);

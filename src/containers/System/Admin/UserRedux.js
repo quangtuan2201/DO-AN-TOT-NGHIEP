@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
@@ -13,12 +13,12 @@ import "./UserRedux.scss";
 function UserRedux() {
   const intl = useIntl();
   const dispatch = useDispatch();
-  // console.log("useDispatch: ", useDispatch);
-  // console.log("option dispatch: ", dispatch);
   const [isOpen, setIsOpen] = useState(false);
   const [imageUpload, setImageUpload] = useState(null);
   const [avatar, setAvatar] = useState(null);
   const [editingUser, setEditingUser] = useState(null);
+  const [count, setCount] = useState(0);
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     handleSubmit,
@@ -27,9 +27,9 @@ function UserRedux() {
     reset,
     setValue,
   } = useForm();
+  // console.log("re render");
 
   const dataReducer = useSelector((state) => {
-    // console.log("state", state);
     return {
       language: state.app.language,
       genders: state.admin.gender,
@@ -52,8 +52,7 @@ function UserRedux() {
     console.log("FILE NAME: ", file.name);
     if (file) {
       let base64 = await CommonUtils.getBase64(file);
-      // console.log("Base64 image: ", base64);
-      let objectURL = URL.createObjectURL(file);
+      // let objectURL = URL.createObjectURL(file);
       setImageUpload(base64);
       setAvatar(base64);
     }
@@ -105,7 +104,7 @@ function UserRedux() {
       console.log(`Xảy ra ngoại lệ khi lưu user ${error}`);
     }
   };
-  const handleUpdateUser = (user) => {
+  const handleUpdateUser = useCallback((user) => {
     // Lưu trạng thái người dùng đang chỉnh sửa
     // Fill dữ liệu người dùng vào form
     let imageBase64 = "";
@@ -126,11 +125,11 @@ function UserRedux() {
     setValue("gender", user.gender);
     setValue("positionId", user.positionId);
     setValue("roleId", user.roleId);
-  };
+  }, []);
 
-  const handleDeleteUser = (user) => {
+  const handleDeleteUser = useCallback((user) => {
     dispatch(actions.fetchDeleteUser(user));
-  };
+  }, []);
 
   const renderFormInput = (
     fomatMessId,
@@ -138,8 +137,13 @@ function UserRedux() {
     type = "text",
     rules = {}
   ) => {
+    const isFormPassword = nameInput === "password";
     return (
-      <div className="mb-3 col-3">
+      <div
+        className={`mb-3 col-3 ${
+          isFormPassword ? "password-container" : ""
+        }   `}
+      >
         <label className="form-label">
           <FormattedMessage id={fomatMessId} />
         </label>
@@ -148,13 +152,11 @@ function UserRedux() {
           control={control}
           defaultValue=""
           // rules={rules}
-          rules={
-            nameInput === "password" ? {} : nameInput === "email" ? {} : rules
-          } // Không áp dụng quy tắc nếu là trường password và chỉ đọc
+          rules={isFormPassword ? {} : nameInput === "email" ? {} : rules} // Không áp dụng quy tắc nếu là trường password và chỉ đọc
           render={({ field, fieldState }) => (
             <>
               <input
-                type={type}
+                type={isFormPassword && showPassword === true ? "text" : type}
                 className={`form-control ${
                   fieldState.invalid ? "is-invalid" : ""
                 }`}
@@ -163,12 +165,24 @@ function UserRedux() {
                 })} ${intl.formatMessage({ id: fomatMessId })}`}
                 {...field}
                 readOnly={
-                  editingUser &&
-                  (nameInput === "password" || nameInput === "email")
+                  editingUser && (isFormPassword || nameInput === "email")
                     ? true
                     : false
                 }
               />
+              {isFormPassword ? (
+                <i
+                  className={`showPassword ${
+                    showPassword ? "fas fa-eye" : "fas fa-eye-slash"
+                  }`}
+                  onClick={() => {
+                    setShowPassword(!showPassword);
+                  }}
+                ></i>
+              ) : (
+                ""
+              )}
+
               {fieldState.invalid && (
                 <div className="invalid-feedback">
                   {fieldState?.error?.message || "Invalid input"}
@@ -180,15 +194,25 @@ function UserRedux() {
       </div>
     );
   };
+  //////////////////////////////////////////
+
+  // const handleIncrease = useCallback(() => {
+  //   setCount((pre) => pre + 1);
+  // }, []);
+  const handleIncrease = () => {
+    setCount((pre) => pre + 1);
+  };
+  ////////////////////////////////
 
   return (
     <React.Fragment>
       <div className="container mt-30">
         <div className="title ">
           <h1 className="text-center">Create user redux</h1>
+          <h2>{count}</h2>
         </div>
         <form onSubmit={handleSubmit(handleSaveUser)}>
-          <div className="row mt-5">
+          <div className="row mt-5 info-form-container">
             <div className="row col-12">
               <p>Thêm mới người dùng</p>
             </div>
@@ -398,8 +422,9 @@ function UserRedux() {
       </div>
       <TableManageUser
         allUser={dataReducer.allUser}
-        handleDeleteUser={handleDeleteUser}
-        handleUpdateUser={handleUpdateUser}
+        onDeleteUser={handleDeleteUser}
+        onUpdateUser={handleUpdateUser}
+        onIncrease={handleIncrease}
       />
       {/* 
       {console.log("allUser: ", Array.isArray(dataReducer.allUser))}

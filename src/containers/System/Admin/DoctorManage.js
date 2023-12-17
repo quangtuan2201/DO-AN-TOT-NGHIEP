@@ -6,7 +6,8 @@ import { useState, useEffect } from "react";
 import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../store/actions";
-import { CRUD_ACTIONS } from "../../../utils/constant";
+import { CRUD_ACTIONS, LANGUAGES } from "../../../utils/constant";
+import userService from "../../../services/userService";
 
 function DoctorSelect({ options, onChange, value }) {
   return <Select options={options} onChange={onChange} value={value} />;
@@ -18,16 +19,30 @@ function DoctorManage() {
   const [selectDoctor, setSelectOption] = useState({});
   const [options, setOptions] = useState(null);
   const mdParser = new MarkdownIt(/* Markdown-it options */);
+
+  // save to toctor_info table
+  const [listPrice, setListPrice] = useState([]);
+  const [listPayment, setListPayment] = useState([]);
+  const [selectedPrice, setSelectedPrice] = useState([]);
+  const [selectProvince, setSelectProvince] = useState([]);
+  const [nameclinic, setNameClinic] = useState([]);
+  const [addressClinic, setAddressClinic] = useState([]);
+  const [note, setNode] = useState("");
+  const [infoDoctor, setInfoDoctor] = useState([]);
+  const [allRrequiedDoctorInfo, setAllRrequiedDoctorInfo] = useState([]);
+
   const [content, setContent] = useState({
     contentHTML: "",
     contentMarkdown: "",
     description: "",
     doctorId: 0,
   });
+  //dispatch get allcode doctor info
+  useEffect(() => {
+    dispatch(actions.fetchRequiedDoctorInfo());
+  }, []);
+
   const allDoctors = useSelector((state) => {
-    // console.log("state in DoctorMange: ", state);
-    // let data = state.admin.allDoctors;
-    // console.log(data);
     return state.admin.allDoctors.map((doctor) => {
       return {
         ...doctor,
@@ -36,19 +51,24 @@ function DoctorManage() {
       };
     });
   });
-  const saveInfoDoctor = useSelector((state) => {
-    // console.log("Get all data adminReducer: ", state.admin);
-    // console.log(
-    //   "--Get state in admineducer => info doctor:",
-    //   state.admin.saveInfoDoctor
-    // );
-    // setContent({
-    //   contentHTML: state.admin.contentHTML,
-    //   contentMarkdown: state.admin.contentMarkdown,
-    //   description: state.admin.description,
-    //   doctorId: state.admin.doctorId,
-    // });
-    return state.admin.saveInfoDoctor;
+  // const { dataKeyPayment, dataKeyPrice, dataKeyProvince } = useSelector(
+  //   (state) => {
+  //     const data = state.doctor.allDoctorInfo;
+  //     data.keys.map((item) => {
+  //       return {
+  //         value: item.keyMap,
+  //         // label: language ===LANGUAGES.VI==="",
+  //       };
+  //     });
+  //     return data;
+  //   }
+  // );
+  // console.log("--------------dataKeyPrice: ", dataKeyPrice);
+  const { language, saveInfoDoctor } = useSelector((state) => {
+    return {
+      language: state.app.language,
+      saveInfoDoctor: state.admin.saveInfoDoctor,
+    };
   });
 
   useEffect(() => {
@@ -138,6 +158,22 @@ function DoctorManage() {
       }
     });
   };
+  const DoctorFormInput = ({
+    label,
+    options,
+    onChange,
+    value,
+    placeholder,
+  }) => {
+    return (
+      <div className="col-4 mt-4">
+        <label>
+          <strong>{label}</strong>
+        </label>
+        <DoctorSelect options={options} onChange={onChange} value={value} />
+      </div>
+    );
+  };
 
   return (
     <>
@@ -145,30 +181,40 @@ function DoctorManage() {
         <div className="manage-doctor-title text-center">
           Tạo thêm thông tin Doctors
         </div>
-        <div className="doctor-form">
-          <div className="col-4 doctor-select-left">
-            <label>
-              <strong>Chọn Bác sĩ:</strong>
-            </label>
-            <DoctorSelect
-              options={allDoctors}
-              onChange={handlSelectDoctor}
-              value={selectDoctor}
-            />
-          </div>
-          <div className="col-8 doctor-textarea-right">
-            <label>
-              <strong>Thông tin giới thiệu: </strong>
-            </label>
-            <textarea
-              className="form-control"
-              placeholder="Description..."
-              onChange={handleIntroWrite}
-              // value={content?.description ? content?.description : ""}
-              value={content?.description}
-            ></textarea>
+
+        <div className="container">
+          <div className=" doctor-form row">
+            <div className="col-5 ">
+              <label>
+                <strong>Chọn Bác sĩ:</strong>
+              </label>
+              <DoctorSelect
+                options={allDoctors}
+                onChange={handlSelectDoctor}
+                value={selectDoctor}
+              />
+            </div>
+            <div className="col-6 doctor-textarea-right">
+              <label>
+                <strong>Thông tin giới thiệu: </strong>
+              </label>
+              <textarea
+                className="form-control "
+                placeholder="Description..."
+                onChange={handleIntroWrite}
+                // value={content?.description ? content?.description : ""}
+                value={content?.description}
+              ></textarea>
+            </div>
+            <DoctorFormInput label="Chọn giá:" options={[]} />
+            <DoctorFormInput label="Chọn phương thức thanh toán" options={[]} />
+            <DoctorFormInput label="Chọn tỉnh thành:" options={[]} />
+            <DoctorFormInput label="Tên phòng khám:" options={[]} />
+            <DoctorFormInput label="Địa chỉ phòng khám:" options={[]} />
+            <DoctorFormInput label="Note:" options={[]} />
           </div>
         </div>
+
         <div className="col-12">
           <h3 style={{ color: "blue", margin: " 20px 0" }}></h3>
           <hr />

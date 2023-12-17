@@ -104,7 +104,7 @@ function UserManage(props) {
                     handleDeleteUser(user.id);
                   }}
                 >
-                  <i class="fas fa-trash"></i>
+                  <i className="fas fa-trash"></i>
                 </button>
               </td>
             </tr>

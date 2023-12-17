@@ -145,7 +145,7 @@ function HomeHeader({ isShowHeader }) {
                 </div>
                 <div className="option-child">
                   <div className="icon-child">
-                    <i class="fas fa-stethoscope"></i>
+                    <i className="fas fa-stethoscope"></i>
                   </div>
                   <div className="text-child">
                     <FormattedMessage id="banner.generalityHealth" />
@@ -169,7 +169,7 @@ function HomeHeader({ isShowHeader }) {
                 </div>
                 <div className="option-child">
                   <div className="icon-child">
-                    <i class="fas fa-briefcase-medical"></i>
+                    <i className="fas fa-briefcase-medical"></i>
                     {/* <i class="fa-solid fa-tooth"></i> */}
                   </div>
                   <div className="text-child">

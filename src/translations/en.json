@@ -96,7 +96,12 @@
         "warring-select-date":"Please select a date before submitting.",
         "warring-select-schedule-hours":"Please select an appointment time frame before submitting.",
         "success-book-schedule":"Added new appointment successfully.",
-        "error-book-schedule" :"Adding a new appointment failed"
+        "error-book-schedule" :"Adding a new appointment failed",
+        "no-appointment-scheduled":"There are no appointments available during this time, please choose another time.",
+        "appointment":"Appointment",
+        "chosse":"Chosse ",
+        "and-book":" and book (free)"
+
 
 
     }

@@ -62,7 +62,9 @@ const getAllCode = async (form) => {
   try {
     if (form) {
       const response = await instance.get(`/allcode?type=${form}`);
-      return response;
+      if (response.data.data && response.data.errCode === 0) {
+        return response;
+      }
     }
   } catch (error) {
     throw error;

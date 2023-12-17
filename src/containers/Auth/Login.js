@@ -1,17 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
-import apiUserService from "../../services/userService";
 import * as actions from "../../store/actions";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import "./Login.scss";
-import { useState } from "react";
 import { useIntl, FormattedMessage } from "react-intl";
 import { LANGUAGES } from "../../utils/constant";
 
 function Login(props) {
-  console.log("PROPS: ", props);
+  // console.log("PROPS: ", props);
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const {
@@ -23,7 +21,7 @@ function Login(props) {
   } = useForm();
   const intl = useIntl();
   const { language, userInfo, navigate } = useSelector((state) => {
-    console.log("STATE REDUCER: ", state);
+    // console.log("STATE REDUCER: ", state);
     // navigate: (path) => {
     //   console.log("PATH: ", path);
     //   return dispatch(push(path));
@@ -37,7 +35,7 @@ function Login(props) {
 
   //[handele submit]
   const handleLogin = (data) => {
-    console.log("data login: ", data);
+    // console.log("data login: ", data);
     // dispatch(actions.fetchUserLogin(data));
     // props.userLoginSuccess();
     dispatch(actions.fetchUserLogin(data));
@@ -67,13 +65,6 @@ function Login(props) {
       // alert("Chang VI");
     }
   };
-  //action dispatch
-  // useEffect(() => {
-  //   (path) => {
-  //     console.log("PATH: ", path);
-  //     return dispatch(push(path));
-  //   };
-  // }, []);
 
   return (
     <div className="login-background">
@@ -89,7 +80,7 @@ function Login(props) {
           </div>
 
           <form onSubmit={handleSubmit(handleLogin)}>
-            <div className="">
+            <div className="form-login-container">
               <label className="form-label">
                 <FormattedMessage id="user-manage.email" />
               </label>
@@ -112,7 +103,7 @@ function Login(props) {
                   <>
                     <input
                       type="email"
-                      className={`form-control`}
+                      className="form-control "
                       placeholder={`${intl.formatMessage({
                         id: "user-manage.enter",
                       })} ${intl.formatMessage({ id: "user-manage.email" })}`}
@@ -128,7 +119,7 @@ function Login(props) {
               />
             </div>
 
-            <div className="">
+            <div className="form-login-password">
               <label className="form-label" style={{ marginTop: "20px" }}>
                 <FormattedMessage id="user-manage.password" />
               </label>
@@ -152,7 +143,7 @@ function Login(props) {
                   <>
                     <input
                       type={showPassword ? "text" : "password"}
-                      className={`form-control ${
+                      className={`input-password form-control ${
                         fieldState.invalid ? "is-invalid" : ""
                       }`}
                       placeholder={`${intl.formatMessage({
@@ -163,7 +154,7 @@ function Login(props) {
                       {...field}
                       readOnly={false}
                     />
-                    <button
+                    {/* <button
                       type="button"
                       className="border-0 mt-3"
                       onClick={handleTogglePassword}
@@ -174,7 +165,21 @@ function Login(props) {
                       ) : (
                         <FormattedMessage id="login.hide" />
                       )}
-                    </button>
+                    </button> */}
+                    <i
+                      className={`showPassword ${
+                        showPassword ? "fas fa-eye" : "fas fa-eye-slash"
+                      }`}
+                      // style={{
+                      //   float: "right",
+                      //   fontSize: "20px",
+                      //   marginTop: "10px",
+                      //   marginBottom: "10px",
+                      // }}
+                      onClick={() => {
+                        setShowPassword(!showPassword);
+                      }}
+                    ></i>
                     {fieldState.invalid && (
                       <div className="invalid-feedback">
                         {fieldState?.error?.message || "Invalid input"}
@@ -202,7 +207,6 @@ function Login(props) {
           </div>
           <div className="col-12 text-center">
             <span className="">
-              {" "}
               <FormattedMessage id="login.or-login-with" />
             </span>
           </div>
@@ -216,23 +220,23 @@ function Login(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    language: state.app.language,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     language: state.app.language,
+//   };
+// };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    navigate: (path) => {
-      console.log("PATH: ", path);
-      return dispatch(push(path));
-    },
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     navigate: (path) => {
+//       console.log("PATH: ", path);
+//       return dispatch(push(path));
+//     },
 
-    userLoginSuccess: (userInfo) => {},
-    // dispatch(actions.userLoginSuccess(userInfo)),
-    // userLoginFail: () => dispatch(actions.adminLoginFail()),
-  };
-};
+//     userLoginSuccess: (userInfo) => {},
+//     // dispatch(actions.userLoginSuccess(userInfo)),
+//     // userLoginFail: () => dispatch(actions.adminLoginFail()),
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;
