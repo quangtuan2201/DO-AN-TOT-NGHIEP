@@ -71,17 +71,8 @@ function UserRedux() {
       if (editingUser) {
         // data.image = imageUpload;
         const changeFields = Object.keys(data).filter((key) => {
-          console.log(
-            key,
-            ":",
-            data[key],
-            data[key] !== editingUser[key],
-            "editingUser[key]: ",
-            editingUser[key]
-          );
           return data[key] !== editingUser[key];
         });
-        console.log("changeFiled: ", changeFields);
         const updateUserData = {};
         changeFields.forEach((field) => {
           updateUserData[field] = data[field];
@@ -108,7 +99,6 @@ function UserRedux() {
     // Lưu trạng thái người dùng đang chỉnh sửa
     // Fill dữ liệu người dùng vào form
     let imageBase64 = "";
-    console.log("User fuction handleUpdateUser: ", user);
     if (user.image && typeof user.image === "object") {
       imageBase64 = new Buffer(user.image, "base64").toString("binary");
       setImageUpload(imageBase64);
@@ -194,15 +184,6 @@ function UserRedux() {
       </div>
     );
   };
-  //////////////////////////////////////////
-
-  // const handleIncrease = useCallback(() => {
-  //   setCount((pre) => pre + 1);
-  // }, []);
-  const handleIncrease = () => {
-    setCount((pre) => pre + 1);
-  };
-  ////////////////////////////////
 
   return (
     <React.Fragment>
@@ -262,7 +243,7 @@ function UserRedux() {
                   render={({ field }) => (
                     <>
                       <select
-                        className={`form-select ${
+                        className={`form-control ${
                           errors.gender ? "is-invalid" : ""
                         }`}
                         {...field}
@@ -303,7 +284,7 @@ function UserRedux() {
                   render={({ field }) => (
                     <>
                       <select
-                        className={`form-select ${
+                        className={`form-control ${
                           errors.positionId ? "is-invalid" : ""
                         }`}
                         {...field}
@@ -345,7 +326,7 @@ function UserRedux() {
                   render={({ field }) => (
                     <>
                       <select
-                        className={`form-select ${
+                        className={`form-control ${
                           errors.roleId ? "is-invalid" : ""
                         }`}
                         {...field}
@@ -424,7 +405,6 @@ function UserRedux() {
         allUser={dataReducer.allUser}
         onDeleteUser={handleDeleteUser}
         onUpdateUser={handleUpdateUser}
-        onIncrease={handleIncrease}
       />
       {/* 
       {console.log("allUser: ", Array.isArray(dataReducer.allUser))}

@@ -21,6 +21,7 @@ const handleGetAllDoctors = async () => {
 //[CREATE] || [UPDATE] /api/save-info-doctor
 const handleSaveInfoDoctor = async (InfoDoctor) => {
   try {
+    // console.log("");
     const response = await instance.post("/save-info-doctor", InfoDoctor);
     console.log("Call API save info doctor in doctorService:", response);
     if (response && response.data) {
@@ -99,22 +100,6 @@ const handlefindScheduleByDate = async (doctorId, date) => {
     return null;
   }
 };
-// const handlGetAllCodeService = async (key) => {
-//   try {
-//     if (!key) {
-//       return;
-//     }
-//     const reseponse = await instance.get("/get-all-doctor-info?", {
-//       params: key,
-//     });
-//     console.log("---Respnsse thông tin bác sĩ : ", reseponse``);
-//     if (reseponse) {
-//       return reseponse;
-//     }
-//   } catch (error) {
-//     console.error("Fetch get all doctor info: ", error.message);
-//   }
-// };
 
 export default {
   handleGetAllDoctors,

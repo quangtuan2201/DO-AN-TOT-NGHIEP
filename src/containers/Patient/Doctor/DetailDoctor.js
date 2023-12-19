@@ -13,7 +13,7 @@ function DetailDoctor() {
     // console.log("State redux: ", state);
     return {
       language: state.app.language,
-      doctor: state.admin.detailDoctor,
+      doctor: state.doctor.detailDoctor,
     };
   });
   useEffect(() => {

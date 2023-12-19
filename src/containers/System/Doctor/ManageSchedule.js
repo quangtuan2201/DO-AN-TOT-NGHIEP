@@ -35,13 +35,13 @@ function Doctor() {
       loggedIn: state.user.isLoggedIn,
       language: state.app.language,
       systemMenuPath: state.app.systemMenuPath,
-      allDoctors: state.admin.allDoctors,
+      allDoctors: state.doctor.allDoctors,
       appointmentSchedule: state.doctor.allCodescheduleHours,
     };
   });
   useEffect(() => {
     setSelectedDate(new Date());
-    if (!Object.keys(allDoctors).length) {
+    if (!Object.keys(allDoctors).length > 0) {
       dispatch(actions.fetchGetAllDoctors());
     } else {
       setOptions(() => {

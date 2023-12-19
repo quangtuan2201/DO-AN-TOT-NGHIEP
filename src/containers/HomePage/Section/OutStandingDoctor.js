@@ -22,9 +22,11 @@ function OutStandingDoctor(props) {
     }
   }, [seemore]);
   const { language, topDoctors } = useSelector((state) => {
+    console.log("state stote in OutStanding", state);
     return {
       language: state.app.language,
-      topDoctors: state.admin.topDoctors,
+      topDoctors: state.doctor.topDoctors,
+      // allDoctors: state.doctor.allDoctors,
     };
   });
   const handleViewDetailDoctor = (doctor) => {

@@ -2,15 +2,12 @@ import React, { useState, useEffect, memo } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import UserAdmin from "./UserAdmin";
 
-function TableManageUser({ allUser, onDeleteUser, onUpdateUser, onIncrease }) {
+function TableManageUser({ allUser, onDeleteUser, onUpdateUser }) {
   console.log("re-render");
   return (
     <>
       <div className="user-container container">
         <div className="users-table mt-3 mx-1">
-          <button className="btn btn-primary" onClick={onIncrease}>
-            Click me
-          </button>
           <table id="customers">
             <tr>
               <th>

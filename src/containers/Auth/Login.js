@@ -79,7 +79,10 @@ function Login(props) {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit(handleLogin)}>
+          <form
+            className="container form-login"
+            onSubmit={handleSubmit(handleLogin)}
+          >
             <div className="form-login-container">
               <label className="form-label">
                 <FormattedMessage id="user-manage.email" />

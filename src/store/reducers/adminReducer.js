@@ -9,25 +9,12 @@ const initialState = {
   isLoadingCreateUser: false,
   users: {},
   allUser: [],
-  topDoctors: [],
-  allDoctors: [],
-  saveInfoDoctor: {},
-  detailDoctor: {},
+
   login: {},
 };
 const adminReducer = (state = initialState, action) => {
   // console.log("action:", action);
   switch (action.type) {
-    case actionTypes.FETCH_USER_LOGIN_SUCCESS:
-    //   console.log("FETCH_USER_LOGIN_SUCCESS", action.data);
-    //   return {
-    //     ...state,
-    //     login: action.data,
-    //   };
-    // case actionTypes.FETCH_LOGIN_USER_FAIL:
-    //   return {
-    //     ...state,
-    //   };
     case actionTypes.FETCH_KEYS_START:
       // console.log("FETCH_KEYS_START", action);
       return {
@@ -106,44 +93,6 @@ const adminReducer = (state = initialState, action) => {
         allUser: updatedUsers,
       };
     case actionTypes.FETCH_UPDATE_USER_FAIL:
-      return {
-        ...state,
-      };
-    case actionTypes.FETCH_GET_TOP_DOCTOR_SUCCESS:
-      return {
-        ...state,
-        topDoctors: action.data,
-      };
-    case actionTypes.FETCH_GET_TOP_DOCTOR_FAIL:
-      return {
-        ...state,
-      };
-    case actionTypes.FETCH_GET_ALL_DOCTOR_SUCCESS:
-      console.log("FETCH_GET_ALL_DOCTOR_SUCCESS");
-      return {
-        ...state,
-        allDoctors: action.data,
-      };
-    case actionTypes.FETCH_GET_ALL_DOCTOR_FAIL:
-      return {
-        ...state,
-      };
-    case actionTypes.FETCH_SAVE_INFO_DOCTOR_SUCCESS:
-      console.log("REDUCER data : ", action.data);
-      return {
-        ...state,
-        saveInfoDoctor: action.data,
-      };
-    case actionTypes.FETCH_SAVE_INFO_DOCTOR_FAIL:
-      return {
-        ...state,
-      };
-    case actionTypes.FETCH_GET_DETAIL_DOCTOR_SUCCESS:
-      return {
-        ...state,
-        detailDoctor: action.data,
-      };
-    case actionTypes.FETCH_GET_DETAIL_DOCTOR_FAIL:
       return {
         ...state,
       };

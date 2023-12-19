@@ -123,6 +123,7 @@
     form {
      .form-login-password  {
           position: relative;
+          // width: 92% !important    ;
           // display: inline-block;
           .showPassword {
                position: absolute !important;
@@ -132,11 +133,16 @@
                cursor: pointer;
              }
      }
+    
      .is-invalid {
           background-image: none !important;
 
      }
+
         
       
+     .container, .container-fluid, .container-sm, .container-md, .container-lg, .container-xl {
+          width: 100%;
+     }
 }
 }

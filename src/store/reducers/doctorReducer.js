@@ -2,11 +2,54 @@ import actionTypes from "../actions/actionTypes";
 
 const initialState = {
   allCodescheduleHours: [],
-  allDoctorInfo: [],
+  allKeysMapDoctorInfo: [],
   isAllDoctorInfo: false,
+  topDoctors: [],
+  AllDoctors: [],
+  saveInfoDoctor: {},
+  detailDoctor: {},
 };
 function doctorReducer(state = initialState, action) {
   switch (action.type) {
+    case actionTypes.FETCH_GET_TOP_DOCTOR_SUCCESS:
+      return {
+        ...state,
+        topDoctors: action.data,
+      };
+    case actionTypes.FETCH_GET_TOP_DOCTOR_FAIL:
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_GET_ALL_DOCTOR_SUCCESS:
+      console.log("FETCH_GET_ALL_DOCTOR_SUCCESS");
+      return {
+        ...state,
+        AllDoctors: action.data,
+      };
+    case actionTypes.FETCH_GET_ALL_DOCTOR_FAIL:
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_SAVE_INFO_DOCTOR_SUCCESS:
+      console.log("REDUCER data : ", action.data);
+      return {
+        ...state,
+        saveInfoDoctor: action.data,
+      };
+    case actionTypes.FETCH_SAVE_INFO_DOCTOR_FAIL:
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_GET_DETAIL_DOCTOR_SUCCESS:
+      return {
+        ...state,
+        detailDoctor: action.data,
+      };
+    case actionTypes.FETCH_GET_DETAIL_DOCTOR_FAIL:
+      return {
+        ...state,
+      };
+
     case actionTypes.FETCH_ALLCODE_SCHEDULE_HOURS_SUCCESS:
       return {
         ...state,
@@ -17,17 +60,17 @@ function doctorReducer(state = initialState, action) {
         ...state,
       };
     case actionTypes.FETCH_REQUIRED_DOCTOR_INFO_START:
-      console.log("FETCH_REQUIRED_DOCTOR_INFO_STARTv");
+      console.log("FETCH_REQUIRED_DOCTOR_INFO_START");
       return {
         ...state,
         isAllDoctorInfo: true,
       };
     case actionTypes.FETCH_REQUIRED_DOCTOR_INFO_SUCESS:
-      console.log("FETCH_REQUIRED_DOCTOR_INFO_SUCESS", action.data);
+      console.log("FETCH_REQUIRED_DOCTOR_INFO_SUCESSS");
       return {
         ...state,
         isAllDoctorInfo: false,
-        allDoctorInfo: action.data,
+        allKeysMapDoctorInfo: action.data,
       };
     case actionTypes.FETCH_REQUIRED_DOCTOR_INFO_FAIL:
       console.log("FETCH_REQUIRED_DOCTOR_INFO_FAIL");

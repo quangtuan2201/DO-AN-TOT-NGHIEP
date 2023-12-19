@@ -21,7 +21,7 @@ function DoctorSchedule() {
     console.log("Doctor: ", state.admin.detailDoctor);
     return {
       language: state.app.language,
-      doctor: state.admin.detailDoctor,
+      doctor: state.doctor.detailDoctor,
     };
   });
   console.log("++--------------------------------------------------");
