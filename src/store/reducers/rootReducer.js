@@ -43,6 +43,6 @@ export default (history) =>
     admin: persistReducer(adminPersistConfig, adminReducer),
     user: persistReducer(userPersistConfig, userReducer),
     app: persistReducer(appPersistConfig, appReducer),
-    doctor: persistReducer(doctorPersistConfig, doctorReducer),
+    doctor: doctorReducer,
     // admin: adminReducer,/
   });

@@ -101,6 +101,23 @@ const handlefindScheduleByDate = async (doctorId, date) => {
   }
 };
 
+// Lấy thông tin địa chỉ phòng khám
+const handlGetInfoAddressClinic = async (doctorId) => {
+  try {
+    const response = await instance.get("/get-info-address-clinic", {
+      params: {
+        id: doctorId,
+      },
+    });
+    const { data, errCode } = response.data;
+    if (data && errCode === 0) {
+      return data;
+    }
+  } catch (error) {
+    return error.message;
+  }
+};
+
 export default {
   handleGetAllDoctors,
   handleSaveInfoDoctor,
@@ -108,4 +125,5 @@ export default {
   handleAllCodeScheduleHours,
   handlBulkCreateSchedule,
   handlefindScheduleByDate,
+  handlGetInfoAddressClinic,
 };

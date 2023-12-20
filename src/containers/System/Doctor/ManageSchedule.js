@@ -27,25 +27,28 @@ function Doctor() {
     loggedIn,
     language,
     systemMenuPath,
-    allDoctors,
+    AllDoctors,
     appointmentSchedule,
   } = useSelector((state) => {
-    // console.log("State Redux: ", state);
+    console.log("State Redux: ", state);
     return {
       loggedIn: state.user.isLoggedIn,
       language: state.app.language,
       systemMenuPath: state.app.systemMenuPath,
-      allDoctors: state.doctor.allDoctors,
+      AllDoctors: state.doctor.AllDoctors,
       appointmentSchedule: state.doctor.allCodescheduleHours,
     };
   });
+  console.log("Lấy danh sách bác sĩ: ", AllDoctors);
   useEffect(() => {
     setSelectedDate(new Date());
-    if (!Object.keys(allDoctors).length > 0) {
+    console.log("All Doctors: ", AllDoctors);
+    if (!Array.isArray(AllDoctors) && !Object.keys(AllDoctors) > 0) {
       dispatch(actions.fetchGetAllDoctors());
+      return;
     } else {
       setOptions(() => {
-        return allDoctors.map((doctor) => {
+        return AllDoctors.map((doctor) => {
           return {
             value: doctor.id,
             label: `${doctor.lastName} ${doctor.firstName} `,
@@ -53,7 +56,7 @@ function Doctor() {
         });
       });
     }
-  }, [allDoctors]);
+  }, [AllDoctors]);
   useEffect(() => {
     dispatch(actions.fetchAllCodeScheduleHours());
   }, []);
@@ -167,6 +170,7 @@ function Doctor() {
       });
       setSelectedDate(new Date());
       setInfoSchedule(null);
+      setSelectedAppointment([]);
       const response = await doctorService.handlBulkCreateSchedule(options);
       console.log("---quang tuan dev - action tạo mới : ", response);
       if (response) {

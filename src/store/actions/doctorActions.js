@@ -10,6 +10,7 @@ export const fetchGetAllDoctors = () => {
   return async (dispatch) => {
     try {
       const response = await doctorService.handleGetAllDoctors();
+      console.log("fetch get all doctor: ", response);
       console.log("response ALL DOCTOR in file adminAction:", response);
       if (response.data && response.errCode === 0) {
         toast.success(

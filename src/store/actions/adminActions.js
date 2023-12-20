@@ -35,11 +35,15 @@ const fetchDataFail = () => ({
 });
 // ACTION CREATE USER
 export const fetchCreateUserStart = (data) => {
-  return async (dispatch) => {
+  return async (dispatch, useState) => {
     try {
       dispatch({ type: actionTypes.FETCH_CREATE_USER_START });
       const response = await userService.createUser(data);
-      // console.log("RESPONSE IN FILE AdminAction :", response);
+      console.log(
+        "-->> Data create user trả về trong file AdminAction :",
+        response
+      );
+      console.log("--->> State trong file adminAction , create user: ");
       if (response.data && response?.data?.errCode === 0) {
         toast.success(
           <FormattedMessage id="user-manage.success-create-user" />

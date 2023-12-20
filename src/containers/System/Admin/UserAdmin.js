@@ -5,32 +5,6 @@ import "./UserAdmin.scss";
 
 // Example items, to simulate fetching from another resources.
 // const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
-const items2 = [
-  {
-    id: 1,
-    name: "nguyen tuan anh",
-  },
-  {
-    id: 2,
-    name: "Trần Tuấn anh",
-  },
-  {
-    id: 3,
-    name: "Đào Đức anh",
-  },
-  {
-    id: 4,
-    name: "Trần Tú Đào",
-  },
-  {
-    id: 5,
-    name: "Nguyễn Ngọc Tú",
-  },
-  {
-    id: 6,
-    name: "Nguyễn Đức Anh",
-  },
-];
 
 function Items({ currentItems }) {
   return (
@@ -95,7 +69,7 @@ function PaginatedItems({ items, itemsPerPage }) {
 }
 
 // Add a <div id="container"> to your HTML to see the component rendered.
-function UserAdmin({ items = items2, itemsPage }) {
+function UserAdmin({ items, itemsPage }) {
   //{ items = items2, itemsPage }
   // console.log("items: ", items);
   // console.log("itemsPerPage: ", itemsPage);

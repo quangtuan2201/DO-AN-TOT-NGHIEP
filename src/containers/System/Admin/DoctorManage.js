@@ -135,7 +135,6 @@ function DoctorManage() {
       toast.error("Chosee requied Doctor !");
       return;
     }
-    console.log("contentInfoDoctor : ", contentInfoDoctor);
     const {
       priceId,
       paymentId,
@@ -238,8 +237,11 @@ function DoctorManage() {
           contentMarkdown: "",
           description: "",
           priceId: "",
-          paymentIdL: "",
+          paymentId: "",
           provinceId: "",
+          nameClinic: "",
+          addressClinic: "",
+          note: "",
         };
       } else {
         console.log("dk2");
@@ -397,18 +399,14 @@ function DoctorManage() {
   }, [language]);
 
   const findValuekey = (key, listKeys) => {
-    ////console.log("key: ", key);
-    ////console.log("list key: ", listKeys);
     if (!Array.isArray(listKeys) || !listKeys > 0) {
       return;
     }
     let result = listKeys.find((item) => {
       return item.value === key;
     });
-    ////console.log("====> fint item sucess : ", result);
     return result;
   };
-  console.log("contentInfoDoctor: ", contentInfoDoctor);
   // return
   return (
     <>
@@ -528,7 +526,9 @@ function DoctorManage() {
             }
             onClick={handleSaveInfo}
           >
-            Create
+            {contentInfoDoctor && contentInfoDoctor?.action === "CREATE"
+              ? "CREATE"
+              : "EDIT"}
           </button>
         </div>
       </div>

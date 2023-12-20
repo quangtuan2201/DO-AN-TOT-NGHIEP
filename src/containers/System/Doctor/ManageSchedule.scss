@@ -39,7 +39,7 @@
                // display: flex;
                // border: 1px solid pink;
                display: grid;
-               grid-template-columns: repeat(4,140px ); /*1fr Tạo 5 cột bằng nhau */
+               grid-template-columns: repeat(4,120px ); /*1fr Tạo 5 cột bằng nhau */
                gap: 20px; /* Khoảng cách giữa các div */
                align-items: center;
                flex-direction: column;

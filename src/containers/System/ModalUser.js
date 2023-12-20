@@ -13,8 +13,8 @@ import {
   Button,
 } from "reactstrap";
 import { useState } from "react";
-
-const ModalUser = ({ isOpen, toggle, user }) => {
+//isOpenModal
+const ModalUser = ({ isOpenModal, toggle, user }) => {
   const title = user ? "Edit User" : "Create New User";
   const [defaulValue, setDefaultValue] = useState(false);
   const {
@@ -65,7 +65,7 @@ const ModalUser = ({ isOpen, toggle, user }) => {
   };
 
   return (
-    <Modal isOpen={isOpen} toggle={toggle}>
+    <Modal isOpenModal={isOpenModal} toggle={toggle}>
       <ModalHeader toggle={toggle}>{title}</ModalHeader>
       <ModalBody>
         <Form onSubmit={handleSubmit(submitHandle)}>

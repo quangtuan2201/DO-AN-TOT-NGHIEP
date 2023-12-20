@@ -60,6 +60,7 @@
                }
               
           }
+ 
           .login-input {
                margin: 7px 0;
                .custom-input-password {
@@ -143,6 +144,8 @@
       
      .container, .container-fluid, .container-sm, .container-md, .container-lg, .container-xl {
           width: 100%;
+          padding-left: none !important;
+          padding-right: none !important;
      }
 }
 }

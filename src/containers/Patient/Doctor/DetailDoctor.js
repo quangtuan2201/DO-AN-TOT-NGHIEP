@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import HomeHeader from "../../HomePage/HomeHeader";
 import * as actions from "../../../store/actions";
 import DoctorSchedule from "../Clinic/DoctorSchedule";
+import DoctorExtraInfo from "./DoctorExtraInfo";
 import "./DetailDoctor.scss";
 function DetailDoctor() {
   const { id } = useParams();
@@ -16,6 +17,7 @@ function DetailDoctor() {
       doctor: state.doctor.detailDoctor,
     };
   });
+
   useEffect(() => {
     //     const detaiDoctor = async () => {
     //       const doctor = await doctorService.handleGetDetailDoctor(id);
@@ -50,13 +52,7 @@ function DetailDoctor() {
             <DoctorSchedule />
           </div>
           <div className="content-right">
-            <div>
-              ĐỊA CHỈ KHÁM
-              <br /> Phòng khám Chuyên khoa Da Liễu
-              <br /> 207 Phố Huế - Hai Bà Trưng - Hà Nội
-            </div>
-            <div>GIÁ KHÁM: 300.000đ - 400.000đ LOẠI BẢO HIỂM ÁP DỤNG.</div>
-            <div>LOẠI BẢO HIỂM ÁP DỤNG.</div>
+            <DoctorExtraInfo id={id} />
           </div>
         </div>
 

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useCallback } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { useState, useEffect } from "react";
@@ -27,17 +27,20 @@ function UserManage(props) {
     return;
   }, [selectedUser]);
   // show modal edit & create
-  const handleShowEditModal = (user) => {
-    // console.log("show :", selectedUser);
-    setSelectedUser(user);
-    setEditModalOpen(true);
-  };
+  const handleShowEditModal = useCallback(
+    (user) => {
+      // console.log("show :", selectedUser);
+      setSelectedUser(user);
+      setEditModalOpen(true);
+    },
+    [isEditModalOpen]
+  );
 
-  const handleCloseEditModal = () => {
+  const handleCloseEditModal = useCallback(() => {
     // console.log("close:", selectedUser);
     setEditModalOpen(false);
     setSelectedUser(null);
-  };
+  }, [isEditModalOpen]);
   // delete  user
   const handleDeleteUser = async (userId) => {
     try {
@@ -113,7 +116,7 @@ function UserManage(props) {
         <div className="col-12">
           {/* EditUserModal */}
           <ModalUser
-            isOpen={isEditModalOpen}
+            isOpenModal={isEditModalOpen}
             toggle={handleCloseEditModal}
             user={selectedUser}
           />

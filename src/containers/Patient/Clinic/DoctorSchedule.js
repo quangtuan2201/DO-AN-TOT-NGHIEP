@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect, memo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as actions from "../../../store/actions";
@@ -9,29 +9,30 @@ biết dự án có sử dụng tiếng việt */
 import doctorService from "../../../services/doctorService";
 import { LANGUAGES, dateFormat } from "../../../utils/constant";
 import { FormattedMessage, useIntl } from "react-intl";
+import BookingModal from "../Doctor/Modal/BookingModal";
 import "./DoctorSchedule.scss";
 
 function DoctorSchedule() {
   const dispatch = useDispatch();
+  const { id } = useParams();
   const [allDays, setAllDays] = useState([]);
   const [chosenDate, setChosenDate] = useState(0);
   const [allAvalableTime, setAllAvalableTime] = useState([]);
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const { language, doctor } = useSelector((state) => {
-    console.log("State redux: ", state);
-    console.log("Doctor: ", state.admin.detailDoctor);
+    //console.log("State redux: ", state);
+    //console.log("Doctor: ", state.admin.detailDoctor);
     return {
       language: state.app.language,
       doctor: state.doctor.detailDoctor,
     };
   });
-  console.log("++--------------------------------------------------");
-  console.log("Re render");
-  console.log("++--------------------------------------------------");
-  console.log("moment vi: ", moment(new Date()).format("dddd - DD/MM"));
-  console.log(
-    "moment en: ",
-    moment(new Date()).locale("en").format("ddd - DD/MM")
-  );
+
+  //console.log("moment vi: ", moment(new Date()).format("dddd - DD/MM"));
+  //console.log(
+  //   "moment en: ",
+  //   moment(new Date()).locale("en").format("ddd - DD/MM")
+  // );
 
   // Hàm chuyển đổi ngôn ngữ ,chatGPT
   const getDayLabel = (language, date, format) => {
@@ -52,7 +53,7 @@ function DoctorSchedule() {
           moment(new Date()).add(i, "days"),
           language === LANGUAGES.VI ? "dddd - DD/MM" : "ddd - DD/MM"
         );
-        console.log("lable EN: ", object.label);
+        //console.log("lable EN: ", object.label);
         object.value = moment(new Date())
           .add(i, "days")
           .startOf("day")
@@ -69,6 +70,7 @@ function DoctorSchedule() {
         doctor?.id,
         timestamp
       );
+      console.log("Danh sách lịch làm việc: ", data);
       if (data && data?.length > 0 && errCode === 0) {
         setAllAvalableTime(data);
       } else {
@@ -78,7 +80,7 @@ function DoctorSchedule() {
       }
     };
 
-    const day = getAllDays();
+    getAllDays();
     getCurrentDay();
   }, [language, doctor]);
 
@@ -92,7 +94,7 @@ function DoctorSchedule() {
       doctor.id,
       e.target.value
     );
-    console.log("reponse: ", data);
+    //console.log("reponse: ", data);
     if (data?.length > 0 && errCode === 0) {
       setAllAvalableTime(data);
     } else {
@@ -101,6 +103,12 @@ function DoctorSchedule() {
       );
     }
   };
+  //
+  // const hadlShowModal = () => setIsOpenModal(!isOpenModal);
+  const hadlShowModal = useCallback(
+    () => setIsOpenModal(!isOpenModal),
+    [isOpenModal]
+  );
 
   return (
     <>
@@ -127,7 +135,11 @@ function DoctorSchedule() {
           <div className="time-content">
             {Array.isArray(allAvalableTime) ? (
               allAvalableTime.map((item, index) => (
-                <button className="checked-btn-hours" key={index}>
+                <button
+                  className="checked-btn-hours"
+                  key={index}
+                  onClick={hadlShowModal}
+                >
                   {language === LANGUAGES.VI
                     ? item?.timeTypeData?.valueVn
                     : item?.timeTypeData?.valueEn}
@@ -141,12 +153,21 @@ function DoctorSchedule() {
         <div className="warning-schedule-hours">
           <p className="param-warning">
             <FormattedMessage id="manage-schedule.chosse" />
-            <i class="fas fa-hand-point-up"></i>
+            <i className="fas fa-hand-point-up"></i>
             <FormattedMessage id="manage-schedule.and-book" />
           </p>
         </div>
       </div>
+      <div className="mb-5 ml-5">
+        <BookingModal
+          id={id}
+          isOpenModal={isOpenModal}
+          toggle={hadlShowModal}
+          allAvalableTime={allAvalableTime}
+        />
+      </div>
     </>
   );
 }
+
 export default memo(DoctorSchedule);
