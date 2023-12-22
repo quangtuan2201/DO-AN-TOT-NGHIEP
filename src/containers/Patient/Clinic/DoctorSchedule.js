@@ -1,4 +1,10 @@
-import React, { useState, useEffect, memo, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  memo,
+  useCallback,
+  createContext,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as actions from "../../../store/actions";
@@ -12,6 +18,8 @@ import { FormattedMessage, useIntl } from "react-intl";
 import BookingModal from "../Doctor/Modal/BookingModal";
 import "./DoctorSchedule.scss";
 
+export const ThemeContextDoctorSchedule = createContext();
+
 function DoctorSchedule() {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -19,9 +27,8 @@ function DoctorSchedule() {
   const [chosenDate, setChosenDate] = useState(0);
   const [allAvalableTime, setAllAvalableTime] = useState([]);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState({});
   const { language, doctor } = useSelector((state) => {
-    //console.log("State redux: ", state);
-    //console.log("Doctor: ", state.admin.detailDoctor);
     return {
       language: state.app.language,
       doctor: state.doctor.detailDoctor,
@@ -103,70 +110,80 @@ function DoctorSchedule() {
       );
     }
   };
-  //
-  // const hadlShowModal = () => setIsOpenModal(!isOpenModal);
-  const hadlShowModal = useCallback(
-    () => setIsOpenModal(!isOpenModal),
-    [isOpenModal]
-  );
 
+  const handlShowModal = useCallback(
+    (e, item) => {
+      setSelectedTimeSlot(item);
+      setIsOpenModal(!isOpenModal);
+    },
+    [selectedTimeSlot, isOpenModal]
+  );
   return (
-    <>
-      <div className="doctor-schedule-container">
-        <div className="all-schedule">
-          <select className="list-schedule" onChange={handleBookingDateSelect}>
-            {/* <option value="">Chose schedule</option> */}
-            {allDays &&
-              allDays.map((item, index) => (
-                <option key={index} value={item.value}>
-                  {item.label}
-                </option>
-              ))}
-          </select>
-        </div>
-        <div className="all-available-time">
-          <div className="text-celendar">
-            <i className="far fa-calendar-alt">
-              <span>
-                <FormattedMessage id="manage-schedule.appointment" />
-              </span>
-            </i>
+    <ThemeContextDoctorSchedule.Provider
+      value={{ selectedTimeSlot, isOpenModal, handlShowModal }}
+    >
+      <>
+        <div className="doctor-schedule-container">
+          <div className="all-schedule">
+            <select
+              className="list-schedule"
+              onChange={handleBookingDateSelect}
+            >
+              {/* <option value="">Chose schedule</option> */}
+              {allDays &&
+                allDays.map((item, index) => (
+                  <option key={index} value={item.value}>
+                    {item.label}
+                  </option>
+                ))}
+            </select>
           </div>
-          <div className="time-content">
-            {Array.isArray(allAvalableTime) ? (
-              allAvalableTime.map((item, index) => (
-                <button
-                  className="checked-btn-hours"
-                  key={index}
-                  onClick={hadlShowModal}
-                >
-                  {language === LANGUAGES.VI
-                    ? item?.timeTypeData?.valueVn
-                    : item?.timeTypeData?.valueEn}
-                </button>
-              ))
-            ) : (
-              <span>{allAvalableTime}</span>
-            )}
+          <div className="all-available-time">
+            <div className="text-celendar">
+              <i className="far fa-calendar-alt">
+                <span>
+                  <FormattedMessage id="manage-schedule.appointment" />
+                </span>
+              </i>
+            </div>
+            <div className="time-content">
+              {Array.isArray(allAvalableTime) ? (
+                allAvalableTime.map((item, index) => (
+                  <button
+                    className="checked-btn-hours"
+                    key={index}
+                    onClick={(e) => handlShowModal(e, item)}
+                  >
+                    {language === LANGUAGES.VI
+                      ? item?.timeTypeData?.valueVn
+                      : item?.timeTypeData?.valueEn}
+                  </button>
+                ))
+              ) : (
+                <span>{allAvalableTime}</span>
+              )}
+            </div>
+          </div>
+          <div className="warning-schedule-hours">
+            <p className="param-warning">
+              <FormattedMessage id="manage-schedule.chosse" />
+              <i className="fas fa-hand-point-up"></i>
+              <FormattedMessage id="manage-schedule.and-book" />
+            </p>
           </div>
         </div>
-        <div className="warning-schedule-hours">
-          <p className="param-warning">
-            <FormattedMessage id="manage-schedule.chosse" />
-            <i className="fas fa-hand-point-up"></i>
-            <FormattedMessage id="manage-schedule.and-book" />
-          </p>
+        <div className="mb-5 ml-5">
+          <BookingModal
+            id={id}
+            // dataTime={}
+            isOpenModal={isOpenModal}
+            toggle={handlShowModal}
+            allAvalableTime={allAvalableTime}
+            selectedTimeSlot={selectedTimeSlot}
+          />
         </div>
-      </div>
-      <div className="mb-5 ml-5">
-        <BookingModal
-          id={id}
-          isOpenModal={isOpenModal}
-          toggle={hadlShowModal}
-          allAvalableTime={allAvalableTime}
-        />
-      </div>
-    </>
+      </>
+    </ThemeContextDoctorSchedule.Provider>
   );
 }
 

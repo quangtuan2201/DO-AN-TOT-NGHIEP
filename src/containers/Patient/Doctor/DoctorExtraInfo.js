@@ -5,9 +5,10 @@ import * as actions from "../../../store/actions";
 import "./DoctorExtraInfo.scss";
 import doctorService from "../../../services/doctorService";
 import { LANGUAGES } from "../../../utils/constant";
-
-function DoctorExtraInfo({ id }) {
-  //   const { id } = useParams();
+//{ id }
+function DoctorExtraInfo() {
+  const { id } = useParams();
+  console.log("-----re-render---------DoctorExtraInfo");
   const dispatch = useDispatch();
   const [isShoDetail, setIsShowDetail] = useState(false);
   const [infoAdressClinic, setInfoAddressClinic] = useState({});
@@ -23,16 +24,21 @@ function DoctorExtraInfo({ id }) {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   });
-  console.log("id doctor : ", id);
+  // console.log("id doctor : ", id);
   useEffect(() => {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
     if (!id) {
       console.error("Requires id parameter!");
       return; // or handle the case where id is not available
     }
     (async () => {
       try {
-        const response = await doctorService.handlGetInfoAddressClinic(id);
-        console.log("data res info address: ", response);
+        const response = await doctorService.handlGetInfoAddressClinic(
+          id,
+          signal
+        );
+        // console.log("data res info address: ", response);
         if (response) {
           setInfoAddressClinic(response);
         }
@@ -40,7 +46,11 @@ function DoctorExtraInfo({ id }) {
         console.error("Error fetching data:", error.message);
       }
     })();
-  }, []);
+
+    return () => {
+      abortController.abort();
+    };
+  }, [id]);
   return (
     <React.Fragment>
       <div className="doctor-extra-info-container">

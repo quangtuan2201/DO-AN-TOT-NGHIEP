@@ -89,7 +89,6 @@ const handlefindScheduleByDate = async (doctorId, date) => {
         date,
       },
     });
-    // console.log("---respon findScheduleByDate: ", response);
     if (response && response.data) {
       return response.data;
     } else {
@@ -102,11 +101,12 @@ const handlefindScheduleByDate = async (doctorId, date) => {
 };
 
 // Lấy thông tin địa chỉ phòng khám
-const handlGetInfoAddressClinic = async (doctorId) => {
+const handlGetInfoAddressClinic = async (doctorId, signal) => {
   try {
     const response = await instance.get("/get-info-address-clinic", {
       params: {
         id: doctorId,
+        signal,
       },
     });
     const { data, errCode } = response.data;
@@ -117,7 +117,23 @@ const handlGetInfoAddressClinic = async (doctorId) => {
     return error.message;
   }
 };
-
+const handlGetProfileDoctorById = async (doctorId, signal) => {
+  try {
+    const response = await instance.get("/get-profile-doctor-by-id", {
+      params: { doctorId },
+      signal,
+    });
+    // console.log("data res get profile doctor by Id : ", response);
+    const { data, errCode } = response.data;
+    if (data && errCode === 0) {
+      return data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    return new Error();
+  }
+};
 export default {
   handleGetAllDoctors,
   handleSaveInfoDoctor,
@@ -126,4 +142,5 @@ export default {
   handlBulkCreateSchedule,
   handlefindScheduleByDate,
   handlGetInfoAddressClinic,
+  handlGetProfileDoctorById,
 };

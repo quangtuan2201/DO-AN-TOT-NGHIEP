@@ -23,7 +23,7 @@ body {
           .bg-image {
                height: 217px;
                width: 332px;
-               background-size: contain !important;
+               background-size: cover !important;
                background-position: center center !important;
                background-repeat:no-repeat !important;
                &.section-specialty {
@@ -141,7 +141,7 @@ body {
     
 }
 .section-customize {
-     padding: 15px;
+     // padding: 15px;
      cursor: pointer;
      .customize-border {
           border: 1px solid rgb(19, 99, 105);

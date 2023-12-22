@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { Redirect, Route, Switch } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import Select from "react-select";
 import moment from "moment";
@@ -43,7 +42,9 @@ function Doctor() {
   useEffect(() => {
     setSelectedDate(new Date());
     console.log("All Doctors: ", AllDoctors);
-    if (!Array.isArray(AllDoctors) && !Object.keys(AllDoctors) > 0) {
+    if (!AllDoctors || !AllDoctors.length) {
+      console.log("check :", !AllDoctors || !AllDoctors.length);
+      console.log("Alldoctor dispatch");
       dispatch(actions.fetchGetAllDoctors());
       return;
     } else {
