@@ -1,74 +1,18 @@
-body {
-     height: 1000px;
+.container{
+  border : 1px solid brown;
+  // display: flex;
+  .row {
+    border : 1px solid green;
+    height: 100%;
+    .form-item{
+      
+    }
+    .invalid-feedback {
+      display: block;
+      width: 100%;
+      margin-top: .25rem;
+      font-size: 100%;
+      color: #dc3545;  /* Màu sắc của thông báo lỗi, có thể thay đổi */
+    }
+  }
 }
-.doctor-container {
-     margin-top: 50px;
-     margin: 0 90px;
-     .manage-doctor-title {
-          margin: 15px 0;
-          font-size: 20px;
-          text-transform: uppercase;
-          font-weight: 600;
-     }
-     .doctor-form {
-       display: flex;
-       flex-wrap: wrap;
-       justify-content: space-around;
-       margin-top: 30px;
-   
-       label {
-         width: 100%;
-       }
-       .doctor-select-left,
-       .doctor-input-right {
-         // width: 100%; // Move to the common parent to avoid repetition
-         label {
-           width: 100%;
-         }
-       }
-   
-       .doctor-select-left {
-         .css-2b097c-container {
-          margin-top: 6px;
-         }
-       }
-   
-       .doctor-textarea-right {
-         margin-left: 30px;
-         textarea {
-          margin-top: 5px;
-           // margin-left: 30px;
-           width: 96.5%;
-          //  height: 140px;
-          height: 140px;
-          padding: 10px; 
-          box-sizing: border-box;
-         }
-       }
-     }
-     .save-content-doctor {
-          margin-top: 20px;
-          margin-bottom: 30px;
-          border-radius: 3px;
-          outline: none;
-          border: none;
-          padding:5 px;
-          box-sizing: border-box;
-          &:hover {
-               opacity: 0.9;
-          }
-          button {
-               padding: 3px
-          };
-          .btn-e {
-            background-color: rgb(165, 0, 230) !important;
-            color: white;
-          }
-            .btn-c {
-            background-color: rgb(106, 200, 23) !important;
-            // color: white;
-          }
-
-     }
-   }
-   

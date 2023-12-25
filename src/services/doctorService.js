@@ -37,6 +37,7 @@ const handleSaveInfoDoctor = async (InfoDoctor) => {
     };
   }
 };
+//[GET] /api/
 const handleGetDetailDoctor = async (id) => {
   try {
     const response = await instance.get(`/detail-doctor-by-id?id=${id}`);
@@ -117,13 +118,13 @@ const handlGetInfoAddressClinic = async (doctorId, signal) => {
     return error.message;
   }
 };
+//[GET]: /api/profile-doctor-by-id
 const handlGetProfileDoctorById = async (doctorId, signal) => {
   try {
     const response = await instance.get("/get-profile-doctor-by-id", {
       params: { doctorId },
       signal,
     });
-    // console.log("data res get profile doctor by Id : ", response);
     const { data, errCode } = response.data;
     if (data && errCode === 0) {
       return data;
@@ -134,6 +135,7 @@ const handlGetProfileDoctorById = async (doctorId, signal) => {
     return new Error();
   }
 };
+
 export default {
   handleGetAllDoctors,
   handleSaveInfoDoctor,

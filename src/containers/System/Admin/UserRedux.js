@@ -100,7 +100,8 @@ function UserRedux() {
     // Fill dữ liệu người dùng vào form
     let imageBase64 = "";
     if (user.image && typeof user.image === "object") {
-      imageBase64 = new Buffer(user.image, "base64").toString("binary");
+      imageBase64 = Buffer.from(user.image, "base64").toString("binary");
+      //  new Buffer(user.image, "base64").toString("binary");
       setImageUpload(imageBase64);
     } else if (user.image && typeof user.image === "string") {
       setImageUpload(user.image);

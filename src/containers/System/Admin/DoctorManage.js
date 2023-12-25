@@ -9,63 +9,42 @@ import * as actions from "../../../store/actions";
 import { CRUD_ACTIONS, LANGUAGES } from "../../../utils/constant";
 import userService from "../../../services/userService";
 import { Switch } from "react-router-dom/cjs/react-router-dom.min";
-import { find } from "lodash";
+import { find, set } from "lodash";
 import { toast } from "react-toastify";
+import { useForm, Controller } from "react-hook-form";
 
-function DoctorSelect({ options, onChange, value }) {
-  return <Select options={options} onChange={onChange} value={value} />;
-}
-function TextAreaInput({ label, placeholder, onChange, value }) {
-  return (
-    <div className="col-4 mt-4">
-      <label>
-        <strong>{label}:</strong>
-      </label>
-      <textarea
-        className="form-control"
-        placeholder={placeholder}
-        onChange={onChange}
-        value={value}
-      />
-    </div>
-  );
-}
 function DoctorManage() {
-  ////console.log("--------------------------");
-  ////console.log("re-render");
-  ////console.log("--------------------------");
-
   const dispatch = useDispatch();
-  const [selectDoctor, setSelectOption] = useState({});
   const mdParser = new MarkdownIt(/* Markdown-it options */);
-  const [contentDes, setContentDes] = useState("");
-  // save to toctor_info table
-  const [selectedPayment, setSelectedPayment] = useState([]);
-  const [selectedPrice, setSelectedPrice] = useState([]);
-  const [selectedProvince, setSelectedProvince] = useState([]);
-  const [writeNameClinic, setWriteNameClinic] = useState("");
-  const [addressClinic, setAddressClinic] = useState("");
-  const [writeNote, setWriteNote] = useState("");
-  const [allRrequiedDoctorInfo, setAllRrequiedDoctorInfo] = useState([]);
-  const [markdown, setMarkdown] = useState("");
-  const [contentInfoDoctor, setContentInfoDoctor] = useState(null);
-  //console.log("----------re-render-----------");
-  //console.log("|||||||||||||||||||||||||||||||");
-  ////console.log("Content submit: ", contentInfoDoctor);
-  ////console.log("|||||||||||||||||||||||||||||||");
+  const [selectDoctor, setSelectDoctor] = useState({});
+  const [markdown, setMarkdown] = useState({
+    contentMarkdown: "",
+    contentHTML: "",
+  });
+  const [action, setAction] = useState({});
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+    watch,
+  } = useForm();
 
-  // call API nếu reducer chưa có list data doctors
+  // call API nếu reducer chưa có list data doctors and dispatch get allcode doctor info
   useEffect(() => {
-    if (!Object.keys(AllDoctors).length > 0)
+    if (!Object.keys(AllDoctors).length > 0) {
       dispatch(actions.fetchGetAllDoctors());
+    }
+    dispatch(actions.fetchRequiedDoctorInfo());
   }, []);
 
   /// Lay data all doctor từ store trong reducer
   const AllDoctors = useSelector((state) => {
     return state.doctor.AllDoctors.map((doctor) => {
-      // ////console.log("All Doctor reduc store: ", state.doctor.AllDoctors);
       return {
-        ...doctor,
+        doctor: {
+          ...doctor,
+        },
         value: doctor.id,
         label: `${doctor.lastName} ${doctor.firstName} `,
       };
@@ -73,221 +52,103 @@ function DoctorManage() {
   });
 
   // Lay language and saveInfoDoctor
-  const { language, saveInfoDoctor } = useSelector((state) => {
-    ////console.log("---> State store:", state);
+  const { language } = useSelector((state) => {
+    //console.log("---> State store:", state);
     return {
       language: state.app.language,
       saveInfoDoctor: state.doctor.saveInfoDoctor,
     };
   });
-  //dispatch get allcode doctor info
-  useEffect(() => {
-    dispatch(actions.fetchRequiedDoctorInfo());
-  }, [language]);
 
   const handleEditorChange = ({ html, text }) => {
-    // setMarkdown({
-    //   contentMarkdown: text,
-    //   contentHTML: html,
-    // });
-    setContentInfoDoctor((pre) => ({
+    setMarkdown((pre) => ({
       ...pre,
       contentMarkdown: text,
       contentHTML: html,
     }));
   };
 
-  //ham xu lý khi viết description doctor
   const handleIntroWrite = (e, formName) => {
     let dataForm = e.target.value;
-    switch (formName) {
-      case "description":
-        // setContentDes(dataForm)
-        return setContentInfoDoctor((pre) => ({
-          ...pre,
-          description: dataForm,
-        }));
-      case "note":
-        return setContentInfoDoctor((pre) => ({
-          ...pre,
-          note: dataForm,
-        }));
-      case "addressClinic":
-        return setContentInfoDoctor((pre) => ({
-          ...pre,
-          addressClinic: dataForm,
-        })); // Corrected this line
-      case "nameClinic":
-        ////console.log("Name Clinic: ", dataForm);
-        return setContentInfoDoctor((pre) => ({
-          ...pre,
-          nameClinic: dataForm,
-        }));
-      default:
-      ////console.error("Error writing text area...");
-    }
+    setValue(formName, dataForm);
   };
-
-  //Hàm xử lý lưu thông tin create or update
-  const handleSaveInfo = () => {
-    if (!selectDoctor || !selectDoctor.id) {
-      console.error("Invalid selectDoctor");
-      toast.error("Chosee requied Doctor !");
-      return;
+  // setValue default
+  const setDefaultValues = (label = null, value = null) => {
+    console.log("label: ", label);
+    console.log("value: ", value);
+    let option = {};
+    if (!label && !value) {
+      option = null;
+    } else {
+      option = { label, value };
     }
-    const {
-      priceId,
-      paymentId,
-      provinceId,
-      nameClinic,
-      addressClinic,
-      contentMarkdown,
-      description,
-    } = contentInfoDoctor;
-    if (
-      !addressClinic ||
-      !contentMarkdown ||
-      !description ||
-      !nameClinic ||
-      !paymentId ||
-      !priceId ||
-      !provinceId
-    ) {
-      console.log(
-        "!addressClinic:",
-        addressClinic,
-        "contentMarkdown:",
-        "!contentMarkdown:",
-        contentMarkdown,
-        "!description",
-        description,
-        "!nameClinic",
-        nameClinic,
-        "!paymentId",
-        paymentId,
-        "!priceId",
-        priceId,
-        "!provinceId",
-        provinceId
-      );
-      toast.error("Không được để các trường này trống !");
-      console.error("Không được để các trường này trống");
-      return;
-    }
-    dispatch(actions.fetchSaveInfoDoctor(contentInfoDoctor));
-
-    console.log("====>>> Content Info Doctor =>>> :", contentInfoDoctor);
-    setContentInfoDoctor({
-      contentMarkdown: "",
-      contentHTML: "",
-      doctorId: 0,
-      description: "",
-      paymentId: "",
-      provinceId: "",
-      priceId: "",
-      addressClinic: "",
+    setValue("doctorId", option);
+    setValue("description", "");
+    setValue("nameClinic", "");
+    setValue("addressClinic", "");
+    setValue("paymentId", null);
+    setValue("provinceId", null);
+    setValue("priceId", null);
+    setValue("note", "");
+    setValue("specialtyId", null);
+    setValue("clinicId", null);
+    setMarkdown((pre) => ({
       contentHTML: "",
       contentMarkdown: "",
-      description: "",
-      nameClinic: "",
-      note: "",
-      count: "",
+    }));
+    setAction({
+      action: "CREATE",
     });
-    setSelectOption({});
   };
-
-  // Hàm xử lý chọn bác sĩ
-  const handlSelectDoctor = (selectDoctor) => {
-    console.log("==> Chọn bác sĩ hiện tại: ", selectDoctor);
-    console.log("==> Thông tin lưu trên redux: ", saveInfoDoctor);
-    setSelectOption(selectDoctor);
-    setContentInfoDoctor((pre) => {
-      if (
-        Object.keys(saveInfoDoctor).length !== 0 &&
-        saveInfoDoctor.doctorId === selectDoctor.id
-      ) {
-        console.log("dk1");
-
-        return {
-          ...pre,
-          // id: saveInfoDoctor.id,
-          doctorId: saveInfoDoctor.doctorId,
-          paymentId: saveInfoDoctor.paymentId,
-          provinceId: saveInfoDoctor.provinceId,
-          priceId: saveInfoDoctor.priceId,
-          addressClinic: saveInfoDoctor.addressClinic,
-          contentHTML: saveInfoDoctor.contentHTML,
-          contentMarkdown: saveInfoDoctor.contentMarkdown,
-          description: saveInfoDoctor.description,
-          nameClinic: saveInfoDoctor.nameClinic,
-          note: saveInfoDoctor.note,
-          count: saveInfoDoctor?.count,
-          action: CRUD_ACTIONS.EDIT,
-        };
-      } else if (
-        !selectDoctor.Doctor_Info.paymentId ||
-        !selectDoctor.Markdown.contentMarkdown
-      ) {
-        console.log("dk3");
-        console.log("dk3");
-        return {
-          ...pre,
-          doctorId: selectDoctor?.id,
-          action: CRUD_ACTIONS.CREATE,
-          contentMarkdown: "",
-          description: "",
-          priceId: "",
-          paymentId: "",
-          provinceId: "",
-          nameClinic: "",
-          addressClinic: "",
-          note: "",
-        };
-      } else {
-        console.log("dk2");
-        return {
-          ...pre,
-          doctorId: selectDoctor?.id,
-          paymentId: selectDoctor?.Doctor_Info?.paymentId,
-          provinceId: selectDoctor?.Doctor_Info?.provinceId,
-          priceId: selectDoctor?.Doctor_Info?.priceId,
-          addressClinic: selectDoctor?.Doctor_Info?.addressClinic,
-          contentHTML: selectDoctor?.Markdown?.contentHTML,
-          contentMarkdown: selectDoctor?.Markdown?.contentMarkdown,
-          description: selectDoctor?.Markdown?.description,
-          nameClinic: selectDoctor?.Doctor_Info?.nameClinic,
-          note: selectDoctor?.Doctor_Info?.note,
-          count: selectDoctor?.Doctor_Info?.count,
-          action: CRUD_ACTIONS.EDIT,
-        };
+  const onSubmit = (data) => {
+    // console.log("Form data submit: ", data);
+    try {
+      if (!markdown.contentHTML || !markdown.contentMarkdown) {
+        toast.error("Trường markdown không được trống.");
+        return;
       }
-    });
+      const {
+        addressClinic,
+        clinicId,
+        description,
+        doctorId,
+        nameClinic,
+        note,
+        paymentId,
+        priceId,
+        provinceId,
+        specialtyId,
+      } = data;
+      const convertData = {
+        addressClinic: addressClinic,
+        clinicId: clinicId.value,
+        doctorId: doctorId.value,
+        addressClinic: addressClinic,
+        paymentId: paymentId.value,
+        priceId: priceId.value,
+        provinceId: provinceId.value,
+        specialtyId: specialtyId.value,
+        nameClinic: nameClinic,
+        note: note,
+        description: description,
+        ...markdown,
+        ...action,
+      };
+      console.log("Action push data: ", convertData);
+      setDefaultValues();
+      dispatch(actions.fetchSaveInfoDoctor(convertData));
+    } catch (error) {
+      console.error(error.message);
+    }
   };
-  //render form input
-  const DoctorFormInput = ({
-    label,
-    options,
-    onChange,
-    value,
-    placeholder,
-  }) => {
-    return (
-      <div className="col-4 mt-4">
-        <label>
-          <strong>{label}</strong>
-        </label>
-        <DoctorSelect options={options} onChange={onChange} value={value} />
-      </div>
-    );
-  };
-  // buil data input select
+
+  ///
   const builDataInputSelect = (inputData) => {
-    ////console.log("Input data: ", inputData);
+    // console.log("Input data: ", inputData);
     let result = [];
     let checkLang = language === LANGUAGES.VI;
     if (inputData && inputData.length > 0) {
       inputData.map((item, index) => {
-        // ////console.log("item:", index, "====>", item);
         let object = {};
         if (item.type === "PRICE") {
           const formatter1 = new Intl.NumberFormat(
@@ -330,207 +191,425 @@ function DoctorManage() {
         result.push(object);
       });
     }
-    ////console.log("Result conert Key: ", result);
-    ////console.log("list key :", listkeyInfoDoctor);
     return result;
   };
+  useEffect(() => {
+    let checkLang = language === LANGUAGES.VI;
+    const fields = ["priceId", "provinceId", "paymentId"];
+
+    fields.forEach((field) => {
+      const currentValue = watch(field);
+      // console.log(`current ${field} `, currentValue);
+
+      if (currentValue) {
+        setValue(field, {
+          ...currentValue,
+          label: checkLang ? currentValue.valueVn : currentValue.valueEn,
+        });
+      } else {
+        // console.error(`Error: ${field} is undefined`);
+        return;
+      }
+    });
+  }, [language]);
+
+  useEffect(() => {
+    const { label, value, doctor } = selectDoctor;
+    console.log("chọn bác sĩ: ", selectDoctor);
+    if (
+      doctor &&
+      doctor.Markdown.doctorId !== null &&
+      doctor.Doctor_Info.doctorId !== null
+    ) {
+      const findLabel = (dataKey, key) => {
+        const item = dataKey.find((item) => item.value === key);
+        return item
+          ? language === LANGUAGES.VI
+            ? item.valueVn
+            : item.valueEn
+          : "";
+      };
+
+      const labelPayment = findLabel(
+        dataKeyPayment,
+        doctor.Doctor_Info?.paymentId
+      );
+      const labelProvince = findLabel(
+        dataKeyProvince,
+        doctor.Doctor_Info?.provinceId
+      );
+      const labelPrice = findLabel(dataKeyPrice, doctor.Doctor_Info?.priceId);
+
+      setValue("doctorId", { label, value });
+      setValue("description", doctor.Markdown?.description || "");
+      // setValue("editMarkdown", doctor.Markdown?.contentMarkdown || '');
+      setValue("nameClinic", doctor.Doctor_Info?.nameClinic || "");
+      setValue("addressClinic", doctor.Doctor_Info?.addressClinic || "");
+      setValue("paymentId", {
+        label: labelPayment,
+        value: doctor.Doctor_Info?.paymentId,
+      });
+      setValue("provinceId", {
+        label: labelProvince,
+        value: doctor.Doctor_Info?.provinceId,
+      });
+      setValue("priceId", {
+        label: labelPrice,
+        value: doctor.Doctor_Info?.priceId,
+      });
+      setValue("note", doctor.Doctor_Info?.note || "");
+      setValue("specialtyId", { label: "Cơ xương khớp", value: 1 });
+      setValue("clinicId", {
+        label: "Phòng khám đa khoa Hà Nội 1",
+        value: "DK1",
+      });
+      setMarkdown((pre) => ({
+        ...pre,
+        contentHTML: doctor.Markdown?.contentHTML,
+        contentMarkdown: doctor.Markdown?.contentMarkdown || "",
+      }));
+      setAction({
+        action: "EDIT",
+      });
+    } else {
+      console.log("create");
+      setDefaultValues(label, value);
+      setAction({ action: "CREATE" });
+    }
+  }, [selectDoctor, language]);
+
   //Lay data allCode info doctor từ store trong reducer
   const { dataKeyPayment, dataKeyPrice, dataKeyProvince } = useSelector(
     (state) => {
+      console.log("state: ", state);
       const data = state.doctor.allKeysMapDoctorInfo;
+      // console.log("data: ", data);
       const result = {};
       for (const key in data) {
         result[key] = builDataInputSelect(data[key]);
       }
-      // ////console.log("result: ", result);
-      // setListKeyInfoDoctor(result);
       return result;
     }
   );
-  // handleOnChangeInfoDoctor
-  const handleOnChangeInfoDoctor = (selectDoctoInfo) => {
-    // setSelectedPrice(selectDoctoInfo);
-    //console.log("selectDoctoInfo", selectDoctoInfo);
-    const checkType = selectDoctoInfo.type;
-    switch (checkType) {
-      case "PRICE":
-        ////console.log("CASE PRICE");
-        setSelectedPrice(selectDoctoInfo);
-        return setContentInfoDoctor((pre) => ({
-          ...pre,
-          priceId: selectDoctoInfo.value,
-        }));
-      case "PROVINCE":
-        ////console.log("PROVINCE");
-        //setSelectedProvince(selectDoctoInfo)
-        return setContentInfoDoctor((pre) => ({
-          ...pre,
-          provinceId: selectDoctoInfo.value,
-        }));
-      case "PAYMENT":
-        //setSelectedPayment(selectDoctoInfo)
-        return setContentInfoDoctor((pre) => ({
-          ...pre,
-          paymentId: selectDoctoInfo.value,
-        }));
-      case "DEFAULT":
-        ////console.log("DEFAAULT");
-        let checkLang = language === LANGUAGES.VI;
-        [setSelectedPrice, setSelectedProvince, setSelectedPayment].forEach(
-          (setSelected) => {
-            setSelected((pre) => {
-              const labelKey = checkLang ? "valueVn" : "valueEn";
-              ////console.log("pre curent: ", pre[labelKey]);
-              return {
-                ...pre,
-                label: pre[labelKey],
-              };
-            });
-          }
-        );
-
-        break;
-      default:
-      ////console.log("Unknown type");
-    }
-  };
-  useEffect(() => {
-    handleOnChangeInfoDoctor({ type: "DEFAULT" });
-  }, [language]);
-
-  const findValuekey = (key, listKeys) => {
-    if (!Array.isArray(listKeys) || !listKeys > 0) {
-      return;
-    }
-    let result = listKeys.find((item) => {
-      return item.value === key;
-    });
-    return result;
-  };
-  // return
   return (
     <>
-      <div className="doctor-container">
+      <div className="container mt-5 mb-5">
         <div className="manage-doctor-title text-center">
-          Tạo thêm thông tin Doctors
+          <h2>Tạo thêm thông tin Doctors</h2>
         </div>
+        <form className="" onSubmit={handleSubmit(onSubmit)}>
+          <div className="row">
+            <div className="col-6 mt-4 form-item form-doctor">
+              <label>
+                <strong>Chọn bác sĩ:</strong>
+              </label>
+              <Controller
+                name="doctorId"
+                control={control}
+                rules={{ required: "Trường này là bắt buộc" }}
+                render={({ field }) => (
+                  <>
+                    <Select
+                      {...field}
+                      options={AllDoctors}
+                      onChange={(option) => {
+                        let { label, value } = option;
+                        console.log("option value: ", option.value);
+                        setValue("doctorId", { label, value });
 
-        <div className="container">
-          <div className=" doctor-form row">
-            <div className="col-5 ">
-              <label>
-                <strong>Chọn Bác sĩ:</strong>
-              </label>
-              <DoctorSelect
-                options={AllDoctors}
-                onChange={handlSelectDoctor}
-                value={selectDoctor}
+                        setSelectDoctor(option);
+                      }}
+                      // value={field.value}
+                      // value={field.value}
+                    />
+                    {errors.doctorId && (
+                      <div
+                        className="invalid-feedback "
+                        // style={{ color: "red" }}
+                      >
+                        {errors.doctorId.message}
+                      </div>
+                    )}
+                  </>
+                )}
               />
             </div>
-            <div className="col-6 doctor-textarea-right">
+            <div className="col-6 mt-4 form-item form-descrition">
               <label>
-                <strong>Thông tin giới thiệu: </strong>
+                <strong>Mô tả:</strong>
               </label>
-              <textarea
-                className="form-control "
-                placeholder="Description..."
-                onChange={(e) => {
-                  handleIntroWrite(e, "description");
-                }}
-                value={contentInfoDoctor?.description}
+              <Controller
+                name="description"
+                control={control}
+                rules={{ required: "Trường này là bắt buộc" }}
+                render={({ field }) => (
+                  <>
+                    <textarea
+                      className="form-control "
+                      placeholder="Description..."
+                      style={{ height: "150px" }}
+                      onChange={(e) => {
+                        field.onChange(e);
+                        handleIntroWrite(e, "description");
+                      }}
+                      value={field.value}
+                    />
+                    {errors.description && (
+                      <div className="invalid-feedback">
+                        {errors.description.message}
+                      </div>
+                    )}
+                  </>
+                )}
               />
             </div>
-            <DoctorFormInput
-              label="Chọn giá:"
-              options={dataKeyPrice}
-              onChange={handleOnChangeInfoDoctor}
-              value={findValuekey(contentInfoDoctor?.priceId, dataKeyPrice)}
-            />
-            <DoctorFormInput
-              label="Chọn phương thức thanh toán"
-              options={dataKeyPayment}
-              onChange={handleOnChangeInfoDoctor}
-              value={findValuekey(contentInfoDoctor?.paymentId, dataKeyPayment)}
-            />
-            <DoctorFormInput
-              label="Chọn tỉnh thành:"
-              options={dataKeyProvince}
-              onChange={handleOnChangeInfoDoctor}
-              value={findValuekey(
-                contentInfoDoctor?.provinceId,
-                dataKeyProvince
-              )}
-            />
-            <div className="col-4  mt-4">
+            <div className="col-4 mt-4 form-item form-price">
               <label>
-                <strong>Tên phòng khám: </strong>
+                <strong>Chọn giá:</strong>
               </label>
-              <textarea
-                className="form-control "
-                placeholder="Clinic name..."
-                onChange={(e) => {
-                  handleIntroWrite(e, "nameClinic");
-                }}
-                value={contentInfoDoctor?.nameClinic}
+              <Controller
+                name="priceId"
+                control={control}
+                rules={{ required: "Trường này là bắt buộc" }}
+                render={({ field }) => (
+                  <>
+                    <Select
+                      {...field}
+                      options={dataKeyPrice}
+                      onClick={(option) => {
+                        setValue("priceId", option.value);
+                      }}
+                      value={field.value || ""}
+                    />
+                    {errors.priceId && (
+                      <div className="invalid-feedback">
+                        {errors.priceId.message}
+                      </div>
+                    )}
+                  </>
+                )}
               />
             </div>
-            <div className="col-4  mt-4">
+            <div className="col-4 mt-4 form-item form-payment">
               <label>
-                <strong>Địa chỉ phòng khám: </strong>
+                <strong>Chọn phương thức thanh toán:</strong>
               </label>
-              <textarea
-                className="form-control "
-                placeholder="Adress clinic..."
-                onChange={(e) => {
-                  handleIntroWrite(e, "addressClinic");
-                }}
-                value={contentInfoDoctor?.addressClinic}
+              <Controller
+                name="paymentId"
+                control={control}
+                rules={{ required: "Trường này là bắt buộc" }}
+                render={({ field }) => (
+                  <>
+                    <Select
+                      {...field}
+                      options={dataKeyPayment}
+                      onClick={(option) => {
+                        setValue("paymentId", option.value); // Set value for the "priceId" field
+                      }}
+                      // value={selectedOption}
+                    />
+                    {errors.paymentId && (
+                      <div className="invalid-feedback">
+                        {errors.paymentId.message}
+                      </div>
+                    )}
+                  </>
+                )}
               />
             </div>
-            <div className="col-4  mt-4">
+            <div className="col-4 mt-4 form-item form-provinceId">
               <label>
-                <strong>Note: </strong>
+                <strong>Chọn tỉnh thành:</strong>
               </label>
-              <textarea
-                className="form-control "
-                placeholder="Note..."
-                onChange={(e) => {
-                  handleIntroWrite(e, "note");
-                }}
-                value={contentInfoDoctor?.note}
+              <Controller
+                name="provinceId"
+                control={control}
+                rules={{ required: "Trường này là bắt buộc" }}
+                render={({ field }) => (
+                  <>
+                    <Select
+                      {...field}
+                      options={dataKeyProvince}
+                      onClick={(option) => {
+                        setValue("addressClinic", option.value); // Set value for the "priceId" field
+                      }}
+                      // value={selectedOption}
+                    />
+                    {errors.provinceId && (
+                      <div className="invalid-feedback">
+                        {errors.provinceId.message}
+                      </div>
+                    )}
+                  </>
+                )}
               />
+            </div>
+            <div className="col-4 mt-4 form-item form-nam-clinic">
+              <label>
+                <strong>Tên phòng khám:</strong>
+              </label>
+              <Controller
+                name="nameClinic"
+                control={control}
+                rules={{ required: "Trường này là bắt buộc" }}
+                render={({ field }) => (
+                  <>
+                    <textarea
+                      className="form-control "
+                      placeholder="nameClinic..."
+                      onChange={(e) => {
+                        field.onChange(e);
+                        handleIntroWrite(e, "nameClinic");
+                      }}
+                      value={field.value}
+                    />
+                    {errors.nameClinic && (
+                      <div className="invalid-feedback">
+                        {errors.nameClinic.message}
+                      </div>
+                    )}
+                  </>
+                )}
+              />
+            </div>
+            <div className="col-4 mt-4 form-item form-address-clinic">
+              <label>
+                <strong>Địa chỉ phòng khám:</strong>
+              </label>
+              <Controller
+                name="addressClinic"
+                control={control}
+                rules={{ required: "Trường này là bắt buộc" }}
+                render={({ field }) => (
+                  <>
+                    <textarea
+                      className="form-control "
+                      placeholder="Description..."
+                      onChange={(e) => {
+                        field.onChange(e);
+                        handleIntroWrite(e, "addressClinic");
+                      }}
+                      value={field.value}
+                    />
+                    {errors.addressClinic && (
+                      <div className="invalid-feedback">
+                        {errors.addressClinic.message}
+                      </div>
+                    )}
+                  </>
+                )}
+              />
+            </div>
+            <div className="col-4 mt-4 form-item form-note">
+              <label>
+                <strong>Note:</strong>
+              </label>
+              <Controller
+                name="note"
+                control={control}
+                rules={{ required: "Trường này là bắt buộc" }}
+                render={({ field }) => (
+                  <>
+                    <textarea
+                      className="form-control "
+                      placeholder="Note..."
+                      onChange={(e) => {
+                        field.onChange(e);
+                        handleIntroWrite(e, "note");
+                      }}
+                      value={field.value || ""}
+                    />
+                    {errors.note && (
+                      <div className="invalid-feedback">
+                        {errors.note.message}
+                      </div>
+                    )}
+                  </>
+                )}
+              />
+            </div>
+            <div className="col-4 mt-4 form-item form-select-specialty">
+              <label>
+                <strong>Chọn chuyên khoa:</strong>
+              </label>
+              <Controller
+                name="specialtyId"
+                control={control}
+                rules={{ required: "Trường này là bắt buộc" }}
+                render={({ field }) => (
+                  <>
+                    <Select
+                      {...field}
+                      options={[
+                        { label: "Cơ xương khớp", value: 1 },
+                        { label: "Thai nhi", value: 2 },
+                        { label: "Tai mũi họng", value: 3 },
+                        { label: "Thần kinh", value: 4 },
+                      ]}
+                      onClick={(option) => {
+                        setValue("specialtyId", option.value); // Set value for the "priceId" field
+                      }}
+                    />
+                    {errors.specialtyId && (
+                      <div className="invalid-feedback">
+                        {errors.specialtyId.message}
+                      </div>
+                    )}
+                  </>
+                )}
+              />
+            </div>
+
+            <div className="col-4 mt-4 form-item form-select-clinic">
+              <label>
+                <strong>Chọn phòng khám:</strong>
+              </label>
+              <Controller
+                name="clinicId"
+                control={control}
+                rules={{ required: "Trường này là bắt buộc" }}
+                render={({ field }) => (
+                  <>
+                    <Select
+                      {...field}
+                      options={[
+                        { label: "Đa khoa Hà nội 1", value: "DK1" },
+                        { label: "Đa khoa Hà nội 2", value: "DK2" },
+                        { label: "Đa khoa Hà nội 3", value: "DK3" },
+                      ]}
+                      onClick={(option) => {
+                        setValue("clinicId", option.value); // Set value for the "priceId" field
+                      }}
+                      value={field.value}
+                    />
+                    {errors.clinicId && (
+                      <div className="invalid-feedback">
+                        {errors.clinicId.message}
+                      </div>
+                    )}
+                  </>
+                )}
+              />
+            </div>
+            <div className="col-12 mt-4">
+              <MdEditor
+                style={{ height: "500px" }}
+                renderHTML={(text) => mdParser.render(text)}
+                onChange={(event) => {
+                  handleEditorChange(event);
+                }}
+                value={markdown.contentMarkdown}
+              />
+            </div>
+            <div className="save-content-doctor">
+              <button className="btn btn-primary" type="submit">
+                {action && action.action === "CREATE"
+                  ? "Tạo thông tin"
+                  : "Chỉnh sửa"}
+              </button>
             </div>
           </div>
-        </div>
-
-        <div className="col-12">
-          <h3 style={{ color: "blue", margin: " 20px 0" }}></h3>
-          <hr />
-          <MdEditor
-            style={{ height: "500px" }}
-            renderHTML={(text) => mdParser.render(text)}
-            onChange={handleEditorChange}
-            value={contentInfoDoctor?.contentMarkdown}
-          />
-        </div>
-        <div className="save-content-doctor">
-          <button
-            type="button"
-            className={`btn btn-warning 1`}
-            disabled={
-              !contentInfoDoctor?.doctorId ||
-              !contentInfoDoctor?.contentMarkdown ||
-              !contentInfoDoctor?.priceId ||
-              !contentInfoDoctor?.paymentId ||
-              !contentInfoDoctor?.provinceId
-            }
-            onClick={handleSaveInfo}
-          >
-            {contentInfoDoctor && contentInfoDoctor?.action === "CREATE"
-              ? "CREATE"
-              : "EDIT"}
-          </button>
-        </div>
+        </form>
       </div>
     </>
   );

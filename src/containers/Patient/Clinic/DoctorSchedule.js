@@ -8,7 +8,7 @@ import React, {
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as actions from "../../../store/actions";
-import moment, { lang, months } from "moment";
+import moment from "moment";
 import localization from "moment/locale/vi";
 /* import để thư viện moment 
 biết dự án có sử dụng tiếng việt */

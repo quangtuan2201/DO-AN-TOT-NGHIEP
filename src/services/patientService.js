@@ -32,7 +32,29 @@ const handlSavePatientBookAppointment = async (patientInfo) => {
     console.error("Xay ra loi khi call api ....");
   }
 };
-
+//handl get token and doctorId
+const handlSaveVerifyAppointment = async (token, doctorId) => {
+  try {
+    console.log("token: ", token);
+    console.log("doctorId: ", doctorId);
+    const response = await instance.post("/verify-book-appointment", {
+      token,
+      doctorId,
+    });
+    // console.log("response: ", response);
+    // const { errCode, messenge } = response.data;
+    // if (+errCode === 0) {
+    //   return { statusVerify: true, messenge };
+    // }
+    // {
+    //   return { statusVerify: false, messenge };
+    // }
+    return response.data;
+  } catch (error) {
+    console.error("Error fetch confirm appotient !");
+  }
+};
 export default {
   handlSavePatientBookAppointment,
+  handlSaveVerifyAppointment,
 };

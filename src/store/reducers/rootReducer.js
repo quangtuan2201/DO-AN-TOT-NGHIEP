@@ -5,6 +5,7 @@ import appReducer from "./appReducer";
 import adminReducer from "./adminReducer";
 import userReducer from "./userReducer";
 import doctorReducer from "./doctorReducer";
+import specialtyReducer from "./specialtyReducer";
 
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import storage from "redux-persist/lib/storage";
@@ -44,5 +45,7 @@ export default (history) =>
     user: persistReducer(userPersistConfig, userReducer),
     app: persistReducer(appPersistConfig, appReducer),
     doctor: doctorReducer,
+    specialtys: specialtyReducer,
+
     // admin: adminReducer,/
   });

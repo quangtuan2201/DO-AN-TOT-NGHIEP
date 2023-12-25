@@ -72,7 +72,7 @@ const getAllCode = async (form) => {
 };
 //[GET] Doctor
 //actionRecord : lấy ALL doctor(key:allDoctor) or top doctor(key : topDoctor)
-const fetchGetDoctor = async (limit, roleId) => {
+const fetchGetTopDoctor = async (limit, roleId) => {
   try {
     console.log("limit userService: ", limit);
     const response = await instance.get("/top-doctor-home", {
@@ -103,5 +103,5 @@ export default {
   createUser,
   deleteUser,
   getAllCode,
-  fetchGetDoctor,
+  fetchGetTopDoctor,
 };

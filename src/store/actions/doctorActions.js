@@ -122,6 +122,7 @@ export const fetchSaveInfoDoctor = (newInfo) => {
         toast.success(
           <FormattedMessage id="user-manage.sucess-save-info-user" />
         );
+        dispatch(fetchGetAllDoctors());
         dispatch(fetchSaveInfoDoctorSuccess(response.data));
       } else {
         toast.error(<FormattedMessage id="user-manage.error-save-info-user" />);
@@ -181,7 +182,7 @@ export const fetchTopDoctor = (limit) => {
   return async (dispatch, getState) => {
     try {
       // console.log("limit 2: ", limit);
-      const response = await userService.fetchGetDoctor(limit, "R2");
+      const response = await userService.fetchGetTopDoctor(limit, "R2");
       // console.log("response: ", response);
       if (response.data && response.errCode === 0) {
         dispatch(fetcTopDoctorSuccess(response.data));

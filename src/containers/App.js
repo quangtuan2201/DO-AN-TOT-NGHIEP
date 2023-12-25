@@ -20,7 +20,10 @@ import ConfirmModal from "../components/ConfirmModal";
 import HomePage from "./HomePage/HomePage.js";
 import CustomScrollbars from "../components/CustomScrollbars.js";
 import DetailDoctor from "./Patient/Doctor/DetailDoctor.js";
+import DetailSpecialty from "./Patient/Doctor/DetailSpecialty.js";
+
 import Doctor from "../routes/Doctor.js";
+import VerifyEmail from "./Patient/VerifyEmail.js";
 // import { changeLanguageApp } from ".././store/actions/appActions.js";
 // import * as actions from "./../store/actions";
 
@@ -57,9 +60,17 @@ const App = () => {
                 <Route path={path.HOMEPAGE} component={HomePage} />
                 <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
                 <Route
+                  path={path.DETAIL_SPECIALTY}
+                  component={DetailSpecialty}
+                />
+                <Route
                   path={path.DOCTOR_MANAGE}
                   component={userIsAuthenticated(Doctor)}
                   // component={userIsNotAuthenticated(Doctor)}
+                />
+                <Route
+                  path={path.VERIFY_EMAIL_BOOKING}
+                  component={VerifyEmail}
                 />
               </Switch>
             </CustomScrollbars>

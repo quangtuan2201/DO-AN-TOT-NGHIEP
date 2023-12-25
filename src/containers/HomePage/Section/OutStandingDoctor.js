@@ -18,11 +18,11 @@ function OutStandingDoctor(props) {
     if (seemore === false) {
       dispatch(actions.fetchTopDoctor(15));
     } else {
-      dispatch(actions.fetchTopDoctor(5));
+      dispatch(actions.fetchTopDoctor(8));
     }
   }, [seemore]);
   const { language, topDoctors } = useSelector((state) => {
-    console.log("state stote in OutStanding", state);
+    // console.log("state stote in OutStanding", state);
     return {
       language: state.app.language,
       topDoctors: state.doctor.topDoctors,
@@ -30,14 +30,15 @@ function OutStandingDoctor(props) {
     };
   });
   const handleViewDetailDoctor = (doctor) => {
-    console.log("handle click view: ", doctor);
+    // console.log("handle click view: ", doctor);
     history.push(`/detail-doctors/${doctor.id}`);
   };
   const getThumbnail = (imagebuffer) => {
     let imageBase64 = "";
     // console.log("imagebuffer: ", imagebuffer, typeof imagebuffer);
     if (imagebuffer && typeof imagebuffer === "object") {
-      imageBase64 = new Buffer(imagebuffer, "base64").toString("binary");
+      imageBase64 = Buffer.from(imagebuffer, "base64").toString("binary");
+      // new Buffer(imagebuffer, "base64").toString("binary");
       // console.log("Is Image base64");
       return imageBase64;
     }
@@ -144,7 +145,7 @@ function OutStandingDoctor(props) {
                     <div
                       className="section-customize"
                       key={index}
-                      onClick={() => {
+                      onDoubleClick={() => {
                         handleViewDetailDoctor(doctor);
                       }}
                     >
