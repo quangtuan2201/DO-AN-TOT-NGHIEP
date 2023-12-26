@@ -49,7 +49,7 @@ function VerifyEmail(prop) {
   return (
     <>
       <HomeHeader />
-      <div className="text-center mt-5">
+      <div className={`text-center style `} style={{ marginTop: "100px" }}>
         <h1 className="text-danger">{statusVerify}</h1>
       </div>
     </>

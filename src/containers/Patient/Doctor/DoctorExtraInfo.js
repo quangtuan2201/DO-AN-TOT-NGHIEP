@@ -6,8 +6,8 @@ import "./DoctorExtraInfo.scss";
 import doctorService from "../../../services/doctorService";
 import { LANGUAGES } from "../../../utils/constant";
 //{ id }
-function DoctorExtraInfo() {
-  const { id } = useParams();
+function DoctorExtraInfo({ id }) {
+  // const { id } = useParams();
   console.log("-----re-render---------DoctorExtraInfo");
   const dispatch = useDispatch();
   const [isShoDetail, setIsShowDetail] = useState(false);
@@ -24,8 +24,8 @@ function DoctorExtraInfo() {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   });
-  // console.log("id doctor : ", id);
   useEffect(() => {
+    console.log("re-render doctorExtraInfo");
     const abortController = new AbortController();
     const signal = abortController.signal;
     if (!id) {
@@ -38,7 +38,7 @@ function DoctorExtraInfo() {
           id,
           signal
         );
-        // console.log("data res info address: ", response);
+        console.log("data res info address: ", response);
         if (response) {
           setInfoAddressClinic(response);
         }
@@ -51,6 +51,7 @@ function DoctorExtraInfo() {
       abortController.abort();
     };
   }, [id]);
+  // console.log("infoAdressClinic: ", infoAdressClinics);
   return (
     <React.Fragment>
       <div className="doctor-extra-info-container">

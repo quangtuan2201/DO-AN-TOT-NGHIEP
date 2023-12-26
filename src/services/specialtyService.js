@@ -33,8 +33,31 @@ const handlGetAllSpecialty = async () => {
     throw error;
   }
 };
+//[GET] /api/get-specialty-by-id
+const handlGetSpecialtyById = async (specialtyId, location) => {
+  try {
+    console.log("location: ", location);
+    console.log("id", specialtyId);
+    if (!specialtyId || !location) {
+      return;
+    }
+    const response = await instance.get("/get-specialty-by-id", {
+      params: { id: specialtyId, location },
+    });
+    console.log("response: ", response);
+    const { data, errCode } = response.data;
+    if (data && errCode === 0) {
+      return data;
+    }
+    console.log("response: ", response);
+    // if(response && response.data)
+  } catch (error) {
+    throw error;
+  }
+};
 
 export default {
   handlCreateNewSpecialty,
   handlGetAllSpecialty,
+  handlGetSpecialtyById,
 };

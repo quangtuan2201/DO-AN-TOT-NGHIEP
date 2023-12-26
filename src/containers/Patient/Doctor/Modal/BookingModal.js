@@ -24,14 +24,14 @@ import {
 } from "reactstrap";
 import { LANGUAGES } from "../../../../utils";
 
-function BookingModal() {
+function BookingModal({ id }) {
   // // id,{id}
   // isOpenModal,
   // handlShowModal,
   const { isOpenModal, handlShowModal, selectedTimeSlot } = useContext(
     ThemeContextDoctorSchedule
   );
-  const { id } = useParams();
+  // const { id } = useParams();
   console.log("id", id);
   console.log("-----re-render---------BookingModal");
   const dispatch = useDispatch();
@@ -217,7 +217,7 @@ function BookingModal() {
         <ModalBody>
           <div>
             <ProfileDoctor
-              doctorId={id}
+              id={id}
               isShowDescription={false}
               selectedTimeSlot={selectedTimeSlot}
             />

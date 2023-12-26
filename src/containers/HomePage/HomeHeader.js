@@ -31,7 +31,6 @@ function HomeHeader({ isShowHeader }) {
   };
   return (
     <React.Fragment>
-      (
       <header>
         <div className="home-header-container">
           <div className="home-header-content">
@@ -181,7 +180,6 @@ function HomeHeader({ isShowHeader }) {
           </div>
         )}
       </header>
-      )
     </React.Fragment>
   );
 }

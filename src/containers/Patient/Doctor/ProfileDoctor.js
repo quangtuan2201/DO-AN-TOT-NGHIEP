@@ -7,22 +7,22 @@ import doctorService from "../../../services/doctorService";
 import { LANGUAGES } from "../../../utils/constant";
 import { ThemeContextDoctorSchedule } from ".././Clinic/DoctorSchedule";
 
-function ProfileDoctor({ isShowDescription }) {
-  const { id } = useParams();
+function ProfileDoctor({ isShowDescription, id, selectedTimeSlot }) {
+  // const { id } = useParams();
   const isMounted = useRef(true);
   const [profileDoctor, setProfileDoctor] = useState({});
   console.log("-----re-render---------ProfileDoctor");
   // console.log("user click booking: ", selectedTimeSlot);
-  const { selectedTimeSlot } = useContext(ThemeContextDoctorSchedule);
+  // const { selectedTimeSlot } = useContext(ThemeContextDoctorSchedule);
   const language = useSelector((state) => {
     return state.app.language;
   });
   const checkLang = language === LANGUAGES.VI;
-  //   console.log(" doctorId: ", id);
+  console.log(" Giá trị doctor được truyền id: : ", id);
   const renderTimeBooking = () => {
     if (!selectedTimeSlot) {
       console.error("SelectedTimeSlot underfined or null");
-      return;
+      return null;
     }
     const bookFrameHours = checkLang
       ? selectedTimeSlot?.timeTypeData?.valueVn
@@ -68,7 +68,7 @@ function ProfileDoctor({ isShowDescription }) {
           id,
           signal
         );
-        if (result && isMounted.current) {
+        if (result) {
           // console.log("isMounted: ", isMounted.current);
           // Gọi hàm setProfileDoctor bên trong hàm fetchData
           setProfileDoctor(result);

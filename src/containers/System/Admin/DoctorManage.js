@@ -36,6 +36,7 @@ function DoctorManage() {
       dispatch(actions.fetchGetAllDoctors());
     }
     dispatch(actions.fetchRequiedDoctorInfo());
+    dispatch(actions.fetchGetAllSpecialty());
   }, []);
 
   /// Lay data all doctor từ store trong reducer
@@ -52,10 +53,17 @@ function DoctorManage() {
   });
 
   // Lay language and saveInfoDoctor
-  const { language } = useSelector((state) => {
-    //console.log("---> State store:", state);
+  const { language, listSpecialtys } = useSelector((state) => {
+    console.log("---> State store:", state);
+    let listSpecialtys = state.specialtys.listSpecialtys;
+    let allSpecialty = listSpecialtys.map((item) => ({
+      label: item.name,
+      value: item.id,
+    }));
+    // console.log("allSpecialty: ", allSpecialty);
     return {
       language: state.app.language,
+      listSpecialtys: allSpecialty,
       saveInfoDoctor: state.doctor.saveInfoDoctor,
     };
   });
@@ -239,6 +247,10 @@ function DoctorManage() {
         doctor.Doctor_Info?.provinceId
       );
       const labelPrice = findLabel(dataKeyPrice, doctor.Doctor_Info?.priceId);
+      const labelSpecialty = listSpecialtys.find(
+        (item) => item.value === doctor?.Doctor_Info?.specialtyId
+      );
+      console.log("labelSpecialty: ", labelSpecialty);
 
       setValue("doctorId", { label, value });
       setValue("description", doctor.Markdown?.description || "");
@@ -258,7 +270,11 @@ function DoctorManage() {
         value: doctor.Doctor_Info?.priceId,
       });
       setValue("note", doctor.Doctor_Info?.note || "");
-      setValue("specialtyId", { label: "Cơ xương khớp", value: 1 });
+      console.log("listSpecialtys: ", listSpecialtys);
+      setValue("specialtyId", {
+        label: labelSpecialty?.label || "",
+        value: listSpecialtys?.Doctor_Info?.specialtyId || "",
+      });
       setValue("clinicId", {
         label: "Phòng khám đa khoa Hà Nội 1",
         value: "DK1",
@@ -540,12 +556,7 @@ function DoctorManage() {
                   <>
                     <Select
                       {...field}
-                      options={[
-                        { label: "Cơ xương khớp", value: 1 },
-                        { label: "Thai nhi", value: 2 },
-                        { label: "Tai mũi họng", value: 3 },
-                        { label: "Thần kinh", value: 4 },
-                      ]}
+                      options={listSpecialtys}
                       onClick={(option) => {
                         setValue("specialtyId", option.value); // Set value for the "priceId" field
                       }}
@@ -602,7 +613,12 @@ function DoctorManage() {
               />
             </div>
             <div className="save-content-doctor">
-              <button className="btn btn-primary" type="submit">
+              <button
+                className={`btn  mt-3 px-2  ${
+                  action.action === "CREATE" ? "btn-danger" : "btn-warning"
+                } `}
+                type="submit"
+              >
                 {action && action.action === "CREATE"
                   ? "Tạo thông tin"
                   : "Chỉnh sửa"}

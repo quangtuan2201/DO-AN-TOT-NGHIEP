@@ -1,14 +1,11 @@
 
 .doctor-schedule-container{
-     // border: 1px solid red;
      height: 100%;
      .all-schedule{
           select {
              width: 100%;
-          //    padding: 10px;
              font-size: 12px;
              border: none; /* Bỏ viền */
-          //    border-radius: 5px;
              appearance: none;
              max-width: 100px;
              max-width: 16%;
@@ -38,7 +35,6 @@
                               text-transform: uppercase;
                               font-weight: 600;
                          }
-              
           }
           .time-content {
                display: flex;
@@ -66,7 +62,6 @@
                          background-color: #ebd183;
                          transform: scale(1.05);
                     }
-                    
                }
           }
      }

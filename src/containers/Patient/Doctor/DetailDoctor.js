@@ -49,7 +49,7 @@ function DetailDoctor() {
         </div>
         <div className="schedule-doctor">
           <div className="content-left">
-            <DoctorSchedule />
+            <DoctorSchedule id={id} />
           </div>
           <div className="content-right">
             <DoctorExtraInfo id={id} />

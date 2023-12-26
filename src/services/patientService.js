@@ -11,7 +11,7 @@ const handlSavePatientBookAppointment = async (patientInfo) => {
       !patientInfo.timeType ||
       !patientInfo.date
     ) {
-      alert("Mising param");
+      // alert("Mising param");
       console.error("Missing param");
       return null;
     }

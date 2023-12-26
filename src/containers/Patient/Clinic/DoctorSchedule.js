@@ -20,9 +20,8 @@ import "./DoctorSchedule.scss";
 
 export const ThemeContextDoctorSchedule = createContext();
 
-function DoctorSchedule() {
+function DoctorSchedule({ id }) {
   const dispatch = useDispatch();
-  const { id } = useParams();
   const [allDays, setAllDays] = useState([]);
   const [chosenDate, setChosenDate] = useState(0);
   const [allAvalableTime, setAllAvalableTime] = useState([]);
@@ -49,9 +48,10 @@ function DoctorSchedule() {
     }
     return dayLabel.charAt(0).toUpperCase() + dayLabel.slice(1);
   };
+  //
   useEffect(() => {
-    //Hàm l ấy danh sách 7 ngày từ hôm nay đển hiện tại
-    const getAllDays = () => {
+    //Hàm  lấy danh sách 7 ngày từ hôm nay đển hiện tại
+    (() => {
       let arrDate = [];
       for (let i = 0; i < 7; i++) {
         let object = {};
@@ -69,15 +69,15 @@ function DoctorSchedule() {
       }
       setAllDays(arrDate);
       return arrDate;
-    };
-
-    const getCurrentDay = async () => {
+    })();
+    //Ham Lay ngay hien tai
+    (async () => {
       const timestamp = moment().startOf("day").valueOf();
       const { data, errCode } = await doctorService.handlefindScheduleByDate(
-        doctor?.id,
+        id,
         timestamp
       );
-      console.log("Danh sách lịch làm việc: ", data);
+      // console.log("Danh sách lịch làm việc: ", data);
       if (data && data?.length > 0 && errCode === 0) {
         setAllAvalableTime(data);
       } else {
@@ -85,11 +85,11 @@ function DoctorSchedule() {
           <FormattedMessage id="manage-schedule.no-appointment-scheduled" />
         );
       }
-    };
+    })();
 
-    getAllDays();
-    getCurrentDay();
-  }, [language, doctor]);
+    // getAllDays();
+    // getCurrentDay();
+  }, [language, doctor, id]);
 
   const handleBookingDateSelect = async (e) => {
     let selectDate = e?.target?.value;
@@ -98,7 +98,7 @@ function DoctorSchedule() {
     }
     setChosenDate(selectDate);
     const { data, errCode } = await doctorService.handlefindScheduleByDate(
-      doctor.id,
+      id,
       e.target.value
     );
     //console.log("reponse: ", data);
@@ -129,7 +129,6 @@ function DoctorSchedule() {
               className="list-schedule"
               onChange={handleBookingDateSelect}
             >
-              {/* <option value="">Chose schedule</option> */}
               {allDays &&
                 allDays.map((item, index) => (
                   <option key={index} value={item.value}>
@@ -172,16 +171,13 @@ function DoctorSchedule() {
             </p>
           </div>
         </div>
-        <div className="mb-5 ml-5">
-          <BookingModal
-            id={id}
-            // dataTime={}
-            isOpenModal={isOpenModal}
-            toggle={handlShowModal}
-            allAvalableTime={allAvalableTime}
-            selectedTimeSlot={selectedTimeSlot}
-          />
-        </div>
+        <BookingModal
+          id={id}
+          isOpenModal={isOpenModal}
+          toggle={handlShowModal}
+          allAvalableTime={allAvalableTime}
+          selectedTimeSlot={selectedTimeSlot}
+        />
       </>
     </ThemeContextDoctorSchedule.Provider>
   );

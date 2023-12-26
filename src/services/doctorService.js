@@ -84,6 +84,7 @@ const handlBulkCreateSchedule = async (data) => {
 };
 const handlefindScheduleByDate = async (doctorId, date) => {
   try {
+    // console.log("doctor IDDDDDDDDĐ: ", doctorId);
     const response = await instance.get("/get-schedule-doctor-by-date", {
       params: {
         doctorId,
