@@ -1,11 +1,31 @@
 import "./MedicalFacility.scss";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
+
 import Slider from "react-slick";
 // Import css files
 import { FormattedMessage, useIntl } from "react-intl";
+import clinicService from "../../../services/clinicService";
+import * as actions from "../../../store/actions";
 
 function MedicalFacility(props) {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  useEffect(() => {
+    dispatch(actions.fetchGetAllClinic());
+  }, []);
+  const { listClinics } = useSelector((state) => {
+    return {
+      listClinics: state.specialtys.listClinics,
+    };
+  });
+  const handleViewDetailDoctor = (clinicId) => {
+    // console.log("handle click view: ", doctor);
+    history.push(`/detail-clinic/${clinicId}`);
+  };
+  console.log("List clinic: ", listClinics);
   return (
     <React.Fragment>
       <div className="section-specialty section-share ">
@@ -16,41 +36,26 @@ function MedicalFacility(props) {
           </div>
           <div className="section-body">
             <Slider {...props.settings}>
-              <div className="section-customize">
-                <div className="bg-image section-medical-facility" />
-                <span className="section-descrip">
-                  Bệnh viện hữu nghị việt đức
-                </span>
-              </div>
-              <div className="section-customize">
-                <div className="bg-image section-medical-facility"></div>
-                <span className="section-descrip">Bệnh viện chợ rẫy</span>
-              </div>
-              <div className="section-customize">
-                <div className="bg-image section-medical-facility" />
-                <span className="section-descrip">
-                  Phòng khám Bệnh viện Đại Học Y Dược 1
-                </span>
-              </div>
-              <div className="section-customize">
-                <div className="bg-image section-medical-facility" />
-                <span className="section-descrip">
-                  Trung tâm Khám sức khỏe định ký , bệnh viện trung ương Quân
-                  đội 108
-                </span>
-              </div>
-              <div className="section-customize">
-                <div className="bg-image section-medical-facility" />
-                <span className="section-descrip">
-                  Bệnh viện Ung bướu Hưng việt
-                </span>
-              </div>
-              <div className="section-customize">
-                <div className="bg-image section-medical-facility" />
-                <span className="section-descrip">
-                  Hệ thống Y tế Thu Cúc TCI
-                </span>
-              </div>
+              {Array.isArray(listClinics) &&
+                listClinics.length > 0 &&
+                listClinics.map((item) => {
+                  return (
+                    <div
+                      className="section-customize"
+                      onDoubleClick={() => {
+                        handleViewDetailDoctor(item.id);
+                      }}
+                    >
+                      <div
+                        className="bg-image section-medical-facility"
+                        style={{
+                          backgroundImage: `url(${item?.image})`,
+                        }}
+                      />
+                      <span className="section-descrip">{item?.name}</span>
+                    </div>
+                  );
+                })}
             </Slider>
           </div>
         </div>

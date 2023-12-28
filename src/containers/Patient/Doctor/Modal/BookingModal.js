@@ -56,6 +56,7 @@ function BookingModal({ id }) {
     gender: "",
     doctorId: "",
     language: "",
+    birthday: "",
   });
   // console.log("selectedTimeSlot: ", selectedTimeSlot);
   // console.log("handlShowModal: ", handlShowModal);
@@ -69,8 +70,10 @@ function BookingModal({ id }) {
   if (!selectedTimeSlot) {
     // console.error("selectedTimeSlot parameter null or undefined");
   } else {
+    console.log("====>TimeSlot: ", selectedTimeSlot);
     formData.timeType = selectedTimeSlot.timeType;
     formData.doctorId = selectedTimeSlot.doctorId;
+    formData.date = selectedTimeSlot.date;
   }
 
   useEffect(() => {
@@ -97,7 +100,7 @@ function BookingModal({ id }) {
       setSelectedBirthDay(date[0]);
       setFormData((pre) => ({
         ...pre,
-        date: formattedDate,
+        birthday: formattedDate,
       }));
     }
   };
@@ -130,8 +133,16 @@ function BookingModal({ id }) {
     hoặc thực hiện các hành động cần thiết mà không gây ra việc tải lại trang.*/
       // console.log("Submit selectedTimeSlot:", selectedTimeSlot);
 
-      const { fullName, phoneNumber, email, address, reason, date, gender } =
-        formData;
+      const {
+        fullName,
+        phoneNumber,
+        email,
+        address,
+        reason,
+        date,
+        gender,
+        birthday,
+      } = formData;
       if (
         !fullName ||
         !phoneNumber ||
@@ -139,7 +150,8 @@ function BookingModal({ id }) {
         !address ||
         !reason ||
         !date ||
-        !gender
+        !gender ||
+        !birthday
       ) {
         toast.error("Vui lòng điền đầy đủ thông tin !");
         return;

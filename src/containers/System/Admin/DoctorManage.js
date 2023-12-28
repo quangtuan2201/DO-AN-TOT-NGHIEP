@@ -37,6 +37,7 @@ function DoctorManage() {
     }
     dispatch(actions.fetchRequiedDoctorInfo());
     dispatch(actions.fetchGetAllSpecialty());
+    dispatch(actions.fetchGetAllClinic());
   }, []);
 
   /// Lay data all doctor từ store trong reducer
@@ -53,17 +54,25 @@ function DoctorManage() {
   });
 
   // Lay language and saveInfoDoctor
-  const { language, listSpecialtys } = useSelector((state) => {
+  const { language, listSpecialtys, listClinics } = useSelector((state) => {
     console.log("---> State store:", state);
     let listSpecialtys = state.specialtys.listSpecialtys;
     let allSpecialty = listSpecialtys.map((item) => ({
       label: item.name,
       value: item.id,
     }));
+
+    let listClinics = state.specialtys.listClinics;
+    let allClinics = listClinics.map((item) => ({
+      label: item.name,
+      value: item.id,
+    }));
+
     // console.log("allSpecialty: ", allSpecialty);
     return {
       language: state.app.language,
       listSpecialtys: allSpecialty,
+      listClinics: allClinics,
       saveInfoDoctor: state.doctor.saveInfoDoctor,
     };
   });
@@ -82,8 +91,6 @@ function DoctorManage() {
   };
   // setValue default
   const setDefaultValues = (label = null, value = null) => {
-    console.log("label: ", label);
-    console.log("value: ", value);
     let option = {};
     if (!label && !value) {
       option = null;
@@ -251,6 +258,9 @@ function DoctorManage() {
         (item) => item.value === doctor?.Doctor_Info?.specialtyId
       );
       console.log("labelSpecialty: ", labelSpecialty);
+      const labelClinic = listClinics.find(
+        (item) => item.value === doctor?.Doctor_Info?.clinicId
+      );
 
       setValue("doctorId", { label, value });
       setValue("description", doctor.Markdown?.description || "");
@@ -276,8 +286,8 @@ function DoctorManage() {
         value: listSpecialtys?.Doctor_Info?.specialtyId || "",
       });
       setValue("clinicId", {
-        label: "Phòng khám đa khoa Hà Nội 1",
-        value: "DK1",
+        label: labelClinic?.label || "",
+        value: listSpecialtys?.Doctor_Info?.clinicId,
       });
       setMarkdown((pre) => ({
         ...pre,
@@ -288,7 +298,7 @@ function DoctorManage() {
         action: "EDIT",
       });
     } else {
-      console.log("create");
+      // console.log("create");
       setDefaultValues(label, value);
       setAction({ action: "CREATE" });
     }
@@ -297,7 +307,7 @@ function DoctorManage() {
   //Lay data allCode info doctor từ store trong reducer
   const { dataKeyPayment, dataKeyPrice, dataKeyProvince } = useSelector(
     (state) => {
-      console.log("state: ", state);
+      // console.log("state: ", state);
       const data = state.doctor.allKeysMapDoctorInfo;
       // console.log("data: ", data);
       const result = {};
@@ -330,7 +340,7 @@ function DoctorManage() {
                       options={AllDoctors}
                       onChange={(option) => {
                         let { label, value } = option;
-                        console.log("option value: ", option.value);
+                        // console.log("option value: ", option.value);
                         setValue("doctorId", { label, value });
 
                         setSelectDoctor(option);
@@ -583,15 +593,11 @@ function DoctorManage() {
                   <>
                     <Select
                       {...field}
-                      options={[
-                        { label: "Đa khoa Hà nội 1", value: "DK1" },
-                        { label: "Đa khoa Hà nội 2", value: "DK2" },
-                        { label: "Đa khoa Hà nội 3", value: "DK3" },
-                      ]}
+                      options={listClinics}
                       onClick={(option) => {
                         setValue("clinicId", option.value); // Set value for the "priceId" field
                       }}
-                      value={field.value}
+                      // value={field.value}
                     />
                     {errors.clinicId && (
                       <div className="invalid-feedback">

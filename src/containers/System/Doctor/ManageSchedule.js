@@ -38,7 +38,7 @@ function Doctor() {
       appointmentSchedule: state.doctor.allCodescheduleHours,
     };
   });
-  console.log("Lấy danh sách bác sĩ: ", AllDoctors);
+  // console.log("Lấy danh sách bác sĩ: ", AllDoctors);
   useEffect(() => {
     setSelectedDate(new Date());
     console.log("All Doctors: ", AllDoctors);

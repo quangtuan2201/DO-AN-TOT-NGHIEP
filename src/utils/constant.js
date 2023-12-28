@@ -6,6 +6,7 @@ export const path = {
   SYSTEM: "/system",
   DETAIL_DOCTOR: "/detail-doctors/:id",
   DETAIL_SPECIALTY: "/detail-specialty/:id",
+  DETAIL_CLINIC: "/detail-clinic/:id",
   DOCTOR_MANAGE: "/doctor",
   VERIFY_EMAIL_BOOKING: "/verify-booking",
   ///:token&doctorId=:doctorId",

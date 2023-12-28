@@ -21,6 +21,7 @@ import HomePage from "./HomePage/HomePage.js";
 import CustomScrollbars from "../components/CustomScrollbars.js";
 import DetailDoctor from "./Patient/Doctor/DetailDoctor.js";
 import DetailSpecialty from "./Patient/Doctor/DetailSpecialty.js";
+import DetailClinic from "./Patient/Doctor/DetailClinic.js";
 
 import Doctor from "../routes/Doctor.js";
 import VerifyEmail from "./Patient/VerifyEmail.js";
@@ -68,6 +69,7 @@ const App = () => {
                   component={userIsAuthenticated(Doctor)}
                   // component={userIsNotAuthenticated(Doctor)}
                 />
+                <Route path={path.DETAIL_CLINIC} component={DetailClinic} />
                 <Route
                   path={path.VERIFY_EMAIL_BOOKING}
                   component={VerifyEmail}

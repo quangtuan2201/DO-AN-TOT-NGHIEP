@@ -54,7 +54,46 @@ const handlSaveVerifyAppointment = async (token, doctorId) => {
     console.error("Error fetch confirm appotient !");
   }
 };
+//[GET]:/api/get-list-patient-for-doctor
+const handlGetListPatientDoctor = async (doctorId, date) => {
+  try {
+    // if (!doctorId || date) {
+    //   return null;
+    // }
+    console.log(`Patient service , doctorId:${doctorId} và date: ${date}`);
+    const response = await instance.get("/get-list-patient-for-doctor", {
+      params: { doctorId, date },
+    });
+    const { data, errCode } = response.data;
+    if (data && errCode === 0) {
+      return data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error("Fetch get list patient doctor fail" + error.message);
+    throw error;
+  }
+};
+//
+const handlSendRemedy = async (formData) => {
+  try {
+    const response = await instance.post("/send-remeder", formData);
+    const { data, errCode } = response.data;
+    console.log("response : ", response);
+    if (data && errCode === 0) {
+      return data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+//
 export default {
   handlSavePatientBookAppointment,
   handlSaveVerifyAppointment,
+  handlGetListPatientDoctor,
+  handlSendRemedy,
 };

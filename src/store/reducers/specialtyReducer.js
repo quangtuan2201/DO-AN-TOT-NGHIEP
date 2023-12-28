@@ -4,6 +4,7 @@ import actionTypes from "../actions/actionTypes";
 const initialState = {
   listSpecialtys: [],
   isGetListSpecialtys: false,
+  listClinics: [],
 };
 
 const specialtyReducer = (state = initialState, action) => {
@@ -23,6 +24,15 @@ const specialtyReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggeisGetListSpecialtydIn: false,
+      };
+    case actionTypes.FETCH_GET_ALL_CLINIC_SUCCESS:
+      return {
+        ...state,
+        listClinics: action.data,
+      };
+    case actionTypes.FETCH_GET_ALL_CLINIC_FAIL:
+      return {
+        ...state,
       };
     default:
       return state;

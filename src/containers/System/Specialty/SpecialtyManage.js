@@ -131,9 +131,9 @@ function SpecialtyManage() {
   return (
     <>
       <div className=" manage-specialty-container ml-5 mr-5">
-        <h1 className="text-center ms-title text-uppercase font-weight-bold ">
+        <h2 className="text-center mt-4 ms-title text-uppercase font-weight-bold ">
           Quản lý chuyên khoa
-        </h1>
+        </h2>
         <div className="row d-flex justify-content-between align-items-center add-new-spcialty ">
           <div className="col-5 form-group spcialty-chosse ">
             <label>
