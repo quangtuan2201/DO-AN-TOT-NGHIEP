@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeLanguageApp } from "../../store/actions/appActions";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import { path } from "../../utils/constant";
+import Search from "./Section/Search/Search";
 
 //src/store/actions/appActions.js
 import { LANGUAGES } from "../../utils/constant";
@@ -116,13 +117,8 @@ function HomeHeader({ isShowHeader }) {
               <div className="title2">
                 <FormattedMessage id="banner.title2" />
               </div>
-              <div className="search">
-                <input
-                  type="text"
-                  placeholder={intl.formatMessage({ id: "banner.searchInput" })}
-                />
-                <i className="fas fa-search"></i>
-              </div>
+
+              <Search />
             </div>
             <div className="content-down">
               <div className="options">

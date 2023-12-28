@@ -25,7 +25,7 @@ function MedicalFacility(props) {
     // console.log("handle click view: ", doctor);
     history.push(`/detail-clinic/${clinicId}`);
   };
-  console.log("List clinic: ", listClinics);
+  // console.log("List clinic: ", listClinics);
   return (
     <React.Fragment>
       <div className="section-specialty section-share ">
@@ -45,6 +45,7 @@ function MedicalFacility(props) {
                       onDoubleClick={() => {
                         handleViewDetailDoctor(item.id);
                       }}
+                      key={item.id}
                     >
                       <div
                         className="bg-image section-medical-facility"

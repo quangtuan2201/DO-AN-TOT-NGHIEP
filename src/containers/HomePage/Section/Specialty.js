@@ -10,12 +10,12 @@ import * as actions from "../../../store/actions";
 import { FormattedMessage, useIntl } from "react-intl";
 import specialtyService from "../../../services/specialtyService";
 function Specialty(props) {
-  console.log("props: ", props);
+  // console.log("props: ", props);
   const dispatch = useDispatch();
   const history = useHistory();
   const [specialtyLists, setSpecialtyLists] = useState([]);
   const handleViewSpecialtyDoctor = (specialty) => {
-    console.log("handle click view: ", specialty);
+    // console.log("handle click view: ", specialty);
     history.push(`/detail-specialty/${specialty.id}`);
   };
   const listSpecialtys = useSelector((state) => {
@@ -38,7 +38,7 @@ function Specialty(props) {
     // })();
     dispatch(actions.fetchGetAllSpecialty());
   }, []);
-  console.log("==============>>>>>>>>>> listSpecialtys: ", listSpecialtys);
+  // console.log("==============>>>>>>>>>> listSpecialtys: ", listSpecialtys);
   return (
     <React.Fragment>
       <div className="section-specialty section-share ">

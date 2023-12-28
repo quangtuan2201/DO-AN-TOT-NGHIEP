@@ -79,8 +79,6 @@ function ProfileDoctor({ isShowDescription, id, selectedTimeSlot }) {
     })();
 
     return () => {
-      console.log("Fun CleanUp abortController : ", abortController);
-      isMounted.current = false;
       abortController.abort();
     };
   }, [id]);

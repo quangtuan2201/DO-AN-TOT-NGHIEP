@@ -12,7 +12,7 @@ export const fetchGetAllSpecialty = () => {
   return async (dispatch) => {
     try {
       const response = await specialtyService.handlGetAllSpecialty();
-      console.log("response get all specialty :", response);
+      // console.log("response get all specialty :", response);
       if (response) {
         //    <FormattedMessage id="login.success-login" />;
         dispatch(fetchGetAllSpecialtySuccess(response));
@@ -39,7 +39,7 @@ export const fetchGetAllClinic = () => {
   return async (dispatch) => {
     try {
       const response = await clinicService.handlGetAllClinic();
-      console.log("response get all clinic :", response);
+      // console.log("response get all clinic :", response);
       if (response) {
         //    <FormattedMessage id="login.success-login" />;
         dispatch(fetchGetAllClinicSuccess(response));

@@ -18,7 +18,7 @@ const handleSaveInfoClinic = async (formData) => {
 const handlGetAllClinic = async () => {
   try {
     const response = await instance.get("/get-all-clinic");
-    console.log("Get all info clinic", response);
+    // console.log("Get all info clinic", response);
     const { data, errCode } = response.data;
     if (data && errCode === 0) {
       return data;
@@ -38,7 +38,7 @@ const handlGetInfoDetailClinic = async (clinicId) => {
     const response = await instance.get("/get-info-clinic-by-id", {
       params: { id: clinicId },
     });
-    console.log("Get info detail clinic : ", response);
+    // console.log("Get info detail clinic : ", response);
     const { data, errCode } = response.data;
     if (data && errCode === 0) {
       return data;

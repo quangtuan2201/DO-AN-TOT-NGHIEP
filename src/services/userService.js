@@ -96,6 +96,26 @@ const fetchGetTopDoctor = async (limit, roleId) => {
     };
   }
 };
+//Lấy kết quả người dùng tìm kiếm
+const fetchGetResultSearch = async (keyword) => {
+  try {
+    if (!keyword) {
+      return null;
+    }
+    const results = await instance.get("/search", {
+      params: { keyword },
+    });
+    console.log("Result search: ", results);
+    const { data, errCode } = results.data;
+    if (data && errCode === 0) {
+      return data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
 export default {
   handleLogin,
   getAllUsers,
@@ -104,4 +124,5 @@ export default {
   deleteUser,
   getAllCode,
   fetchGetTopDoctor,
+  fetchGetResultSearch,
 };
