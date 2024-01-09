@@ -34,12 +34,6 @@ function DoctorSchedule({ id }) {
     };
   });
 
-  //console.log("moment vi: ", moment(new Date()).format("dddd - DD/MM"));
-  //console.log(
-  //   "moment en: ",
-  //   moment(new Date()).locale("en").format("ddd - DD/MM")
-  // );
-
   // Hàm chuyển đổi ngôn ngữ ,chatGPT
   const getDayLabel = (language, date, format) => {
     const dayLabel = moment(date).locale(language).format(format);
@@ -60,7 +54,6 @@ function DoctorSchedule({ id }) {
           moment(new Date()).add(i, "days"),
           language === LANGUAGES.VI ? "dddd - DD/MM" : "ddd - DD/MM"
         );
-        //console.log("lable EN: ", object.label);
         object.value = moment(new Date())
           .add(i, "days")
           .startOf("day")
@@ -77,7 +70,6 @@ function DoctorSchedule({ id }) {
         id,
         timestamp
       );
-      // console.log("Danh sách lịch làm việc: ", data);
       if (data && data?.length > 0 && errCode === 0) {
         setAllAvalableTime(data);
       } else {
@@ -101,7 +93,6 @@ function DoctorSchedule({ id }) {
       id,
       e.target.value
     );
-    //console.log("reponse: ", data);
     if (data?.length > 0 && errCode === 0) {
       setAllAvalableTime(data);
     } else {

@@ -9,11 +9,12 @@ import UserAdmin from "../containers/System/Admin/UserAdmin";
 import ClinicManage from "../containers/System/Clinic/ClinicManage";
 import SpecialtyManage from "../containers/System/Specialty/SpecialtyManage";
 import HandBookManage from "../containers/System/Admin/HandbookManage";
-import PostManage from "../containers/System/Admin/PostManage";
+import StatisticsManage from "../containers/System/Admin/StatisticsManage";
 import DoctorSchedule from "../containers/System/Admin/DoctorSchedule";
 import RegisterPackageGroupOrAcc from "../containers/System/RegisterPackageGroupOrAcc";
 import Header from "../containers/Header/Home";
 import DoctorManage from "../containers/System/Admin/DoctorManage";
+import Search from "../containers/HomePage/Section/Search/Search";
 
 // class System extends Component {
 //     render() {
@@ -60,7 +61,11 @@ function System() {
               component={SpecialtyManage}
             />
             <Route path="/system/handbook-manage" component={HandBookManage} />
-            <Route path="/system/post-manage" component={PostManage} />
+            <Route
+              path="/system/statistics-manage"
+              component={StatisticsManage}
+            />
+            {/* <Route path="/search" component={Search} /> */}
 
             <Route
               component={() => {

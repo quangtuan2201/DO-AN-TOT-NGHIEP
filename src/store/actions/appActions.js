@@ -12,3 +12,7 @@ export const changeLanguageApp = (newLanguage) => ({
   type: actionTypes.CHANGE_LANGUAGE,
   newLanguage,
 });
+export const changLoading = (setLoading) => ({
+  type: actionTypes.CHANGE_LOADING,
+  setLoading,
+});

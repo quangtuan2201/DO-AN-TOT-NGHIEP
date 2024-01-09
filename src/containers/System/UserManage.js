@@ -16,7 +16,6 @@ function UserManage(props) {
       try {
         const response = await apiUserService.getAllUsers();
         setUsers(response.data.user);
-        // console.log("response", response);
       } catch (error) {
         console.error("Lỗi khi lấy danh sách người dùng:", error);
         // Xử lý lỗi nếu cần
@@ -29,7 +28,6 @@ function UserManage(props) {
   // show modal edit & create
   const handleShowEditModal = useCallback(
     (user) => {
-      // console.log("show :", selectedUser);
       setSelectedUser(user);
       setEditModalOpen(true);
     },
@@ -37,7 +35,6 @@ function UserManage(props) {
   );
 
   const handleCloseEditModal = useCallback(() => {
-    // console.log("close:", selectedUser);
     setEditModalOpen(false);
     setSelectedUser(null);
   }, [isEditModalOpen]);
@@ -45,12 +42,10 @@ function UserManage(props) {
   const handleDeleteUser = async (userId) => {
     try {
       const response = await userService.deleteUser(userId);
-      console.log("deletet user response", response);
       if (response.status) {
         const userNew = users.filter((item) => item.id !== userId);
         setUsers(userNew);
       }
-      // console.log("use sau khi click delete:", users);
     } catch (error) {
       throw error;
     }
@@ -103,7 +98,6 @@ function UserManage(props) {
                 <button
                   className="btn-delete"
                   onClick={() => {
-                    console.log("delete user");
                     handleDeleteUser(user.id);
                   }}
                 >

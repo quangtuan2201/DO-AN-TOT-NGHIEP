@@ -21,11 +21,9 @@ export const processLogout = () => ({
 });
 //ACTION LOGIN
 export const fetchUserLogin = (user) => {
-  console.log("User: ", user);
   return async (dispatch) => {
     try {
       const response = await userService.handleLogin(user);
-      console.log("response login :", response);
       if (response.data && response.errCode === 0) {
         <FormattedMessage id="login.success-login" />;
         dispatch(userLoginSuccess(response.data));

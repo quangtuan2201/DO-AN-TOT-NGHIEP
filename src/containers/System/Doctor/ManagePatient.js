@@ -17,9 +17,9 @@ function ManagePatient() {
   const [listPatientDoctor, setListPatientDoctor] = useState([]);
   const [isShowModal, setIsShowModalConfirm] = useState(false);
   const [dataModal, setDataModal] = useState({});
+  const [status, setStatus] = useState();
   let yesterDay = new Date(new Date().setDate(new Date().getDate() - 1));
   const { language, userInfo } = useSelector((state) => {
-    // console.log("State : ", state);
     return {
       language: state.app.language,
       userInfo: state.user.userInfo,
@@ -31,9 +31,6 @@ function ManagePatient() {
         console.error("ID or Date missing parameter.");
         return;
       } else {
-        console.log("current date: ", date);
-        console.log("id: ", id);
-
         const momentObject = moment(date);
         if (!momentObject.isValid()) {
           console.error("Invalid date format.");
@@ -48,7 +45,6 @@ function ManagePatient() {
           id,
           formattedDate
         );
-        console.log("Data: ", response);
 
         if (response) {
           setListPatientDoctor(response);
@@ -61,9 +57,8 @@ function ManagePatient() {
     }
   };
   useEffect(() => {
-    console.log("call api");
     fetchListPatientDoctor(userInfo.id, currentDate);
-  }, []);
+  }, [isShowModal]);
 
   const handleDateChange = async (date) => {
     const momentObject = moment(date[0]);
@@ -76,35 +71,33 @@ function ManagePatient() {
         userInfo.id,
         formattedDate
       );
-      console.log("response: ", response);
 
       if (response) {
-        // console.log("response: ", response);
         setListPatientDoctor(response);
       } else {
         setListPatientDoctor([]);
       }
     }
   };
-  // const handlShowModal = useCallback(() => {
-  //   setIsOpneModal((pre) => !pre);
-  // });
 
-  const handlShowModalConfirm = (item) => {
-    console.log("patient: ", item);
-    const data = {
-      doctorId: item?.doctorId,
-      patientId: item?.patientId,
-      email: item?.patientData?.email,
-      timeType: item?.timeType,
-      statusId: item?.statusId,
-      firstName: item?.patientData?.firstName,
-      language,
-    };
-    console.log("Check Data: ", data);
-    setDataModal(data);
-    setIsShowModalConfirm(!isShowModal);
-  };
+  const handlShowModalConfirm = useCallback(
+    (item, status) => {
+      const data = {
+        doctorId: item?.doctorId,
+        patientId: item?.patientId,
+        email: item?.patientData?.email,
+        timeType: item?.timeType,
+        statusId: item?.statusId,
+        firstName: item?.patientData?.firstName,
+        // status,
+        language,
+      };
+      setDataModal(data);
+      setIsShowModalConfirm(!isShowModal);
+      setStatus(status);
+    },
+    [dataModal, status, isShowModal, language]
+  );
 
   return (
     <React.Fragment>
@@ -128,6 +121,7 @@ function ManagePatient() {
               isShowModal={isShowModal}
               handlShowModalConfirm={handlShowModalConfirm}
               dataModal={dataModal}
+              status={status}
             />
             <table class="table table-hover table-fixed ">
               <thead>
@@ -164,10 +158,18 @@ function ManagePatient() {
                             <button
                               className="btn btn-warning pl-2 pr-2"
                               onClick={() => {
-                                handlShowModalConfirm(item);
+                                handlShowModalConfirm(item, "CONFIRM");
                               }}
                             >
                               Xác nhận
+                            </button>
+                            <button
+                              className="btn btn-danger ml-3 pl-2 pr-2"
+                              onClick={() => {
+                                handlShowModalConfirm(item, "CANCEL");
+                              }}
+                            >
+                              Hủy
                             </button>
                           </td>
                         </tr>

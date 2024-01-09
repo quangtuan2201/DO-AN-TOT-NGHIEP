@@ -39,26 +39,17 @@ export const fetchCreateUserStart = (data) => {
     try {
       dispatch({ type: actionTypes.FETCH_CREATE_USER_START });
       const response = await userService.createUser(data);
-      console.log(
-        "-->> Data create user trả về trong file AdminAction :",
-        response
-      );
-      console.log("--->> State trong file adminAction , create user: ");
       if (response.data && response?.data?.errCode === 0) {
         toast.success(
           <FormattedMessage id="user-manage.success-create-user" />
         );
         dispatch(fetchCreateUserSuccess(response.data.user));
-        // console.log(
-        //   "Reponse data[response.data.user] in adminAction.js :",
-        //   response.data.user.image
-        // );
       } else {
         toast.error(<FormattedMessage id="user-manage.error-create-user" />);
         dispatch(fetchCreateUserFail());
       }
     } catch (error) {
-      console.log("Error create user in admin.Action.js: ", error);
+      console.error("Error create user in admin.Action.js: ", error);
       toast.error(<FormattedMessage id="user-manage.error-create-user" />);
       dispatch(fetchCreateUserFail());
     }
@@ -77,19 +68,10 @@ export const fetchGetUserStart = () => {
   return async (dispatch) => {
     try {
       const response = await userService.getAllUsers();
-      // const resGetDoctor = await userService.fetchGetDoctor(2, "R2");
-      // console.log("resGetDoctor: ", resGetDoctor);
-      // console.log("response: get alluser: ", response);
       if (response.data && response.data.errCode === 0) {
         dispatch(fetchGetUserSuccess(response.data.user));
       } else {
         dispatch(fetchGetUserFail());
-        // }
-        // if (resGetDoctor.data && resGetDoctor.errCode === 0) {
-        //   dispatch(fetchGetUserSuccess(resGetDoctor.data.data))
-        // }
-        // else{
-        //   dispatch(fetchGetUserFail());
       }
     } catch (error) {
       dispatch(fetchGetUserFail());
@@ -118,7 +100,7 @@ export const fetchDeleteUser = (user) => {
       }
     } catch (error) {
       toast.success(<FormattedMessage id="user-manage.error-delete-user" />);
-      console.log("Delete User Error ", error.message);
+      console.error("Delete User Error ", error.message);
       dispatch(fetchDeleteUserFail());
     }
   };
@@ -145,7 +127,7 @@ export const fetchUpdateUser = (user) => {
       }
     } catch (error) {
       toast.success(<FormattedMessage id="user-manage.error-update-user" />);
-      console.log("Update user error in fetchUpdateUser:", error.message);
+      console.error("Update user error in fetchUpdateUser:", error.message);
       dispatch(fetchUpdateFail());
     }
   };
@@ -158,26 +140,3 @@ const fetchUpdateSuccess = (data) => ({
 const fetchUpdateFail = () => ({
   type: actionTypes.FETCH_UPDATE_USER_FAIL,
 });
-
-//ACTION LOGIN
-// export const fetchUserLogin = (user) => {
-//   console.log("User: ", user);
-//   return async (dispatch) => {
-//     const response = await userService.handleLogin(user);
-//     console.log("response login :",response);
-//     if (response) {
-//       toast.success("User Login Success !");
-//       dispatch(fetchUserLoginSuccess(response));
-//     } else {
-//       toast.error("User Login Fail");
-//       dispatch(fetchUserLoginFail());
-//     }
-//   };
-// };
-// const fetchUserLoginSuccess = (data) => ({
-//   type: actionTypes.FETCH_USER_LOGIN_SUCCESS,
-//   data,
-// });
-// const fetchUserLoginFail = () => ({
-//   type: actionTypes.FETCH_USER_LOGIN_FAIL,
-// });

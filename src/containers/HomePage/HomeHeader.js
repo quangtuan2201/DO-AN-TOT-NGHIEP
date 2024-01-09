@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeLanguageApp } from "../../store/actions/appActions";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import { path } from "../../utils/constant";
-import Search from "./Section/Search/Search";
 
 //src/store/actions/appActions.js
 import { LANGUAGES } from "../../utils/constant";
@@ -30,6 +29,15 @@ function HomeHeader({ isShowHeader }) {
     // alert("Return Home !");
     history.push(path.HOMEPAGE);
   };
+  const redirectSearch = () => {
+    // alert("Return Home !");
+    history.push(path.SEARCH);
+  };
+  const redirectSupport = () => {
+    // alert("Return Home !");
+    history.push(path.SUPPORT);
+  };
+
   return (
     <React.Fragment>
       <header>
@@ -41,7 +49,7 @@ function HomeHeader({ isShowHeader }) {
             </div>
 
             <div className="center-content">
-              <div className="child-content">
+              <div className="child-content" onClick={redirectSearch}>
                 <div className="">
                   <b>
                     <FormattedMessage id="homeHeader.speciality" />
@@ -51,7 +59,7 @@ function HomeHeader({ isShowHeader }) {
                   <FormattedMessage id="homeHeader.searchDoctor" />
                 </div>
               </div>
-              <div className="child-content">
+              <div className="child-content" onClick={redirectSearch}>
                 <div className="">
                   <b>
                     <FormattedMessage id="homeHeader.healthFacility" />
@@ -61,7 +69,7 @@ function HomeHeader({ isShowHeader }) {
                   <FormattedMessage id="homeHeader.selectRoom" />
                 </div>
               </div>
-              <div className="child-content">
+              <div className="child-content" onClick={redirectSearch}>
                 <div className="">
                   <b>
                     <FormattedMessage id="homeHeader.doctor" />
@@ -71,7 +79,7 @@ function HomeHeader({ isShowHeader }) {
                   <FormattedMessage id="homeHeader.selectDoctor" />
                 </div>
               </div>
-              <div className="child-content">
+              <div className="child-content" onClick={redirectSearch}>
                 <div className="">
                   <b>
                     <FormattedMessage id="homeHeader.fee" />
@@ -83,7 +91,7 @@ function HomeHeader({ isShowHeader }) {
               </div>
             </div>
             <div className="right-content">
-              <div className="support">
+              <div className="support" onClick={redirectSupport}>
                 <i className="fas fa-question-circle">
                   <FormattedMessage id="homeHeader.support" />
                 </i>
@@ -117,8 +125,14 @@ function HomeHeader({ isShowHeader }) {
               <div className="title2">
                 <FormattedMessage id="banner.title2" />
               </div>
-
-              <Search />
+              <div className="search">
+                <input
+                  type="text"
+                  placeholder={intl.formatMessage({ id: "banner.searchInput" })}
+                  onClick={redirectSearch}
+                />
+                <i className="fas fa-search"></i>
+              </div>
             </div>
             <div className="content-down">
               <div className="options">

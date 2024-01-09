@@ -1,15 +1,13 @@
 import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
-import Select from "react-select";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import userService from "../../../services/userService";
 import CommonUtils from "../../../utils/CommonUtils";
-import * as actions from "../../../store/actions";
 import "./SpecialtyManage.scss";
-import doctorService from "../../../services/doctorService";
 import specialtyService from "../../../services/specialtyService";
+import { FormattedMessage, useIntl } from "react-intl";
+
 import { toast } from "react-toastify";
 
 // const options = [
@@ -40,24 +38,17 @@ function SpecialtyManage() {
     descriptionMarkdown: "",
     descriptionHTML: "",
   });
-  // const [selectSpecialty, setSelectSpecialty] = useState({
-  //   label: "",
-  //   value: "",
-  //   name: "",
-  // });
+
   const [nameSpecialty, setNameSpecialty] = useState("");
   const [avatar, setAvatar] = useState({
     imageBase64: "",
   });
   //get language
   const { language } = useSelector((state) => {
-    //console.log("---> State store:", state);
     return {
       language: state.app.language,
     };
   });
-  //call api get list spcialty
-  // useEffect(() => {}, [language]);
 
   // handle wirte description content
   const handleEditorChange = ({ html, text }) => {
@@ -70,11 +61,6 @@ function SpecialtyManage() {
 
   //handle change select spcialty
   const handlOnChangeSpecialty = (e) => {
-    // console.log("value: ", item);
-    // setSelectSpecialty((pre) => ({
-    //   ...item,
-    //   name: item.label,
-    // }));
     const nameSecialty = e.target.value;
     setNameSpecialty(nameSecialty);
   };
@@ -83,7 +69,6 @@ function SpecialtyManage() {
     const file = event.target.files;
     if (file && file[0]) {
       let base64 = await CommonUtils.getBase64(file[0]);
-      // console.log("base 64: ", base64);
       setAvatar((pre) => ({
         ...pre,
         imageBase64: base64,
@@ -94,13 +79,11 @@ function SpecialtyManage() {
   // handle submit data
   const handleSubmit = async () => {
     try {
-      console.log("submit");
       const formData = {
         name: nameSpecialty,
         ...avatar,
         ...desMarkdown,
       };
-      console.log("data: ", formData);
       if (
         !formData.name ||
         !formData.descriptionHTML ||
@@ -131,20 +114,17 @@ function SpecialtyManage() {
   return (
     <>
       <div className=" manage-specialty-container ml-5 mr-5">
-        <h2 className="text-center mt-4 ms-title text-uppercase font-weight-bold ">
-          Quản lý chuyên khoa
+        <h2 className="text-center mt-4 ms-title text-primary text-uppercase font-weight-bold ">
+          <FormattedMessage id="manage-specialty.specialty-title" />
         </h2>
         <div className="row d-flex justify-content-between align-items-center add-new-spcialty ">
           <div className="col-5 form-group spcialty-chosse ">
             <label>
-              <strong>Chọn chuyên khoa:</strong>
+              <strong>
+                {" "}
+                <FormattedMessage id="manage-specialty.choose-speciality" />
+              </strong>
             </label>
-            {/* <Select
-              options={options}
-              onChange={handlOnChangeSpecialty}
-              value={selectSpecialty}
-              // className="form-control"
-            /> */}
             <input
               value={nameSpecialty}
               className="form-control"
@@ -153,7 +133,9 @@ function SpecialtyManage() {
           </div>
           <div className="col-5 form-group spcialty-avatar">
             <label>
-              <strong>Ảnh chuyên khoa:</strong>
+              <strong>
+                <FormattedMessage id="manage-specialty.choose-image" />
+              </strong>
             </label>
             <br />
             <input onChange={handlOnChangeAvatar} type="file" />
@@ -175,8 +157,8 @@ function SpecialtyManage() {
           />
         </div>
         <div className="col-12 mt-3">
-          <button className="btn btn-primary" onClick={handleSubmit}>
-            Lưu thông tin
+          <button className="btn btn-primary pl-2 pr-2 " onClick={handleSubmit}>
+            <FormattedMessage id="manage-specialty.button" />
           </button>
         </div>
       </div>

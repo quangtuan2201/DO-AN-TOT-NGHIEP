@@ -77,13 +77,11 @@ function ClinicManage() {
   // handle submit data
   const handleSubmit = async () => {
     try {
-      console.log("submit");
       const formData = {
         ...inputClinic,
         ...avatar,
         ...desMarkdown,
       };
-      console.log("data: ", formData);
       if (
         !formData.name ||
         !formData.descriptionHTML ||
@@ -93,7 +91,6 @@ function ClinicManage() {
         toast.error("Các trường dữ liệu không được để trống !");
         return;
       }
-      console.log("form data: ", formData);
       const response = await clinicService.handleSaveInfoClinic(formData);
       if (response) {
         toast.success("Tạo chuyên khoa thành công.");

@@ -38,7 +38,6 @@ const handlGetInfoDetailClinic = async (clinicId) => {
     const response = await instance.get("/get-info-clinic-by-id", {
       params: { id: clinicId },
     });
-    // console.log("Get info detail clinic : ", response);
     const { data, errCode } = response.data;
     if (data && errCode === 0) {
       return data;

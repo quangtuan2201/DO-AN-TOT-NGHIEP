@@ -13,10 +13,8 @@ const initialState = {
   login: {},
 };
 const adminReducer = (state = initialState, action) => {
-  // console.log("action:", action);
   switch (action.type) {
     case actionTypes.FETCH_KEYS_START:
-      // console.log("FETCH_KEYS_START", action);
       return {
         ...state,
         isLoadingKeys: true,
@@ -31,7 +29,6 @@ const adminReducer = (state = initialState, action) => {
         isLoadingGetAllUser: false,
       };
     case actionTypes.FETCH_KEYS_FAIL:
-      // console.log("FETCH_KEYS_FAIL", action);
       return {
         ...state,
         gender: [],
@@ -57,37 +54,31 @@ const adminReducer = (state = initialState, action) => {
         isLoadingCreateUser: false,
       };
     case actionTypes.FETCH_GET_USER_START:
-      console.log("FETCH_GET_USER_START");
       return {
         ...state,
         isLoadingGetAllUser: true,
       };
     case actionTypes.FETCH_GET_USER_SUCCESS:
-      console.log("FETCH_GET_USER_SUCCESS");
       return {
         ...state,
         allUser: action.data,
         isLoadingGetAllUser: false,
       };
     case actionTypes.FETCH_GET_USER_FAIL:
-      console.log("FETCH_GET_USER_FAIL");
       return {
         ...state,
         allUser: [],
         isLoadingGetAllUser: false,
       };
     case actionTypes.FETCH_DELETE_USER_SUCCESS:
-      console.log("FETCH_DELETE_USER_SUCCESS");
       return {
         ...state,
         allUser: state.allUser.filter((user) => user.id != action.userId),
       };
     case actionTypes.FETCH_UPDATE_USER_SUCCESS:
-      console.log("FETCH_PUT_USER_SUCCESS");
       const updatedUsers = state.allUser.map((user) => {
         return user.id === action.data.id ? action.data : user;
       });
-      console.log("FETCH_PUT_USER_SUCCESS updatedUsers: ", updatedUsers);
       return {
         ...state,
         allUser: updatedUsers,

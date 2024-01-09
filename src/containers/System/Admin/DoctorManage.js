@@ -12,9 +12,11 @@ import { Switch } from "react-router-dom/cjs/react-router-dom.min";
 import { find, set } from "lodash";
 import { toast } from "react-toastify";
 import { useForm, Controller } from "react-hook-form";
+import { FormattedMessage, useIntl } from "react-intl";
 
 function DoctorManage() {
   const dispatch = useDispatch();
+  const intl = useIntl();
   const mdParser = new MarkdownIt(/* Markdown-it options */);
   const [selectDoctor, setSelectDoctor] = useState({});
   const [markdown, setMarkdown] = useState({
@@ -55,7 +57,6 @@ function DoctorManage() {
 
   // Lay language and saveInfoDoctor
   const { language, listSpecialtys, listClinics } = useSelector((state) => {
-    console.log("---> State store:", state);
     let listSpecialtys = state.specialtys.listSpecialtys;
     let allSpecialty = listSpecialtys.map((item) => ({
       label: item.name,
@@ -68,7 +69,6 @@ function DoctorManage() {
       value: item.id,
     }));
 
-    // console.log("allSpecialty: ", allSpecialty);
     return {
       language: state.app.language,
       listSpecialtys: allSpecialty,
@@ -116,7 +116,6 @@ function DoctorManage() {
     });
   };
   const onSubmit = (data) => {
-    // console.log("Form data submit: ", data);
     try {
       if (!markdown.contentHTML || !markdown.contentMarkdown) {
         toast.error("Trường markdown không được trống.");
@@ -149,7 +148,6 @@ function DoctorManage() {
         ...markdown,
         ...action,
       };
-      console.log("Action push data: ", convertData);
       setDefaultValues();
       dispatch(actions.fetchSaveInfoDoctor(convertData));
     } catch (error) {
@@ -159,7 +157,6 @@ function DoctorManage() {
 
   ///
   const builDataInputSelect = (inputData) => {
-    // console.log("Input data: ", inputData);
     let result = [];
     let checkLang = language === LANGUAGES.VI;
     if (inputData && inputData.length > 0) {
@@ -214,8 +211,6 @@ function DoctorManage() {
 
     fields.forEach((field) => {
       const currentValue = watch(field);
-      // console.log(`current ${field} `, currentValue);
-
       if (currentValue) {
         setValue(field, {
           ...currentValue,
@@ -230,7 +225,6 @@ function DoctorManage() {
 
   useEffect(() => {
     const { label, value, doctor } = selectDoctor;
-    console.log("chọn bác sĩ: ", selectDoctor);
     if (
       doctor &&
       doctor.Markdown.doctorId !== null &&
@@ -257,7 +251,6 @@ function DoctorManage() {
       const labelSpecialty = listSpecialtys.find(
         (item) => item.value === doctor?.Doctor_Info?.specialtyId
       );
-      console.log("labelSpecialty: ", labelSpecialty);
       const labelClinic = listClinics.find(
         (item) => item.value === doctor?.Doctor_Info?.clinicId
       );
@@ -280,7 +273,6 @@ function DoctorManage() {
         value: doctor.Doctor_Info?.priceId,
       });
       setValue("note", doctor.Doctor_Info?.note || "");
-      console.log("listSpecialtys: ", listSpecialtys);
       setValue("specialtyId", {
         label: labelSpecialty?.label || "",
         value: listSpecialtys?.Doctor_Info?.specialtyId || "",
@@ -298,7 +290,6 @@ function DoctorManage() {
         action: "EDIT",
       });
     } else {
-      // console.log("create");
       setDefaultValues(label, value);
       setAction({ action: "CREATE" });
     }
@@ -307,9 +298,7 @@ function DoctorManage() {
   //Lay data allCode info doctor từ store trong reducer
   const { dataKeyPayment, dataKeyPrice, dataKeyProvince } = useSelector(
     (state) => {
-      // console.log("state: ", state);
       const data = state.doctor.allKeysMapDoctorInfo;
-      // console.log("data: ", data);
       const result = {};
       for (const key in data) {
         result[key] = builDataInputSelect(data[key]);
@@ -321,18 +310,26 @@ function DoctorManage() {
     <>
       <div className="container mt-5 mb-5">
         <div className="manage-doctor-title text-center">
-          <h2>Tạo thêm thông tin Doctors</h2>
+          <h2 className="text-primary">
+            <FormattedMessage id="manage-doctor.create-more-doctors-info" />
+          </h2>
         </div>
         <form className="" onSubmit={handleSubmit(onSubmit)}>
           <div className="row">
             <div className="col-6 mt-4 form-item form-doctor">
               <label>
-                <strong>Chọn bác sĩ:</strong>
+                <strong>
+                  <FormattedMessage id="manage-doctor.choose-doctor" />
+                </strong>
               </label>
               <Controller
                 name="doctorId"
                 control={control}
-                rules={{ required: "Trường này là bắt buộc" }}
+                rules={{
+                  required: intl.formatMessage({
+                    id: "manage-doctor.required",
+                  }),
+                }}
                 render={({ field }) => (
                   <>
                     <Select
@@ -340,13 +337,10 @@ function DoctorManage() {
                       options={AllDoctors}
                       onChange={(option) => {
                         let { label, value } = option;
-                        // console.log("option value: ", option.value);
                         setValue("doctorId", { label, value });
 
                         setSelectDoctor(option);
                       }}
-                      // value={field.value}
-                      // value={field.value}
                     />
                     {errors.doctorId && (
                       <div
@@ -362,12 +356,18 @@ function DoctorManage() {
             </div>
             <div className="col-6 mt-4 form-item form-descrition">
               <label>
-                <strong>Mô tả:</strong>
+                <strong>
+                  <FormattedMessage id="manage-doctor.description" />
+                </strong>
               </label>
               <Controller
                 name="description"
                 control={control}
-                rules={{ required: "Trường này là bắt buộc" }}
+                rules={{
+                  required: intl.formatMessage({
+                    id: "manage-doctor.required",
+                  }),
+                }}
                 render={({ field }) => (
                   <>
                     <textarea
@@ -391,12 +391,18 @@ function DoctorManage() {
             </div>
             <div className="col-4 mt-4 form-item form-price">
               <label>
-                <strong>Chọn giá:</strong>
+                <strong>
+                  <FormattedMessage id="manage-doctor.chosse-price" />
+                </strong>
               </label>
               <Controller
                 name="priceId"
                 control={control}
-                rules={{ required: "Trường này là bắt buộc" }}
+                rules={{
+                  required: intl.formatMessage({
+                    id: "manage-doctor.required",
+                  }),
+                }}
                 render={({ field }) => (
                   <>
                     <Select
@@ -418,12 +424,18 @@ function DoctorManage() {
             </div>
             <div className="col-4 mt-4 form-item form-payment">
               <label>
-                <strong>Chọn phương thức thanh toán:</strong>
+                <strong>
+                  <FormattedMessage id="manage-doctor.select-payment-method" />
+                </strong>
               </label>
               <Controller
                 name="paymentId"
                 control={control}
-                rules={{ required: "Trường này là bắt buộc" }}
+                rules={{
+                  required: intl.formatMessage({
+                    id: "manage-doctor.required",
+                  }),
+                }}
                 render={({ field }) => (
                   <>
                     <Select
@@ -445,7 +457,9 @@ function DoctorManage() {
             </div>
             <div className="col-4 mt-4 form-item form-provinceId">
               <label>
-                <strong>Chọn tỉnh thành:</strong>
+                <strong>
+                  <FormattedMessage id="manage-doctor.select-province" />
+                </strong>
               </label>
               <Controller
                 name="provinceId"
@@ -472,12 +486,18 @@ function DoctorManage() {
             </div>
             <div className="col-4 mt-4 form-item form-nam-clinic">
               <label>
-                <strong>Tên phòng khám:</strong>
+                <strong>
+                  <FormattedMessage id="manage-doctor.clinic-name" />
+                </strong>
               </label>
               <Controller
                 name="nameClinic"
                 control={control}
-                rules={{ required: "Trường này là bắt buộc" }}
+                rules={{
+                  required: intl.formatMessage({
+                    id: "manage-doctor.required",
+                  }),
+                }}
                 render={({ field }) => (
                   <>
                     <textarea
@@ -500,12 +520,18 @@ function DoctorManage() {
             </div>
             <div className="col-4 mt-4 form-item form-address-clinic">
               <label>
-                <strong>Địa chỉ phòng khám:</strong>
+                <strong>
+                  <FormattedMessage id="manage-doctor.clinic-address" />
+                </strong>
               </label>
               <Controller
                 name="addressClinic"
                 control={control}
-                rules={{ required: "Trường này là bắt buộc" }}
+                rules={{
+                  required: intl.formatMessage({
+                    id: "manage-doctor.required",
+                  }),
+                }}
                 render={({ field }) => (
                   <>
                     <textarea
@@ -528,12 +554,18 @@ function DoctorManage() {
             </div>
             <div className="col-4 mt-4 form-item form-note">
               <label>
-                <strong>Note:</strong>
+                <strong>
+                  <FormattedMessage id="manage-doctor.note" />
+                </strong>
               </label>
               <Controller
                 name="note"
                 control={control}
-                rules={{ required: "Trường này là bắt buộc" }}
+                rules={{
+                  required: intl.formatMessage({
+                    id: "manage-doctor.required",
+                  }),
+                }}
                 render={({ field }) => (
                   <>
                     <textarea
@@ -556,12 +588,18 @@ function DoctorManage() {
             </div>
             <div className="col-4 mt-4 form-item form-select-specialty">
               <label>
-                <strong>Chọn chuyên khoa:</strong>
+                <strong>
+                  <FormattedMessage id="manage-doctor.choose-specialty" />
+                </strong>
               </label>
               <Controller
                 name="specialtyId"
                 control={control}
-                rules={{ required: "Trường này là bắt buộc" }}
+                rules={{
+                  required: intl.formatMessage({
+                    id: "manage-doctor.required",
+                  }),
+                }}
                 render={({ field }) => (
                   <>
                     <Select
@@ -583,12 +621,18 @@ function DoctorManage() {
 
             <div className="col-4 mt-4 form-item form-select-clinic">
               <label>
-                <strong>Chọn phòng khám:</strong>
+                <strong>
+                  <FormattedMessage id="manage-doctor.choose-clinic" />
+                </strong>
               </label>
               <Controller
                 name="clinicId"
                 control={control}
-                rules={{ required: "Trường này là bắt buộc" }}
+                rules={{
+                  required: intl.formatMessage({
+                    id: "manage-doctor.required",
+                  }),
+                }}
                 render={({ field }) => (
                   <>
                     <Select
@@ -625,9 +669,11 @@ function DoctorManage() {
                 } `}
                 type="submit"
               >
-                {action && action.action === "CREATE"
-                  ? "Tạo thông tin"
-                  : "Chỉnh sửa"}
+                {action && action.action === "CREATE" ? (
+                  <FormattedMessage id="manage-doctor.create-info" />
+                ) : (
+                  <FormattedMessage id="manage-doctor.edit" />
+                )}
               </button>
             </div>
           </div>

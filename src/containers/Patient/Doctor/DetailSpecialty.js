@@ -24,7 +24,6 @@ function DetailSpecialty() {
   const [checkLang, setCheckLang] = useState(false);
 
   const { language } = useSelector((state) => {
-    // console.log("state: ", state);
     return { language: state.app.language };
   });
 
@@ -35,7 +34,6 @@ function DetailSpecialty() {
           id,
           "ALL"
         );
-        // console.log("Danh sách chuyên khoa: ", response);
         setDetailSpecialty(response);
         setArrDoctorId(response.doctorSpecilty);
       } catch (error) {
@@ -60,10 +58,8 @@ function DetailSpecialty() {
       (async () => {
         const provinces = await userService.getAllCode("PROVINCE");
         const { data, errCode } = provinces.data;
-        console.log("Province: ", data);
 
         if (data && errCode === 0) {
-          console.log("Đa ta: ", data);
           let dataConvert = data.map((item) => {
             return {
               label: checkLang ? item?.valueVn : item?.valueEn,
@@ -74,14 +70,13 @@ function DetailSpecialty() {
             label: checkLang ? "Tất cả" : "All",
             value: "ALL",
           });
-          console.log("====>>> data: ", dataConvert);
           if (Array.isArray(dataConvert) && dataConvert.length > 0) {
             setDoctorProvince(dataConvert);
           } else setDoctorProvince([]);
         }
       })();
     } catch (error) {
-      console.log("", error.message);
+      console.error("", error.message);
     }
   }, [language, id]);
 
@@ -93,15 +88,11 @@ function DetailSpecialty() {
     return <div>Error occurred: {error.message}</div>;
   }
   const handlOnChangeProvince = async (doctorProvince) => {
-    // console.log("Tỉnh thành: ", e.target.value);
-    console.log("Province: ", doctorProvince);
-    // setDoctorProvince(doctorProvince);
     try {
       const response = await specialtyService.handlGetSpecialtyById(
         id,
         doctorProvince?.value
       );
-      console.log("Lọc doctor qua keyMap: ", response);
       const { doctorSpecilty } = response;
       if (Array.isArray(doctorSpecilty) && doctorSpecilty.length > 0) {
         setArrDoctorId(doctorSpecilty);
@@ -175,7 +166,6 @@ function DetailSpecialty() {
                     <div className="each-doctor" key={index}>
                       <div className="detail-content-left">
                         <div className="profile-doctor">
-                          {console.log("PROFILE ID : ", item.doctorId)}
                           <ProfileDoctor
                             id={item.doctorId}
                             isShowDescription={true}

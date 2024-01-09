@@ -1,131 +1,183 @@
-{ 
-    "homeHeader":{
-        "speciality":"Chuyên khoa",
-        "searchDoctor":"Tìm bác sĩ theo chuyên khoa",
-        "healthFacility":"Cơ sở y tế",
-        "selectRoom":"Chọn bệnh viện , phòng khám",
-        "selectDoctor":"Chọn bác sĩ giỏi",
-        "doctor":"Bác sĩ",
-        "fee":"Gói khám",
-        "checkHealth":"Khám sức khỏe tổng quát",
-        "support":"Hỗ trợ",
-        "wellcome":"Xin chào, "
-        
+{
+  "homeHeader": {
+    "speciality": "Chuyên khoa",
+    "searchDoctor": "Tìm bác sĩ theo chuyên khoa",
+    "healthFacility": "Cơ sở y tế",
+    "selectRoom": "Chọn bệnh viện , phòng khám",
+    "selectDoctor": "Chọn bác sĩ giỏi",
+    "doctor": "Bác sĩ",
+    "fee": "Gói khám",
+    "checkHealth": "Khám sức khỏe tổng quát",
+    "support": "Hỗ trợ",
+    "wellcome": "Xin chào, "
+  },
+  "handbook": {
+    "title1": "NỀN TẢNG Y TẾ ",
+    "title2": "Chăm sóc sức khỏe toàn diện",
+    "searchInput": "Tìm chuyên khoa khám bệnh",
+    "specialty": "Khám chuyên khoa",
+    "removeHealth": "Khám từ xa",
+    "generalityHealth": "Khám tổng quát",
+    "medicalTesting": "Xét nghiệm y học",
+    "mentalHealth": "Sức khỏe tinh thần",
+    "dentalExamination": "Khám nha khoa",
+    "outstanding-medical-facilities": "Cơ sở y tế nổi bật",
+    "hand-book": "Cẩm nang"
+  },
+  "banner": {
+    "title1": "NỀN TẢNG Y TẾ ",
+    "title2": "Chăm sóc sức khỏe toàn diện",
+    "searchInput": "Tìm chuyên khoa khám bệnh",
+    "specialty": "Khám chuyên khoa",
+    "removeHealth": "Khám từ xa",
+    "generalityHealth": "Khám tổng quát",
+    "medicalTesting": "Xét nghiệm y học",
+    "mentalHealth": "Sức khỏe tinh thần",
+    "dentalExamination": "Khám nha khoa",
+    "outstanding-medical-facilities": "Cơ sở y tế nổi bật"
+  },
+  "popularSpeciality": {
+    "popularSpeciality": "Chuyên khoa phổ biến"
+  },
+  "login": {
+    "login": "Đăng nhập",
+    "username": "Tên đăng nhập",
+    "password": "Mật khẩu",
+    "userpass-wrong": "Sai tên đăng nhập hoặc mật khẩu!",
+    "show": "Hiện Mật khẩu",
+    "hide": "Ẩn Mật khẩu",
+    "oblivion": "Quên Mật khẩu?",
+    "or-login-with": "Hoặc Đăng nhập bằng?",
+    "success-login": "Đăng nhập thành công",
+    "error-login": "Đăng nhập thất bại"
+  },
+  "menu": {
+    "admin": {
+      "manage-user": "Người dùng",
+      "manage-doctor": "Quản lý bác sĩ",
+      "manage-admin": "Quản lý admin",
+      "manage-statistics-booking": "Quản lý thống kê đặt lịch",
+      "crud": "CRUD Người dùng",
+      "crud-redux": "CRUD Người dùng , redux",
+      "manage-clinic": " Quản lý phòng khám",
+      "clinic": "Phòng khám",
+      "specialty": "Chuyên khoa",
+      "manage-specialty": "Quản lý chuyên khoa",
+      "statistics": "Thống kê",
+      "manage-post": "Quản lý bài đăng",
+      "handbook": "Cẩm nang",
+      "manage-handbook": "Quản lý cẩm nang"
     },
-    "banner": {
-        "title1":"NỀN TẢNG Y TẾ ",
-        "title2":"Chăm sóc sức khỏe toàn diện",
-        "searchInput":"Tìm chuyên khoa khám bệnh",
-        "specialty":"Khám chuyên khoa",
-        "removeHealth":"Khám từ xa",
-        "generalityHealth":"Khám tổng quát",
-        "medicalTesting":"Xét nghiệm y học",
-        "mentalHealth":"Sức khỏe tinh thần",
-        "dentalExamination":"Khám nha khoa"
-    },
-    "popularSpeciality":{
-        "popularSpeciality":"Chuyên khoa phổ biến"
-    },
-    "login": {
-        "login": "Đăng nhập",
-        "username": "Tên đăng nhập",
-        "password": "Mật khẩu",
-        "userpass-wrong": "Sai tên đăng nhập hoặc mật khẩu!",
-        "show":"Hiện Mật khẩu",
-        "hide":"Ẩn Mật khẩu",
-        "oblivion":"Quên Mật khẩu?",
-        "or-login-with":"Hoặc Đăng nhập bằng?",
-        "success-login":"Đăng nhập thành công",
-        "error-login":"Đăng nhập thất bại"
-    },
-    "menu": {
-        "admin":{
-            "manage-user":"Người dùng",
-            "manage-doctor":"Quản lý bác sĩ",
-            "manage-admin":"Quản lý admin",
-            "crud":"CRUD Người dùng",
-            "crud-redux":"CRUD Người dùng , redux",
-            "manage-clinic":" Quản lý phòng khám",
-            "clinic":"Phòng khám",
-            "specialty":"Chuyên khoa",
-            "manage-specialty":"Quản lý chuyên khoa",
-            "post":"Bài đăng",
-            "manage-post":"Quản lý bài đăng",
-            "handbook":"Cẩm nang",
-            "manage-handbook":"Quản lý cẩm nang"
-        },
-        "doctor":{
-            "manage-schedule":"Quản lý kế hoạch khám bệnh",
-            "manage-patient":"Quản lý bệnh nhân khám bệnh"
-        
-        }
-    },
-    "user-manage":{
-        "add":"Thêm mới người dùng",
-        "email":"Email",
-        "password":"Mật khẩu",
-        "firstName":"Tên",
-        "lastName":"Họ",
-        "phoneNumber":"Số điện thoại",
-        "address":"Địa chỉ",
-        "gender":"Giới tính",
-        "position":"Chức danh",
-        "role":"Vai trò",
-        "image":"Ảnh đại diện",
-        "save":"Lưu user",
-        "clear":"Làm sạch",
-        "enter":"Nhập vào",
-        "action":"Hành động",
-        "selectGender":"Chọn Giới tính",
-        "selectPosition":"Chon Chức danh",
-        "selectRole":"Chọn Vai trò",
-        "invalidEmail":"Email không hợp lệ !",
-        "enterEmail":"Nhập Email",
-        "enterPassword":"Nhập Mật khẩu",
-        "login":"Đăng nhập",
-        "passwordLength":"Độ dài mật khẩu",
-        "success-create-user":"Tạo dùng người mới thành công.",
-         "error-create-user":"Tạo người dùng thất bại.",
-         "sucess-update-user":"Cập nhật người dùng thành công",
-         "error-update-user":"Cập nhật người dùng thất bại",
-         "sucess-delete-user":"Xóa người dùng thành công.",
-         "error-delete-user":"Xóa người dùng thất bại.",
-         "sucess-get-all-user":"Lấy danh sách người dùng thành công",
-         "error-get-all-user":"Lấy danh sách người dùng thất bại",
-         "sucess-save-info-user":"Lưu thông tin người dùng thành công.",
-         "error-save-info-user":"lưu thông tin người dùng thất bại",
-         "sucess-get-detail-user":"Lấy thông chi tiết người dùng thành công.",
-         "error-get-detail-user":"Lấy thông tin chi tiết người dùng thất bại",
-         "sucess-get-allcode-schedule":"Lấy thông tin đặt lịch thành công",
-         "error-get-allcode-schedule":"Lấy thông tin đặt lịch thất bại"
-
-
-
-    },
-    "homePage":{
-        "prominent-doctor":"Bác sĩ nổi bật",
-        "see-more":"Xem thêm"
-
-    },
-    "manage-schedule": {
-        "title":"Quản lý kế hoạch khám bệnh của bác sĩ",
-        "save":"Lưu thông tin",
-        "select-date":"Chọn ngày",
-        "select-doctor":"Chọn bác sĩ",
-        "appointment-schedule":"Lịch Khám",
-        "warring-select-doctor":"Vui lòng chọn bác sĩ trước khi gửi.",
-        "warring-select-date":"Vui lòng chọn ngày trước khi gửi.",
-        "warring-select-schedule-hours":"Vui lòng chọn khung giờ khám trước khi gửi.",
-        "success-book-schedule":"Thêm mới lịch hẹn thành công.",
-        "error-book-schedule" :"Thêm mới lịch hẹn không thành công.",
-        "no-appointment-scheduled":"Không có lịch hẹn trong thời gian này, vui lòng chọn thời gian khác.",
-        "appointment":"Lịch khám",
-        "chosse":"Chọn ",
-        "and-book":" và đặt (miễn phí)"
-
-
+    "doctor": {
+      "manage-schedule": "Quản lý kế hoạch khám bệnh",
+      "manage-patient": "Quản lý bệnh nhân khám bệnh"
     }
-    
-     
-    
+  },
+  "user-manage": {
+    "user-manage": "Quản lý người dùng",
+    "add": "Thêm mới người dùng",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "firstName": "Tên",
+    "lastName": "Họ",
+    "phoneNumber": "Số điện thoại",
+    "address": "Địa chỉ",
+    "gender": "Giới tính",
+    "position": "Chức danh",
+    "role": "Vai trò",
+    "image": "Ảnh đại diện",
+    "save": "Lưu user",
+    "clear": "Làm sạch",
+    "enter": "Nhập vào",
+    "action": "Hành động",
+    "selectGender": "Chọn Giới tính",
+    "selectPosition": "Chon Chức danh",
+    "selectRole": "Chọn Vai trò",
+    "invalidEmail": "Email không hợp lệ !",
+    "enterEmail": "Nhập Email",
+    "enterPassword": "Nhập Mật khẩu",
+    "login": "Đăng nhập",
+    "passwordLength": "Độ dài mật khẩu",
+    "success-create-user": "Tạo dùng người mới thành công.",
+    "error-create-user": "Tạo người dùng thất bại.",
+    "sucess-update-user": "Cập nhật người dùng thành công",
+    "error-update-user": "Cập nhật người dùng thất bại",
+    "sucess-delete-user": "Xóa người dùng thành công.",
+    "error-delete-user": "Xóa người dùng thất bại.",
+    "sucess-get-all-user": "Lấy danh sách người dùng thành công",
+    "error-get-all-user": "Lấy danh sách người dùng thất bại",
+    "sucess-save-info-user": "Lưu thông tin người dùng thành công.",
+    "error-save-info-user": "lưu thông tin người dùng thất bại",
+    "sucess-get-detail-user": "Lấy thông chi tiết người dùng thành công.",
+    "error-get-detail-user": "Lấy thông tin chi tiết người dùng thất bại",
+    "sucess-get-allcode-schedule": "Lấy thông tin đặt lịch thành công",
+    "error-get-allcode-schedule": "Lấy thông tin đặt lịch thất bại"
+  },
+  "homePage": {
+    "prominent-doctor": "Bác sĩ nổi bật",
+    "see-more": "Xem thêm"
+  },
+  "manage-schedule": {
+    "title": "Quản lý kế hoạch khám bệnh của bác sĩ",
+    "save": "Lưu thông tin",
+    "select-date": "Chọn ngày",
+    "select-doctor": "Chọn bác sĩ",
+    "appointment-schedule": "Lịch Khám",
+    "warring-select-doctor": "Vui lòng chọn bác sĩ trước khi gửi.",
+    "warring-select-date": "Vui lòng chọn ngày trước khi gửi.",
+    "warring-select-schedule-hours": "Vui lòng chọn khung giờ khám trước khi gửi.",
+    "success-book-schedule": "Thêm mới lịch hẹn thành công.",
+    "error-book-schedule": "Thêm mới lịch hẹn không thành công.",
+    "no-appointment-scheduled": "Không có lịch hẹn trong thời gian này, vui lòng chọn thời gian khác.",
+    "appointment": "Lịch khám",
+    "chosse": "Chọn ",
+    "and-book": " và đặt (miễn phí)"
+  },
+  "manage-doctor": {
+    "create-more-doctors-info": "Tạo thêm thông tin Doctors",
+    "choose-doctor": "Chosse a doctor:",
+    "description": "Mô tả:",
+    "chosse-price": "Chọn giá:",
+    "select-payment-method": "Chọn phương thức thanh toán:",
+    "select-province": "Chọn tỉnh thành:",
+    "clinic-name": "Tên phòng khám:",
+    "clinic-address": "Địa chỉ phòng khám:",
+    "note": "Ghi chú:",
+    "choose-specialty": "Chọn chuyên khoa:",
+    "choose-clinic": "Chọn phòng khám:",
+    "create-info": "Tạo thông tin",
+    "edit": "Chỉnh sửa",
+    "required": "Trường này là bắt buộc"
+  },
+  "manage-hanbook": {
+    "hanbook-title": "Quản lý cẩm nang"
+  },
+  "manage-specialty": {
+    "specialty-title": "Quản lý chuyên khoa",
+    "choose-speciality": "Chọn chuyên khoa:",
+    "choose-image": "Chọn ảnh chuyên khoa:",
+    "button": "Lưu thông tin"
+  },
+  "manage-statistical": {
+    "statistical-title": "Quản lý thống kê ",
+    "all": "Tất cả",
+    "choose-doctor": "Chọn bác sĩ:",
+    "choose-start-date": "Chọn ngày bắt đầu: ",
+    "choose-end-date": "Chọn ngày kết thúc: ",
+    "fullName": "Họ và tên",
+    "status": "Trạng thái",
+    "column-chart": "Biểu đồ cột thống kê số lượng",
+    "pie-chart": "Biểu đồ tròn tỉ lệ phần trăm",
+    "appointment": "Bác sĩ chưa có lịch hẹn.",
+    "submit": "Gửi"
+  },
+
+  "doctor-extra-info": {
+    "address-price": "Địa chỉ giá khám",
+    "price": "Giá khám: ",
+    "preferential": "Được ưu tiên khám trước khi đặt qua bookingcare",
+    "payment-method": "Người bệnh có thể thanh toán chi phí bằng hình thức",
+    "see-details": "Xem chi tiết!",
+    "hide details": "Ẩn chi tiết!"
+  }
 }

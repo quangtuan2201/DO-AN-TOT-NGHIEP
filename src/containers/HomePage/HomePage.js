@@ -11,6 +11,7 @@ import HandBook from "./Section/HandBook";
 import "./HomePage.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Chatbot from "./Chatbot";
 
 function HomePage({ isLoggedIn }) {
   const settings = {
@@ -30,6 +31,7 @@ function HomePage({ isLoggedIn }) {
         <OutStandingDoctor settings={settings} />
         <HandBook settings={settings} />
         <Abount />
+        <Chatbot />
         <HomeFooter />
       </div>
     </React.Fragment>

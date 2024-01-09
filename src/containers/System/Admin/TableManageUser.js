@@ -3,7 +3,6 @@ import { FormattedMessage, useIntl } from "react-intl";
 import UserAdmin from "./UserAdmin";
 
 function TableManageUser({ allUser, onDeleteUser, onUpdateUser }) {
-  console.log("re-render");
   return (
     <>
       <div className="user-container container">

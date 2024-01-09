@@ -5,11 +5,11 @@ import * as actions from "../../../store/actions";
 import "./DoctorExtraInfo.scss";
 import doctorService from "../../../services/doctorService";
 import { LANGUAGES } from "../../../utils/constant";
+import { FormattedMessage, useIntl } from "react-intl";
+import _ from "lodash";
+
 //{ id }
 function DoctorExtraInfo({ id }) {
-  // const { id } = useParams();
-  console.log("-----re-render---------DoctorExtraInfo");
-  const dispatch = useDispatch();
   const [isShoDetail, setIsShowDetail] = useState(false);
   const [infoAdressClinic, setInfoAddressClinic] = useState({});
   const { language } = useSelector((state) => {
@@ -25,7 +25,6 @@ function DoctorExtraInfo({ id }) {
     maximumFractionDigits: 0,
   });
   useEffect(() => {
-    console.log("re-render doctorExtraInfo");
     const abortController = new AbortController();
     const signal = abortController.signal;
     if (!id) {
@@ -38,7 +37,6 @@ function DoctorExtraInfo({ id }) {
           id,
           signal
         );
-        console.log("data res info address: ", response);
         if (response) {
           setInfoAddressClinic(response);
         }
@@ -51,44 +49,75 @@ function DoctorExtraInfo({ id }) {
       abortController.abort();
     };
   }, [id]);
-  // console.log("infoAdressClinic: ", infoAdressClinics);
   return (
     <React.Fragment>
       <div className="doctor-extra-info-container">
         <div className="content-up">
-          <div className="text-address">Địa chỉ giá khám</div>
+          <div className="text-address">
+            <FormattedMessage id="doctor-extra-info.price" />
+          </div>
           <div className="name-clinic">{infoAdressClinic?.nameClinic}</div>
           <div className="detail-address">
             {infoAdressClinic?.addressClinic}
           </div>
         </div>
-        <div className="content-down">
-          {isShoDetail ? (
-            <>
-              <div className="mt-2 mb-2">
-                <strong className="text-uppercase"> Giá Khám:</strong>
-              </div>
-              <div className="benefit">
-                <div className="price">
-                  <strong className="text-uppercase">Giá khám: </strong>
-                  <strong>
-                    {infoAdressClinic &&
-                      formatter.format(
-                        checkLang
-                          ? infoAdressClinic?.priceData?.valueVn
-                          : infoAdressClinic?.priceData?.valueEn
-                      )}
+        {!_.isEmpty(infoAdressClinic) && (
+          <div className="content-down">
+            {isShoDetail ? (
+              <>
+                <div className="mt-2 mb-2">
+                  <strong className="text-uppercase">
+                    <FormattedMessage id="doctor-extra-info.price" />{" "}
                   </strong>
                 </div>
-                <div>Được ưu tiên khám trước khi đặt qua bookingcare </div>
-                <div className="note"> {infoAdressClinic.note}</div>
-              </div>
-              <div className="payments">
-                Người bệnh có thể thanh toán chi phí bằng hình thức
+                <div className="benefit">
+                  <div className="price">
+                    <strong className="text-uppercase">
+                      <FormattedMessage id="doctor-extra-info.price" />{" "}
+                    </strong>
+                    <strong>
+                      {!_.isEmpty(infoAdressClinic) &&
+                        formatter.format(
+                          checkLang
+                            ? infoAdressClinic?.priceData?.valueVn
+                            : infoAdressClinic?.priceData?.valueEn
+                        )}
+                    </strong>
+                  </div>
+                  <div>
+                    <FormattedMessage id="doctor-extra-info.preferential" />
+                  </div>
+                  <div className="note"> {infoAdressClinic.note}</div>
+                </div>
+                <div className="payments">
+                  <FormattedMessage id="doctor-extra-info.payment-method" />
+                  <strong className="ml-1">
+                    {checkLang
+                      ? infoAdressClinic?.paymentData.valueVn
+                      : infoAdressClinic?.paymentData.valueEn}
+                  </strong>
+                  <span
+                    onClick={() => {
+                      setIsShowDetail(!isShoDetail);
+                    }}
+                    style={{ color: "blue" }}
+                  >
+                    <FormattedMessage id="doctor-extra-info.hide details" />
+                  </span>
+                </div>
+              </>
+            ) : (
+              <div className="medical-price">
+                <span className="text-uppercase">
+                  <FormattedMessage id="doctor-extra-info.price" />
+                </span>
                 <strong>
-                  {checkLang
-                    ? infoAdressClinic?.paymentData.valueVn
-                    : infoAdressClinic?.paymentData.valueEn}
+                  {!_.isEmpty(infoAdressClinic) &&
+                    formatter.format(
+                      checkLang
+                        ? infoAdressClinic?.priceData?.valueVn
+                        : infoAdressClinic?.priceData?.valueEn
+                    )}
                 </strong>
                 <span
                   onClick={() => {
@@ -96,32 +125,12 @@ function DoctorExtraInfo({ id }) {
                   }}
                   style={{ color: "blue" }}
                 >
-                  Ẩn chi tiết
+                  <FormattedMessage id="doctor-extra-info.see-details" />
                 </span>
               </div>
-            </>
-          ) : (
-            <div className="medical-price">
-              <span className="text-uppercase">Giá khám:</span>
-              <strong>
-                {infoAdressClinic &&
-                  formatter.format(
-                    checkLang
-                      ? infoAdressClinic?.priceData?.valueVn
-                      : infoAdressClinic?.priceData?.valueEn
-                  )}
-              </strong>
-              <span
-                onClick={() => {
-                  setIsShowDetail(!isShoDetail);
-                }}
-                style={{ color: "blue" }}
-              >
-                Xem chi tiết !
-              </span>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        )}
       </div>
     </React.Fragment>
   );

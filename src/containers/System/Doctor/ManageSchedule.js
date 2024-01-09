@@ -9,7 +9,7 @@ import DatePicker from "../../../components/Input/DatePicker";
 import { LANGUAGES, dateFormat } from "../../../utils/constant";
 import { toast } from "react-toastify";
 import doctorService from "../../../services/doctorService";
-import { set } from "lodash";
+import DoctorExtraInfo from "../../Patient/Doctor/DoctorExtraInfo";
 function DoctorSelect({ options, onChange, value }) {
   return <Select options={options} onChange={onChange} value={value} />;
 }
@@ -44,7 +44,6 @@ function Doctor() {
     console.log("All Doctors: ", AllDoctors);
     if (!AllDoctors || !AllDoctors.length) {
       console.log("check :", !AllDoctors || !AllDoctors.length);
-      console.log("Alldoctor dispatch");
       dispatch(actions.fetchGetAllDoctors());
       return;
     } else {
@@ -62,7 +61,7 @@ function Doctor() {
     dispatch(actions.fetchAllCodeScheduleHours());
   }, []);
   const handlSelectDoctor = (selectDoctor) => {
-    console.log("Select: ", selectDoctor);
+    console.log("Chọn bác sĩ: ", selectDoctor);
     setSelectOption(selectDoctor);
     setInfoSchedule((pres) => {
       return {
@@ -254,12 +253,13 @@ function Doctor() {
                     ))}
                 </div>
                 <p className="param-warning">
-                  Chọn <i class="fas fa-hand-point-up"></i> và đặt (Phí đặt lịch
-                  0đ)
+                  <FormattedMessage id="manage-schedule.chosse" />
+                  <i className="fas fa-hand-point-up"></i>
+                  <FormattedMessage id="manage-schedule.and-book" />
                 </p>
               </div>
               <div className="col-6 clinic-info-address">
-                <div className="clinic-address-title">
+                {/* <div className="clinic-address-title">
                   <strong>Địa chỉ khám</strong>
                 </div>
                 <div className="clinic-name">
@@ -267,7 +267,8 @@ function Doctor() {
                 </div>
                 <div className="clinic-address">
                   207 Phố Huế - Hai Bà Trưng - Hà Nội
-                </div>
+                </div> */}
+                <DoctorExtraInfo id={selectDoctor.value} />
               </div>
               <hr />
             </div>

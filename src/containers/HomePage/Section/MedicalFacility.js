@@ -2,10 +2,10 @@ import "./MedicalFacility.scss";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { FormattedMessage, useIntl } from "react-intl";
 
 import Slider from "react-slick";
 // Import css files
-import { FormattedMessage, useIntl } from "react-intl";
 import clinicService from "../../../services/clinicService";
 import * as actions from "../../../store/actions";
 
@@ -22,17 +22,19 @@ function MedicalFacility(props) {
     };
   });
   const handleViewDetailDoctor = (clinicId) => {
-    // console.log("handle click view: ", doctor);
     history.push(`/detail-clinic/${clinicId}`);
   };
-  // console.log("List clinic: ", listClinics);
   return (
     <React.Fragment>
       <div className="section-specialty section-share ">
         <div className="section-container">
           <div className="section-header">
-            <span className="title-section">Cơ sở y tế nổi bật</span>
-            <button className="btn-section">Xem thêm</button>
+            <span className="title-section">
+              <FormattedMessage id="banner.outstanding-medical-facilities" />
+            </span>
+            <button className="btn-section">
+              <FormattedMessage id="homePage.see-more" />
+            </button>
           </div>
           <div className="section-body">
             <Slider {...props.settings}>

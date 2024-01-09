@@ -10,6 +10,7 @@ const initContentOfConfirmModal = {
 const initialState = {
   started: true,
   language: "en",
+  loading: false,
   systemMenuPath: "/system/user-manage",
   contentOfConfirmModal: {
     ...initContentOfConfirmModal,
@@ -32,10 +33,14 @@ const appReducer = (state = initialState, action) => {
         },
       };
     case actionTypes.CHANGE_LANGUAGE:
-      //   console.log("quang tuan: ", action);
       return {
         ...state,
         language: action.newLanguage,
+      };
+    case actionTypes.CHANGE_LOADING:
+      return {
+        ...state,
+        loading: action.setLoading,
       };
     default:
       return state;

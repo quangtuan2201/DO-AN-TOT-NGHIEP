@@ -1,18 +1,42 @@
+.header-search {
+  margin-top: 90px;
+}
 .result-search {
-     // background-color: rgb(255, 255, 255) !important;
-     // padding: 5px;
-     margin-top: 4px;
-     max-width: 368px;
-     margin-left: auto;
-     margin-right: auto;
-     border-radius: 5px;
-     .result-search-specialty {
-     background-color: rgba(255, 255, 255, 0.9);
-
-
-     }
-     .result-search-clinic {
-     background-color: rgba(255, 255, 255, 0.9);
-
-     }
+  // background-color: rgb(255, 255, 255) !important;
+  // padding: 5px;
+  margin-top: 4px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+  .result-search-specialty {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  .result-search-clinic {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+}
+.search {
+  // text-align: center;
+  // border: 1px solid red ;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  align-items: center;
+  background: #f7d800;
+  width: 700px;
+  border-radius: 25px;
+  padding: 6px;
+  margin-top: 30px;
+  input {
+    padding: 17px;
+    height: 30px;
+    width: 665px;
+    border: none;
+    background: transparent;
+    outline: none;
+  }
+  i {
+    margin: 0 5px;
+  }
 }

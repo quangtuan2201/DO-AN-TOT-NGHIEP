@@ -10,35 +10,18 @@ import * as actions from "../../../store/actions";
 import { FormattedMessage, useIntl } from "react-intl";
 import specialtyService from "../../../services/specialtyService";
 function Specialty(props) {
-  // console.log("props: ", props);
   const dispatch = useDispatch();
   const history = useHistory();
   const [specialtyLists, setSpecialtyLists] = useState([]);
   const handleViewSpecialtyDoctor = (specialty) => {
-    // console.log("handle click view: ", specialty);
     history.push(`/detail-specialty/${specialty.id}`);
   };
   const listSpecialtys = useSelector((state) => {
-    // console.log("state: ", state);
     return state.specialtys.listSpecialtys;
   });
   useEffect(() => {
-    // (async () => {
-    //   try {
-    //     const response = await specialtyService.handlGetAllSpecialty();
-    //     if (response) {
-    //       console.log("Data list specialty: ", response);
-    //       setSpecialtyLists(response);
-    //     } else {
-    //       console.log("Fetch get all specialty fail,,,");
-    //     }
-    //   } catch (error) {
-    //     console.error("Fetch get all specilty fail...");
-    //   }
-    // })();
     dispatch(actions.fetchGetAllSpecialty());
   }, []);
-  // console.log("==============>>>>>>>>>> listSpecialtys: ", listSpecialtys);
   return (
     <React.Fragment>
       <div className="section-specialty section-share ">
@@ -47,7 +30,9 @@ function Specialty(props) {
             <span className="title-section">
               <FormattedMessage id="popularSpeciality.popularSpeciality" />
             </span>
-            <button className="btn-section">Xem thêm</button>
+            <button className="btn-section">
+              <FormattedMessage id="homePage.see-more" />
+            </button>
           </div>
           <div className="section-body">
             <Slider {...props.settings}>

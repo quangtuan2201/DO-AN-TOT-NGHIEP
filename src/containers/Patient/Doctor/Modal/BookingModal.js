@@ -31,14 +31,10 @@ function BookingModal({ id }) {
   const { isOpenModal, handlShowModal, selectedTimeSlot } = useContext(
     ThemeContextDoctorSchedule
   );
-  // const { id } = useParams();
-  console.log("id", id);
-  console.log("-----re-render---------BookingModal");
   const dispatch = useDispatch();
   const inputRefs = [useRef(null), useRef(null)];
   const [selectedBirthDay, setSelectedBirthDay] = useState(null);
   const { language, genders } = useSelector((state) => {
-    console.log("state:", state);
     return {
       language: state.app.language,
       genders: state.admin.gender,
@@ -58,19 +54,9 @@ function BookingModal({ id }) {
     language: "",
     birthday: "",
   });
-  // console.log("selectedTimeSlot: ", selectedTimeSlot);
-  // console.log("handlShowModal: ", handlShowModal);
-  // if (!id) {
-  //   console.error("Id Requied parameter !");
-  //   id = null;
-  // } else {
-  //   formData.doctorId = id;
-  // }
 
   if (!selectedTimeSlot) {
-    // console.error("selectedTimeSlot parameter null or undefined");
   } else {
-    console.log("====>TimeSlot: ", selectedTimeSlot);
     formData.timeType = selectedTimeSlot.timeType;
     formData.doctorId = selectedTimeSlot.doctorId;
     formData.date = selectedTimeSlot.date;
@@ -119,7 +105,6 @@ function BookingModal({ id }) {
 
   //Hàm lấy fullName
   const builDoctorName = (language) => {
-    console.log("Built Doctor theo language: ", selectedTimeSlot);
     const { firstName, lastName } = selectedTimeSlot.doctorData;
     const checkLang = language && language === LANGUAGES.VI;
     const fullName = checkLang
@@ -131,7 +116,6 @@ function BookingModal({ id }) {
     try {
       e.preventDefault(); /*e.preventDefault(), bạn có thể thực hiện xử lý dữ liệu của mình
     hoặc thực hiện các hành động cần thiết mà không gây ra việc tải lại trang.*/
-      // console.log("Submit selectedTimeSlot:", selectedTimeSlot);
 
       const {
         fullName,
@@ -181,22 +165,21 @@ function BookingModal({ id }) {
       const timebooking = renderTimeBooking(language);
       formData.timeString = timebooking;
       const doctorName = builDoctorName(language);
-      console.log("Lấy tên bác sĩ : ", doctorName);
       formData.doctorName = doctorName;
-      console.log("doctorId: ", selectedTimeSlot.doctorId);
       formData.doctorId = selectedTimeSlot.doctorId;
-      console.log("language: ", language);
       formData.language = language;
 
-      console.log("------------>>>  Data modal : ", formData);
+      dispatch(actions.changLoading(true));
       const result = await patientService.handlSavePatientBookAppointment(
         formData
       );
 
       if (result) {
         handlShowModal();
+        dispatch(actions.changLoading(false));
         toast.success("Tạo lịch hẹn khám thành công.");
       } else {
+        dispatch(actions.changLoading(false));
         toast.error("Tạo lịch hẹn khám không thành công.");
       }
       setSelectedBirthDay(new Date());

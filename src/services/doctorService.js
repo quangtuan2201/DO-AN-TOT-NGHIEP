@@ -21,9 +21,7 @@ const handleGetAllDoctors = async () => {
 //[CREATE] || [UPDATE] /api/save-info-doctor
 const handleSaveInfoDoctor = async (InfoDoctor) => {
   try {
-    // console.log("");
     const response = await instance.post("/save-info-doctor", InfoDoctor);
-    console.log("Call API save info doctor in doctorService:", response);
     if (response && response.data) {
       return response.data;
     } else {
@@ -41,7 +39,6 @@ const handleSaveInfoDoctor = async (InfoDoctor) => {
 const handleGetDetailDoctor = async (id) => {
   try {
     const response = await instance.get(`/detail-doctor-by-id?id=${id}`);
-    // console.log("response handleGetDetailDoctor: ", response);
     if (response.data.data && response.data.errCode === 0) {
       return response.data.data;
     } else {
@@ -84,7 +81,6 @@ const handlBulkCreateSchedule = async (data) => {
 };
 const handlefindScheduleByDate = async (doctorId, date) => {
   try {
-    // console.log("doctor IDDDDDDDDĐ: ", doctorId);
     const response = await instance.get("/get-schedule-doctor-by-date", {
       params: {
         doctorId,

@@ -116,6 +116,24 @@ const fetchGetResultSearch = async (keyword) => {
     throw error;
   }
 };
+//
+const fetchGetStatisticalByDate = async (formData) => {
+  try {
+    console.log("Form data: ", formData);
+    const response = await instance.get("/get-statistics-by-date", {
+      params: formData,
+    });
+    console.log("response: ", response);
+    const { data, errCode } = response.data;
+    if (data && errCode === 0) {
+      return data;
+    } else {
+      return;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
 export default {
   handleLogin,
   getAllUsers,
@@ -125,4 +143,5 @@ export default {
   getAllCode,
   fetchGetTopDoctor,
   fetchGetResultSearch,
+  fetchGetStatisticalByDate,
 };

@@ -9,9 +9,7 @@ import "./DetailDoctor.scss";
 function DetailDoctor() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  //   const [doctor, setDoctor] = useState(null);
   const { language, doctor } = useSelector((state) => {
-    // console.log("State redux: ", state);
     return {
       language: state.app.language,
       doctor: state.doctor.detailDoctor,
@@ -19,16 +17,8 @@ function DetailDoctor() {
   });
 
   useEffect(() => {
-    //     const detaiDoctor = async () => {
-    //       const doctor = await doctorService.handleGetDetailDoctor(id);
-    //       console.log("doctor: ", doctor);
-    //       setDoctor(doctor);
-    //     };
-    //     detaiDoctor();
-    console.log("id: ", id);
     dispatch(actions.fetchGetDetailDoctor(id));
   }, []);
-  //   console.log("Image: ", doctor.image);
   return (
     <React.Fragment>
       <HomeHeader isShowHeader={false} />

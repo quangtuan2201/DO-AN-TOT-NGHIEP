@@ -1,17 +1,23 @@
 @import "variables";
 
 .text-center {
-    text-align: center !important;
+  text-align: center !important;
 }
 
 .text-left {
-    text-align: left !important;
+  text-align: left !important;
 }
 
 .text-right {
-    text-align: right !important;
+  text-align: right !important;
 }
 
 .text-red {
-    color: $common-red !important;
+  color: $common-red !important;
+}
+div._loading_overlay_wrapper {
+  position: unset;
+  ._loading_overlay_overlay {
+    z-index: 100000000;
+  }
 }

@@ -14,7 +14,6 @@ function OutStandingDoctor(props) {
   const dispatch = useDispatch();
   const history = useHistory();
   useEffect(() => {
-    // console.log("seemore last:", seemore);
     if (seemore === false) {
       dispatch(actions.fetchTopDoctor(15));
     } else {
@@ -22,24 +21,18 @@ function OutStandingDoctor(props) {
     }
   }, [seemore]);
   const { language, topDoctors } = useSelector((state) => {
-    // console.log("state stote in OutStanding", state);
     return {
       language: state.app.language,
       topDoctors: state.doctor.topDoctors,
-      // allDoctors: state.doctor.allDoctors,
     };
   });
   const handleViewDetailDoctor = (doctor) => {
-    // console.log("handle click view: ", doctor);
     history.push(`/detail-doctors/${doctor.id}`);
   };
   const getThumbnail = (imagebuffer) => {
     let imageBase64 = "";
-    // console.log("imagebuffer: ", imagebuffer, typeof imagebuffer);
     if (imagebuffer && typeof imagebuffer === "object") {
       imageBase64 = Buffer.from(imagebuffer, "base64").toString("binary");
-      // new Buffer(imagebuffer, "base64").toString("binary");
-      // console.log("Is Image base64");
       return imageBase64;
     }
     return imageBase64;
@@ -48,8 +41,6 @@ function OutStandingDoctor(props) {
   const renderAllDoctor = (allDoctors) => {
     const containerStyle = {
       height: "700px", // Có thể là px, em, rem, %, etc.
-      // backgroundColor: 'lightgray', // Các thuộc tính CSS khác nếu cần
-      // padding: '10px',
       boxSizing: "border-box",
     };
 

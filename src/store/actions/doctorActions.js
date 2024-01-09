@@ -10,19 +10,17 @@ export const fetchGetAllDoctors = () => {
   return async (dispatch) => {
     try {
       const response = await doctorService.handleGetAllDoctors();
-      console.log("fetch get all doctor: ", response);
-      console.log("response ALL DOCTOR in file adminAction:", response);
       if (response.data && response.errCode === 0) {
-        toast.success(
-          <FormattedMessage id="user-manage.sucess-get-all-user" />
-        );
+        // toast.success(
+        //   <FormattedMessage id="user-manage.sucess-get-all-user" />
+        // );
         dispatch(fetchAllDoctorSuccess(response.data));
       } else {
-        toast.error(<FormattedMessage id="user-manage.error-get-all-user" />);
+        // toast.error(<FormattedMessage id="user-manage.error-get-all-user" />);
         dispatch(fetchAllDoctoFail());
       }
     } catch (error) {
-      toast.error(<FormattedMessage id="user-manage.error-get-all-user" />);
+      // toast.error(<FormattedMessage id="user-manage.error-get-all-user" />);
       dispatch(fetchAllDoctoFail());
     }
   };
@@ -40,14 +38,14 @@ export const fetchAllCodeScheduleHours = () => {
     try {
       const reseponse = await doctorService.handleAllCodeScheduleHours();
       if (reseponse) {
-        <FormattedMessage id="user-manage.success-get-allcode-schedule" />;
+        // <FormattedMessage id="user-manage.success-get-allcode-schedule" />;
         dispatch(fetchAllCodeScheduleHoursSuccess(reseponse));
       } else {
-        <FormattedMessage id="user-manage.error-get-allcode-schedule" />;
+        // <FormattedMessage id="user-manage.error-get-allcode-schedule" />;
         dispatch(fetchAllCodeScheduleHoursFail());
       }
     } catch (error) {
-      <FormattedMessage id="user-manage.error-get-allcode-schedule" />;
+      // <FormattedMessage id="user-manage.error-get-allcode-schedule" />;
       dispatch(fetchAllCodeScheduleHoursFail());
     }
   };
@@ -60,6 +58,38 @@ const fetchAllCodeScheduleHoursFail = () => ({
   type: actionTypes.FETCH_ALLCODE_SCHEDULE_HOURS_FAIL,
 });
 
+// fetchRequiedDoctorInfo
+// export const fetchRequiedDoctorInfo = () => {
+//   return async (dispatch) => {
+//     try {
+//       dispatch(fetchRequiedDoctorInfoStart());
+
+//       const [
+//         { data: dataKeyPrice, errCode: errCodePrice },
+//         { data: dataKeyPayment, errCode: errCodePayment },
+//         { data: dataKeyProvince, errCode: errCodeProvince },
+//       ] = await Promise.all([
+//         userService.getAllCode("PRICE"),
+//         userService.getAllCode("PAYMENT"),
+//         userService.getAllCode("PROVINCE"),
+//       ]);
+//       if (errCodePrice === 0 && errCodePayment === 0 && errCodeProvince === 0) {
+//         dispatch(
+//           fetchRequiedDoctorInfoSuccess({
+//             dataKeyPrice,
+//             dataKeyPayment,
+//             dataKeyProvince,
+//           })
+//         );
+//       } else {
+//         dispatch(fetchRequiedDoctorInfoFail());
+//       }
+//     } catch (error) {
+//       dispatch(fetchRequiedDoctorInfoFail());
+//       console.error("---", error.message);
+//     }
+//   };
+// };
 // fetchRequiedDoctorInfo
 export const fetchRequiedDoctorInfo = () => {
   return async (dispatch, getState) => {
@@ -96,6 +126,7 @@ export const fetchRequiedDoctorInfo = () => {
     }
   };
 };
+
 //ACTION FETCH REQUAIE DOCTOR INFO
 const fetchRequiedDoctorInfoStart = () => ({
   type: actionTypes.FETCH_REQUIRED_DOCTOR_INFO_START,
@@ -113,11 +144,7 @@ const fetchRequiedDoctorInfoFail = (data) => ({
 export const fetchSaveInfoDoctor = (newInfo) => {
   return async (dispatch, getState) => {
     try {
-      // toast.error("ACTION SAVE DOCTOR...");
-      console.log("===> Info Doctor in Doctor Action: ", newInfo);
-      // console.log("Get State save info; ", getState());
       const response = await doctorService.handleSaveInfoDoctor(newInfo);
-      // console.log("response SAVE INFO in file adminAction:", response);
       if (response.data && response.errCode === 0) {
         toast.success(
           <FormattedMessage id="user-manage.sucess-save-info-user" />
@@ -129,7 +156,7 @@ export const fetchSaveInfoDoctor = (newInfo) => {
         dispatch(fetchSaveInfoDoctorFail());
       }
     } catch (error) {
-      console.log("exception ", error.message);
+      console.error("exception ", error.message);
       toast.error(<FormattedMessage id="user-manage.error-save-info-user" />);
       dispatch(fetchSaveInfoDoctorFail());
     }
@@ -148,20 +175,19 @@ export const fetchGetDetailDoctor = (id) => {
   return async (dispatch) => {
     try {
       const doctor = await doctorService.handleGetDetailDoctor(id);
-      // console.log("Doctor: ", doctor);
       if (doctor) {
-        toast.success(
-          <FormattedMessage id="user-manage.sucess-get-detail-user" />
-        );
+        // toast.success(
+        //   <FormattedMessage id="user-manage.sucess-get-detail-user" />
+        // );
         dispatch(fetchGetDetailDoctorSuccess(doctor));
       } else {
-        toast.error(
-          <FormattedMessage id="user-manage.error-get-detail-user" />
-        );
+        // toast.error(
+        //   <FormattedMessage id="user-manage.error-get-detail-user" />
+        // );
         dispatch(fetchGetDetailDoctorFail());
       }
     } catch (error) {
-      toast.error(<FormattedMessage id="user-manage.error-get-detail-user" />);
+      // toast.error(<FormattedMessage id="user-manage.error-get-detail-user" />);
       dispatch(fetchGetDetailDoctorFail());
       console.error("", error.message);
     }
@@ -178,12 +204,9 @@ const fetchGetDetailDoctorFail = () => ({
 });
 //ACTION UPDATE
 export const fetchTopDoctor = (limit) => {
-  // console.log("limit1:", limit);
   return async (dispatch, getState) => {
     try {
-      // console.log("limit 2: ", limit);
       const response = await userService.fetchGetTopDoctor(limit, "R2");
-      // console.log("response: ", response);
       if (response.data && response.errCode === 0) {
         dispatch(fetcTopDoctorSuccess(response.data));
       } else {

@@ -25,21 +25,18 @@ import DetailClinic from "./Patient/Doctor/DetailClinic.js";
 
 import Doctor from "../routes/Doctor.js";
 import VerifyEmail from "./Patient/VerifyEmail.js";
+import Search from "./HomePage/Section/Search/Search.js";
+import Support from "./HomePage/Section/Support/Support.js";
+import LoadingOverlay from "react-loading-overlay";
+import { useSelector } from "react-redux";
 // import { changeLanguageApp } from ".././store/actions/appActions.js";
-// import * as actions from "./../store/actions";
 
 const App = () => {
-  const handlePersistorState = () => {
-    // You may need to adjust this part based on your specific use case
-    // The logic appears to depend on the persistor, which might not be necessary with hooks
-    // If necessary, you could use local state or other hooks to handle this logic
-    // Example: const { bootstrapped } = useSomeCustomHook();
-    // setBootstrapped(bootstrapped);
-  };
-
-  useEffect(() => {
-    handlePersistorState();
-  }, []);
+  // const { loading } = useSelector((state) => {
+  //   return {
+  //     loading: state.app.loading,
+  //   };
+  // });
 
   return (
     <Fragment>
@@ -74,22 +71,11 @@ const App = () => {
                   path={path.VERIFY_EMAIL_BOOKING}
                   component={VerifyEmail}
                 />
+                <Route path={path.SEARCH} component={Search} />
+                <Route path={path.SUPPORT} component={Support} />
               </Switch>
             </CustomScrollbars>
           </div>
-
-          {/* <ToastContainer
-            className="toast-container"
-            toastClassName="toast-item"
-            bodyClassName="toast-item-body"
-            autoClose={false}
-            hideProgressBar={true}
-            pauseOnHover={false}
-            pauseOnFocusLoss={true}
-            closeOnClick={false}
-            draggable={false}
-            closeButton={<CustomToastCloseButton />}
-          /> */}
           <ToastContainer
             position="bottom-right"
             autoClose={3000}
@@ -101,6 +87,12 @@ const App = () => {
             draggable
             pauseOnHover
           />
+          <LoadingOverlay
+            className="text-warning"
+            active={false}
+            spinner
+            text="Loading..."
+          ></LoadingOverlay>
         </div>
       </Router>
     </Fragment>

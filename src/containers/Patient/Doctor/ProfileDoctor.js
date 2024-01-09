@@ -11,14 +11,10 @@ function ProfileDoctor({ isShowDescription, id, selectedTimeSlot }) {
   // const { id } = useParams();
   const isMounted = useRef(true);
   const [profileDoctor, setProfileDoctor] = useState({});
-  console.log("-----re-render---------ProfileDoctor");
-  // console.log("user click booking: ", selectedTimeSlot);
-  // const { selectedTimeSlot } = useContext(ThemeContextDoctorSchedule);
   const language = useSelector((state) => {
     return state.app.language;
   });
   const checkLang = language === LANGUAGES.VI;
-  console.log(" Giá trị doctor được truyền id: : ", id);
   const renderTimeBooking = () => {
     if (!selectedTimeSlot) {
       console.error("SelectedTimeSlot underfined or null");
@@ -31,12 +27,7 @@ function ProfileDoctor({ isShowDescription, id, selectedTimeSlot }) {
     const date = moment(timestamp).toDate();
     const dateVn = moment(date).format("dddd - DD/MM");
     const dateEn = moment(date).locale("en").format("ddd - DD/MM");
-    //     console.log("Ngày chọn lịch khám : ", date);
-    //     console.log("moment vi: ", moment(new Date()).format("dddd - DD/MM"));
-    //     console.log(
-    //       "moment en: ",
-    //       moment(new Date()).locale("en").format("ddd - DD/MM")
-    //     );
+
     return (
       <>
         {`${bookFrameHours}, ${checkLang ? dateVn : dateEn}`}
@@ -58,9 +49,7 @@ function ProfileDoctor({ isShowDescription, id, selectedTimeSlot }) {
   useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
-
     // Khai báo biến để lưu trữ dữ liệu
-
     (async () => {
       try {
         // Gán giá trị từ phản hồi vào biến đã khai báo
@@ -69,8 +58,6 @@ function ProfileDoctor({ isShowDescription, id, selectedTimeSlot }) {
           signal
         );
         if (result) {
-          // console.log("isMounted: ", isMounted.current);
-          // Gọi hàm setProfileDoctor bên trong hàm fetchData
           setProfileDoctor(result);
         }
       } catch (error) {
@@ -83,8 +70,6 @@ function ProfileDoctor({ isShowDescription, id, selectedTimeSlot }) {
     };
   }, [id]);
 
-  // console.log("profileDoctor", profileDoctor);
-  //   const
   return (
     <>
       <div className="profile-doctor-container ">

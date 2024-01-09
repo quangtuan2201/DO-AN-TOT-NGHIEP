@@ -9,7 +9,6 @@ import { useIntl, FormattedMessage } from "react-intl";
 import { LANGUAGES } from "../../utils/constant";
 
 function Login(props) {
-  // console.log("PROPS: ", props);
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const {
@@ -21,12 +20,6 @@ function Login(props) {
   } = useForm();
   const intl = useIntl();
   const { language, userInfo, navigate } = useSelector((state) => {
-    // console.log("STATE REDUCER: ", state);
-    // navigate: (path) => {
-    //   console.log("PATH: ", path);
-    //   return dispatch(push(path));
-    // },
-
     return {
       language: state.app.language,
       userInfo: state.user.userInfo,
@@ -35,18 +28,13 @@ function Login(props) {
 
   //[handele submit]
   const handleLogin = (data) => {
-    // console.log("data login: ", data);
-    // dispatch(actions.fetchUserLogin(data));
-    // props.userLoginSuccess();
     dispatch(actions.fetchUserLogin(data));
-    // props.dispatch(actions.fetchUserLogin(data));
     setValue("email", "");
     setValue("password", "");
   };
   //[handele togglePass]
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
-    // reset();
   };
   //handle Enter pass
   const handleEnterKeyPress = (e) => {
@@ -222,24 +210,5 @@ function Login(props) {
     </div>
   );
 }
-
-// const mapStateToProps = (state) => {
-//   return {
-//     language: state.app.language,
-//   };
-// };
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     navigate: (path) => {
-//       console.log("PATH: ", path);
-//       return dispatch(push(path));
-//     },
-
-//     userLoginSuccess: (userInfo) => {},
-//     // dispatch(actions.userLoginSuccess(userInfo)),
-//     // userLoginFail: () => dispatch(actions.adminLoginFail()),
-//   };
-// };
 
 export default Login;

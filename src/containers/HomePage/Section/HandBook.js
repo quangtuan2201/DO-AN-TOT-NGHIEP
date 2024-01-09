@@ -1,11 +1,10 @@
 // function Specialty() {}
 import "./HandBook.scss";
 import React, { useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
 // Import css files
-
-import { FormattedMessage, useIntl } from "react-intl";
 
 function HandBook(props) {
   return (
@@ -13,8 +12,12 @@ function HandBook(props) {
       <div className="section-specialty section-share ">
         <div className="section-container">
           <div className="section-header">
-            <span className="title-section">Cẩm nang</span>
-            <button className="btn-section">Xem thêm</button>
+            <span className="title-section">
+              <FormattedMessage id="handbook.hand-book" />
+            </span>
+            <button className="btn-section">
+              <FormattedMessage id="homePage.see-more" />{" "}
+            </button>
           </div>
           <div className="section-body">
             <Slider {...props.settings}>

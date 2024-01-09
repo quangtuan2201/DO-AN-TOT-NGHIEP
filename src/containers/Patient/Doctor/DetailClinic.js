@@ -29,10 +29,7 @@ function DetailClinic() {
         console.error(`Fetch info clinic fail.${error.message}`);
       }
     })();
-    console.log("id: ", id);
-    // dispatch(actions.fetchGetDetailDoctor(id));
   }, []);
-  console.log("Info: ", infoDetailClinic);
   return (
     <React.Fragment>
       <HomeHeader isShowHeader={false} />

@@ -9,27 +9,7 @@ import { LANGUAGES, USER_ROLE } from "../../utils/constant";
 import { changeLanguageApp } from "../../store/actions/appActions";
 import { FormattedMessage, useIntl } from "react-intl";
 
-// class Header extends Component {
-//   render() {
-//     const { processLogout } = this.props;
-
-//     return (
-//       <div className="header-container">
-//         {/* thanh navigator */}
-//         <div className="header-tabs-container">
-//           <Navigator menus={adminMenu} />
-//         </div>
-
-//         {/* nút logout */}
-//         <div className="btn btn-logout" onClick={processLogout}>
-//           <i className="fas fa-sign-out-alt"></i>
-//         </div>
-//       </div>
-//     );
-//   }
-// }
 function Header() {
-  // console.log("processLogout", processLogout);
   const dispatch = useDispatch();
   const [menuApp, setMenuApp] = useState([]);
   const { language, userInfo } = useSelector((state) => {
@@ -39,21 +19,17 @@ function Header() {
     };
   });
   useEffect(() => {
-    // let menu =[];
-    // console.log("UserInfo: ", userInfo);
     if (userInfo && Object.keys(userInfo).length > 0) {
       let role = userInfo.roleId;
       if (role === USER_ROLE.ADMIN) {
-        // console.log("IS ADMIN");
         setMenuApp(adminMenu);
       } else if (role === USER_ROLE.DOCTOR) {
-        // console.log("IS DOCTOR");
         setMenuApp(doctorMenu);
       }
     } else {
-      console.log("IS ...");
+      console.error("Phân quyền xảy ra lỗi hoặc một lý do khác ...");
     }
-  });
+  }, [userInfo]);
 
   const switchToEnglish = () => {
     dispatch(changeLanguageApp(LANGUAGES.EN));
@@ -98,17 +74,5 @@ function Header() {
     </div>
   );
 }
-
-// const mapStateToProps = (state) => {
-//   return {
-//     isLoggedIn: state.user.isLoggedIn,
-//   };
-// };
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     processLogout: () => dispatch(actions.processLogout()),
-//   };
-// };
 
 export default Header;

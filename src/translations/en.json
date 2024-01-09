@@ -1,113 +1,166 @@
 {
-    "homeHeader":{
-        "speciality":"Medical specialty",
-        "searchDoctor":"Find doctors by specialty",
-        "healthFacility":"Health facility",
-        "selectRoom":"Choose a hospital or clinic",
-        "selectDoctor":"Choose a good doctor",
-        "doctor":"Doctor",
-        "fee":"Feer",
-        "checkHealth":"Check Health",
-        "support":"Support",
-        "wellcome":"Wellcome, "
+  "homeHeader": {
+    "speciality": "Medical specialty",
+    "searchDoctor": "Find doctors by specialty",
+    "healthFacility": "Health facility",
+    "selectRoom": "Choose a hospital or clinic",
+    "selectDoctor": "Choose a good doctor",
+    "doctor": "Doctor",
+    "fee": "Feer",
+    "checkHealth": "Check Health",
+    "support": "Support",
+    "wellcome": "Wellcome, "
+  },
+  "handbook": {
+    "title1": "MEDICAL FOUNDATION",
+    "title2": "Comprehensive health care",
+    "searchInput": "Find medical specialty",
+    "specialty": "Specialty examination",
+    "removeHealth": "Remote examination",
+    "generalityHealth": "General examination",
+    "medicalTesting": "Medical testing",
+    "mentalHealth": "Mental health",
+    "dentalExamination": "Dental examination",
+    "outstanding-medical-facilities": "Outstanding medical facilities",
+    "hand-book": "Hand book"
+  },
+  "banner": {
+    "title1": "MEDICAL FOUNDATION",
+    "title2": "Comprehensive health care",
+    "searchInput": "Find a medical specialist",
+    "specialty": "Specialized examination",
+    "removeHealth": "Remote examination",
+    "generalityHealth": "General examination",
+    "medicalTesting": "Medical tests",
+    "mentalHealth": "Mental health",
+    "dentalExamination": "Dental examination",
+    "outstanding-medical-facilities": "Outstanding Medical Facilities"
+  },
+  "popularSpeciality": {
+    "popularSpeciality": "Popular speciality"
+  },
+  "login": {
+    "login": "Login",
+    "email": "Email",
+    "password": "Password",
+    "userpass-wrong": "Sai tên đăng nhập hoặc mật khẩu!",
+    "show": "Show Password",
+    "hide": "Hide Password",
+    "or-login-with": "Or Login with?",
+    "oblivion": "Forgot password?"
+  },
+  "menu": {
+    "admin": {
+      "manage-user": "User",
+      "manage-doctor": "Doctor management",
+      "manage-statistics-booking": "Manage booking statistics",
+      "crud": "CRUD User",
+      "crud-redux": "CRUD User , redux",
+      "manage-clinic": " Clinic management",
+      "clinic": "Clinic",
+      "specialty": "Specialty",
+      "manage-specialty": "Specialty management",
+      "statistics": "Statistics",
+      "manage-post": "Post management",
+      "handbook": "HandBook management",
+      "manage-handbook": "HandBook management"
     },
-    "banner":{
-        "title1":"MEDICAL FOUNDATION",
-        "title2":"Comprehensive health care",
-        "searchInput":"Find a medical specialist",
-        "specialty":"Specialized examination",
-        "removeHealth":"Remote examination",
-        "generalityHealth":"General examination",
-        "medicalTesting":"Medical tests",
-        "mentalHealth":"Mental health",
-        "dentalExamination":"Dental examination"
-
-    },
-    "popularSpeciality":{
-        "popularSpeciality":"Popular speciality"
-    },
-    "login": {
-        "login": "Login",
-        "email": "Email",
-        "password": "Password",
-        "userpass-wrong": "Sai tên đăng nhập hoặc mật khẩu!",
-        "show":"Show Password",
-        "hide":"Hide Password",
-        "or-login-with":"Or Login with?",
-        "oblivion":"Forgot password?"
-    },
-    "menu": {
-        "admin":{
-            "manage-user":"User",
-            "manage-doctor":"Doctor management",
-            "manage-admin":"Admin management",
-            "crud":"CRUD User",
-            "crud-redux":"CRUD User , redux",
-            "manage-clinic":" Clinic management",
-            "clinic":"Clinic",
-            "specialty":"Specialty",
-            "manage-specialty":"Specialty management",
-            "post":"Post",
-            "manage-post":"Post management",
-            "handbook":"HandBook management",
-            "manage-handbook":"HandBook management"
-        },
-        "doctor":{
-            "manage-schedule":"Manage doctor's schedule",
-            "manage-patient":"Manage doctor's patient"
-
-        }
-    },
-    "user-manage":{
-        "add":"Add new user",
-        "email":"Email",
-        "password":"Password",
-        "firstName":"First name",
-        "lastName":"Last name",
-        "phoneNumber":"Phone number",
-        "address":"Address",
-        "gender":"Gender",
-        "position":"Position",
-        "role":"Role",
-        "image":"Avatar",
-        "save":"Save user",
-        "clear":"Clear",
-        "enter":"Enter",
-        "action":"Action",
-        "selectGender":"Select Gender",
-        "selectPosition":"Select Position",
-        "selectRole":"Select Role",
-        "invalidEmail":"Invalid Email",
-        "enterEmail":"Enter Email",
-        "enterPassword":"Enter Password",
-        "login":"Login",
-        "passwordLength":"Password length"
-    },
-    "homePage":{
-        "prominent-doctor":"Prominent dotor",
-        "see-more":"See more"
-
-    },
-    "manage-schedule": {
-        "title":"Manage doctor's medical examination plans",
-        "save":"Save",
-        "select-date":"Select date",
-        "select-doctor":"Select doctor",
-        "appointment-schedule":"Appointment Schedule",
-        "warring-select-doctor":"Please select a date before submitting.",
-        "warring-select-date":"Please select a date before submitting.",
-        "warring-select-schedule-hours":"Please select an appointment time frame before submitting.",
-        "success-book-schedule":"Added new appointment successfully.",
-        "error-book-schedule" :"Adding a new appointment failed",
-        "no-appointment-scheduled":"There are no appointments available during this time, please choose another time.",
-        "appointment":"Appointment",
-        "chosse":"Chosse ",
-        "and-book":" and book (free)"
-
-
-
+    "doctor": {
+      "manage-schedule": "Manage doctor's schedule",
+      "manage-patient": "Manage doctor's patient"
     }
-    
+  },
+  "user-manage": {
+    "user-manage": "Manage user",
+    "add": "Add new user",
+    "email": "Email",
+    "password": "Password",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "phoneNumber": "Phone number",
+    "address": "Address",
+    "gender": "Gender",
+    "position": "Position",
+    "role": "Role",
+    "image": "Avatar",
+    "save": "Save user",
+    "clear": "Clear",
+    "enter": "Enter",
+    "action": "Action",
+    "selectGender": "Select Gender",
+    "selectPosition": "Select Position",
+    "selectRole": "Select Role",
+    "invalidEmail": "Invalid Email",
+    "enterEmail": "Enter Email",
+    "enterPassword": "Enter Password",
+    "login": "Login",
+    "passwordLength": "Password length"
+  },
+  "homePage": {
+    "prominent-doctor": "Prominent dotor",
+    "see-more": "See more"
+  },
+  "manage-schedule": {
+    "title": "Manage doctor's medical examination plans",
+    "save": "Save",
+    "select-date": "Select date",
+    "select-doctor": "Select doctor",
+    "appointment-schedule": "Appointment Schedule",
+    "warring-select-doctor": "Please select a date before submitting.",
+    "warring-select-date": "Please select a date before submitting.",
+    "warring-select-schedule-hours": "Please select an appointment time frame before submitting.",
+    "success-book-schedule": "Added new appointment successfully.",
+    "error-book-schedule": "Adding a new appointment failed",
+    "no-appointment-scheduled": "There are no appointments available during this time, please choose another time.",
+    "appointment": "Appointment",
+    "chosse": "Chosse ",
+    "and-book": " and book (free)"
+  },
+  "manage-doctor": {
+    "create-more-doctors-info": "Create more Doctors information",
+    "choose-doctor": "Choose a doctor:",
+    "description": "Description:",
+    "chosse-price": "Choose price:",
+    "select-payment-method": "Select payment method:",
+    "select-province": "Select province:",
+    "clinic-name": "Clinic name:",
+    "clinic-address": "Clinic address:",
+    "note": "Note:",
+    "choose-specialty": "Choose specialty:",
+    "choose-clinic": "Choose clinic:",
+    "create-info": "Create information",
+    "edit": "Edit",
+    "required": "This field is required"
+  },
+  "manage-hanbook": {
+    "hanbook-title": "Manage handbook"
+  },
+  "manage-specialty": {
+    "specialty-title": "Management specialty",
+    "choose-speciality": "Choose speciality:",
+    "choose-image": "Choose specialized photos:",
+    "button": "Save info"
+  },
 
-      
+  "manage-statistical": {
+    "statistical-title": "Management statistics ",
+    "all": "ALL",
+    "choose-doctor": "Choose doctor:",
+    "choose-start-date": "Choose start date: ",
+    "choose-end-date": "Choose end date: ",
+    "fullName": "Full name",
+    "status": "Status",
+    "column-chart": "Column statistical column chart",
+    "pie-chart": "Percentage pie chart",
+    "appointment": "The doctor has no appointment yet.",
+    "submit": "Submit"
+  },
+  "doctor-extra-info": {
+    "address-price": "Address of examination price",
+    "price": "Examination price: ",
+    "preferential": "Priority for examination before booking through bookingcare",
+    "payment-method": "Patients can pay fees in this form",
+    "see-details": "See details!",
+    "hide details": "Hide details!"
+  }
 }

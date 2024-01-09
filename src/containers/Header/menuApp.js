@@ -56,12 +56,12 @@ export const adminMenu = [
     ],
   },
   {
-    // Quản lý bài đăng
-    name: "menu.admin.post",
+    // Quản lý thống kê
+    name: "menu.admin.statistics",
     menus: [
       {
-        name: "menu.admin.manage-post",
-        link: "/system/post-manage",
+        name: "menu.admin.manage-statistics-booking",
+        link: "/system/statistics-manage",
       },
     ],
   },

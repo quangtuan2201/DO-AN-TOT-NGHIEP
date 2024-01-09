@@ -13,13 +13,7 @@ import React, {
 } from "react";
 function VerifyEmail(prop) {
   const [statusVerify, setStatusVerify] = useState("");
-  // const { search } = useLocation(); saveVerifiyBookAppointment
-  // const params = new URLSearchParams(search);
-  // const token = params.get("token");
-  // const doctorId = params.get("doctorId");
-  // console.log("token: ", token);
   const state = useSelector((state) => {
-    console.log("State : ", state);
     return state;
   });
   useEffect(() => {
@@ -28,13 +22,10 @@ function VerifyEmail(prop) {
         const urlParams = new URLSearchParams(prop.location.search);
         let token = urlParams.get("token");
         let doctorId = urlParams.get("doctorId");
-        console.log("token: ", token);
-        console.log("doctorId: ", doctorId);
         const response = await patientService.handlSaveVerifyAppointment(
           token,
           doctorId
         );
-        console.log("response: ", response);
         if (response && +response.errCode === 0) {
           setStatusVerify("Lịch đặt của bạn kích hoạt thành công");
         } else if (+response.errCode === 2) {
