@@ -23,6 +23,11 @@ export const adminMenu = [
         name: "menu.doctor.manage-schedule",
         link: "/doctor/manage-schedule",
       },
+      {
+        //Quản lý lịch sử khám
+        name: "menu.doctor.manage-historys-booking",
+        link: "/doctor/manage-historys-booking",
+      },
     ],
   },
   {
@@ -63,6 +68,18 @@ export const adminMenu = [
         name: "menu.admin.manage-statistics-booking",
         link: "/system/statistics-manage",
       },
+      {
+        name: "menu.admin.manage-statistics-patient",
+        link: "/system/statistics-patients",
+      },
+      {
+        name: "menu.admin.manage-statistics-doctors",
+        link: "/system/statistics-doctors",
+      },
+      {
+        name: "menu.admin.manage-statistics-specialtys",
+        link: "/system/statistics-specialtys",
+      },
     ],
   },
 ];
@@ -79,6 +96,11 @@ export const doctorMenu = [
         //Quản lý bệnh nhân kham bẹnh
         name: "menu.doctor.manage-patient",
         link: "/doctor/manage-patient",
+      },
+      {
+        //Quản lý lịch sử khám
+        name: "menu.doctor.manage-historys-booking",
+        link: "/doctor/manage-historys-booking",
       },
     ],
   },

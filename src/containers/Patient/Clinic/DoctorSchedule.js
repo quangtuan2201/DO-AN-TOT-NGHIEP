@@ -21,7 +21,6 @@ import "./DoctorSchedule.scss";
 export const ThemeContextDoctorSchedule = createContext();
 
 function DoctorSchedule({ id }) {
-  const dispatch = useDispatch();
   const [allDays, setAllDays] = useState([]);
   const [chosenDate, setChosenDate] = useState(0);
   const [allAvalableTime, setAllAvalableTime] = useState([]);

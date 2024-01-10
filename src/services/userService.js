@@ -116,7 +116,7 @@ const fetchGetResultSearch = async (keyword) => {
     throw error;
   }
 };
-//
+//Lấy dữ liệu thống kế bằng date
 const fetchGetStatisticalByDate = async (formData) => {
   try {
     console.log("Form data: ", formData);
@@ -126,6 +126,22 @@ const fetchGetStatisticalByDate = async (formData) => {
     console.log("response: ", response);
     const { data, errCode } = response.data;
     if (data && errCode === 0) {
+      return data;
+    } else {
+      return;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+//Lấy dữ liệu lịch sử đặt lịch
+const fetchGetHistorysBookingByDate = async (formData) => {
+  try {
+    const response = await instance.get("/get-historys-booking-by-date", {
+      params: formData,
+    });
+    const { data, errCode } = response.data;
+    if ((data, errCode === 0)) {
       return data;
     } else {
       return;
@@ -144,4 +160,5 @@ export default {
   fetchGetTopDoctor,
   fetchGetResultSearch,
   fetchGetStatisticalByDate,
+  fetchGetHistorysBookingByDate,
 };

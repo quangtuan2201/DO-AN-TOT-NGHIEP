@@ -57,6 +57,10 @@
       "manage-doctor": "Quản lý bác sĩ",
       "manage-admin": "Quản lý admin",
       "manage-statistics-booking": "Quản lý thống kê đặt lịch",
+      "manage-statistics-patient": "Quảng lý thống kê bệnh nhân",
+      "manage-statistics-doctors": "Quản lý thống kê bác sĩ",
+      "manage-statistics-specialtys": "Quản lý chuyên khoa",
+      "manage-historys-booking": "Quản lý lịch sử đặt lịch khám",
       "crud": "CRUD Người dùng",
       "crud-redux": "CRUD Người dùng , redux",
       "manage-clinic": " Quản lý phòng khám",
@@ -70,7 +74,8 @@
     },
     "doctor": {
       "manage-schedule": "Quản lý kế hoạch khám bệnh",
-      "manage-patient": "Quản lý bệnh nhân khám bệnh"
+      "manage-patient": "Quản lý bệnh nhân khám bệnh",
+      "manage-historys-booking": "Quản lý lịch sử đặt lịch khám"
     }
   },
   "user-manage": {

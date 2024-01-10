@@ -1,0 +1,29 @@
+.history-manage-container {
+  height: 700px;
+  margin: 0 10%;
+  .row.mt-5 {
+    height: auto;
+  }
+  table {
+    // max-width: 70%;
+    tr {
+      td {
+        // width: 5%;
+        &.s-2 {
+          color: blue;
+        }
+        &.s-3 {
+          color: rgb(197, 188, 25);
+        }
+        &.s-4 {
+          color: red;
+        }
+      }
+      td.preview-image {
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+}

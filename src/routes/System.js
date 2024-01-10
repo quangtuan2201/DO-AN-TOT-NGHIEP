@@ -10,29 +10,17 @@ import ClinicManage from "../containers/System/Clinic/ClinicManage";
 import SpecialtyManage from "../containers/System/Specialty/SpecialtyManage";
 import HandBookManage from "../containers/System/Admin/HandbookManage";
 import StatisticsManage from "../containers/System/Admin/StatisticsManage";
+import StatisticsPatients from "../containers/System/Admin/statistics/StatisticsPatients";
+import StatisticsDoctors from "../containers/System/Admin/statistics/StatisticsDoctors";
+import StatisticsSpecialtys from "../containers/System/Admin/statistics/StatisticsSpecialtys";
+import HistorysManage from "../containers/System/Admin/HistorysMange";
+
 import DoctorSchedule from "../containers/System/Admin/DoctorSchedule";
 import RegisterPackageGroupOrAcc from "../containers/System/RegisterPackageGroupOrAcc";
 import Header from "../containers/Header/Home";
 import DoctorManage from "../containers/System/Admin/DoctorManage";
 import Search from "../containers/HomePage/Section/Search/Search";
 
-// class System extends Component {
-//     render() {
-//         const { systemMenuPath } = this.props;
-//         return (
-//             <div className="system-container">
-//                 <div className="system-list">
-//                     <Switch>
-//                         <Route path="/system/user-manage" component={UserManage} />
-//                         <Route path="/system/product-manage" component={ProductManage} />
-//                         <Route path="/system/register-package-group-or-account" component={RegisterPackageGroupOrAcc} />
-//                         <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
-//                     </Switch>
-//                 </div>
-//             </div>
-//         );
-//     }
-// }
 function System() {
   const { loggedIn, systemMenuPath } = useSelector((state) => {
     return {
@@ -65,7 +53,22 @@ function System() {
               path="/system/statistics-manage"
               component={StatisticsManage}
             />
-            {/* <Route path="/search" component={Search} /> */}
+            <Route
+              path="/system/statistics-patients"
+              component={StatisticsPatients}
+            />
+            <Route
+              path="/system/statistics-doctors"
+              component={StatisticsDoctors}
+            />
+            <Route
+              path="/system/statistics-specialtys"
+              component={StatisticsSpecialtys}
+            />
+            <Route
+              path="/doctor/manage-historys-booking"
+              component={HistorysManage}
+            />
 
             <Route
               component={() => {
@@ -79,14 +82,4 @@ function System() {
   );
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     systemMenuPath: state.app.systemMenuPath,
-//   };
-// };
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {};
-// };
-//connect(mapStateToProps, mapDispatchToProps)(System)
 export default System;

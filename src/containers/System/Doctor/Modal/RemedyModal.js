@@ -22,6 +22,7 @@ import {
   Col,
 } from "reactstrap";
 import { LANGUAGES } from "../../../../utils";
+import { event } from "jquery";
 
 function RemedyModal({
   isShowModal,
@@ -55,16 +56,29 @@ function RemedyModal({
       }));
     }
   };
+  const handlChangeDescription = (e) => {
+    setFormData((pre) => ({
+      ...pre,
+      description: e.target.value,
+    }));
+  };
   const handleChangeReason = (event) => {
     setFormData((pre) => ({
       ...pre,
       reason: event.target.value,
     }));
   };
+  const handlChangeNote = (event) => {
+    setFormData((pre) => ({
+      ...pre,
+      note: event.target.value,
+    }));
+  };
 
   const handlSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log("Form data: ", formData);
       const response = await patientService.handlSendRemedy(formData);
       if (response) {
         dispatch(actions.changLoading(false));
@@ -114,27 +128,41 @@ function RemedyModal({
                 </FormGroup>
               </Col>
               {status && status === "CONFIRM" ? (
-                <Col md={6}>
-                  <FormGroup>
-                    <Label for="exampleEmail">Chọn file đơn thuốc:</Label>
-                    <Input
-                      onChange={handleChangeImage}
-                      type="file"
-                      name="image"
-                      innerRef={inputRefs[1]}
-                    />
-                  </FormGroup>
-                </Col>
+                <>
+                  <Col md={6}>
+                    <FormGroup>
+                      <Label for="exampleEmail">Chọn file đơn thuốc:</Label>
+                      <Input
+                        onChange={handleChangeImage}
+                        type="file"
+                        name="image"
+                        innerRef={inputRefs[1]}
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col md={12}>
+                    <FormGroup>
+                      <Label for="exampleEmail">Ghi chú:</Label>
+                      <Input
+                        onChange={handlChangeDescription}
+                        type="textarea"
+                        name="description"
+                        innerRef={inputRefs[1]}
+                        value={formData?.description}
+                      />
+                    </FormGroup>
+                  </Col>
+                </>
               ) : (
                 <Col md={6}>
                   <FormGroup>
                     <Label for="exampleEmail">Lý do hủy:</Label>
                     <Input
-                      onChange={handleChangeReason}
+                      onChange={handlChangeDescription}
                       type="textarea"
-                      name="reason"
+                      name="description"
                       innerRef={inputRefs[1]}
-                      value={formData?.reason}
+                      value={formData?.description}
                     />
                   </FormGroup>
                 </Col>

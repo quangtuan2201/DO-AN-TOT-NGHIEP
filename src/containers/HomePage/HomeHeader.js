@@ -37,6 +37,10 @@ function HomeHeader({ isShowHeader }) {
     // alert("Return Home !");
     history.push(path.SUPPORT);
   };
+  const redirectSpecialty = () => {
+    // alert("Return Home !");
+    history.push(path.SEARCH);
+  };
 
   return (
     <React.Fragment>
@@ -140,7 +144,7 @@ function HomeHeader({ isShowHeader }) {
                   <div className="icon-child">
                     <i className="far fa-hospital"></i>
                   </div>
-                  <div className="text-child">
+                  <div className="text-child" onClick={redirectSpecialty}>
                     <FormattedMessage id="banner.specialty" />
                   </div>
                 </div>
