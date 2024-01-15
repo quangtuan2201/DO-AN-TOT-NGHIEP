@@ -1,103 +1,98 @@
 body {
-     height: 100vh; /* Đảm bảo chiều cao của body chiếm toàn bộ viewport */
-     overflow-y: scroll; /* Thêm thanh cuộn dọc khi cần thiết */
-     margin: 0; /* Loại bỏ margin mặc định của body */
+  height: 100vh; /* Đảm bảo chiều cao của body chiếm toàn bộ viewport */
+  overflow-y: scroll; /* Thêm thanh cuộn dọc khi cần thiết */
+  margin: 0; /* Loại bỏ margin mặc định của body */
 
-.doctor-detail-container {
-     height: 700px;
+  .doctor-detail-container {
+    height: 700px;
+    margin-top: 80px;
 
-.intro-doctor{
-     display: flex;
-     height: 165px;
-     margin: 40px 200px;
-     .content-left{
-          width: 20%;
-          background-repeat: no-repeat;
-          background-position: center;
-          background-size: cover;
-          height: 120px;
-          border-radius: 50%;
-          width: 120px;
-          margin: 10px 0;
-     }
-   
-     .content-right{
-          width: 80%;
-          display: flex;
-          flex-direction: column;
-          padding-left: 10px;
-          padding-top: 10px;
-          height: 120px;
-          margin: 10px 20px;
-          .up {
-               font-size: 20px;
-               font-weight: 600;
-               padding-top: 15px;
-          }
-          .down {
-               // padding-top: 10px;
-               display: inline-block;
-               max-width: 50%;
-          }
-     }
-     
+    .intro-doctor {
+      display: flex;
+      align-items: center;
+      height: 165px;
+      margin: 40px 200px;
+      .content-left {
+        width: 20%;
+        background-color: #fff;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        height: 120px;
+        border-radius: 50%;
+        width: 120px;
+        margin: 10px 0;
+      }
 
-}
-.schedule-doctor {
-     margin: 0 100px;
-     display: flex;
-     height: 200px;
-     .content-left {
-          width: 50%;
+      .content-right {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
 
-     }
-     .content-right {
-          width: 50%;
-          padding: 10px 20px;
-          border-left: 1px solid black;
-     }
-
-}
-.detail-info-doctor {
-     margin-top: 35px;
-     padding: 20px 100px;
-     background-color: #ddd;
-     h2 {
-          font-size: 17px;
+        height: 120px;
+        margin: 10px 20px;
+        .up {
+          font-size: 20px;
           font-weight: 600;
-     }
-     .detail-info-doctor p{
-          display: flex;
-          justify-content: center; /* Căn giữa theo chiều ngang */
-          align-items: center; 
-     }
-     img {
-          transition: transform 0.3s ease-in-out;      /* Hiệu ứng chuyển động mượt mà */
-          height: 100%; /* Đặt chiều cao cố định */
-          width: auto;
-          
         }
-        
-        img:hover {
-          transform: scale(1.1); /* Phóng to hình ảnh khi rê chuột qua */
+        .down {
+          // padding-top: 10px;
+          display: inline-block;
+          max-width: 50%;
         }
-}
-}
-// .container {
-//      padding-left: 0 ;
-//      padding-right: 0 ;
-// }
-.bk-image {
-     display: flex;
-     justify-content: center;
-     align-items: center; 
-     margin-bottom: 100px;
-     img {
-          max-width: 100%;
-           height: auto;
-           width: 350px;
-           height: 350px;
-     }
-}
-}
+      }
+    }
+    .schedule-doctor {
+      margin: 0 100px;
+      display: flex;
+      height: 200px;
+      .content-left {
+        width: 50%;
+      }
+      .content-right {
+        width: 50%;
+        padding: 10px 20px;
+        border-left: 1px solid black;
+      }
+    }
+    .detail-info-doctor {
+      margin-top: 35px;
+      padding: 20px 100px;
+      background-color: #ddd;
+      h2 {
+        font-size: 17px;
+        font-weight: 600;
+      }
+      .detail-info-doctor p {
+        display: flex;
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        align-items: center;
+      }
+      img {
+        transition: transform 0.3s ease-in-out; /* Hiệu ứng chuyển động mượt mà */
+        height: 100%; /* Đặt chiều cao cố định */
+        width: auto;
+      }
 
+      img:hover {
+        transform: scale(1.1); /* Phóng to hình ảnh khi rê chuột qua */
+      }
+    }
+  }
+  // .container {
+  //      padding-left: 0 ;
+  //      padding-right: 0 ;
+  // }
+  .bk-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 100px;
+    img {
+      max-width: 100%;
+      height: auto;
+      width: 350px;
+      height: 350px;
+    }
+  }
+}

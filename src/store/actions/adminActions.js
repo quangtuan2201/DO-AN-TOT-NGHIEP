@@ -1,9 +1,7 @@
 import actionTypes from "./actionTypes";
 import userService from "../../services/userService";
-import doctorService from "../../services/doctorService";
 import { toast } from "react-toastify";
 import { FormattedMessage } from "react-intl";
-import { Alert } from "bootstrap";
 
 export const allKeys = ["ROLE", "STATUS", "TIME", "POSITION", "GENDER"];
 //GET allcode
@@ -35,6 +33,7 @@ const fetchDataFail = () => ({
 });
 // ACTION CREATE USER
 export const fetchCreateUserStart = (data) => {
+  console.log("create user: ", data);
   return async (dispatch, useState) => {
     try {
       dispatch({ type: actionTypes.FETCH_CREATE_USER_START });
@@ -94,6 +93,7 @@ export const fetchDeleteUser = (user) => {
       const response = await userService.deleteUser(user.id);
       if (response.data && response.data.errCode === 0) {
         dispatch(fetchDeleteUserSuccess(response.data.userId));
+        dispatch(fetchGetUserStart());
       } else {
         toast.success(<FormattedMessage id="user-manage.error-delete-user" />);
         dispatch(fetchDeleteUserFail(response.data));
@@ -115,15 +115,17 @@ const fetchDeleteUserFail = () => ({
 });
 //ACTION UPDATE
 export const fetchUpdateUser = (user) => {
+  console.log("Update user: ", user);
   return async (dispatch) => {
     try {
       const response = await userService.updateUser(user);
+      console.log("response update user: ", response);
       if (response.data && response.data.errCode === 0) {
         toast.success(<FormattedMessage id="user-manage.sucess-update-user" />);
         dispatch(fetchUpdateSuccess(response.data.user));
+        dispatch(fetchGetUserStart());
       } else {
         toast.success(<FormattedMessage id="user-manage.error-update-user" />);
-        dispatch(fetchUpdateFail());
       }
     } catch (error) {
       toast.success(<FormattedMessage id="user-manage.error-update-user" />);

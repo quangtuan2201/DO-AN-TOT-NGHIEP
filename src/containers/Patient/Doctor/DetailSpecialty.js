@@ -132,26 +132,7 @@ function DetailSpecialty() {
               </button>
             )}
           </div>
-          <div className="col-2 ">
-            {/* <Select
-              options={[
-                { label: "Hà Nội", value: "PR1" },
-                { label: "Hồ Chí Minh", value: "PR2" },
-                { label: "Hải Phòng", value: "PR3" },
-                { label: "Quảng Ninh", value: "PR4" },
-              ]}
-              onChange={handlOnChangeProvince}
-              value={doctorProvince}
-              // className="form-control"
-            /> */}
-            {/* <label>Chọn tỉnh thành</label>
-            <select onChange={handlOnChangeProvince}>
-              <option value={"PR1"}>Hà Nội</option>
-              <option value={"PR2"}>Hồ Chí Minh</option>
-              <option value={"PR3"}>Hải Phòng</option>
-              <option value={"PR4"}>Quảng Ninh</option>
-            </select>
-            <label>Chọn tỉnh thành</label> */}
+          <div style={{ width: 160 }}>
             <Select
               options={doctorProvince}
               onChange={handlOnChangeProvince}

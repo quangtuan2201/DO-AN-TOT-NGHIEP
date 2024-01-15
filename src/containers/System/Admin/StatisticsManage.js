@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import "./StatisticsManage.scss";
-import Select from "react-select";
 import moment from "moment";
 import DatePicker from "../../../components/Input/DatePicker";
 import userService from "../../../services/userService";
@@ -228,26 +227,7 @@ const StatisticsManage = () => {
             <FormattedMessage id="manage-statistical.submit" />
           </button>
         </div>
-        <div className="col-12 mt-5">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">STT</th>
-                <th scope="col">FirstName</th>
-                <th scope="col">LastName</th>
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Nguyễn</td>
-                <td>Tuấn Anh</td>
-                <td>Confirm</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+
         <div className="col-12 mt-5">
           <div className="row text-center">
             <div className="col-7">

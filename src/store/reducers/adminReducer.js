@@ -73,7 +73,7 @@ const adminReducer = (state = initialState, action) => {
     case actionTypes.FETCH_DELETE_USER_SUCCESS:
       return {
         ...state,
-        allUser: state.allUser.filter((user) => user.id != action.userId),
+        allUser: state.allUser.filter((user) => user.id !== action.userId),
       };
     case actionTypes.FETCH_UPDATE_USER_SUCCESS:
       const updatedUsers = state.allUser.map((user) => {

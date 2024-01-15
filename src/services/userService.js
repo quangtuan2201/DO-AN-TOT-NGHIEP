@@ -74,7 +74,6 @@ const getAllCode = async (form) => {
 //actionRecord : lấy ALL doctor(key:allDoctor) or top doctor(key : topDoctor)
 const fetchGetTopDoctor = async (limit, roleId) => {
   try {
-    console.log("limit userService: ", limit);
     const response = await instance.get("/top-doctor-home", {
       params: {
         limit,
@@ -105,7 +104,6 @@ const fetchGetResultSearch = async (keyword) => {
     const results = await instance.get("/search", {
       params: { keyword },
     });
-    console.log("Result search: ", results);
     const { data, errCode } = results.data;
     if (data && errCode === 0) {
       return data;
@@ -119,11 +117,9 @@ const fetchGetResultSearch = async (keyword) => {
 //Lấy dữ liệu thống kế bằng date
 const fetchGetStatisticalByDate = async (formData) => {
   try {
-    console.log("Form data: ", formData);
     const response = await instance.get("/get-statistics-by-date", {
       params: formData,
     });
-    console.log("response: ", response);
     const { data, errCode } = response.data;
     if (data && errCode === 0) {
       return data;

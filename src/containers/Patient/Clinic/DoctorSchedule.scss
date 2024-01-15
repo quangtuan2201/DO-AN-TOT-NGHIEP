@@ -1,71 +1,69 @@
-
-.doctor-schedule-container{
-     height: 100%;
-     .all-schedule{
-          select {
-             width: 100%;
-             font-size: 12px;
-             border: none; /* Bỏ viền */
-             appearance: none;
-             max-width: 100px;
-             max-width: 16%;
-             font-weight: bold;
-             color:rgb(197, 163, 8);
-             border-bottom:  3px solid rgb(236, 181, 0);
-             text-align: center;   
-             height: 22px;
-             background-color:#ffffff00;
-            
-          }
-          select:focus {
-               outline: none;
-               border: 1px solid transparent; /* Đặt border thành màu trong suốt để ẩn viền */
-               box-shadow: none; /* Ẩn shadow khi focus */
-             }
-
-     }
-     .all-available-time {
-          .text-celendar {
-               margin: 10px 0;
-               color : #3333;
-                         margin-right: 5px;
-                         color: rgb(43, 9, 146);
-                         span {
-                              margin-left: 8px;
-                              text-transform: uppercase;
-                              font-weight: 600;
-                         }
-          }
-          .time-content {
-               display: flex;
-               gap: 25px;
-               flex-wrap: wrap;
-               min-height: 117px;
-               button {
-                    background-color: #f2b500;
-                    border-width: 0;
-                    box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0;
-                    color: #dad600;
-                    cursor: pointer;
-                    display: inline-block;
-                    font-family: Arial, sans-serif;
-                    font-size: 12px;
-                    // 1em;
-                    height: 46px;
-                    padding: 7px;
-                    transition: all 200ms;
-                    border-radius: 9px;
-                    color: black;
-                    font-weight: 550;
-                    width: 130px;
-                    &:hover {
-                         background-color: #ebd183;
-                         transform: scale(1.05);
-                    }
-               }
-          }
-     }
-     .warning-schedule-hours{
-          padding: 15px 10px 10px 0;
-     }
+.doctor-schedule-container {
+  height: 100%;
+  .all-schedule {
+    select {
+      width: 100%;
+      font-size: 12px;
+      border: none; /* Bỏ viền */
+      appearance: none;
+      max-width: 100px;
+      max-width: 16%;
+      font-weight: bold;
+      color: rgb(197, 163, 8);
+      border-bottom: 3px solid rgb(236, 181, 0);
+      text-align: center;
+      height: 22px;
+      background-color: #ffffff00;
+    }
+    select:focus {
+      outline: none;
+      border: 1px solid transparent; /* Đặt border thành màu trong suốt để ẩn viền */
+      box-shadow: none; /* Ẩn shadow khi focus */
+    }
+  }
+  .all-available-time {
+    .text-celendar {
+      margin: 10px 0;
+      color: #3333;
+      margin-right: 5px;
+      color: rgb(43, 9, 146);
+      span {
+        margin-left: 8px;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+    }
+    .time-content {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      min-height: 117px;
+      button {
+        background-color: #f2b500;
+        border-width: 0;
+        box-shadow: rgba(25, 25, 25, 0.04) 0 0 1px 0,
+          rgba(0, 0, 0, 0.1) 0 3px 4px 0;
+        color: #dad600;
+        cursor: pointer;
+        display: inline-block;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        // 1em;
+        height: 46px;
+        padding: 7px;
+        transition: all 200ms;
+        border-radius: 9px;
+        color: black;
+        font-weight: 550;
+        width: 130px;
+        &:hover {
+          background-color: #ebd183;
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+  .warning-schedule-hours {
+    padding: 15px 10px 10px 0;
+  }
 }

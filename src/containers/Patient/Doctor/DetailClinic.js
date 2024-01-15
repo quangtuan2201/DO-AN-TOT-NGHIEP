@@ -41,9 +41,7 @@ function DetailClinic() {
               <div
                 className="avatar"
                 style={{ backgroundImage: `url(${infoDetailClinic?.image})` }}
-              >
-                img
-              </div>
+              ></div>
               <div className="clinic-title ">
                 <h1>{infoDetailClinic.name}</h1>
               </div>

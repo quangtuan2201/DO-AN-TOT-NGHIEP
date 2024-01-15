@@ -22,7 +22,6 @@ import {
   Col,
 } from "reactstrap";
 import { LANGUAGES } from "../../../../utils";
-import { event } from "jquery";
 
 function RemedyModal({
   isShowModal,

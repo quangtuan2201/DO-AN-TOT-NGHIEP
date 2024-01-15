@@ -1,7 +1,6 @@
 import { memo, useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import userService from "../../../../services/userService";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./Search.scss";
 import HomeHeader from "../../HomeHeader";

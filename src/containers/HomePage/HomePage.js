@@ -20,8 +20,26 @@ function HomePage({ isLoggedIn }) {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1500,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: false,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: false,
+        },
+      },
+    ],
   };
-  const dispatch = useDispatch();
+
   return (
     <React.Fragment>
       <div>
@@ -36,19 +54,8 @@ function HomePage({ isLoggedIn }) {
       </div>
     </React.Fragment>
   );
-  //  (<Specialty />);
 
   //   <Redirect to={linkToRedirect} />;
 }
-
-// const mapStateToProps = (state) => {
-//   return {
-//     isLoggedIn: state.user.isLoggedIn,
-//   };
-// };
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {};
-// };
 
 export default HomePage;

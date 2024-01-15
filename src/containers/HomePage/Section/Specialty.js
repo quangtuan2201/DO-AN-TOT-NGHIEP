@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import Slider from "react-slick";
 import * as actions from "../../../store/actions";
+import _ from "lodash";
 
 // Import css files
 import { FormattedMessage, useIntl } from "react-intl";
-import specialtyService from "../../../services/specialtyService";
 function Specialty(props) {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -36,7 +36,7 @@ function Specialty(props) {
           </div>
           <div className="section-body">
             <Slider {...props.settings}>
-              {listSpecialtys &&
+              {!_.isEmpty(listSpecialtys) &&
                 listSpecialtys.map((item, index) => (
                   <div
                     key={index}
@@ -52,27 +52,6 @@ function Specialty(props) {
                     <span className="section-descrip">{item.name}</span>
                   </div>
                 ))}
-
-              {/* <div className="section-customize">
-                <div className="bg-image section-specialty"></div>
-                <span className="section-descrip">Cơ xương khớp</span>
-              </div>
-              <div className="section-customize">
-                <div className="bg-image section-specialty" />
-                <span className="section-descrip">Cơ xương khớp</span>
-              </div>
-              <div className="section-customize">
-                <div className="bg-image section-specialty" />
-                <span className="section-descrip">Cơ xương khớp</span>
-              </div>
-              <div className="section-customize">
-                <div className="bg-image section-specialty" />
-                <span className="section-descrip">Cơ xương khớp</span>
-              </div>
-              <div className="section-customize">
-                <div className="bg-image section-specialty" />
-                <span className="section-descrip">Cơ xương khớp</span>
-              </div> */}
             </Slider>
           </div>
         </div>

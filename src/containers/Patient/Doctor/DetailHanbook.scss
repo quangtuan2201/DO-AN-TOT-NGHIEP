@@ -1,0 +1,23 @@
+body {
+  height: 100%;
+  // background-color: rgb(245, 245, 245);
+  .detail-hanbook-container {
+    margin-top: 80px;
+    // padding: 0 50px;
+    // background-color: white;
+    .bg-image {
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      height: 400px;
+      // padding: 0 100px;
+    }
+    .detail-hanbook-description {
+      background-color: white;
+      // background-color: rgb(245, 245, 245);
+      padding: 15px;
+      margin-bottom: 50px;
+      height: 100%;
+    }
+  }
+}

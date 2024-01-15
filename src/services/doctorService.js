@@ -1,5 +1,4 @@
 import axios from "axios";
-import { dateFilter } from "react-bootstrap-table2-filter";
 const instance = axios.create({
   baseURL: "http://localhost:3333/api",
 });

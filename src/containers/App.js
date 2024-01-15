@@ -22,6 +22,7 @@ import CustomScrollbars from "../components/CustomScrollbars.js";
 import DetailDoctor from "./Patient/Doctor/DetailDoctor.js";
 import DetailSpecialty from "./Patient/Doctor/DetailSpecialty.js";
 import DetailClinic from "./Patient/Doctor/DetailClinic.js";
+import DetailHanbook from "./Patient/Doctor/DetailHanbook.js";
 
 import Doctor from "../routes/Doctor.js";
 import VerifyEmail from "./Patient/VerifyEmail.js";
@@ -29,14 +30,16 @@ import Search from "./HomePage/Section/Search/Search.js";
 import Support from "./HomePage/Section/Support/Support.js";
 import LoadingOverlay from "react-loading-overlay";
 import { useSelector } from "react-redux";
-// import { changeLanguageApp } from ".././store/actions/appActions.js";
+import requireAuth from "../hoc/requireAuth.js";
+import { USER_ROLE } from "../utils/constant.js";
 
-const App = () => {
-  // const { loading } = useSelector((state) => {
-  //   return {
-  //     loading: state.app.loading,
-  //   };
-  // });
+const App = (prop) => {
+  // const ProtectedProductManage = requireAuth([USER_ROLE.ADMIN], ProductManage);
+  // console.log("admin: ", USER_ROLE.ADMIN);
+  // const { userInfo, loading } = useSelector((state) => ({
+  //   userInfo: state.user.userInfo,
+  //   // loading: state.app.loading,
+  // }));
 
   return (
     <Fragment>
@@ -61,6 +64,7 @@ const App = () => {
                   path={path.DETAIL_SPECIALTY}
                   component={DetailSpecialty}
                 />
+                <Route path={path.DETAIL_HANBOOK} component={DetailHanbook} />
                 <Route
                   path={path.DOCTOR_MANAGE}
                   component={userIsAuthenticated(Doctor)}

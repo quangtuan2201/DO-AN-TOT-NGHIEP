@@ -53,8 +53,8 @@ function HistorysManage() {
     setIsOpen(true);
   };
   const handlSearchHistoryPatient = (keyword, data) => {
-    console.log("data: ", data);
-    console.log("keyword: ", keyword);
+    // console.log("data: ", data);
+    // console.log("keyword: ", keyword);
     if (keyword === "") {
       setPatients("");
       return;
@@ -69,17 +69,17 @@ function HistorysManage() {
       return formattedFullName.includes(formattedKeyword);
     });
 
-    console.log("filteredPatients: ", filteredPatients);
+    // console.log("filteredPatients: ", filteredPatients);
     setPatients(filteredPatients);
   };
   const handleBlur = (e) => {
-    console.log("sự kiện blur: ", e);
-    console.log("Người dùng blur ra khỏi form input ");
+    // console.log("sự kiện blur: ", e);
+    // console.log("Người dùng blur ra khỏi form input ");
     setHasChanged(true);
   };
 
   const handleSubmit = async (formData) => {
-    console.log("Form data: ", formData);
+    // console.log("Form data: ", formData);
     if (
       !formData.doctorId ||
       !formData.startDateTime ||
@@ -103,7 +103,7 @@ function HistorysManage() {
       );
       if (response) {
         setHistorysData(response);
-        console.log("history data: ", response);
+        // console.log("history data: ", response);
       } else {
         setHistorysData(null);
       }
@@ -209,30 +209,31 @@ function HistorysManage() {
               <FormattedMessage id="manage-statistical.submit" />
             </button>
           </div>
-          {!_.isEmpty(patients) ? (
-            <div className="col-12 mt-3">
-              <p>
-                <strong>Kết quả: </strong>
-              </p>
-              <table className="table table-hover table-bordered">
-                {patients.map((item, index) => {
-                  return (
-                    <tbody>
-                      <tr key={index}>
-                        <td>{index + 1}</td>
-                        <td>{item?.patientData?.firstName}</td>
-                        <td>{item?.patientData?.email}</td>
-                        <td>{item?.patientData?.genderData?.valueVn}</td>
-                        <td>{item?.patientData?.phoneNumber}</td>
-                        <td>{item?.patientData?.address}</td>
-                        <td>
-                          {moment(item?.patientData?.createdAt).format(
-                            "DD/MM/YYYY"
-                          )}
-                        </td>
-                        <td>{item?.bookTimeData?.valueVn}</td>
-                        <td
-                          className={`font-weight-bold 
+          {
+            !_.isEmpty(patients) ? (
+              <div className="col-12 mt-3">
+                <p>
+                  <strong>Kết quả: </strong>
+                </p>
+                <table className="table table-hover table-bordered">
+                  {patients.map((item, index) => {
+                    return (
+                      <tbody>
+                        <tr key={index}>
+                          <td>{index + 1}</td>
+                          <td>{item?.patientData?.firstName}</td>
+                          <td>{item?.patientData?.email}</td>
+                          <td>{item?.patientData?.genderData?.valueVn}</td>
+                          <td>{item?.patientData?.phoneNumber}</td>
+                          <td>{item?.patientData?.address}</td>
+                          <td>
+                            {moment(item?.patientData?.createdAt).format(
+                              "DD/MM/YYYY"
+                            )}
+                          </td>
+                          <td>{item?.bookTimeData?.valueVn}</td>
+                          <td
+                            className={`font-weight-bold 
                 ${
                   item.statusId === "S2"
                     ? "s-2"
@@ -240,23 +241,27 @@ function HistorysManage() {
                     ? "s-3"
                     : "s-4"
                 }`}
-                        >
-                          {item?.statusData?.valueVn}
-                        </td>
-                        <th scope="col">File</th>
-                      </tr>
-                    </tbody>
-                  );
-                })}
-              </table>
-            </div>
-          ) : (
-            <div className="col-12 mt-3">
-              <p className="text-danger">
-                Từ khóa bạn không phù hợp , vui lòng nhập thông tin chính xác
-              </p>
-            </div>
-          )}
+                          >
+                            {item?.statusData?.valueVn}
+                          </td>
+                          <th scope="col">File</th>
+                        </tr>
+                      </tbody>
+                    );
+                  })}
+                </table>
+              </div>
+            ) : (
+              ""
+            )
+            // (
+            //   <div className="col-12 mt-3">
+            //     <p className="text-danger">
+            //       Từ khóa bạn không phù hợp , vui lòng nhập thông tin chính xác
+            //     </p>
+            //   </div>
+            // )
+          }
           <div className="col-12 mt-5">
             <table class="table table-hover table-bordered">
               <thead>

@@ -1,10 +1,8 @@
-import React, { Component } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import React, { memo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
-import UserManage from "../containers/System/UserManage";
 import ProductManage from "../containers/System/ProductManage";
 import UserRedux from "../containers/System/Admin/UserRedux";
-import UserDoctor from "../containers/System/Admin/DoctorManage";
 import UserAdmin from "../containers/System/Admin/UserAdmin";
 import ClinicManage from "../containers/System/Clinic/ClinicManage";
 import SpecialtyManage from "../containers/System/Specialty/SpecialtyManage";
@@ -19,13 +17,48 @@ import DoctorSchedule from "../containers/System/Admin/DoctorSchedule";
 import RegisterPackageGroupOrAcc from "../containers/System/RegisterPackageGroupOrAcc";
 import Header from "../containers/Header/Home";
 import DoctorManage from "../containers/System/Admin/DoctorManage";
-import Search from "../containers/HomePage/Section/Search/Search";
+import requireAuth from "../hoc/requireAuth.js";
+import { USER_ROLE } from "../utils/constant.js";
 
 function System() {
-  const { loggedIn, systemMenuPath } = useSelector((state) => {
+  const ProtectedClinicManage = requireAuth([USER_ROLE.ADMIN], ClinicManage);
+  const ProtectedSpecialtyManage = requireAuth(
+    [USER_ROLE.ADMIN],
+    SpecialtyManage
+  );
+  const ProtectedHandBookManage = requireAuth(
+    [USER_ROLE.ADMIN],
+    HandBookManage
+  );
+  const ProtectedStatisticsManage = requireAuth(
+    [USER_ROLE.ADMIN],
+    StatisticsManage
+  );
+  const ProtectedStatisticsPatients = requireAuth(
+    [USER_ROLE.ADMIN],
+    StatisticsPatients
+  );
+  const ProtectedStatisticsDoctors = requireAuth(
+    [USER_ROLE.ADMIN],
+    StatisticsDoctors
+  );
+  const ProtectedStatisticsSpecialtys = requireAuth(
+    [USER_ROLE.ADMIN],
+    StatisticsSpecialtys
+  );
+  const ProtectedHistorysManage = requireAuth(
+    [USER_ROLE.ADMIN],
+    HistorysManage
+  );
+  const ProtectedDoctorManage = requireAuth([USER_ROLE.ADMIN], DoctorManage);
+  const ProtectedUserRedux = requireAuth([USER_ROLE.ADMIN], UserRedux);
+  console.log("ProtectedUserRedux: ", ProtectedUserRedux);
+
+  const { userInfo, loggedIn, systemMenuPath } = useSelector((state) => {
     return {
       loggedIn: state.user.isLoggedIn,
       systemMenuPath: state.app.systemMenuPath,
+      userInfo: state.user.userInfo,
     };
   });
   return (
@@ -34,15 +67,13 @@ function System() {
       <div className="system-container">
         <div className="system-list">
           <Switch>
-            <Route path="/system/user-manage" component={UserManage} />
             <Route path="/system/product-manage" component={ProductManage} />
             <Route
               path="/system/register-package-group-or-account"
               component={RegisterPackageGroupOrAcc}
             />
-            <Route path="/system/user-redux" component={UserRedux} />
+            <Route path="/system/user-manage" component={UserRedux} />
             <Route path="/system/user-doctor" component={DoctorManage} />
-            <Route path="/system/user-admin" component={UserAdmin} />
             <Route path="/system/clinic-manage" component={ClinicManage} />
             <Route
               path="/system/specialty-manage"
@@ -82,4 +113,4 @@ function System() {
   );
 }
 
-export default System;
+export default memo(System);

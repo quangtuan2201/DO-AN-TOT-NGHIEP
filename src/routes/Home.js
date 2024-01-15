@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 // import { connect } from "react-redux";
 import { useSelector, useDispatch } from "react-redux";
+import { USER_ROLE } from "../utils/constant.js";
 
 // class Home extends Component {
 //   render() {
@@ -13,8 +14,15 @@ import { useSelector, useDispatch } from "react-redux";
 // }
 
 function Home() {
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-  let linkToRedirect = isLoggedIn ? "/system/user-manage" : "/home";
+  const { isLoggedIn, userInfo } = useSelector((state) => ({
+    isLoggedIn: state.user.isLoggedIn,
+    userInfo: state.user.userInfo,
+  }));
+  let linkToRedirect = isLoggedIn
+    ? userInfo.roleId === USER_ROLE.ADMIN
+      ? "/system/user-manage"
+      : "/doctor/manage-schedule"
+    : "/home";
   return <Redirect to={linkToRedirect} />;
 }
 export default Home;

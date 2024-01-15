@@ -13,9 +13,9 @@ import { LANGUAGES, CommonUtils } from "../../../utils";
 import { FormattedMessage, useIntl } from "react-intl";
 import * as actions from "../../../store/actions";
 import TableManageUser from "./TableManageUser";
-import UserAdmin from "./UserAdmin";
 import "./UserRedux.scss";
 import userService from "../../../services/userService";
+import _ from "lodash";
 
 function UserRedux() {
   const intl = useIntl();
@@ -74,6 +74,7 @@ function UserRedux() {
 
   //dispatch , actions
   const handleOnChangeImage = async (e) => {
+    console.log("on change image");
     let file = e.target.files[0];
     if (file) {
       let base64 = await CommonUtils.getBase64(file);
@@ -120,27 +121,72 @@ function UserRedux() {
       console.error(`Xảy ra ngoại lệ khi lưu user ${error.message}`);
     }
   };
+  // const handleUpdateUser = useCallback((user) => {
+  //   // Lưu trạng thái người dùng đang chỉnh sửa
+  //   // Fill dữ liệu người dùng vào form
+  //   let imageBase64 = "";
+  //   if (_.isNull(_.get(user, "image"))) {
+  //     console.log("thuoc tinh image la null: ");
+  //     setImageUpload(null);
+  //   }
+  //   if (user.image && typeof user.image === "object") {
+  //     imageBase64 = Buffer.from(user.image, "base64").toString("binary");
+  //     //  new Buffer(user.image, "base64").toString("binary");
+  //     setImageUpload(imageBase64);
+  //   }
+  //   if (user.image && typeof user.image === "string") {
+  //     setImageUpload(user.image);
+  //   }
+  //   setEditingUser(user);
+  //   setValue("email", user.email);
+  //   setValue("password", user.password);
+  //   setValue("firstName", user.firstName);
+  //   setValue("lastName", user.lastName);
+  //   setValue("phoneNumber", user.phoneNumber);
+  //   setValue("address", user.address);
+  //   setValue("gender", user.gender);
+  //   setValue("positionId", user.positionId);
+  //   setValue("roleId", user.roleId);
+  // }, []);
   const handleUpdateUser = useCallback((user) => {
     // Lưu trạng thái người dùng đang chỉnh sửa
     // Fill dữ liệu người dùng vào form
-    let imageBase64 = "";
-    if (user.image && typeof user.image === "object") {
-      imageBase64 = Buffer.from(user.image, "base64").toString("binary");
-      //  new Buffer(user.image, "base64").toString("binary");
-      setImageUpload(imageBase64);
-    } else if (user.image && typeof user.image === "string") {
-      setImageUpload(user.image);
+
+    const {
+      image,
+      email,
+      password,
+      firstName,
+      lastName,
+      phoneNumber,
+      address,
+      gender,
+      positionId,
+      roleId,
+    } = user;
+
+    // Xử lý ảnh
+    let imageUpload = null;
+    if (_.isNull(image)) {
+      console.log("Thuộc tính image là null");
+    } else if (typeof image === "object") {
+      imageUpload = Buffer.from(image, "base64").toString("binary");
+    } else if (typeof image === "string") {
+      imageUpload = image;
     }
+    setImageUpload(imageUpload);
+
+    // Set giá trị cho các trường
     setEditingUser(user);
-    setValue("email", user.email);
-    setValue("password", user.password);
-    setValue("firstName", user.firstName);
-    setValue("lastName", user.lastName);
-    setValue("phoneNumber", user.phoneNumber);
-    setValue("address", user.address);
-    setValue("gender", user.gender);
-    setValue("positionId", user.positionId);
-    setValue("roleId", user.roleId);
+    setValue("email", email);
+    setValue("password", password);
+    setValue("firstName", firstName);
+    setValue("lastName", lastName);
+    setValue("phoneNumber", phoneNumber);
+    setValue("address", address);
+    setValue("gender", gender);
+    setValue("positionId", positionId);
+    setValue("roleId", roleId);
   }, []);
 
   const handleDeleteUser = useCallback((user) => {
@@ -160,14 +206,13 @@ function UserRedux() {
           isFormPassword ? "password-container" : ""
         }   `}
       >
-        <label className="form-label">
+        <label className="form-label font-weight-bold">
           <FormattedMessage id={fomatMessId} />
         </label>
         <Controller
           name={nameInput}
           control={control}
           defaultValue=""
-          // rules={rules}
           rules={isFormPassword ? {} : nameInput === "email" ? {} : rules} // Không áp dụng quy tắc nếu là trường password và chỉ đọc
           render={({ field, fieldState }) => (
             <>
@@ -255,7 +300,7 @@ function UserRedux() {
             })}
             {genders && (
               <div className="mb-3 col-3">
-                <label className="form-label">
+                <label className="form-label font-weight-bold">
                   <FormattedMessage id="user-manage.gender" />
                 </label>
                 <Controller
@@ -278,7 +323,7 @@ function UserRedux() {
                         </option>
                         {genders.map((gender, index) => (
                           <option key={index} value={gender.keyMap}>
-                            {language === "vi"
+                            {language === LANGUAGES.VI
                               ? gender?.valueVn
                               : gender?.valueEn}
                           </option>
@@ -296,7 +341,7 @@ function UserRedux() {
             )}
             {positions && (
               <div className="mb-3 col-3">
-                <label className="form-label">
+                <label className="form-label font-weight-bold">
                   <FormattedMessage id="user-manage.position" />
                 </label>
                 <Controller
@@ -319,9 +364,9 @@ function UserRedux() {
                         </option>
                         {positions.map((position, index) => (
                           <option key={index} value={position.keyMap}>
-                            {language === "vi"
-                              ? position.valueVn
-                              : position.valueEn}
+                            {language === LANGUAGES.VI
+                              ? position?.valueVn
+                              : position?.valueEn}
                           </option>
                         ))}
                       </select>
@@ -337,7 +382,7 @@ function UserRedux() {
             )}
             {roles && (
               <div className="mb-3 col-3">
-                <label className="form-label">
+                <label className="form-label font-weight-bold">
                   <FormattedMessage id="user-manage.role" />
                 </label>
                 <Controller
@@ -358,7 +403,9 @@ function UserRedux() {
                         </option>
                         {roles.map((role, index) => (
                           <option key={index} value={role.keyMap}>
-                            {language === "vi" ? role?.valueVn : role?.valueEn}
+                            {language === LANGUAGES.VI
+                              ? role?.valueVn
+                              : role?.valueEn}
                           </option>
                         ))}
                       </select>
@@ -373,7 +420,7 @@ function UserRedux() {
               </div>
             )}
             <div className="mb-3 col-3">
-              <label htmlFor="image" className="form-label">
+              <label htmlFor="image" className="form-label font-weight-bold">
                 <FormattedMessage id="user-manage.image" />
               </label>
               <div className="preview-image-container">
@@ -384,8 +431,9 @@ function UserRedux() {
                   hidden
                   onChange={(e) => handleOnChangeImage(e)}
                 />
-                <label className="label-upload" htmlFor="image">
-                  Tải ảnh <i className="fas fa-upload"></i>
+                <label className="label-upload " htmlFor="image">
+                  <FormattedMessage id="user-manage.upload" />
+                  <i className="fas fa-upload"></i>
                 </label>
                 <div
                   className="preview-image"
@@ -425,6 +473,7 @@ function UserRedux() {
         allUser={allUser}
         onDeleteUser={handleDeleteUser}
         onUpdateUser={handleUpdateUser}
+        language={language}
       />
     </React.Fragment>
   );

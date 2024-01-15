@@ -1,175 +1,184 @@
 body {
-     background: #f5f5f5;
+  background: #f5f5f5;
 }
 .section-share {
-     &.section-specialty {
-          background: #f5f5f5;
-     }
-     &.out-standing-doctor {
-          background: #f5f5f5;
-     }
-     &.section-abount {
-          height: 500px !important;
-     }
-     .section-body {
-          .bg-image {
-               height: 217px;
-               width: 332px;
-               background-size: cover !important;
-               background-position: center center !important;
-               background-repeat:no-repeat !important;
-               border: 1px solid #00000099;
-               border-radius: 5px;
-             
-               &.section-medical-facility {
-               background: url('../../assets/images/co-so-benh-vien-img/logobenhvien108.jpg') ;
+  &.section-specialty {
+    background: #f5f5f5;
+  }
+  &.out-standing-doctor {
+    background: #f5f5f5;
+  }
+  &.section-abount {
+    height: 500px !important;
+  }
+  .section-body {
+    .bg-image {
+      height: 217px;
+      width: 300px;
+      background-size: contain !important;
+      background-position: center center !important;
+      background-repeat: no-repeat !important;
+      // border: 1px solid #00000099;
+      border-radius: 5px;
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+      background: #fff;
+    }
 
-               }
-               &.section-outstanding-doctor  {
-               width:120px ;
-               height: 120px;
-               margin: 0 auto;
-               border-radius: 50%;
-          }
-               &.section-handbook {
-                    background: url("../../assets/images/Cam-nang/095419-drmarie-co-tot-khong.jpg");
-                }
-          }
-          .section-descrip {
-               display: inline-block;
-               font-style: 19px !important;   
-               font-weight: 600;
-               margin-top: 5px;          
-          }
-          .slick-prev {
-               left: -25px !important;
-               z-index: 1000;
-               height: 40px !important;
-               width: 40px  !important;
-               font-size: 30px;
-          }
-          .slick-next {
-               height: 40px !important;
-               width: 40px  !important;
-               right: -14px !important;
-               margin-right: 30px;
-          }
-          .slick-disablesd {
-               display: none !important;
-          }
-          button.slick-arrow.slick-prev.slick-disabled {
-               display: none !important;
-           }
-           button.slick-arrow.slick-next.slick-disabled {
-               display: none !important;
-           }
-          .slick-prev:before, .slick-next:before {
-               font-family: 'Glyphicons Halflings' !important;
-               font-size: 40px;
-               line-height: 1;
-               opacity: .75;
-               border-color: rgb(6, 73, 81);
-               color:rgb(21, 125, 137); ;
-               background-color: rgb(255, 255, 255);
-               box-shadow: rgb(22, 120, 131) 2px 2px 5px;
-          
-           }
-     }
+    &.section-medical-facility {
+      background: url("../../assets/images/co-so-benh-vien-img/logobenhvien108.jpg");
+    }
+    &.section-outstanding-doctor {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto;
+      border-radius: 50%;
+    }
+    &.section-handbook {
+      background: url("../../assets/images/Cam-nang/095419-drmarie-co-tot-khong.jpg");
+    }
+  }
+  .section-descrip {
+    font-style: 19px !important;
+    font-weight: 600;
+    margin-top: 5px;
+    width: 300px !important;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+  .slick-prev {
+    left: 16px !important;
+    z-index: 1000;
+    height: 40px !important;
+    width: 40px !important;
+    font-size: 30px;
+  }
+  .slick-next {
+    height: 40px !important;
+    width: 40px !important;
+    right: -14px !important;
+    margin-right: 30px;
+  }
+  .slick-disablesd {
+    display: none !important;
+  }
+  button.slick-arrow.slick-prev.slick-disabled {
+    display: none !important;
+  }
+  button.slick-arrow.slick-next.slick-disabled {
+    display: none !important;
+  }
+  .slick-prev:before,
+  .slick-next:before {
+    font-family: "Glyphicons Halflings" !important;
+    font-size: 40px;
+    line-height: 1;
+    opacity: 0.75;
+    border-color: rgb(6, 73, 81);
+    color: rgb(21, 125, 137);
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgb(22, 120, 131) 2px 2px 5px;
+  }
 }
 .section-share {
-     height: 330px;
-     background: #f5f5f5;
-     .section-container { 
-          // section
-          margin: 0 100px;
-          display: flex;
-          flex-direction: column;
-          .section-header {
-               height: 60px;
-               margin-bottom: 30px;
-               padding-top: 30px;
-               .title-section {
-                    font-size: 22px;
-                    font-weight: 600;
-               }
-               .btn-section {
-                    float: right;
-                    padding: 10px 15px;
-                    border: none;
-                    outline: none;
-                    display: block;
-                    cursor: pointer;
-                    text-transform: uppercase;
-                    &:hover {
-                         color: black;
-                         box-shadow: rgb(8, 122, 135) 2px 2px 5px;
-                    }
-               }
-          }
-     }
+  background: #f5f5f5;
+  .section-container {
+    // section
+    margin: 0 100px;
+    display: flex;
+    flex-direction: column;
+    .section-header {
+      height: 60px;
+      margin-bottom: 30px;
+      padding-top: 30px;
+      .title-section {
+        font-size: 22px;
+        font-weight: 600;
+      }
+      .btn-section {
+        float: right;
+        padding: 10px 15px;
+        border: none;
+        outline: none;
+        display: block;
+        cursor: pointer;
+        text-transform: uppercase;
+        &:hover {
+          color: black;
+          box-shadow: rgb(8, 122, 135) 2px 2px 5px;
+        }
+      }
+    }
+  }
 }
 .section-outstanding-doctor {
-     .outer-bg {
-          display: flex;
-          justify-content: center;
-          margin-bottom: 10px;
-          border-radius: 50% !important;
-     }
-    
+  .outer-bg {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    border-radius: 50% !important;
+  }
 }
 .section-customize {
-     // padding: 15px;
-     cursor: pointer;
-     .customize-border {
-          border: 1px solid rgb(19, 99, 105);
-          padding: 15px;
-          margin-right: 40px;
-          border-radius: 5%;
-     }
+  // padding: 15px;
+  cursor: pointer;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .customize-border {
+    border: 1px solid rgb(19, 99, 105);
+    padding: 15px;
+    margin-right: 40px;
+    border-radius: 5%;
+  }
+  .section-customize-content {
+    text-align: center;
+    width: 300px;
+  }
 }
 .home-footer {
-     padding-top: 30px;
-     text-align: center;
-     height: 100px;
-     a {
-          text-decoration: unset;
-     }
+  padding-top: 30px;
+  text-align: center;
+  height: 100px;
+  a {
+    text-decoration: unset;
+  }
 }
 .section-abount {
-     padding: 0 100px;
-     .section-abount-header {
-          padding:20px 10px ;
-          font-size: 22px;
-          font-weight: 500;
-          .abount-title{
-               height: 60px;
-               // background: red;
-               padding-top:30px ;
-               margin-bottom: 30px;
-               font-weight: 600;
-          }
-
-     }
-     .section-abount-content {
-          display: flex;
-          gap: 15px;
-          .content-left {
-               flex: 1;
-               iframe {
-                    border-radius: 16px;
-               }
-          }
-          .content-right {
-               box-sizing: border-box;
-               flex: 1;
-               text-align: center;
-               p {
-                    padding-top: 15px;
-                    text-align: justify;
-                    font-size:  15px;
-                    font-style: italic;
-               }
-          }
-
-     }
+  padding: 0 100px;
+  .section-abount-header {
+    padding: 20px 10px;
+    font-size: 22px;
+    font-weight: 500;
+    .abount-title {
+      height: 60px;
+      // background: red;
+      padding-top: 30px;
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
+  }
+  .section-abount-content {
+    display: flex;
+    gap: 15px;
+    .content-left {
+      flex: 1;
+      iframe {
+        border-radius: 16px;
+      }
+    }
+    .content-right {
+      box-sizing: border-box;
+      flex: 1;
+      text-align: center;
+      p {
+        padding-top: 15px;
+        text-align: justify;
+        font-size: 15px;
+        font-style: italic;
+      }
+    }
+  }
 }

@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import _ from "lodash";
 import * as actions from "../../store/actions";
 import Navigator from "../../components/Navigator";
 import { adminMenu, doctorMenu } from "./menuApp";
@@ -19,7 +19,7 @@ function Header() {
     };
   });
   useEffect(() => {
-    if (userInfo && Object.keys(userInfo).length > 0) {
+    if (userInfo && !_.isEmpty(userInfo)) {
       let role = userInfo.roleId;
       if (role === USER_ROLE.ADMIN) {
         setMenuApp(adminMenu);

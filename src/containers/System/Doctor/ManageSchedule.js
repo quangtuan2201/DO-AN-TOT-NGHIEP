@@ -113,7 +113,6 @@ function Doctor() {
     });
     console.log("Schedule hours; ", selectedAppointment);
   };
-  console.log("Select doctor sau khi submit: ", selectDoctor);
   const handleInfoSchedule = async () => {
     try {
       let result = [];
