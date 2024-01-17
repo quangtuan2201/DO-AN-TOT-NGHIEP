@@ -1,21 +1,16 @@
 import React, { useEffect, Fragment } from "react";
-// import { useSelector, useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter as Router } from "connected-react-router";
 import { history } from "../redux";
 import { ToastContainer } from "react-toastify";
-
 import {
   userIsAuthenticated,
   userIsNotAuthenticated,
 } from "../hoc/authentication";
 import { path } from "../utils";
-
 import Home from "../routes/Home";
 import Login from "./Auth/Login";
-// import Header from "./Header/Home.js";
 import System from "../routes/System";
-// import { CustomToastCloseButton } from "../components/CustomToast";
 import ConfirmModal from "../components/ConfirmModal";
 import HomePage from "./HomePage/HomePage.js";
 import CustomScrollbars from "../components/CustomScrollbars.js";
@@ -23,15 +18,12 @@ import DetailDoctor from "./Patient/Doctor/DetailDoctor.js";
 import DetailSpecialty from "./Patient/Doctor/DetailSpecialty.js";
 import DetailClinic from "./Patient/Doctor/DetailClinic.js";
 import DetailHanbook from "./Patient/Doctor/DetailHanbook.js";
-
 import Doctor from "../routes/Doctor.js";
 import VerifyEmail from "./Patient/VerifyEmail.js";
 import Search from "./HomePage/Section/Search/Search.js";
 import Support from "./HomePage/Section/Support/Support.js";
 import LoadingOverlay from "react-loading-overlay";
 import { useSelector } from "react-redux";
-import requireAuth from "../hoc/requireAuth.js";
-import { USER_ROLE } from "../utils/constant.js";
 
 const App = (prop) => {
   // const ProtectedProductManage = requireAuth([USER_ROLE.ADMIN], ProductManage);

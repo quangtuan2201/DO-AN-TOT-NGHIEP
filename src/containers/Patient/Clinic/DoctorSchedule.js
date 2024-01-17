@@ -16,6 +16,8 @@ import doctorService from "../../../services/doctorService";
 import { LANGUAGES, dateFormat } from "../../../utils/constant";
 import { FormattedMessage, useIntl } from "react-intl";
 import BookingModal from "../Doctor/Modal/BookingModal";
+import LoadingOverlay from "react-loading-overlay";
+
 import "./DoctorSchedule.scss";
 
 export const ThemeContextDoctorSchedule = createContext();
@@ -26,6 +28,8 @@ function DoctorSchedule({ id }) {
   const [allAvalableTime, setAllAvalableTime] = useState([]);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+
   const { language, doctor } = useSelector((state) => {
     return {
       language: state.app.language,
@@ -108,6 +112,12 @@ function DoctorSchedule({ id }) {
     },
     [selectedTimeSlot, isOpenModal]
   );
+  const handlSetIsLoading = useCallback(
+    (value) => {
+      setIsLoading(value);
+    },
+    [isLoading]
+  );
   return (
     <ThemeContextDoctorSchedule.Provider
       value={{ selectedTimeSlot, isOpenModal, handlShowModal }}
@@ -161,12 +171,19 @@ function DoctorSchedule({ id }) {
             </p>
           </div>
         </div>
+        <LoadingOverlay
+          className="text-warning"
+          active={isLoading}
+          spinner
+          text="Loading..."
+        ></LoadingOverlay>
         <BookingModal
           id={id}
           isOpenModal={isOpenModal}
           toggle={handlShowModal}
           allAvalableTime={allAvalableTime}
           selectedTimeSlot={selectedTimeSlot}
+          handlSetIsLoading={handlSetIsLoading}
         />
       </>
     </ThemeContextDoctorSchedule.Provider>

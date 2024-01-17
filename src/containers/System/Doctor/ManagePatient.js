@@ -10,6 +10,7 @@ import { LANGUAGES, dateFormat } from "../../../utils/constant";
 import { toast } from "react-toastify";
 import doctorService from "../../../services/doctorService";
 import patientService from "../../../services/patientService";
+import LoadingOverlay from "react-loading-overlay";
 import RemedyModal from "./Modal/RemedyModal";
 // Hàm để lấy ngày hiện tại dưới dạng yyyy-mm-dd
 function ManagePatient() {
@@ -18,6 +19,8 @@ function ManagePatient() {
   const [isShowModal, setIsShowModalConfirm] = useState(false);
   const [dataModal, setDataModal] = useState({});
   const [status, setStatus] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+
   let yesterDay = new Date(new Date().setDate(new Date().getDate() - 1));
   const { language, userInfo } = useSelector((state) => {
     return {
@@ -79,6 +82,12 @@ function ManagePatient() {
       }
     }
   };
+  const handlSetIsLoading = useCallback(
+    (value) => {
+      setIsLoading(value);
+    },
+    [isLoading]
+  );
 
   const handlShowModalConfirm = useCallback(
     (item, status) => {
@@ -103,7 +112,7 @@ function ManagePatient() {
     <React.Fragment>
       <div className="manage-patient-container container">
         <div className="m-p-title text-center">
-          <h1>Quản lý bệnh nhân khám bệnh</h1>
+          <h2>Quản lý bệnh nhân khám bệnh</h2>
         </div>
         <div className="manage-patient-body row">
           <div className="col-4 form-group">
@@ -122,6 +131,7 @@ function ManagePatient() {
               handlShowModalConfirm={handlShowModalConfirm}
               dataModal={dataModal}
               status={status}
+              handlSetIsLoading={handlSetIsLoading}
             />
             <table class="table table-hover table-fixed ">
               <thead>
@@ -181,6 +191,12 @@ function ManagePatient() {
           </div>
         </div>
       </div>
+      <LoadingOverlay
+        className="text-warning"
+        active={isLoading}
+        spinner
+        text="Loading..."
+      ></LoadingOverlay>
     </React.Fragment>
   );
 }

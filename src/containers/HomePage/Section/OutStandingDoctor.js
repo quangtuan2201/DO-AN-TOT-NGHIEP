@@ -21,7 +21,7 @@ function OutStandingDoctor(props) {
     // }
   }, []);
   const { language, topDoctors } = useSelector((state) => {
-    // console.log("top doctor: ", state.doctor.topDoctors);
+    console.log("top doctor: ", state.doctor.topDoctors);
     return {
       language: state.app.language,
       topDoctors: state.doctor.topDoctors,

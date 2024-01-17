@@ -1,11 +1,10 @@
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
-
 const app = express();
 app.use(cors({ origin: true }));
 
-const buildDir = path.join(__dirname, "../build");
+const buildDir = path.join(__dirname, "../public");
 console.log("Using files in " + buildDir);
 
 const subDir = "/";

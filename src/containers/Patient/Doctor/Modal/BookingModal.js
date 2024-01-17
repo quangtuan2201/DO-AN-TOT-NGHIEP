@@ -24,16 +24,14 @@ import {
 } from "reactstrap";
 import { LANGUAGES } from "../../../../utils";
 
-function BookingModal({ id }) {
-  // // id,{id}
-  // isOpenModal,
-  // handlShowModal,
+function BookingModal({ id, handlSetIsLoading }) {
   const { isOpenModal, handlShowModal, selectedTimeSlot } = useContext(
     ThemeContextDoctorSchedule
   );
   const dispatch = useDispatch();
   const inputRefs = [useRef(null), useRef(null)];
   const [selectedBirthDay, setSelectedBirthDay] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { language, genders } = useSelector((state) => {
     return {
       language: state.app.language,
@@ -116,7 +114,6 @@ function BookingModal({ id }) {
     try {
       e.preventDefault(); /*e.preventDefault(), bạn có thể thực hiện xử lý dữ liệu của mình
     hoặc thực hiện các hành động cần thiết mà không gây ra việc tải lại trang.*/
-
       const {
         fullName,
         phoneNumber,
@@ -169,17 +166,17 @@ function BookingModal({ id }) {
       formData.doctorId = selectedTimeSlot.doctorId;
       formData.language = language;
 
-      dispatch(actions.changLoading(true));
+      // dispatch(actions.changLoading(true));
+      handlSetIsLoading(true);
       const result = await patientService.handlSavePatientBookAppointment(
         formData
       );
-
       if (result) {
         handlShowModal();
-        dispatch(actions.changLoading(false));
+        handlSetIsLoading(false);
         toast.success("Tạo lịch hẹn khám thành công.");
       } else {
-        dispatch(actions.changLoading(false));
+        handlSetIsLoading(false);
         toast.error("Tạo lịch hẹn khám không thành công.");
       }
       setSelectedBirthDay(new Date());

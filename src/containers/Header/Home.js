@@ -44,7 +44,7 @@ function Header() {
       <div className="header-tabs-container">
         <Navigator menus={menuApp} />
       </div>
-      <div className="languages">
+      <div className="languages font-weight-bold">
         <span className="wellcome">
           <FormattedMessage id="homeHeader.wellcome" />
           {userInfo?.firstName}

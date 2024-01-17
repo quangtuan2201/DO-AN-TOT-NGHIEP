@@ -20,8 +20,8 @@ const handlSavePatientBookAppointment = async (patientInfo) => {
       patientInfo
     );
     const { data, errCode } = response.data;
-    if (response && errCode === 0) {
-      return data[0];
+    if (data && errCode === 0) {
+      return data;
     } else {
       console.error("data response: ", response);
       return null;

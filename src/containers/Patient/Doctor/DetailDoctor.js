@@ -43,7 +43,6 @@ function DetailDoctor() {
               <span>{doctor?.Markdown?.description}</span>
             </div>
             <div className="like-share-plugin">
-              <h3>like and share</h3>
               <LikeAndShare dataHref={currentURL} />
             </div>
           </div>

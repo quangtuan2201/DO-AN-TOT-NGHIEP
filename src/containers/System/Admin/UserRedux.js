@@ -121,37 +121,9 @@ function UserRedux() {
       console.error(`Xảy ra ngoại lệ khi lưu user ${error.message}`);
     }
   };
-  // const handleUpdateUser = useCallback((user) => {
-  //   // Lưu trạng thái người dùng đang chỉnh sửa
-  //   // Fill dữ liệu người dùng vào form
-  //   let imageBase64 = "";
-  //   if (_.isNull(_.get(user, "image"))) {
-  //     console.log("thuoc tinh image la null: ");
-  //     setImageUpload(null);
-  //   }
-  //   if (user.image && typeof user.image === "object") {
-  //     imageBase64 = Buffer.from(user.image, "base64").toString("binary");
-  //     //  new Buffer(user.image, "base64").toString("binary");
-  //     setImageUpload(imageBase64);
-  //   }
-  //   if (user.image && typeof user.image === "string") {
-  //     setImageUpload(user.image);
-  //   }
-  //   setEditingUser(user);
-  //   setValue("email", user.email);
-  //   setValue("password", user.password);
-  //   setValue("firstName", user.firstName);
-  //   setValue("lastName", user.lastName);
-  //   setValue("phoneNumber", user.phoneNumber);
-  //   setValue("address", user.address);
-  //   setValue("gender", user.gender);
-  //   setValue("positionId", user.positionId);
-  //   setValue("roleId", user.roleId);
-  // }, []);
   const handleUpdateUser = useCallback((user) => {
     // Lưu trạng thái người dùng đang chỉnh sửa
     // Fill dữ liệu người dùng vào form
-
     const {
       image,
       email,

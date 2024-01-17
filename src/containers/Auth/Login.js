@@ -72,7 +72,7 @@ function Login(props) {
             onSubmit={handleSubmit(handleLogin)}
           >
             <div className="form-login-container">
-              <label className="form-label">
+              <label className="form-label font-weight-bold">
                 <FormattedMessage id="user-manage.email" />
               </label>
               <Controller
@@ -94,7 +94,7 @@ function Login(props) {
                   <>
                     <input
                       type="email"
-                      className="form-control "
+                      className="form-control"
                       placeholder={`${intl.formatMessage({
                         id: "user-manage.enter",
                       })} ${intl.formatMessage({ id: "user-manage.email" })}`}
@@ -109,8 +109,7 @@ function Login(props) {
                 )}
               />
             </div>
-
-            <div className="form-login-password">
+            <div className="form-login-password font-weight-bold">
               <label className="form-label" style={{ marginTop: "20px" }}>
                 <FormattedMessage id="user-manage.password" />
               </label>

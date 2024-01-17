@@ -14,7 +14,6 @@ import { toast } from "react-toastify";
 import _ from "lodash";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
-import image from "../../../assets/images/co-so-benh-vien-img/logo-y-duoc-1.jpg";
 function HistorysManage() {
   const intl = useIntl();
   const [formData, setFormData] = useState({
@@ -30,8 +29,9 @@ function HistorysManage() {
   const handleDateChange = (date, checkDate) => {
     // Chuyển đổi thành đối tượng Moment
     const momentObject = moment(date);
+    console.log("momentObject: ", new Date(momentObject).getTime());
     if (!momentObject.isValid()) {
-      // console.error("Invalid moment object: ", momentObject);
+      console.error("Invalid moment object: ", momentObject);
       return;
     } else {
       setFormData((pre) => ({

@@ -28,6 +28,7 @@ function RemedyModal({
   handlShowModalConfirm,
   dataModal,
   status,
+  handlSetIsLoading,
 }) {
   const dispatch = useDispatch();
   const inputRefs = [useRef(null), useRef(null)];
@@ -61,31 +62,18 @@ function RemedyModal({
       description: e.target.value,
     }));
   };
-  const handleChangeReason = (event) => {
-    setFormData((pre) => ({
-      ...pre,
-      reason: event.target.value,
-    }));
-  };
-  const handlChangeNote = (event) => {
-    setFormData((pre) => ({
-      ...pre,
-      note: event.target.value,
-    }));
-  };
 
   const handlSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("Form data: ", formData);
+      handlSetIsLoading(true);
       const response = await patientService.handlSendRemedy(formData);
       if (response) {
-        dispatch(actions.changLoading(false));
+        handlSetIsLoading(false);
         toast.success("Xác nhận đặt lịch khám thành công.");
         handlShowModalConfirm();
-        //    dataModal = null;
       } else {
-        dispatch(actions.changLoading(false));
+        handlSetIsLoading(false);
         toast.error("Xác nhận đặt lịch khám thất bại.");
       }
       setFormData({});
@@ -121,8 +109,6 @@ function RemedyModal({
                   <Input
                     value={formData?.email}
                     onChange={handlOnChangeEmail}
-                    // name="email"
-                    // innerRef={inputRefs[0]}
                   />
                 </FormGroup>
               </Col>

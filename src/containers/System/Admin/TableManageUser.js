@@ -92,8 +92,8 @@ function TableManageUser({ allUser, onDeleteUser, onUpdateUser, language }) {
           filter
           field={(rowData) =>
             language === LANGUAGES.VI
-              ? rowData.genderData && rowData.genderData.valueVn
-              : rowData.genderData && rowData.genderData.valueEn
+              ? rowData?.genderData && rowData.genderData.valueVn
+              : rowData?.genderData && rowData.genderData.valueEn
           }
           header={<FormattedMessage id="user-manage.gender" />}
         />
@@ -102,8 +102,8 @@ function TableManageUser({ allUser, onDeleteUser, onUpdateUser, language }) {
           filter
           field={(rowData) =>
             language === LANGUAGES.VI
-              ? rowData.positionData && rowData.positionData.valueVn
-              : rowData.positionData && rowData.positionData.valueEn
+              ? rowData?.positionData && rowData.positionData.valueVn
+              : rowData?.positionData && rowData.positionData.valueEn
           }
           header={<FormattedMessage id="user-manage.position" />}
         />
@@ -112,8 +112,8 @@ function TableManageUser({ allUser, onDeleteUser, onUpdateUser, language }) {
           filter
           field={(rowData) =>
             language === LANGUAGES.VI
-              ? rowData.roleData && rowData.roleData.valueVn
-              : rowData.roleData && rowData.roleData.valueEn
+              ? rowData?.roleData && rowData.roleData.valueVn
+              : rowData?.roleData && rowData.roleData.valueEn
           }
           header={<FormattedMessage id="user-manage.role" />}
         />

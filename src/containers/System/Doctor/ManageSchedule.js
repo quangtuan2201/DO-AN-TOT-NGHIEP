@@ -29,7 +29,6 @@ function Doctor() {
     AllDoctors,
     appointmentSchedule,
   } = useSelector((state) => {
-    console.log("State Redux: ", state);
     return {
       loggedIn: state.user.isLoggedIn,
       language: state.app.language,
@@ -38,12 +37,9 @@ function Doctor() {
       appointmentSchedule: state.doctor.allCodescheduleHours,
     };
   });
-  // console.log("Lấy danh sách bác sĩ: ", AllDoctors);
   useEffect(() => {
     setSelectedDate(new Date());
-    console.log("All Doctors: ", AllDoctors);
     if (!AllDoctors || !AllDoctors.length) {
-      console.log("check :", !AllDoctors || !AllDoctors.length);
       dispatch(actions.fetchGetAllDoctors());
       return;
     } else {
@@ -61,7 +57,6 @@ function Doctor() {
     dispatch(actions.fetchAllCodeScheduleHours());
   }, []);
   const handlSelectDoctor = (selectDoctor) => {
-    console.log("Chọn bác sĩ: ", selectDoctor);
     setSelectOption(selectDoctor);
     setInfoSchedule((pres) => {
       return {
@@ -76,7 +71,6 @@ function Doctor() {
   const handleDateChange = (date) => {
     // Chuyển đổi thành đối tượng Moment
     const momentObject = moment(date[0]);
-    console.log("date: ", date[0]);
     if (!momentObject.isValid()) {
       // console.error("Invalid moment object: ", momentObject);
       return;
@@ -94,7 +88,6 @@ function Doctor() {
     }
   };
   const handleAppointmentSelect = (scheduleHours) => {
-    console.log("scheduleHours: ", scheduleHours);
     setSelectedAppointment((present) => {
       let isCheckked = present.includes(scheduleHours);
       let appointmentSelect = [];
@@ -111,19 +104,10 @@ function Doctor() {
       });
       return appointmentSelect;
     });
-    console.log("Schedule hours; ", selectedAppointment);
   };
   const handleInfoSchedule = async () => {
     try {
       let result = [];
-      console.log("------INFO SCHEDULE: ", infoSchedule);
-      console.log(
-        '---InfoSchedule?.chosenDoctor?.doctorId === ""',
-        infoSchedule?.chosenDoctor?.doctorId === null,
-        infoSchedule?.chosenDoctor?.doctorId,
-        "type",
-        typeof infoSchedule?.chosenDoctor?.doctorId
-      );
       if (
         !infoSchedule?.chosenDoctor?.hasOwnProperty("doctorId") ||
         infoSchedule?.chosenDoctor?.doctorId === null
@@ -144,8 +128,6 @@ function Doctor() {
           <FormattedMessage id="manage-schedule.warring-select-schedule-hours" />
         );
       }
-      console.log("DATA INFO SCHEDULE: ", infoSchedule);
-      // const dataArray = Object.values(infoSchedule);
       if (infoSchedule?.hasOwnProperty("scheduleHoursList")) {
         infoSchedule.scheduleHoursList.map((element) => {
           const obj = {};
@@ -154,9 +136,7 @@ function Doctor() {
           obj.timeType = element;
           result.push(obj);
         });
-        console.log("Result: ", result);
       }
-      console.log("quang tuan dev: ", infoSchedule);
       const options = {
         doctorCode: infoSchedule.chosenDoctor.doctorId,
         bookingDate: infoSchedule.selectedDate,
@@ -171,7 +151,6 @@ function Doctor() {
       setInfoSchedule(null);
       setSelectedAppointment([]);
       const response = await doctorService.handlBulkCreateSchedule(options);
-      console.log("---quang tuan dev - action tạo mới : ", response);
       if (response) {
         toast.success(
           <FormattedMessage id="manage-schedule.success-book-schedule" />

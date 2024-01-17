@@ -26,7 +26,10 @@ function MedicalFacility(props) {
   };
   return (
     <React.Fragment>
-      <div className="section-specialty section-share ">
+      <div
+        className="section-specialty section-share medical-facility"
+        style={{ paddingBottom: "30px" }}
+      >
         <div className="section-container">
           <div className="section-header">
             <span className="title-section">
