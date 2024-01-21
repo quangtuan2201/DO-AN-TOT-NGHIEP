@@ -45,6 +45,7 @@ function Header() {
         <Navigator menus={menuApp} />
       </div>
       <div className="languages font-weight-bold">
+        <i className="fas fa-user mr-2 "></i>
         <span className="wellcome">
           <FormattedMessage id="homeHeader.wellcome" />
           {userInfo?.firstName}

@@ -114,6 +114,7 @@ function HistorysManage() {
   useEffect(() => {
     dispatch(actions.fetchGetAllDoctors());
   }, [dispatch, language]);
+  
   return (
     <>
       <div className="history-manage-container">

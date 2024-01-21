@@ -37,7 +37,7 @@ function DoctorSchedule({ id }) {
     };
   });
 
-  // Hàm chuyển đổi ngôn ngữ ,chatGPT
+  // Hàm chuyển đổi ngôn ngữ
   const getDayLabel = (language, date, format) => {
     const dayLabel = moment(date).locale(language).format(format);
     if (moment(date).isSame(moment(), "day")) {
@@ -81,9 +81,6 @@ function DoctorSchedule({ id }) {
         );
       }
     })();
-
-    // getAllDays();
-    // getCurrentDay();
   }, [language, doctor, id]);
 
   const handleBookingDateSelect = async (e) => {

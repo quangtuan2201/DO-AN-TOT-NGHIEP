@@ -6,7 +6,7 @@ import "./Search.scss";
 import HomeHeader from "../../HomeHeader";
 import { LANGUAGES } from "../../../../utils";
 import { useSelector } from "react-redux";
-// import { constant } from "../../../../";
+import _ from "lodash";
 
 const Search = () => {
   const intl = useIntl();
@@ -20,9 +20,7 @@ const Search = () => {
       language: state.app.language,
     };
   });
-  const handleBlur = () => {
-    console.log("Chuột rời khỏi trường input");
-  };
+
   const handleGetResultSearch = async () => {
     try {
       const results = await userService.fetchGetResultSearch(keyword);
@@ -45,11 +43,11 @@ const Search = () => {
         setDataClinic(null); // Reset clinic data on failure
         setDataSpecialty(null); // Reset specialty data on failure
         setDataDoctor(null); // Reset specialty data on failure
-        setNotResult("Không có kết quả tìm kiếm.");
+        setNotResult(<FormattedMessage id="banner.search.no-result" />);
       }
     } catch (error) {
-      setNotResult("Không có kết quả tìm kiếm.");
-      console.error("Fetch result search " + error.message);
+      setNotResult(<FormattedMessage id="banner.search.no-result" />);
+      console.error("Fetch result search fail " + error.message);
     }
   };
   const handlOnChangeInputSearch = (keyword) => {
@@ -64,7 +62,6 @@ const Search = () => {
     if (!keyword) {
       return;
     }
-
     handleGetResultSearch();
   }, [keyword, language]);
   const getFullNameDoctor = (item) => {
@@ -85,17 +82,18 @@ const Search = () => {
           onChange={(e) => {
             handlOnChangeInputSearch(e.target.value);
           }}
-          onBlur={handleBlur}
         />
         <i className="fas fa-search"></i>
       </div>
       <div className="result-search">
         <div className="result-search-specialty">
-          {dataSpecialty && dataSpecialty?.result?.length > 0 && (
+          {!_.isEmpty(dataSpecialty) && (
             <table className="table table-sm  table-hover ">
               <thead>
                 <tr>
-                  <th>Chuyên khoa</th>
+                  <th>
+                    <FormattedMessage id="banner.search.speciality" />
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -117,11 +115,13 @@ const Search = () => {
           )}
         </div>
         <div className="result-search-clinic">
-          {dataClinic && dataClinic?.result?.length > 0 && (
+          {!_.isEmpty(dataClinic) && (
             <table className="table table-sm  table-hover">
               <thead>
                 <tr>
-                  <th>Phòng khám</th>
+                  <th>
+                    <FormattedMessage id="banner.search.clinic" />
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -130,7 +130,6 @@ const Search = () => {
                     <>
                       <tr key={index}>
                         <td>
-                          {" "}
                           <Link to={`/detail-clinic/${item.id}`}>
                             {item.name}
                           </Link>{" "}
@@ -144,11 +143,13 @@ const Search = () => {
           )}
         </div>
         <div className="result-search-doctor">
-          {dataDoctor && dataDoctor?.result?.length > 0 && (
+          {!_.isEmpty(dataDoctor) && (
             <table className="table table-sm  table-hover">
               <thead>
                 <tr>
-                  <th>Bác sĩ</th>
+                  <th>
+                    <FormattedMessage id="banner.search.doctor" />
+                  </th>
                 </tr>
               </thead>
               <tbody>

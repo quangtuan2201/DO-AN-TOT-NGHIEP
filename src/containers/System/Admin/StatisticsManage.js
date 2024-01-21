@@ -73,39 +73,6 @@ const StatisticsManage = () => {
     }
   };
 
-  // const createDoughnutChartData = (data) => {
-  //   if (data) {
-  //     const total = data.S1 + data.S2 + data.S3 + data.S4;
-
-  //     const doughnutChartData = {
-  //       labels: ["Lịch hẹn mới", "Đã xác nhận", "Đã khám xong", "Đã Hủy"],
-
-  //       datasets: [
-  //         {
-  //           data: [
-  //             (data.S1 / total) * 100,
-  //             (data.S2 / total) * 100,
-  //             (data.S3 / total) * 100,
-  //             (data.S4 / total) * 100,
-  //           ],
-  //           backgroundColor: ["#36A2EB", "#FFCE56", "#4CAF50", "#FF6384"],
-  //         },
-  //       ],
-  //     };
-
-  //     // Tạo một mảng chứa các nhãn có dạng "10.00%"
-  //     const percentageLabels = doughnutChartData.datasets[0].data.map(
-  //       (value) => value.toFixed(2) + "%"
-  //     );
-
-  //     // Gán mảng nhãn đã tạo vào biểu đồ
-  //     doughnutChartData.labels = percentageLabels;
-
-  //     setDoughnutChartData(doughnutChartData);
-  //   } else {
-  //     setDoughnutChartData(null);
-  //   }
-  // };
 
   const handleSubmit = async (formData) => {
     var momentStartDate = moment(formData.startDateTime);

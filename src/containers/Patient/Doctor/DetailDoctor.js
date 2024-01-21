@@ -16,9 +16,8 @@ function DetailDoctor() {
       ? `http://localhost:3000/detail-doctors/${id}`
       : window.location.href;
   console.log("currentURL: ", currentURL);
-  const { language, doctor } = useSelector((state) => {
+  const { doctor } = useSelector((state) => {
     return {
-      language: state.app.language,
       doctor: state.doctor.detailDoctor,
     };
   });

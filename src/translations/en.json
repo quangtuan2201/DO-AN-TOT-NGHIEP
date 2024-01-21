@@ -34,7 +34,13 @@
     "medicalTesting": "Medical tests",
     "mentalHealth": "Mental health",
     "dentalExamination": "Dental examination",
-    "outstanding-medical-facilities": "Outstanding Medical Facilities"
+    "outstanding-medical-facilities": "Outstanding Medical Facilities",
+    "search": {
+      "speciality": "Specialty",
+      "clinic": "Clinic",
+      "doctor": "Doctor",
+      "no-result": "No search results."
+    }
   },
   "popularSpeciality": {
     "popularSpeciality": "Popular speciality"

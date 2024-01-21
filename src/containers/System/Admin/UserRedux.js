@@ -320,7 +320,7 @@ function UserRedux() {
                   name="positionId"
                   control={control}
                   defaultValue=""
-                  rules={{ required: "Position is required" }}
+                  // rules={{ required: "Position is required" }}
                   render={({ field }) => (
                     <>
                       <select
@@ -342,11 +342,11 @@ function UserRedux() {
                           </option>
                         ))}
                       </select>
-                      {errors.position && (
+                      {/* {errors.position && (
                         <div className="invalid-feedback">
                           {errors.positionId.message}
                         </div>
-                      )}
+                      )} */}
                     </>
                   )}
                 />

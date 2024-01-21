@@ -11,6 +11,7 @@ import "./DetailSpecialty.scss";
 import userService from "../../../services/userService";
 import { useSelector } from "react-redux";
 import { LANGUAGES } from "../../../utils";
+import _ from "lodash";
 
 function DetailSpecialty() {
   const { id } = useParams();
@@ -94,11 +95,9 @@ function DetailSpecialty() {
         doctorProvince?.value
       );
       const { doctorSpecilty } = response;
-      if (Array.isArray(doctorSpecilty) && doctorSpecilty.length > 0) {
-        setArrDoctorId(doctorSpecilty);
-      } else {
-        setArrDoctorId("Không có bác sĩ nào.");
-      }
+      !_.isEmpty(doctorSpecilty)
+        ? setArrDoctorId(doctorSpecilty)
+        : setArrDoctorId("Không có bác sĩ nào.");
     } catch (error) {
       console.error("Lọc Bác sĩ fail !");
     }

@@ -34,7 +34,13 @@
     "medicalTesting": "Xét nghiệm y học",
     "mentalHealth": "Sức khỏe tinh thần",
     "dentalExamination": "Khám nha khoa",
-    "outstanding-medical-facilities": "Cơ sở y tế nổi bật"
+    "outstanding-medical-facilities": "Cơ sở y tế nổi bật",
+    "search": {
+      "speciality": "Chuyên khoa",
+      "clinic": "Phòng khám",
+      "doctor": "Bác sĩ",
+      "no-result": "Không có kết quả tìm kiếm."
+    }
   },
   "popularSpeciality": {
     "popularSpeciality": "Chuyên khoa phổ biến"
