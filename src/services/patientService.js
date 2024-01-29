@@ -75,9 +75,34 @@ const handlSendRemedy = async (formData) => {
   }
 };
 //
+const handlAppointmentSchedule = async ({ email, date }) => {
+  try {
+    if (!email || !date) {
+      console.log("Missing parameter !");
+      return;
+    }
+    const response = await instance.post("/get-appointment-schedule", {
+      email,
+      date,
+    });
+    // {
+    //   params: { email, date },
+    // });
+    console.log("fetch data get lịch hẹn : ", response);
+    const { data, errCode } = response.data;
+    if (data && errCode === 0) {
+      return data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
 export default {
   handlSavePatientBookAppointment,
   handlSaveVerifyAppointment,
   handlGetListPatientDoctor,
   handlSendRemedy,
+  handlAppointmentSchedule,
 };

@@ -111,8 +111,8 @@ function ManagePatient() {
   return (
     <React.Fragment>
       <div className="manage-patient-container container">
-        <div className="m-p-title text-center">
-          <h2>Quản lý bệnh nhân khám bệnh</h2>
+        <div className="title m-p-title text-center">
+          Quản lý bệnh nhân khám bệnh
         </div>
         <div className="manage-patient-body row">
           <div className="col-4 form-group">

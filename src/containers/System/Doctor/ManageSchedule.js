@@ -169,7 +169,7 @@ function Doctor() {
   return (
     <React.Fragment>
       <div className="manage-schedule-container">
-        <div className="m-s-title">
+        <div className="title m-s-title">
           <FormattedMessage id="manage-schedule.title" />
         </div>
         <div className="container">
@@ -237,15 +237,6 @@ function Doctor() {
                 </p>
               </div>
               <div className="col-6 clinic-info-address">
-                {/* <div className="clinic-address-title">
-                  <strong>Địa chỉ khám</strong>
-                </div>
-                <div className="clinic-name">
-                  <strong>Phòng Khám Chuyên Khoa Da Liễu</strong>
-                </div>
-                <div className="clinic-address">
-                  207 Phố Huế - Hai Bà Trưng - Hà Nội
-                </div> */}
                 <DoctorExtraInfo id={selectDoctor.value} />
               </div>
               <hr />

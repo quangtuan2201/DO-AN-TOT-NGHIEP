@@ -115,9 +115,7 @@ function ClinicManage() {
   return (
     <>
       <div className=" manage-clinic-container ml-5 mr-5">
-        <h2 className="text-center mt-4 ms-title text-uppercase font-weight-bold ">
-          Quản lý phòng khám
-        </h2>
+        <h2 className="text-center mt-4 ms-title title ">Quản lý phòng khám</h2>
         <div className="row d-flex justify-content-between align-items-center add-new-clinic ">
           {/* <div className="col-5 form-group clinic-chosse ">
             <label>

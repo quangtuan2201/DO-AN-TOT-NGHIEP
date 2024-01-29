@@ -92,6 +92,11 @@
       }
       .forgot-password {
         font-size: 12px;
+        cursor: pointer;
+        &:hover {
+          font-weight: 550;
+          // font-size: 50px;
+        }
       }
       .social-login {
         display: flex;

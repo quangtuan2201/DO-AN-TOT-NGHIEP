@@ -127,9 +127,9 @@ function HandbookManage() {
   return (
     <>
       <div className=" manage-hanbook-container ml-5 mr-5">
-        <h2 className="text-center text-primary mt-4 ms-title text-uppercase font-weight-bold ">
+        <div className="text-center text-primary mt-4 ms-title text-uppercase title ">
           <FormattedMessage id="manage-hanbook.hanbook-title" />
-        </h2>
+        </div>
         <div className="row mb-5">
           <div className="belong-to-specialty col-3 mb-5 ">
             <label>

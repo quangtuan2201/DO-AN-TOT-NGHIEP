@@ -10,21 +10,6 @@ import { FormattedMessage, useIntl } from "react-intl";
 
 import { toast } from "react-toastify";
 
-// const options = [
-//   {
-//     label: "Khoa xương khớp",
-//     value: "K1",
-//   },
-//   {
-//     label: "Khoa Chỉnh hình",
-//     value: "K2",
-//   },
-//   {
-//     label: "Khoa thần kinh",
-//     value: "K3",
-//   },
-// ];
-
 function SpecialtyManage() {
   const mdParser = new MarkdownIt();
   const dispatch = useDispatch();
@@ -114,9 +99,9 @@ function SpecialtyManage() {
   return (
     <>
       <div className=" manage-specialty-container ml-5 mr-5">
-        <h2 className="text-center mt-4 ms-title text-primary text-uppercase font-weight-bold ">
+        <div className="text-center mt-4 title">
           <FormattedMessage id="manage-specialty.specialty-title" />
-        </h2>
+        </div>
         <div className="row d-flex justify-content-between align-items-center add-new-spcialty ">
           <div className="col-5 form-group spcialty-chosse ">
             <label>

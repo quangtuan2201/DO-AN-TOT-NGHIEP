@@ -22,17 +22,13 @@ import Doctor from "../routes/Doctor.js";
 import VerifyEmail from "./Patient/VerifyEmail.js";
 import Search from "./HomePage/Section/Search/Search.js";
 import Support from "./HomePage/Section/Support/Support.js";
+import AppointmentSchedule from "./HomePage/Section/AppointmentSchedule/AppointmentSchedule.js";
 import LoadingOverlay from "react-loading-overlay";
+import ForgotPassword from "./Auth/ForgotPassword.js";
+import VerifyCode from "./Auth/VerifyCode.js";
 import { useSelector } from "react-redux";
 
 const App = (prop) => {
-  // const ProtectedProductManage = requireAuth([USER_ROLE.ADMIN], ProductManage);
-  // console.log("admin: ", USER_ROLE.ADMIN);
-  // const { userInfo, loading } = useSelector((state) => ({
-  //   userInfo: state.user.userInfo,
-  //   // loading: state.app.loading,
-  // }));
-
   return (
     <Fragment>
       <Router history={history}>
@@ -60,7 +56,6 @@ const App = (prop) => {
                 <Route
                   path={path.DOCTOR_MANAGE}
                   component={userIsAuthenticated(Doctor)}
-                  // component={userIsNotAuthenticated(Doctor)}
                 />
                 <Route path={path.DETAIL_CLINIC} component={DetailClinic} />
                 <Route
@@ -69,6 +64,12 @@ const App = (prop) => {
                 />
                 <Route path={path.SEARCH} component={Search} />
                 <Route path={path.SUPPORT} component={Support} />
+                <Route
+                  path={path.APPOINTMENT_SCHEDULE}
+                  component={AppointmentSchedule}
+                />
+                <Route path={path.FORGOT_PASSWORD} component={ForgotPassword} />
+                <Route path={path.VERIFY_CODE} component={VerifyCode} />
               </Switch>
             </CustomScrollbars>
           </div>

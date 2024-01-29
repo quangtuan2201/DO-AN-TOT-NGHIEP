@@ -7,9 +7,12 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Login.scss";
 import { useIntl, FormattedMessage } from "react-intl";
 import { LANGUAGES } from "../../utils/constant";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { path } from "../../utils/constant";
 
 function Login(props) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [showPassword, setShowPassword] = useState(false);
   const {
     control,
@@ -53,7 +56,9 @@ function Login(props) {
       // alert("Chang VI");
     }
   };
-
+  const handleForgotPassword = () => {
+    history.push(path.FORGOT_PASSWORD);
+  };
   return (
     <div className="login-background">
       <div className="login-container">
@@ -191,7 +196,7 @@ function Login(props) {
           </form>
 
           <div className="col-12">
-            <span className="forgot-password">
+            <span className="forgot-password" onClick={handleForgotPassword}>
               <FormattedMessage id="login.oblivion" />
             </span>
           </div>

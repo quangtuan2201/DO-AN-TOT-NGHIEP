@@ -41,6 +41,9 @@ function HomeHeader({ isShowHeader }) {
     // alert("Return Home !");
     history.push(path.SEARCH);
   };
+  const redirectAppointmentSchedule = () => {
+    history.push(path.APPOINTMENT_SCHEDULE);
+  };
 
   return (
     <React.Fragment>
@@ -99,6 +102,9 @@ function HomeHeader({ isShowHeader }) {
                 <i className="fas fa-question-circle">
                   <FormattedMessage id="homeHeader.support" />
                 </i>
+              </div>
+              <div className="support" onClick={redirectAppointmentSchedule}>
+                <i className="fas fa-history">Lịch hẹn</i>
               </div>
               <div className="language-vi">
                 <span

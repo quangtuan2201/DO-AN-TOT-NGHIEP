@@ -1,0 +1,19 @@
+body {
+  font-family: "Roboto", sans-serif;
+  .appointment-schedule-container {
+    // border: 1px solid;
+    height: 500px;
+    font-weight: 500;
+    .form-container {
+      margin-top: 30px;
+      .form-appointment-schedule {
+        display: flex;
+        justify-content: start;
+        button {
+          margin-left: 30px;
+          margin-top: 30px;
+        }
+      }
+    }
+  }
+}

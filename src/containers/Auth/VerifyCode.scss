@@ -1,0 +1,23 @@
+.verify-code-container {
+  //   .showPassword {
+  //     position: absolute !important;
+  //     right: 10px;
+  //     top: 60px;
+  //     // transform: translateY(50%);
+  //     cursor: pointer;
+  //   }
+  .password {
+    position: relative;
+    .showPassword {
+      position: absolute;
+      top: 70%;
+      right: 10px; /* Điều chỉnh giá trị right để đặt vị trí từ phía bên phải */
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+  }
+  .error-message {
+    color: red; /* Màu chữ cho thông báo lỗi */
+    font-size: 14px; /* Kích thước chữ cho thông báo lỗi */
+  }
+}

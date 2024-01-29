@@ -114,13 +114,11 @@ function HistorysManage() {
   useEffect(() => {
     dispatch(actions.fetchGetAllDoctors());
   }, [dispatch, language]);
-  
+
   return (
     <>
       <div className="history-manage-container">
-        <h2 className="text-center text-primary">
-          Quản lý lịch sử đặt lịch khám
-        </h2>
+        <h2 className="text-center title">Quản lý lịch sử đặt lịch khám</h2>
         <div className="row mt-5">
           <div className="col-2">
             <label>

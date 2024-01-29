@@ -308,11 +308,9 @@ function DoctorManage() {
   );
   return (
     <>
-      <div className="container mt-5 mb-5">
-        <div className="manage-doctor-title text-center">
-          <h2 className="text-primary">
-            <FormattedMessage id="manage-doctor.create-more-doctors-info" />
-          </h2>
+      <div className="container mt-3 mb-5">
+        <div className="manage-doctor-title title text-center">
+          <FormattedMessage id="manage-doctor.create-more-doctors-info" />
         </div>
         <form className="" onSubmit={handleSubmit(onSubmit)}>
           <div className="row">

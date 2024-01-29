@@ -18,11 +18,22 @@ function Home() {
     isLoggedIn: state.user.isLoggedIn,
     userInfo: state.user.userInfo,
   }));
+  console.log("userInfo: ", userInfo);
+
+  // let linkToRedirect = isLoggedIn
+  //   ? userInfo.roleId === USER_ROLE.ADMIN
+  //     ? "/system/user-manage"
+  //     : "/doctor/manage-schedule"
+  //   : "/login";
+  const isAdmin = userInfo?.roleId === USER_ROLE.ADMIN;
   let linkToRedirect = isLoggedIn
-    ? userInfo.roleId === USER_ROLE.ADMIN
+    ? isAdmin
       ? "/system/user-manage"
       : "/doctor/manage-schedule"
-    : "/home";
+    : "/login";
+  console.log("linkToRedirect: ", linkToRedirect);
+  // return <Redirect to={linkToRedirect} />;
+  // let linkToRedirect = isLoggedIn ? "/system/user-manage" : "/home";
   return <Redirect to={linkToRedirect} />;
 }
 export default Home;

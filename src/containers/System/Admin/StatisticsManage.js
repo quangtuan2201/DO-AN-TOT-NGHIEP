@@ -73,7 +73,6 @@ const StatisticsManage = () => {
     }
   };
 
-
   const handleSubmit = async (formData) => {
     var momentStartDate = moment(formData.startDateTime);
     var momentEndDate = moment(formData.endDateTime);
@@ -117,9 +116,9 @@ const StatisticsManage = () => {
 
   return (
     <div className="container p-3 statistics-container">
-      <h2 className="text-center">
+      <div className="title mb-3 text-center">
         <FormattedMessage id="manage-statistical.statistical-title" />
-      </h2>
+      </div>
       <div className="row">
         <div className="col-2">
           <label>

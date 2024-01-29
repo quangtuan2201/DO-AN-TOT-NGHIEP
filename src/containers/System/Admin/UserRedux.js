@@ -232,12 +232,12 @@ function UserRedux() {
     <React.Fragment>
       <div className="container mt-30">
         <div className="title ">
-          <h2 className="text-center">
+          <div className="title text-center">
             <FormattedMessage id="user-manage.user-manage" />
-          </h2>
+          </div>
         </div>
         <form onSubmit={handleSubmit(handleSaveUser)}>
-          <div className="row mt-5 info-form-container">
+          <div className="row mt-3 info-form-container">
             {renderFormInput("user-manage.email", "email", "email", {
               required: "Email is required",
               pattern: { value: /^\S+@\S+$/i, message: "Invalid email" },

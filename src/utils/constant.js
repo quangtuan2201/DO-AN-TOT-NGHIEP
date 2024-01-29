@@ -6,12 +6,16 @@ export const path = {
   SYSTEM: "/system",
   SEARCH: "/search",
   SUPPORT: "/support",
+  APPOINTMENT_SCHEDULE: "/appointment_schedule",
   DETAIL_DOCTOR: "/detail-doctors/:id",
   DETAIL_SPECIALTY: "/detail-specialty/:id",
   DETAIL_CLINIC: "/detail-clinic/:id",
   DETAIL_HANBOOK: "/detail-hanbook/:id",
   DOCTOR_MANAGE: "/doctor",
   VERIFY_EMAIL_BOOKING: "/verify-booking",
+  FORGOT_PASSWORD: "/forgot-password",
+  VERIFY_CODE: "/verify-code",
+
   ///:token&doctorId=:doctorId",
 };
 export const CRUD_ACTIONS = {

@@ -146,6 +146,40 @@ const fetchGetHistorysBookingByDate = async (formData) => {
     throw error;
   }
 };
+// cập nhật mật khẩu
+const fetchForgotPassword = async (email, language) => {
+  try {
+    if (!email) {
+      return;
+    }
+    const response = await instance.post("forgot-password", {
+      email,
+      language,
+    });
+    const { errCode } = response.data;
+    if (errCode === 0) {
+      return response.data;
+    } else {
+      return;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+//xác thực mã code
+const fetchVerifyCode = async (data) => {
+  try {
+    const response = await instance.post("/verify-code", data);
+    const { errCode } = response.data;
+    if (errCode === 0) {
+      return response.data;
+    } else {
+      return;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
 export default {
   handleLogin,
   getAllUsers,
@@ -157,4 +191,6 @@ export default {
   fetchGetResultSearch,
   fetchGetStatisticalByDate,
   fetchGetHistorysBookingByDate,
+  fetchForgotPassword,
+  fetchVerifyCode,
 };
