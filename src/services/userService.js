@@ -9,6 +9,7 @@ const handleLogin = async (user) => {
       email: user.email,
       password: user.password,
     });
+    console.log("response: ", response);
     if (response && response.data) {
       return response.data;
     } else {

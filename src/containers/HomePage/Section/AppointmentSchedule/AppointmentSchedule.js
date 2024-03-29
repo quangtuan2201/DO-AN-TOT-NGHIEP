@@ -31,6 +31,7 @@ const AppointmentSchedule = () => {
       data.date = formattedDate;
       console.log("data: ", data);
       const response = await patientService.handlAppointmentSchedule(data);
+      console.log("response: ", response);
       if (response) {
         console.log("fetch data", response);
         setData(response);
